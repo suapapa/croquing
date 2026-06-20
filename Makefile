@@ -1,22 +1,24 @@
-BINARY_NAME=croquis-king
+.PHONY: all build push lint
 
-all: build
+TAG=latest
+CR=icn.vultrcr.com/homincr1
+IMAGE_TAG_BE=${CR}/croquis-king-backend:${TAG}
+IMAGE_TAG_FE=${CR}/croquis-king-frontend:${TAG}
 
-web:
-	cd frontend && npm install && npm run build
-	go build -o bin/$(BINARY_NAME) ./cmd/server/main.go
+all: lint push
 
-build:
-	go build -o bin/$(BINARY_NAME) ./cmd/server/main.go
+build_be:
+	docker buildx build --platform linux/amd64 -t ${IMAGE_TAG_BE} .
 
-run:
-	go run ./cmd/server/main.go
+build_fe:
+	docker buildx build --platform linux/amd64 \
+	    --target prod \
+		--build-arg VITE_API_BASE= \
+	    -t ${IMAGE_TAG_FE} ./frontend
 
-clean:
-	rm -rf bin
+push: build_be build_fe
+	docker push ${IMAGE_TAG_BE}
+	docker push ${IMAGE_TAG_FE}
 
-test:
-	go test -race ./...
-
-progress:
-	go run ./scripts/update_progress
+lint:
+	golangci-lint run ./...

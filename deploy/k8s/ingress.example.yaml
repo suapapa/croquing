@@ -1,0 +1,29 @@
+# Optional Ingress for the sidecar Deployment.
+# All traffic goes to the frontend (nginx) Service; nginx proxies /api and /ws
+# to the backend container inside the same Pod.
+#
+# Apply after app.yaml:
+#   kubectl apply -f deploy/k8s/ingress.example.yaml
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: croquis-king
+  labels:
+    app.kubernetes.io/name: croquis-king
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: croquis.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: croquis-king
+                port:
+                  name: http
