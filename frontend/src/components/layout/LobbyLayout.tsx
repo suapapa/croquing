@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import type { ReactNode } from 'react'
 import type { LobbySnapshot } from '../../types/lobby'
 import type { ConnectionStatus } from '../../hooks/useLobbySocket'
-import { getConnectionLabel, getPhaseMessage } from '../../lib/phaseMessages'
+import { getConnectionLabel, getPhaseMessage, t } from '../../lib/i18n'
 import { CopyLobbyLinkButton } from '../lobby/CopyLobbyLinkButton'
 import { IconLogo } from '../ui/Icons'
 
@@ -41,7 +41,7 @@ export function LobbyLayout({
               isAdmin ? 'admin' : 'participant'
             }`}
           >
-            {isAdmin ? 'Admin' : 'Participant'}
+            {isAdmin ? t('lobby.badge.admin') : t('lobby.badge.participant')}
           </span>
         </div>
 
@@ -57,8 +57,9 @@ export function LobbyLayout({
           </span>
           {snapshot ? (
             <span className="lobby-layout__participants">
-              {snapshot.participant_count}{' '}
-              {snapshot.participant_count === 1 ? 'participant' : 'participants'}
+              {snapshot.participant_count === 1
+                ? t('lobby.participantCount', { count: snapshot.participant_count })
+                : t('lobby.participantCountPlural', { count: snapshot.participant_count })}
             </span>
           ) : null}
           {snapshot ? (
@@ -69,7 +70,7 @@ export function LobbyLayout({
 
       {isDisconnected ? (
         <div className="lobby-layout__banner lobby-layout__banner--warning" role="status">
-          Connection lost. Trying to reconnect…
+          {t('lobby.connection.lost')}
         </div>
       ) : null}
 
@@ -82,13 +83,15 @@ export function LobbyLayout({
       {!snapshot && connectionStatus !== 'disconnected' ? (
         <div className="lobby-layout__loading" role="status">
           <div className="lobby-layout__spinner" aria-hidden="true" />
-          <p>Loading lobby state…</p>
+          <p>{t('lobby.loadingState')}</p>
         </div>
       ) : null}
 
       {snapshot && phaseMessage ? (
         <section className="lobby-layout__intro" aria-live="polite">
-          <p className="lobby-layout__lobby-id">Lobby {lobbyId.slice(0, 8)}</p>
+          <p className="lobby-layout__lobby-id">
+            {t('lobby.lobbyId', { id: lobbyId.slice(0, 8) })}
+          </p>
           <h1>{phaseMessage.title}</h1>
           <p>{phaseMessage.description}</p>
         </section>

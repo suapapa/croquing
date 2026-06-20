@@ -8,6 +8,7 @@ import {
 } from '../../hooks/useServerClock'
 import type { LobbySnapshot } from '../../types/lobby'
 import { IconExitFullscreen, IconFullscreen } from '../ui/Icons'
+import { t } from '../../lib/i18n'
 
 interface DrawingPanelProps {
   snapshot: LobbySnapshot
@@ -73,7 +74,7 @@ export function DrawingPanel({
         <div
           className="drawing-panel__countdown"
           role="timer"
-          aria-label={`Round starts in ${countdownSeconds} seconds`}
+          aria-label={t('draw.startsIn', { count: countdownSeconds })}
         >
           <span className="drawing-panel__countdown-number" aria-hidden="true">
             {countdownSeconds}
@@ -90,7 +91,7 @@ export function DrawingPanel({
             aria-valuemin={0}
             aria-valuemax={drawDurationMs}
             aria-valuenow={drawDurationMs - drawRemainingMs}
-            aria-label="Draw time remaining"
+            aria-label={t('draw.remainingAria')}
           />
           <span className="drawing-panel__timer-label">
             {formatRemainingTime(drawRemainingMs)}
@@ -105,8 +106,8 @@ export function DrawingPanel({
               type="button"
               className="button--zen-control"
               onClick={toggleFullscreen}
-              title={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
-              aria-label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
+              title={isFullscreen ? t('draw.exitFullscreen') : t('draw.enterFullscreen')}
+              aria-label={isFullscreen ? t('draw.exitFullscreen') : t('draw.enterFullscreen')}
             >
               {isFullscreen ? (
                 <IconExitFullscreen style={{ width: '1.25rem', height: '1.25rem' }} />
@@ -126,21 +127,24 @@ export function DrawingPanel({
               />
             </div>
           ) : !isCountdown ? (
-            <p className="drawing-panel__empty">Waiting for photo…</p>
+            <p className="drawing-panel__empty">{t('draw.waitingPhoto')}</p>
           ) : null}
         </div>
 
         {photo && !isCountdown ? (
           <footer className="drawing-panel__footer">
             <p className="drawing-panel__attribution">
-              Image from{' '}
+              {t('draw.attribution')}{' '}
               <a href={photo.page_url} target="_blank" rel="noreferrer">
                 Pixabay
               </a>
             </p>
             {snapshot.total_rounds > 0 ? (
               <p className="drawing-panel__round">
-                Round {snapshot.current_round} / {snapshot.total_rounds}
+                {t('draw.round', {
+                  current: snapshot.current_round,
+                  total: snapshot.total_rounds,
+                })}
               </p>
             ) : null}
           </footer>

@@ -6,6 +6,7 @@ import {
 import { ApiError } from '../../api/client'
 import type { LobbySnapshot } from '../../types/lobby'
 import { useCallback, useState } from 'react'
+import { t } from '../../lib/i18n'
 
 interface AdminControlsProps {
   lobbyId: string
@@ -24,7 +25,7 @@ export function AdminControls({ lobbyId, snapshot }: AdminControlsProps) {
         await action()
       } catch (err) {
         const message =
-          err instanceof ApiError ? err.message : 'Action failed'
+          err instanceof ApiError ? err.message : t('admin.actionFailed')
         setError(message)
       } finally {
         setLoadingAction(null)
@@ -55,7 +56,7 @@ export function AdminControls({ lobbyId, snapshot }: AdminControlsProps) {
           disabled={loadingAction !== null}
           onClick={() => void runAction('start', () => startLobbySession(lobbyId))}
         >
-          {loadingAction === 'start' ? 'Starting…' : 'Start session'}
+          {loadingAction === 'start' ? t('admin.starting') : t('admin.startSession')}
         </button>
       ) : null}
 
@@ -67,7 +68,7 @@ export function AdminControls({ lobbyId, snapshot }: AdminControlsProps) {
             disabled={loadingAction !== null}
             onClick={() => void runAction('next', () => nextLobbyRound(lobbyId))}
           >
-            {loadingAction === 'next' ? 'Loading…' : 'Next photo'}
+            {loadingAction === 'next' ? t('admin.loading') : t('admin.nextPhoto')}
           </button>
           <button
             type="button"
@@ -77,7 +78,7 @@ export function AdminControls({ lobbyId, snapshot }: AdminControlsProps) {
               void runAction('finish', () => finishLobbySession(lobbyId))
             }
           >
-            {loadingAction === 'finish' ? 'Ending…' : 'End session'}
+            {loadingAction === 'finish' ? t('admin.ending') : t('admin.endSession')}
           </button>
         </div>
       ) : null}

@@ -1,38 +1,9 @@
 import { useEffect, useState } from 'react'
 import { IconBulb, IconSpinner } from '../ui/Icons'
-
-const TIPS = [
-  {
-    title: 'Gesture First',
-    text: 'Capture the main line of action and body flow first, ignoring all small details.',
-  },
-  {
-    title: 'Squint to Simplify',
-    text: 'Squinting helps block out high-frequency details so you can see the main shapes of light and shadow.',
-  },
-  {
-    title: 'Draw with your Arm',
-    text: 'Use your elbow and shoulder to make long, sweeping strokes instead of scratchy wrist movements.',
-  },
-  {
-    title: 'Exaggerate the Pose',
-    text: 'In short gesture sketches, it is better to draw a pose that looks more dynamic and expressive than the photo.',
-  },
-  {
-    title: 'Negative Spaces',
-    text: 'Look at the empty shapes formed between limbs to gauge proportions and angles accurately.',
-  },
-  {
-    title: 'Proportions over Details',
-    text: 'Leave hands, feet, and faces blank until the main torso and overall skeleton structure are locked in.',
-  },
-  {
-    title: 'Keep it Loose',
-    text: 'Remember, this is a croquis! Speed and feeling are more important than a polished, perfect drawing.',
-  },
-]
+import { getLocalizedTips, t } from '../../lib/i18n'
 
 export function ParticipantWaitPanel() {
+  const tips = getLocalizedTips()
   const [index, setIndex] = useState(0)
   const [transitionState, setTransitionState] = useState<'active' | 'exit' | 'enter'>('active')
 
@@ -41,7 +12,7 @@ export function ParticipantWaitPanel() {
       setTransitionState('exit')
       
       const exitTimer = setTimeout(() => {
-        setIndex((prev) => (prev + 1) % TIPS.length)
+        setIndex((prev) => (prev + 1) % tips.length)
         setTransitionState('enter')
         
         const enterTimer = setTimeout(() => {
@@ -55,9 +26,9 @@ export function ParticipantWaitPanel() {
     }, 8000)
 
     return () => clearInterval(timer)
-  }, [])
+  }, [tips.length])
 
-  const currentTip = TIPS[index]
+  const currentTip = tips[index]
 
   let transitionClass = 'tip-panel__tip--active'
   if (transitionState === 'enter') {
@@ -71,20 +42,24 @@ export function ParticipantWaitPanel() {
       <div className="tip-panel__icon-wrap">
         <IconBulb className="button__icon" />
       </div>
-      <h2 className="tip-panel__title">Setting up reference photos...</h2>
+      <h2 className="tip-panel__title">{t('wait.settingPhotos')}</h2>
       <p style={{ color: 'var(--color-muted)', fontSize: '0.875rem', marginBottom: 'var(--space-6)' }}>
-        The admin is choosing photos. They stay hidden until the session starts.
+        {t('wait.adminChoosing')}
       </p>
 
       <div className="tip-panel__carousel">
-        <div className={`tip-panel__tip ${transitionClass}`}>
-          <span className="tip-panel__tip-title">Tip: {currentTip.title}</span>
-          <p className="tip-panel__tip-text">{currentTip.text}</p>
-        </div>
+        {currentTip ? (
+          <div className={`tip-panel__tip ${transitionClass}`}>
+            <span className="tip-panel__tip-title">
+              {t('wait.tipLabel', { title: currentTip.title })}
+            </span>
+            <p className="tip-panel__tip-text">{currentTip.text}</p>
+          </div>
+        ) : null}
       </div>
 
       <div className="tip-panel__dots" aria-label="Carousel navigation">
-        {TIPS.map((_, idx) => (
+        {tips.map((_, idx) => (
           <button
             key={idx}
             type="button"
@@ -99,7 +74,7 @@ export function ParticipantWaitPanel() {
                 }, 50)
               }, 300)
             }}
-            aria-label={`Go to tip ${idx + 1}`}
+            aria-label={t('wait.goTip', { idx: idx + 1 })}
             aria-current={idx === index ? 'true' : 'false'}
           />
         ))}
@@ -107,7 +82,7 @@ export function ParticipantWaitPanel() {
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginTop: 'var(--space-8)', color: 'var(--color-accent)', fontWeight: 600, fontSize: '0.875rem' }}>
         <IconSpinner className="button__spinner" />
-        <span>Waiting for admin...</span>
+        <span>{t('wait.waitingForAdmin')}</span>
       </div>
     </div>
   )

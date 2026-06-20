@@ -9,22 +9,23 @@ import {
   IconUsers,
 } from '../components/ui/Icons'
 import { saveAdminToken } from '../lib/adminStorage'
+import { t } from '../lib/i18n'
 
 const STEPS = [
   {
     icon: IconLink,
-    title: 'Create & share',
-    description: 'Start a lobby and send the link to your drawing group.',
+    titleKey: 'home.step1.title',
+    descKey: 'home.step1.desc',
   },
   {
     icon: IconUsers,
-    title: 'Pick references',
-    description: 'The admin selects photos from Pixabay for everyone to draw.',
+    titleKey: 'home.step2.title',
+    descKey: 'home.step2.desc',
   },
   {
     icon: IconTimer,
-    title: 'Draw in sync',
-    description: 'Timed rounds with the same photo and countdown for all.',
+    titleKey: 'home.step3.title',
+    descKey: 'home.step3.desc',
   },
 ] as const
 
@@ -43,7 +44,7 @@ export function HomePage() {
       navigate(`/lobby/${created.id}`)
     } catch (err) {
       const message =
-        err instanceof Error ? err.message : 'Failed to create lobby'
+        err instanceof Error ? err.message : t('home.createLobbyFailed')
       setError(message)
     } finally {
       setLoading(false)
@@ -54,14 +55,13 @@ export function HomePage() {
     <main className="home-page">
       <div className="home-page__shell">
         <section className="home-page__hero" aria-labelledby="home-title">
-          <p className="home-page__eyebrow">Real-time croquis meetups</p>
+          <p className="home-page__eyebrow">{t('home.eyebrow')}</p>
           <div className="home-page__brand-header">
             <IconLogo className="home-page__logo" aria-hidden="true" />
             <h1 id="home-title">Croquis King</h1>
           </div>
           <p className="home-page__lead">
-            Create a lobby, share the link, and draw together with synchronized
-            photos and timers — no screen sharing required.
+            {t('home.lead')}
           </p>
 
           <button
@@ -74,10 +74,10 @@ export function HomePage() {
             {loading ? (
               <>
                 <IconSpinner className="button__spinner" />
-                Creating lobby…
+                {t('home.creatingLobby')}
               </>
             ) : (
-              'Create lobby'
+              t('home.createLobby')
             )}
           </button>
 
@@ -90,14 +90,14 @@ export function HomePage() {
 
         <section className="home-page__steps" aria-labelledby="how-it-works">
           <h2 id="how-it-works" className="home-page__steps-title">
-            How it works
+            {t('home.howItWorks')}
           </h2>
           <ol className="home-page__steps-list">
             {STEPS.map((step, index) => {
               const Icon = step.icon
               return (
                 <li
-                  key={step.title}
+                  key={step.titleKey}
                   className="home-page__step"
                   style={{ animationDelay: `${index * 60}ms` }}
                 >
@@ -105,8 +105,8 @@ export function HomePage() {
                     <Icon />
                   </span>
                   <div>
-                    <h3>{step.title}</h3>
-                    <p>{step.description}</p>
+                    <h3>{t(step.titleKey)}</h3>
+                    <p>{t(step.descKey)}</p>
                   </div>
                 </li>
               )

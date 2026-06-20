@@ -5,6 +5,7 @@ import type { LobbySnapshot, Photo } from '../../types/lobby'
 import { PixabaySearchPanel } from '../search/PixabaySearchPanel'
 import { PhotoReviewPanel } from './PhotoReviewPanel'
 import { ParticipantWaitPanel } from './ParticipantWaitPanel'
+import { t } from '../../lib/i18n'
 
 interface PhotoSelectionPanelProps {
   lobbyId: string
@@ -38,7 +39,7 @@ export function PhotoSelectionPanel({
       await setLobbyPhotos(lobbyId, selectedPhotos)
     } catch (err) {
       const message =
-        err instanceof ApiError ? err.message : 'Failed to save selection'
+        err instanceof ApiError ? err.message : t('selection.errSave')
       setError(message)
     } finally {
       setLoading(false)
@@ -52,7 +53,7 @@ export function PhotoSelectionPanel({
       await markLobbyReady(lobbyId)
     } catch (err) {
       const message =
-        err instanceof ApiError ? err.message : 'Failed to confirm selection'
+        err instanceof ApiError ? err.message : t('selection.errConfirm')
       setError(message)
     } finally {
       setLoading(false)
@@ -66,7 +67,7 @@ export function PhotoSelectionPanel({
       await reopenLobbyPhotos(lobbyId)
     } catch (err) {
       const message =
-        err instanceof ApiError ? err.message : 'Failed to reopen photo selection'
+        err instanceof ApiError ? err.message : t('selection.errReopen')
       setError(message)
     } finally {
       setLoading(false)
@@ -96,7 +97,7 @@ export function PhotoSelectionPanel({
                 disabled={loading || selectedPhotos.length === 0}
                 onClick={() => void handleSaveSelection()}
               >
-                {loading ? 'Saving…' : `Save ${selectedPhotos.length} photos`}
+                {loading ? t('selection.saving') : t('selection.saveCount', { count: selectedPhotos.length })}
               </button>
             ) : null
           }

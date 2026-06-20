@@ -1,4 +1,5 @@
 import type { Photo } from '../../types/lobby'
+import { t } from '../../lib/i18n'
 
 interface PhotoReviewPanelProps {
   photos: Photo[]
@@ -16,11 +17,10 @@ export function PhotoReviewPanel({
   return (
     <section className="photo-review" aria-labelledby="photo-review-title">
       <header className="photo-review__header">
-        <h2 id="photo-review-title">{photos.length} photos saved</h2>
-        <p>
-          Hover a thumbnail to preview it at full size. When you are happy with
-          the set, shuffle and lock the order to start.
-        </p>
+        <h2 id="photo-review-title">
+          {t('review.photosSaved', { count: photos.length })}
+        </h2>
+        <p>{t('review.instruction')}</p>
       </header>
 
       {photos.length > 0 ? (
@@ -30,7 +30,10 @@ export function PhotoReviewPanel({
               <button
                 type="button"
                 className="photo-review__thumb"
-                aria-label={`Preview saved photo ${index + 1} of ${photos.length}`}
+                aria-label={t('review.previewAria', {
+                  index: index + 1,
+                  total: photos.length,
+                })}
               >
                 <img
                   className="photo-review__thumb-image"
@@ -59,7 +62,7 @@ export function PhotoReviewPanel({
           disabled={loading}
           onClick={onEdit}
         >
-          Edit selection
+          {t('review.editSelection')}
         </button>
         <button
           type="button"
@@ -67,7 +70,7 @@ export function PhotoReviewPanel({
           disabled={loading || photos.length === 0}
           onClick={onConfirm}
         >
-          {loading ? 'Shuffling…' : 'Selection complete'}
+          {loading ? t('review.shuffling') : t('review.selectionComplete')}
         </button>
       </div>
     </section>

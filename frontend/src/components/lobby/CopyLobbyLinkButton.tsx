@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { IconLink } from '../ui/Icons'
 import { copyLobbyJoinUrl } from '../../lib/lobbyLink'
+import { t } from '../../lib/i18n'
 
 interface CopyLobbyLinkButtonProps {
   lobbyId: string
@@ -41,7 +42,11 @@ export function CopyLobbyLinkButton({
     setCopied(false)
   }, [lobbyId])
 
-  const label = copied ? 'Copied!' : failed ? 'Copy failed' : 'Copy link'
+  const label = copied
+    ? t('copy.copied')
+    : failed
+      ? t('copy.failed')
+      : t('copy.link')
   const classes = [
     'button',
     'button--secondary',

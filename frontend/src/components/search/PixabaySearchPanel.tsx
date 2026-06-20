@@ -13,6 +13,7 @@ import {
   IconSpinner,
   IconClose,
 } from '../ui/Icons'
+import { t } from '../../lib/i18n'
 
 const RECOMMENDED_COUNT = 5
 const PIXABAY_PER_PAGE = 24
@@ -47,7 +48,7 @@ export function PixabaySearchPanel({
     async (nextPage: number) => {
       const trimmed = query.trim()
       if (!trimmed) {
-        setError('Enter a search term')
+        setError(t('search.errEmpty'))
         return
       }
 
@@ -69,7 +70,7 @@ export function PixabaySearchPanel({
         )
       } catch (err) {
         const message =
-          err instanceof ApiError ? err.message : 'Search failed'
+          err instanceof ApiError ? err.message : t('search.errFailed')
         setError(message)
       } finally {
         setLoading(false)
@@ -111,26 +112,26 @@ export function PixabaySearchPanel({
           }}
         >
           <label className="pixabay-search__field">
-            <span className="pixabay-search__label">Search Pixabay</span>
+            <span className="pixabay-search__label">{t('search.fieldLabel')}</span>
             <input
               type="search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="e.g. portrait, anatomy, gesture"
+              placeholder={t('search.placeholder')}
               autoComplete="off"
             />
           </label>
 
           <label className="pixabay-search__field pixabay-search__field--compact">
-            <span className="pixabay-search__label">Sort</span>
+            <span className="pixabay-search__label">{t('search.sort')}</span>
             <select
               value={order}
               onChange={(event) =>
                 setOrder(event.target.value as 'popular' | 'latest')
               }
             >
-              <option value="popular">Popular</option>
-              <option value="latest">Latest</option>
+              <option value="popular">{t('search.sortPopular')}</option>
+              <option value="latest">{t('search.sortLatest')}</option>
             </select>
           </label>
 
@@ -138,8 +139,8 @@ export function PixabaySearchPanel({
             type="submit"
             className="button button--primary button--icon-only"
             disabled={loading}
-            aria-label={loading ? 'Searching' : 'Search'}
-            title={loading ? 'Searching' : 'Search'}
+            aria-label={loading ? t('search.searching') : t('search.button')}
+            title={loading ? t('search.searching') : t('search.button')}
           >
             {loading ? (
               <IconSpinner className="button__spinner" />
@@ -151,7 +152,7 @@ export function PixabaySearchPanel({
       ) : null}
 
       <p className="pixabay-search__hint">
-        {selectedPhotos.length} selected · {RECOMMENDED_COUNT} recommended
+        {t('search.hint', { count: selectedPhotos.length, recommended: RECOMMENDED_COUNT })}
       </p>
 
       {error ? (
@@ -173,7 +174,11 @@ export function PixabaySearchPanel({
               onClick={() => togglePhoto(hit)}
               disabled={readOnly}
               aria-pressed={selected}
-              aria-label={`${selected ? 'Deselect' : 'Select'} photo ${hit.pixabay_id}`}
+              aria-label={
+                selected
+                  ? t('search.ariaDeselect', { id: hit.pixabay_id })
+                  : t('search.ariaSelect', { id: hit.pixabay_id })
+              }
             >
               <img
                 src={hit.preview_url}
@@ -197,21 +202,21 @@ export function PixabaySearchPanel({
             className="button button--secondary button--icon-only"
             disabled={loading || page <= 1}
             onClick={() => void runSearch(page - 1)}
-            aria-label="Previous page"
-            title="Previous page"
+            aria-label={t('search.prevPage')}
+            title={t('search.prevPage')}
           >
             <IconChevronLeft className="button__icon" />
           </button>
           <span>
-            Page {page} of {totalPages}
+            {t('search.pageIndicator', { page, total: totalPages })}
           </span>
           <button
             type="button"
             className="button button--secondary button--icon-only"
             disabled={loading || page >= totalPages}
             onClick={() => void runSearch(page + 1)}
-            aria-label="Next page"
-            title="Next page"
+            aria-label={t('search.nextPage')}
+            title={t('search.nextPage')}
           >
             <IconChevronRight className="button__icon" />
           </button>
@@ -220,7 +225,7 @@ export function PixabaySearchPanel({
 
       <div className="pixabay-search__footer">
         <p className="pixabay-search__attribution">
-          Images from{' '}
+          {t('draw.attribution')}{' '}
           <a href="https://pixabay.com" target="_blank" rel="noreferrer">
             Pixabay
           </a>
@@ -232,7 +237,7 @@ export function PixabaySearchPanel({
           <div className="selection-dock__container">
             <div className="selection-dock__left">
               <h3 className="selection-dock__title">
-                Selected Reference Photos
+                {t('search.dock.title')}
                 <span className="selection-dock__count-badge">
                   {selectedPhotos.length}
                 </span>
@@ -255,7 +260,7 @@ export function PixabaySearchPanel({
                         selectedPhotos.filter((p) => p.pixabay_id !== photo.pixabay_id),
                       )
                     }
-                    title="Remove photo"
+                    title={t('search.dock.remove')}
                   >
                     <IconClose style={{ width: '0.625rem', height: '0.625rem' }} />
                   </button>
