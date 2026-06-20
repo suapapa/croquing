@@ -3,7 +3,7 @@
 > **자동 생성 문서** — 직접 수정하지 마세요.  
 > 소스: [`workitems.json`](workitems.json) · 갱신: `make progress`
 
-마지막 갱신: **2026-06-20 19:53 KST**
+마지막 갱신: **2026-06-20 19:54 KST**
 
 ## Phase A — 백엔드 (001-017)
 
@@ -139,7 +139,7 @@
 
 선행 조건: backend 완료 (001-017)
 
-진행: **4 / 12** (33%)
+진행: **6 / 12** (50%)
 
 | Index | 상태 | 제목 | deps | 산출물 검증 |
 |-------|------|------|------|-------------|
@@ -147,8 +147,8 @@
 | **102** | ✅ done | [FE] 라우팅·로비 접속 | 101 | ✓ |
 | **103** | ✅ done | [FE] WebSocket 클라이언트 훅 | 102 | ✓ |
 | **104** | ✅ done | [FE] 로비 공통 레이아웃 | 103 | ✓ |
-| **105** | ⬜ pending | [FE] Admin / Participant UI 분기 | 104 | — |
-| **106** | ⬜ pending | [FE] PixaBay 검색 UI | 105, 010 | — |
+| **105** | ✅ done | [FE] Admin / Participant UI 분기 | 104 | ✓ |
+| **106** | ✅ done | [FE] PixaBay 검색 UI | 105, 010 | ✓ |
 | **107** | ⬜ pending | [FE] 사진 선택 UI | 106, 011 | — |
 | **108** | ⬜ pending | [FE] READY 화면 | 107, 012 | — |
 | **109** | ⬜ pending | [FE] DRAWING 화면 | 108, 013 | — |
@@ -182,15 +182,27 @@
 - 산출물: frontend/src/components/layout/LobbyLayout.tsx, frontend/src/lib/phaseMessages.ts
 - 메모: LobbyLayout shows participant count, phase copy, connection badge, loading and reconnect banners.
 
+#### 105 — [FE] Admin / Participant UI 분기
+
+- 완료일: 2026-06-20
+- 산출물: frontend/src/components/admin/AdminControls.tsx
+- 메모: AdminControls renders start/next/finish actions only when sessionStorage admin token exists.
+
+#### 106 — [FE] PixaBay 검색 UI
+
+- 완료일: 2026-06-20
+- 산출물: frontend/src/components/search/PixabaySearchPanel.tsx, frontend/src/api/pixabayApi.ts
+- 메모: Admin search panel with order toggle, pagination, selectable grid, and PixaBay attribution.
+
 ## 전체 요약
 
-- **전체:** 21 / 29 완료 (72%)
+- **전체:** 23 / 29 완료 (79%)
 - **백엔드:** 17 / 17 (100%)
-- **프론트엔드:** 4 / 12 (33%)
+- **프론트엔드:** 6 / 12 (50%)
 
 ## 다음 작업 후보
 
-- **105** — [FE] Admin / Participant UI 분기 (`pending`)
+- **107** — [FE] 사진 선택 UI (`pending`)
 
 ## 진도 갱신 방법
 

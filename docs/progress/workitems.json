@@ -324,14 +324,25 @@
           "title": "[FE] Admin / Participant UI 분기",
           "description": "AdminToken 유무에 따라 조작 버튼 노출/비노출",
           "deps": ["104"],
-          "status": "pending"
+          "status": "done",
+          "completed_at": "2026-06-20",
+          "artifacts": [
+            "frontend/src/components/admin/AdminControls.tsx"
+          ],
+          "notes": "AdminControls renders start/next/finish actions only when sessionStorage admin token exists."
         },
         {
           "id": "106",
           "title": "[FE] PixaBay 검색 UI",
           "description": "검색어 입력, popular/latest 정렬, 페이지네이션, 결과 그리드 (Admin, SELECTING)",
           "deps": ["105", "010"],
-          "status": "pending"
+          "status": "done",
+          "completed_at": "2026-06-20",
+          "artifacts": [
+            "frontend/src/components/search/PixabaySearchPanel.tsx",
+            "frontend/src/api/pixabayApi.ts"
+          ],
+          "notes": "Admin search panel with order toggle, pagination, selectable grid, and PixaBay attribution."
         },
         {
           "id": "107",
