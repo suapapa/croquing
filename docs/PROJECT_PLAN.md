@@ -8,7 +8,7 @@
 
 ## 1. 배경 및 문제
 
-매주 수요일 화상 미팅으로 모여 PixaBay에서 사진을 고른 뒤, 한 사람이 이미지 뷰어와 타이머를 화면 공유하며 사진당 5분씩 따라그리는 모임을 진행 중이다.
+매주 수요일 화상 미팅으로 모여 Pixabay에서 사진을 고른 뒤, 한 사람이 이미지 뷰어와 타이머를 화면 공유하며 사진당 5분씩 따라그리는 모임을 진행 중이다.
 
 ### 현재 불편함
 
@@ -17,13 +17,13 @@
 | 낮은 화면 공유 해상도 | 화상 공유로 사진을 보면 선명도가 떨어짐 |
 | 타이머 + 사진 동시 공유 | 타이머 창 때문에 사진을 크게 보기 어려움 |
 | 시작 전 조기 그리기 | 공식 시작 전에 그리기 시작하는 참가자 발생 |
-| 수동 워크플로 | PixaBay 사이트 접속 → 검색 → 다운로드 → 뷰어/타이머 수동 운영 |
+| 수동 워크플로 | Pixabay 사이트 접속 → 검색 → 다운로드 → 뷰어/타이머 수동 운영 |
 
 ### 목표
 
 - 참가자 전원이 **같은 URL**에 접속해 **동일한 화면 변화**를 실시간으로 본다.
 - 화상 공유 없이 **고해상도 사진**과 **서버 동기화 타이머**를 제공한다.
-- PixaBay 검색·선택을 앱 안에서 처리한다.
+- Pixabay 검색·선택을 앱 안에서 처리한다.
 - 사진 순서는 **시작 전까지 비공개**, **랜덤**으로 결정한다.
 - 그리기 시간(5분) 동안만 사진을 **최대 크기**로 표시하고, 시간이 끝나면 숨긴다.
 
@@ -63,7 +63,7 @@ https://{host}/lobby/{lobby_id}
                            │ 관리자: 사진 선택 시작
                            ▼
                     ┌─────────────┐
-                    │  SELECTING  │  PixaBay 검색·사진 선택
+                    │  SELECTING  │  Pixabay 검색·사진 선택
                     └──────┬──────┘
                            │ 관리자: 선택 완료
                            ▼
@@ -109,12 +109,12 @@ https://{host}/lobby/{lobby_id}
 └──────────────┘                  │  ├─ WebSocket Hub           │
                                   │  ├─ Lobby State Machine     │
                                   │  ├─ Timer Scheduler         │
-                                  │  └─ PixaBay Proxy Client    │
+                                  │  └─ Pixabay Proxy Client    │
                                   └──────────────┬──────────────┘
                                                  │ HTTPS
                                                  ▼
                                   ┌─────────────────────────────┐
-                                  │ PixaBay API                 │
+                                  │ Pixabay API                 │
                                   │ https://pixabay.com/api/    │
                                   └─────────────────────────────┘
 ```
@@ -122,15 +122,15 @@ https://{host}/lobby/{lobby_id}
 ### 3.2 실시간 동기화
 
 - **WebSocket** (`/ws/lobby/{id}`): 로비 상태 변경, 타이머 잔여 시간, 참가자 수 등 브로드캐스트
-- **REST API**: 로비 생성, PixaBay 검색, 관리자 액션(사진 선택·세션 시작 등)
+- **REST API**: 로비 생성, Pixabay 검색, 관리자 액션(사진 선택·세션 시작 등)
 - 타이머는 서버에서 `draw_ends_at`(Unix ms)을 저장하고, 클라이언트는 수신한 시각을 기준으로 UI만 렌더링  
   → 네트워크 지연이 있어도 **서버 만료 시점**이 기준
 
-### 3.3 PixaBay API 연동
+### 3.3 Pixabay API 연동
 
 - API Key는 **백엔드 환경변수**에만 보관 (`PIXABAY_API_KEY`)
-- 프론트엔드는 백엔드 REST를 호출; PixaBay에 직접 요청하지 않음
-- 참고: [PixaBay API Docs](https://pixabay.com/api/docs/)
+- 프론트엔드는 백엔드 REST를 호출; Pixabay에 직접 요청하지 않음
+- 참고: [Pixabay API Docs](https://pixabay.com/api/docs/)
 
 **초기 지원 파라미터**
 
@@ -149,7 +149,7 @@ https://{host}/lobby/{lobby_id}
 - `imageWidth`, `imageHeight`, `views`, `downloads`, `likes`
 - UI 썸네일: `previewURL` / 그리기용: `largeImageURL`
 
-**PixaBay 이용 조건**: 검색 결과 표시 시 이미지 출처(PixaBay) 표기 필요 ([API 가이드라인](https://pixabay.com/api/docs/))
+**Pixabay 이용 조건**: 검색 결과 표시 시 이미지 출처(Pixabay) 표기 필요 ([API 가이드라인](https://pixabay.com/api/docs/))
 
 ### 3.4 프로젝트 디렉터리 (목표 구조)
 
@@ -161,7 +161,7 @@ croquis-king/
 ├── internal/
 │   ├── config/                  # 환경설정
 │   ├── lobby/                   # 로비 도메인·상태머신·저장소
-│   ├── pixabay/                 # PixaBay API 클라이언트
+│   ├── pixabay/                 # Pixabay API 클라이언트
 │   ├── timer/                   # 서버 타이머 스케줄러
 │   ├── ws/                      # WebSocket 허브
 │   └── http/                    # HTTP 핸들러·라우터
@@ -226,14 +226,14 @@ type LobbySnapshot struct {
 |--------|------|------|------|
 | `POST` | `/api/lobbies` | — | 로비 생성 → `{ id, admin_token, join_url }` |
 | `GET` | `/api/lobbies/{id}` | — | 현재 스냅샷 조회 |
-| `GET` | `/api/pixabay/search` | Admin* | PixaBay 검색 프록시 |
+| `GET` | `/api/pixabay/search` | Admin* | Pixabay 검색 프록시 |
 | `PUT` | `/api/lobbies/{id}/photos` | Admin | 선택 사진 목록 설정 |
 | `POST` | `/api/lobbies/{id}/ready` | Admin | 선택 완료 → 셔플 → READY |
 | `POST` | `/api/lobbies/{id}/start` | Admin | 첫 DRAWING 시작 |
 | `POST` | `/api/lobbies/{id}/next` | Admin | BETWEEN → 다음 DRAWING |
 | `POST` | `/api/lobbies/{id}/finish` | Admin | 세션 강제 종료 |
 
-\* PixaBay 검색은 로비 AdminToken 헤더(`X-Admin-Token`) 또는 로비 ID + 토큰 검증
+\* Pixabay 검색은 로비 AdminToken 헤더(`X-Admin-Token`) 또는 로비 ID + 토큰 검증
 
 ### 4.2 WebSocket
 
@@ -299,8 +299,8 @@ type LobbySnapshot struct {
 | **006** | `[BE]` 로비 생성·조회 API | `POST /api/lobbies`, `GET /api/lobbies/{id}`. AdminToken 생성·검증 헬퍼 | 003, 005 |
 | **007** | `[BE]` WebSocket 허브 | `/ws/lobby/{id}` 업그레이드, 연결 등록/해제, 로비별 브로드캐스트 | 003, 005 |
 | **008** | `[BE]` 실시간 스냅샷 동기화 | 로비 상태 변경 시 모든 WS 클라이언트에 `snapshot` push. 연결 직후 초기 스냅샷 전송 | 006, 007 |
-| **009** | `[BE]` PixaBay API 클라이언트 | HTTP 클라이언트, 검색 요청/응답 파싱, API key 주입, 에러·rate limit 처리 | 002 |
-| **010** | `[BE]` PixaBay 검색 API | `GET /api/pixabay/search?q&order&page&per_page`. AdminToken 검증, PixaBay 응답 정규화 | 006, 009 |
+| **009** | `[BE]` Pixabay API 클라이언트 | HTTP 클라이언트, 검색 요청/응답 파싱, API key 주입, 에러·rate limit 처리 | 002 |
+| **010** | `[BE]` Pixabay 검색 API | `GET /api/pixabay/search?q&order&page&per_page`. AdminToken 검증, Pixabay 응답 정규화 | 006, 009 |
 | **011** | `[BE]` 사진 선택 API | `PUT /api/lobbies/{id}/photos` — 선택 목록 저장, Phase를 `SELECTING`으로, 스냅샷 갱신 | 006, 008 |
 | **012** | `[BE]` 사진 순서 랜덤 셔플 | `POST .../ready` — Fisher-Yates 셔플로 `PhotoOrder` 생성. `PhotoOrder`는 스냅샷에 **미포함** | 011 |
 | **013** | `[BE]` 서버 권위 타이머 | `DrawEndsAt` 설정/초기화, `DRAWING` 진입 시 `now + DrawDuration`, 만료 판정 헬퍼 | 004, 005 |
@@ -322,10 +322,10 @@ type LobbySnapshot struct {
 | **103** | `[FE]` WebSocket 클라이언트 훅 | `useLobbySocket(id)` — snapshot 수신, reconnect, 서버 시각 offset 보정 | 102 |
 | **104** | `[FE]` 로비 공통 레이아웃 | 참가자 수, Phase별 안내 문구, 로딩/연결 끊김 UI | 103 |
 | **105** | `[FE]` Admin / Participant UI 분기 | AdminToken 유무에 따라 조작 버튼 노출/비노출 | 104 |
-| **106** | `[FE]` PixaBay 검색 UI | 검색어 입력, `popular`/`latest` 정렬, 페이지네이션, 결과 그리드 (Admin, `SELECTING`) | 105, 010 |
+| **106** | `[FE]` Pixabay 검색 UI | 검색어 입력, `popular`/`latest` 정렬, 페이지네이션, 결과 그리드 (Admin, `SELECTING`) | 105, 010 |
 | **107** | `[FE]` 사진 선택 UI | 다중 선택(기본 5장 권장), 선택 목록 확인, "선택 완료" → ready API | 106, 011 |
 | **108** | `[FE]` READY 화면 | "N장 준비됨" — 썸네일·순서 미표시. Admin "시작" 버튼 | 107, 012 |
-| **109** | `[FE]` DRAWING 화면 | 상단 progress bar + `mm:ss` 잔여 시간, 중앙 `largeImageURL` 최대 표시, PixaBay 출처 표기 | 108, 013 |
+| **109** | `[FE]` DRAWING 화면 | 상단 progress bar + `mm:ss` 잔여 시간, 중앙 `largeImageURL` 최대 표시, Pixabay 출처 표기 | 108, 013 |
 | **110** | `[FE]` BETWEEN / FINISHED 화면 | 사진 숨김, 라운드 간 대기, Admin "다음" 버튼, 종료 메시지 | 109, 014 |
 | **111** | `[FE]` 반응형·전체화면 UX | 모바일/태블릿 대응, 불필요 chrome 최소화, 그리기에 방해되지 않는 UI | 109 |
 | **112** | `[FE]` 프론트엔드 통합·빌드 | 프로덕션 빌드, Go static embed 또는 reverse proxy 연동 문서화 | 110, 111, 016 |
@@ -355,7 +355,7 @@ type LobbySnapshot struct {
 **권장 첫 구현 묶음**
 
 1. **MVP-Backend (001–008):** 로비 생성 + WebSocket 동기화만으로 "같은 화면을 본다" 검증
-2. **MVP-PixaBay (009–011):** 검색·선택
+2. **MVP-Pixabay (009–011):** 검색·선택
 3. **MVP-Session (012–015):** 셔플·타이머·자동 전환
 4. **MVP-Frontend (101–109):** 실제 모임에 쓸 수 있는 최소 UI
 
@@ -367,7 +367,7 @@ type LobbySnapshot struct {
 |------|------|
 | 동시 로비 수 | 초기: 인메모리, 단일 인스턴스. 수십 명 규모면 충분 |
 | 보안 | AdminToken은 UUID v4+, HTTPS 배포 권장 |
-| PixaBay Rate Limit | 검색 debounce(프론트), 백엔드 simple cache(동일 query 30s) 고려 |
+| Pixabay Rate Limit | 검색 debounce(프론트), 백엔드 simple cache(동일 query 30s) 고려 |
 | 배포 | 단일 바이너리 + React static. Docker 선택 |
 
 ---
@@ -388,7 +388,7 @@ type LobbySnapshot struct {
 | 변수 | 필수 | 설명 |
 |------|------|------|
 | `PORT` | | HTTP 포트 (default: `8080`) |
-| `PIXABAY_API_KEY` | ✓ | PixaBay API 키 |
+| `PIXABAY_API_KEY` | ✓ | Pixabay API 키 |
 | `DRAW_DURATION` | | 예: `5m` |
 | `CORS_ORIGINS` | | 예: `http://localhost:5173` |
 

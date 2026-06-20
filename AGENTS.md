@@ -25,7 +25,7 @@ Module path: `github.com/suapapa/croquis-king`.
 ### Core behaviors (from plan)
 
 - Admin opens a lobby; joiners see the same page state via **WebSocket**.
-- **PixaBay** search/selection through the backend ([API docs](https://pixabay.com/api/docs/)); API key stays server-side.
+- **Pixabay** search/selection through the backend ([API docs](https://pixabay.com/api/docs/)); API key stays server-side.
 - Photo order is **shuffled and hidden** until the session starts.
 - During each **5-minute** round, show the photo as large as possible with a thin top progress bar and remaining time; hide the photo when time ends.
 - **Server-authoritative timer** (`DrawEndsAt`) to prevent drawing before the official start.
@@ -67,7 +67,7 @@ Current state: **WorkItems 001–017 (backend) and 101–112 (frontend) done**. 
 - **Go:** Follow idiomatic Go. See `.agents/skills/golang-pro/SKILL.md` for project-local expectations (vet, tests with `-race`, layout under `internal/`).
 - **State:** Lobby phase and timer are owned by the **server**; clients render snapshots only.
 - **Secrets:** `PIXABAY_API_KEY` and admin tokens never belong in frontend code or committed env files.
-- **PixaBay:** Show attribution when displaying search results (API guideline).
+- **Pixabay:** Show attribution when displaying search results (API guideline).
 
 ## Commands (from repo root)
 
@@ -100,7 +100,7 @@ Treat doc updates as part of the same change, not optional follow-up.
 
 | Range | Phase |
 |-------|--------|
-| 001–017 | Backend: scaffold → HTTP/WS → PixaBay → session & timer → integration tests |
+| 001–017 | Backend: scaffold → HTTP/WS → Pixabay → session & timer → integration tests |
 | 101–112 | Frontend: React → lobby UI → search/select → drawing screen with timer |
 
 Full descriptions and dependencies: **[docs/PROJECT_PLAN.md §6](docs/PROJECT_PLAN.md#6-workitem-목록)**.

@@ -10,7 +10,7 @@ const (
 	maxPerPage        = 200
 )
 
-// SearchParams holds query parameters for a PixaBay image search.
+// SearchParams holds query parameters for a Pixabay image search.
 type SearchParams struct {
 	Query      string
 	Order      string
@@ -28,7 +28,7 @@ type SearchResult struct {
 	RateLimit RateLimit
 }
 
-// Image contains the fields used by Croquis King from a PixaBay hit.
+// Image contains the fields used by Croquis King from a Pixabay hit.
 type Image struct {
 	ID            int
 	PageURL       string
@@ -42,7 +42,7 @@ type Image struct {
 	Likes         int
 }
 
-// RateLimit captures PixaBay rate-limit response headers.
+// RateLimit captures Pixabay rate-limit response headers.
 type RateLimit struct {
 	Limit     int
 	Remaining int

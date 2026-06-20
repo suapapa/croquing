@@ -93,7 +93,7 @@ export function DrawingPanel({
             <p className="drawing-panel__attribution">
               Image from{' '}
               <a href={photo.page_url} target="_blank" rel="noreferrer">
-                PixaBay
+                Pixabay
               </a>
             </p>
             {snapshot.total_rounds > 0 ? (

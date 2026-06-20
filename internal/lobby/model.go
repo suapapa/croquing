@@ -2,7 +2,7 @@ package lobby
 
 import "time"
 
-// Photo is a selected PixaBay image stored in a lobby.
+// Photo is a selected Pixabay image stored in a lobby.
 type Photo struct {
 	PixabayID     int    `json:"pixabay_id"`
 	PreviewURL    string `json:"preview_url"`

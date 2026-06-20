@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Client calls the PixaBay REST API.
+// Client calls the Pixabay REST API.
 type Client struct {
 	apiKey     string
 	baseURL    string
@@ -31,7 +31,7 @@ func WithHTTPClient(httpClient *http.Client) Option {
 	}
 }
 
-// WithBaseURL overrides the PixaBay API base URL (mainly for tests).
+// WithBaseURL overrides the Pixabay API base URL (mainly for tests).
 func WithBaseURL(baseURL string) Option {
 	return func(c *Client) {
 		if baseURL != "" {
@@ -40,7 +40,7 @@ func WithBaseURL(baseURL string) Option {
 	}
 }
 
-// NewClient creates a PixaBay API client.
+// NewClient creates a Pixabay API client.
 func NewClient(apiKey string, opts ...Option) *Client {
 	c := &Client{
 		apiKey:  apiKey,
@@ -57,7 +57,7 @@ func NewClient(apiKey string, opts ...Option) *Client {
 	return c
 }
 
-// Search performs an image search against the PixaBay API.
+// Search performs an image search against the Pixabay API.
 func (c *Client) Search(ctx context.Context, params SearchParams) (SearchResult, error) {
 	if strings.TrimSpace(params.Query) == "" {
 		return SearchResult{}, ErrEmptyQuery

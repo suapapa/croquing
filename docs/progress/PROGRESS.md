@@ -19,8 +19,8 @@
 | **006** | ✅ done | [BE] 로비 생성·조회 API | 003, 005 | ✓ |
 | **007** | ✅ done | [BE] WebSocket 허브 | 003, 005 | ✓ |
 | **008** | ✅ done | [BE] 실시간 스냅샷 동기화 | 006, 007 | ✓ |
-| **009** | ✅ done | [BE] PixaBay API 클라이언트 | 002 | ✓ |
-| **010** | ✅ done | [BE] PixaBay 검색 API | 006, 009 | ✓ |
+| **009** | ✅ done | [BE] Pixabay API 클라이언트 | 002 | ✓ |
+| **010** | ✅ done | [BE] Pixabay 검색 API | 006, 009 | ✓ |
 | **011** | ✅ done | [BE] 사진 선택 API | 006, 008 | ✓ |
 | **012** | ✅ done | [BE] 사진 순서 랜덤 셔플 | 011 | ✓ |
 | **013** | ✅ done | [BE] 서버 권위 타이머 | 004, 005 | ✓ |
@@ -81,13 +81,13 @@
 - 산출물: internal/ws/sync.go, internal/ws/sync_test.go
 - 메모: SnapshotSync: 연결/해제 시 participant_count 반영 broadcast. Broadcast()로 상태 변경 push.
 
-#### 009 — [BE] PixaBay API 클라이언트
+#### 009 — [BE] Pixabay API 클라이언트
 
 - 완료일: 2026-06-20
 - 산출물: internal/pixabay/client.go, internal/pixabay/types.go, internal/pixabay/errors.go, internal/pixabay/client_test.go
 - 메모: Search API 클라이언트. 429 ErrRateLimited, X-RateLimit-* 헤더 파싱, httptest 단위 테스트.
 
-#### 010 — [BE] PixaBay 검색 API
+#### 010 — [BE] Pixabay 검색 API
 
 - 완료일: 2026-06-20
 - 산출물: internal/http/pixabay_handlers.go, internal/http/admin_middleware.go, internal/http/pixabay_handlers_test.go
@@ -148,7 +148,7 @@
 | **103** | ✅ done | [FE] WebSocket 클라이언트 훅 | 102 | ✓ |
 | **104** | ✅ done | [FE] 로비 공통 레이아웃 | 103 | ✓ |
 | **105** | ✅ done | [FE] Admin / Participant UI 분기 | 104 | ✓ |
-| **106** | ✅ done | [FE] PixaBay 검색 UI | 105, 010 | ✓ |
+| **106** | ✅ done | [FE] Pixabay 검색 UI | 105, 010 | ✓ |
 | **107** | ✅ done | [FE] 사진 선택 UI | 106, 011 | ✓ |
 | **108** | ✅ done | [FE] READY 화면 | 107, 012 | ✓ |
 | **109** | ✅ done | [FE] DRAWING 화면 | 108, 013 | ✓ |
@@ -188,11 +188,11 @@
 - 산출물: frontend/src/components/admin/AdminControls.tsx
 - 메모: AdminControls renders start/next/finish actions only when sessionStorage admin token exists.
 
-#### 106 — [FE] PixaBay 검색 UI
+#### 106 — [FE] Pixabay 검색 UI
 
 - 완료일: 2026-06-20
 - 산출물: frontend/src/components/search/PixabaySearchPanel.tsx, frontend/src/api/pixabayApi.ts
-- 메모: Admin search panel with order toggle, pagination, selectable grid, and PixaBay attribution.
+- 메모: Admin search panel with order toggle, pagination, selectable grid, and Pixabay attribution.
 
 #### 107 — [FE] 사진 선택 UI
 
@@ -210,7 +210,7 @@
 
 - 완료일: 2026-06-20
 - 산출물: frontend/src/components/phases/DrawingPanel.tsx
-- 메모: Fullscreen-friendly drawing view with server-synced timer bar, large photo, PixaBay credit.
+- 메모: Fullscreen-friendly drawing view with server-synced timer bar, large photo, Pixabay credit.
 
 #### 110 — [FE] BETWEEN / FINISHED 화면
 

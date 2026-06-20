@@ -122,7 +122,7 @@
         },
         {
           "id": "009",
-          "title": "[BE] PixaBay API 클라이언트",
+          "title": "[BE] Pixabay API 클라이언트",
           "description": "HTTP 클라이언트, 검색 요청/응답 파싱, API key 주입, 에러·rate limit 처리",
           "deps": ["002"],
           "status": "done",
@@ -137,8 +137,8 @@
         },
         {
           "id": "010",
-          "title": "[BE] PixaBay 검색 API",
-          "description": "GET /api/pixabay/search?q&order&page&per_page. AdminToken 검증, PixaBay 응답 정규화",
+          "title": "[BE] Pixabay 검색 API",
+          "description": "GET /api/pixabay/search?q&order&page&per_page. AdminToken 검증, Pixabay 응답 정규화",
           "deps": ["006", "009"],
           "status": "done",
           "completed_at": "2026-06-20",
@@ -333,7 +333,7 @@
         },
         {
           "id": "106",
-          "title": "[FE] PixaBay 검색 UI",
+          "title": "[FE] Pixabay 검색 UI",
           "description": "검색어 입력, popular/latest 정렬, 페이지네이션, 결과 그리드 (Admin, SELECTING)",
           "deps": ["105", "010"],
           "status": "done",
@@ -342,7 +342,7 @@
             "frontend/src/components/search/PixabaySearchPanel.tsx",
             "frontend/src/api/pixabayApi.ts"
           ],
-          "notes": "Admin search panel with order toggle, pagination, selectable grid, and PixaBay attribution."
+          "notes": "Admin search panel with order toggle, pagination, selectable grid, and Pixabay attribution."
         },
         {
           "id": "107",
@@ -371,14 +371,14 @@
         {
           "id": "109",
           "title": "[FE] DRAWING 화면",
-          "description": "상단 progress bar + mm:ss 잔여 시간, 중앙 largeImageURL 최대 표시, PixaBay 출처 표기",
+          "description": "상단 progress bar + mm:ss 잔여 시간, 중앙 largeImageURL 최대 표시, Pixabay 출처 표기",
           "deps": ["108", "013"],
           "status": "done",
           "completed_at": "2026-06-20",
           "artifacts": [
             "frontend/src/components/phases/DrawingPanel.tsx"
           ],
-          "notes": "Fullscreen-friendly drawing view with server-synced timer bar, large photo, PixaBay credit."
+          "notes": "Fullscreen-friendly drawing view with server-synced timer bar, large photo, Pixabay credit."
         },
         {
           "id": "110",

@@ -17,7 +17,7 @@ Required environment variables:
 
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
-| `PIXABAY_API_KEY` | yes | — | PixaBay API key |
+| `PIXABAY_API_KEY` | yes | — | Pixabay API key |
 | `PORT` | | `8080` | HTTP port |
 | `CORS_ORIGINS` | | `*` | Allowed origins (e.g. `http://localhost:5173`) |
 | `DRAW_DURATION` | | `5m` | Draw round duration |

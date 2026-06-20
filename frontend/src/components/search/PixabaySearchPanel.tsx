@@ -100,7 +100,7 @@ export function PixabaySearchPanel({
   }
 
   return (
-    <section className="pixabay-search" aria-label="PixaBay search">
+    <section className="pixabay-search" aria-label="Pixabay search">
       {!readOnly ? (
         <form
           className="pixabay-search__form"
@@ -110,7 +110,7 @@ export function PixabaySearchPanel({
           }}
         >
           <label className="pixabay-search__field">
-            <span className="pixabay-search__label">Search PixaBay</span>
+            <span className="pixabay-search__label">Search Pixabay</span>
             <input
               type="search"
               value={query}
@@ -167,9 +167,8 @@ export function PixabaySearchPanel({
               key={hit.pixabay_id}
               type="button"
               role="listitem"
-              className={`pixabay-search__card${
-                selected ? ' pixabay-search__card--selected' : ''
-              }`}
+              className={`pixabay-search__card${selected ? ' pixabay-search__card--selected' : ''
+                }`}
               onClick={() => togglePhoto(hit)}
               disabled={readOnly}
               aria-pressed={selected}
@@ -219,15 +218,14 @@ export function PixabaySearchPanel({
       ) : null}
 
       <div
-        className={`pixabay-search__footer${
-          footerStart ? ' pixabay-search__footer--split' : ''
-        }`}
+        className={`pixabay-search__footer${footerStart ? ' pixabay-search__footer--split' : ''
+          }`}
       >
         {footerStart}
         <p className="pixabay-search__attribution">
           Images from{' '}
           <a href="https://pixabay.com" target="_blank" rel="noreferrer">
-            PixaBay
+            Pixabay
           </a>
         </p>
       </div>
