@@ -59,7 +59,7 @@ croquis-king/
 └── AGENTS.md
 ```
 
-Current state: **WorkItems 001–003 done** — `cmd/server`, `internal/config`, `internal/http` (Gin), Makefile. See [docs/progress/PROGRESS.md](docs/progress/PROGRESS.md). Next: **004** (lobby domain) or **009** (PixaBay client, parallel after 002).
+Current state: **WorkItems 001–003, 009 done** — `cmd/server`, `internal/config`, `internal/http` (Gin), `internal/pixabay`, Makefile. See [docs/progress/PROGRESS.md](docs/progress/PROGRESS.md). Next: **004** (lobby domain) or **010** (PixaBay search API, needs 006).
 
 ## Conventions for agents
 

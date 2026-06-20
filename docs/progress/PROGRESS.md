@@ -3,11 +3,11 @@
 > **자동 생성 문서** — 직접 수정하지 마세요.  
 > 소스: [`workitems.json`](workitems.json) · 갱신: `make progress`
 
-마지막 갱신: **2026-06-20 18:44 KST**
+마지막 갱신: **2026-06-20 18:46 KST**
 
 ## Phase A — 백엔드 (001-017)
 
-진행: **3 / 17** (17%)
+진행: **4 / 17** (23%)
 
 | Index | 상태 | 제목 | deps | 산출물 검증 |
 |-------|------|------|------|-------------|
@@ -19,7 +19,7 @@
 | **006** | ⬜ pending | [BE] 로비 생성·조회 API | 003, 005 | — |
 | **007** | ⬜ pending | [BE] WebSocket 허브 | 003, 005 | — |
 | **008** | ⬜ pending | [BE] 실시간 스냅샷 동기화 | 006, 007 | — |
-| **009** | ⬜ pending | [BE] PixaBay API 클라이언트 | 002 | — |
+| **009** | ✅ done | [BE] PixaBay API 클라이언트 | 002 | ✓ |
 | **010** | ⬜ pending | [BE] PixaBay 검색 API | 006, 009 | — |
 | **011** | ⬜ pending | [BE] 사진 선택 API | 006, 008 | — |
 | **012** | ⬜ pending | [BE] 사진 순서 랜덤 셔플 | 011 | — |
@@ -51,6 +51,12 @@
 - 산출물: internal/http/router.go, internal/http/server.go, internal/http/router_test.go
 - 메모: Gin 라우터, GET /health, SIGINT/SIGTERM graceful shutdown.
 
+#### 009 — [BE] PixaBay API 클라이언트
+
+- 완료일: 2026-06-20
+- 산출물: internal/pixabay/client.go, internal/pixabay/types.go, internal/pixabay/errors.go, internal/pixabay/client_test.go
+- 메모: Search API 클라이언트. 429 ErrRateLimited, X-RateLimit-* 헤더 파싱, httptest 단위 테스트.
+
 ## Phase B — 프론트엔드 (101-112)
 
 선행 조건: backend 완료 (001-017)
@@ -74,14 +80,13 @@
 
 ## 전체 요약
 
-- **전체:** 3 / 29 완료 (10%)
-- **백엔드:** 3 / 17 (17%)
+- **전체:** 4 / 29 완료 (13%)
+- **백엔드:** 4 / 17 (23%)
 - **프론트엔드:** 0 / 12 (0%)
 
 ## 다음 작업 후보
 
 - **004** — [BE] 로비 도메인 모델 (`pending`)
-- **009** — [BE] PixaBay API 클라이언트 (`pending`)
 
 ## 진도 갱신 방법
 

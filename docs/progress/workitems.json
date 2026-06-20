@@ -98,10 +98,15 @@
           "title": "[BE] PixaBay API 클라이언트",
           "description": "HTTP 클라이언트, 검색 요청/응답 파싱, API key 주입, 에러·rate limit 처리",
           "deps": ["002"],
-          "status": "pending",
+          "status": "done",
+          "completed_at": "2026-06-20",
           "artifacts": [
-            "internal/pixabay/"
-          ]
+            "internal/pixabay/client.go",
+            "internal/pixabay/types.go",
+            "internal/pixabay/errors.go",
+            "internal/pixabay/client_test.go"
+          ],
+          "notes": "Search API 클라이언트. 429 ErrRateLimited, X-RateLimit-* 헤더 파싱, httptest 단위 테스트."
         },
         {
           "id": "010",
