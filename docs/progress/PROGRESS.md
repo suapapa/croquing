@@ -3,7 +3,7 @@
 > **자동 생성 문서** — 직접 수정하지 마세요.  
 > 소스: [`workitems.json`](workitems.json) · 갱신: `make progress`
 
-마지막 갱신: **2026-06-20 19:46 KST**
+마지막 갱신: **2026-06-20 19:51 KST**
 
 ## Phase A — 백엔드 (001-017)
 
@@ -139,12 +139,12 @@
 
 선행 조건: backend 완료 (001-017)
 
-진행: **1 / 12** (8%)
+진행: **2 / 12** (16%)
 
 | Index | 상태 | 제목 | deps | 산출물 검증 |
 |-------|------|------|------|-------------|
 | **101** | ✅ done | [FE] React 프로젝트 초기화 | 017 | ✓ |
-| **102** | ⬜ pending | [FE] 라우팅·로비 접속 | 101 | — |
+| **102** | ✅ done | [FE] 라우팅·로비 접속 | 101 | ✓ |
 | **103** | ⬜ pending | [FE] WebSocket 클라이언트 훅 | 102 | — |
 | **104** | ⬜ pending | [FE] 로비 공통 레이아웃 | 103 | — |
 | **105** | ⬜ pending | [FE] Admin / Participant UI 분기 | 104 | — |
@@ -164,15 +164,21 @@
 - 산출물: frontend/package.json, frontend/vite.config.ts, frontend/eslint.config.js, frontend/.prettierrc, frontend/.env.example, frontend/src/config/env.ts
 - 메모: Vite react-ts template. ESLint flat config + Prettier. getApiBase() reads VITE_API_BASE (default localhost:8080).
 
+#### 102 — [FE] 라우팅·로비 접속
+
+- 완료일: 2026-06-20
+- 산출물: frontend/src/App.tsx, frontend/src/pages/HomePage.tsx, frontend/src/pages/LobbyPage.tsx, frontend/src/api/lobbyApi.ts, frontend/src/api/client.ts, frontend/src/lib/adminStorage.ts, frontend/src/types/lobby.ts
+- 메모: react-router-dom. POST /api/lobbies on home, /lobby/:id join. Admin token in sessionStorage per lobby.
+
 ## 전체 요약
 
-- **전체:** 18 / 29 완료 (62%)
+- **전체:** 19 / 29 완료 (65%)
 - **백엔드:** 17 / 17 (100%)
-- **프론트엔드:** 1 / 12 (8%)
+- **프론트엔드:** 2 / 12 (16%)
 
 ## 다음 작업 후보
 
-- **102** — [FE] 라우팅·로비 접속 (`pending`)
+- **103** — [FE] WebSocket 클라이언트 훅 (`pending`)
 
 ## 진도 갱신 방법
 

@@ -1,13 +1,23 @@
 :root {
-  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color: #1a1a1a;
-  background-color: #fafafa;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --color-bg: #f7f4ef;
+  --color-surface: #ffffff;
+  --color-text: #1c1917;
+  --color-muted: #57534e;
+  --color-border: #e7e5e4;
+  --color-accent: #c2410c;
+  --color-accent-hover: #9a3412;
+  --color-error: #b91c1c;
+  --font-body: 'Segoe UI', system-ui, sans-serif;
+  --font-display: Georgia, 'Times New Roman', serif;
+  --radius-md: 0.75rem;
+  --shadow-sm: 0 1px 2px rgb(28 25 23 / 8%);
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --touch-min: 2.75rem;
 }
 
 *,
@@ -19,40 +29,165 @@
 body {
   margin: 0;
   min-height: 100svh;
+  font-family: var(--font-body);
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
   min-height: 100svh;
 }
 
-.app {
-  max-width: 40rem;
-  margin: 0 auto;
-  padding: 3rem 1.5rem;
-  text-align: center;
+a {
+  color: inherit;
 }
 
-h1 {
-  margin: 0 0 0.75rem;
-  font-size: clamp(2rem, 5vw, 2.75rem);
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--touch-min);
+  padding: 0 var(--space-6);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font: inherit;
   font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
 }
 
-.tagline {
-  margin: 0 0 1.5rem;
-  color: #555;
+.button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
 }
 
-.meta {
+.button--primary {
+  color: #fff;
+  background: var(--color-accent);
+}
+
+.button--primary:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+}
+
+.button--secondary {
+  color: var(--color-text);
+  background: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.button--secondary:hover:not(:disabled) {
+  border-color: var(--color-muted);
+}
+
+.home-page {
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  padding: var(--space-8) var(--space-4);
+}
+
+.home-page__content {
+  width: min(100%, 34rem);
+  padding: var(--space-8);
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: calc(var(--radius-md) * 1.5);
+  box-shadow: var(--shadow-sm);
+}
+
+.home-page__eyebrow {
+  margin: 0 0 var(--space-2);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.home-page h1 {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 6vw, 3.25rem);
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.home-page__lead {
+  margin: 0 0 var(--space-6);
+  color: var(--color-muted);
+}
+
+.home-page__error {
+  margin: var(--space-4) 0 0;
+  color: var(--color-error);
+}
+
+.lobby-page {
+  min-height: 100svh;
+  padding: var(--space-4);
+}
+
+.lobby-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.lobby-page__brand {
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.lobby-page__role {
+  padding: var(--space-1) var(--space-3);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 999px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.lobby-page__summary {
+  max-width: 40rem;
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.lobby-page__summary h1 {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+}
+
+.lobby-page__status,
+.lobby-page__error {
   margin: 0;
-  font-size: 0.95rem;
-  color: #666;
 }
 
-code {
-  font-family: ui-monospace, Consolas, monospace;
-  font-size: 0.9em;
-  padding: 0.15rem 0.4rem;
-  border-radius: 0.25rem;
-  background: #eee;
+.lobby-page__error {
+  color: var(--color-error);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
