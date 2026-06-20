@@ -18,9 +18,15 @@ import (
 func TestHubRegisterUnregisterAndCount(t *testing.T) {
 	t.Parallel()
 
-	hub := NewHub()
+	sync := NewSnapshotSync(lobby.NewMemoryStore())
+	hub := sync.Hub()
 	conn := &websocket.Conn{}
-	client := newClient(hub, "lobby-1", conn)
+	client := &Client{
+		sync:    sync,
+		lobbyID: "lobby-1",
+		conn:    conn,
+		send:    make(chan []byte, clientSendBuffer),
+	}
 
 	hub.Register("lobby-1", client)
 	if got := hub.ClientCount("lobby-1"); got != 1 {
@@ -37,8 +43,8 @@ func TestHubBroadcast(t *testing.T) {
 	t.Parallel()
 
 	store := lobby.NewMemoryStore()
-	hub := NewHub()
-	handler := NewHandler(hub, store)
+	sync := NewSnapshotSync(store)
+	handler := NewHandler(sync)
 
 	created, err := store.Create(context.Background(), 5*time.Minute)
 	if err != nil {
@@ -58,16 +64,13 @@ func TestHubBroadcast(t *testing.T) {
 	}
 	defer conn.Close()
 
-	deadline := time.Now().Add(time.Second)
-	for hub.ClientCount(created.ID) == 0 && time.Now().Before(deadline) {
-		time.Sleep(10 * time.Millisecond)
-	}
+	readSnapshotMessage(t, conn)
 
-	payload, err := MarshalEnvelope("snapshot", map[string]string{"phase": "WAITING"})
+	payload, err := MarshalEnvelope(MessageTypeSnapshot, map[string]string{"phase": "WAITING"})
 	if err != nil {
 		t.Fatalf("MarshalEnvelope() error = %v", err)
 	}
-	hub.Broadcast(created.ID, payload)
+	sync.Hub().Broadcast(created.ID, payload)
 
 	_ = conn.SetReadDeadline(time.Now().Add(2 * time.Second))
 	_, message, err := conn.ReadMessage()
@@ -79,7 +82,7 @@ func TestHubBroadcast(t *testing.T) {
 	if err := json.Unmarshal(message, &envelope); err != nil {
 		t.Fatalf("Unmarshal() error = %v", err)
 	}
-	if envelope.Type != "snapshot" {
+	if envelope.Type != MessageTypeSnapshot {
 		t.Fatalf("type = %q, want snapshot", envelope.Type)
 	}
 }
@@ -87,8 +90,7 @@ func TestHubBroadcast(t *testing.T) {
 func TestHandlerRejectsMissingLobby(t *testing.T) {
 	t.Parallel()
 
-	store := lobby.NewMemoryStore()
-	handler := NewHandler(NewHub(), store)
+	handler := NewHandler(NewSnapshotSync(lobby.NewMemoryStore()))
 
 	router := gin.New()
 	router.GET("/ws/lobby/:id", handler.Handle)
@@ -106,36 +108,23 @@ func TestHandlerUpgradesExistingLobby(t *testing.T) {
 	t.Parallel()
 
 	store := lobby.NewMemoryStore()
-	hub := NewHub()
-	handler := NewHandler(hub, store)
+	sync := NewSnapshotSync(store)
+	handler := NewHandler(sync)
 
 	created, err := store.Create(context.Background(), 5*time.Minute)
 	if err != nil {
 		t.Fatalf("Create() error = %v", err)
 	}
 
-	router := gin.New()
-	router.GET("/ws/lobby/:id", handler.Handle)
-
-	server := httptest.NewServer(router)
-	t.Cleanup(server.Close)
-
-	wsURL := "ws" + strings.TrimPrefix(server.URL, "http") + "/ws/lobby/" + created.ID
-	conn, resp, err := websocket.DefaultDialer.Dial(wsURL, nil)
-	if err != nil {
-		t.Fatalf("Dial() error = %v", err)
-	}
+	conn := dialLobbyWS(t, handler, created.ID)
 	defer conn.Close()
 
-	if resp.StatusCode != http.StatusSwitchingProtocols {
-		t.Fatalf("status = %d, want %d", resp.StatusCode, http.StatusSwitchingProtocols)
+	if sync.Hub().ClientCount(created.ID) != 1 {
+		t.Fatalf("ClientCount() = %d, want 1", sync.Hub().ClientCount(created.ID))
 	}
 
-	deadline := time.Now().Add(500 * time.Millisecond)
-	for hub.ClientCount(created.ID) == 0 && time.Now().Before(deadline) {
-		time.Sleep(10 * time.Millisecond)
-	}
-	if hub.ClientCount(created.ID) != 1 {
-		t.Fatalf("ClientCount() = %d, want 1", hub.ClientCount(created.ID))
+	snapshot := readSnapshotMessage(t, conn)
+	if snapshot.ParticipantCount != 1 {
+		t.Fatalf("ParticipantCount = %d, want 1", snapshot.ParticipantCount)
 	}
 }

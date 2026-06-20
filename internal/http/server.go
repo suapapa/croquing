@@ -22,28 +22,35 @@ const shutdownTimeout = 10 * time.Second
 
 // Server wraps the HTTP listener and Gin router.
 type Server struct {
-	cfg    *config.Config
-	http   *http.Server
-	router *gin.Engine
+	cfg       *config.Config
+	http      *http.Server
+	router    *gin.Engine
+	lobbySync *ws.SnapshotSync
+}
+
+// LobbySync returns the lobby snapshot broadcaster for state-changing handlers.
+func (s *Server) LobbySync() *ws.SnapshotSync {
+	return s.lobbySync
 }
 
 // New builds a Server from configuration and dependencies.
-func New(cfg *config.Config, store lobby.Store, pixabayClient *pixabay.Client, hub *ws.Hub) (*Server, error) {
+func New(cfg *config.Config, store lobby.Store, pixabayClient *pixabay.Client, lobbySync *ws.SnapshotSync) (*Server, error) {
 	drawDuration, err := time.ParseDuration(cfg.DrawDuration)
 	if err != nil {
 		return nil, fmt.Errorf("parse DRAW_DURATION: %w", err)
 	}
 
 	var wsHandler *ws.Handler
-	if hub != nil {
-		wsHandler = ws.NewHandler(hub, store)
+	if lobbySync != nil {
+		wsHandler = ws.NewHandler(lobbySync)
 	}
 
 	router := newRouter(store, drawDuration, pixabayClient, wsHandler)
 
 	return &Server{
-		cfg:    cfg,
-		router: router,
+		cfg:       cfg,
+		router:    router,
+		lobbySync: lobbySync,
 		http: &http.Server{
 			Addr:    fmt.Sprintf(":%d", cfg.Port),
 			Handler: router,

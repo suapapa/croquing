@@ -112,7 +112,13 @@
           "title": "[BE] 실시간 스냅샷 동기화",
           "description": "로비 상태 변경 시 모든 WS 클라이언트에 snapshot push. 연결 직후 초기 스냅샷 전송",
           "deps": ["006", "007"],
-          "status": "pending"
+          "status": "done",
+          "completed_at": "2026-06-20",
+          "artifacts": [
+            "internal/ws/sync.go",
+            "internal/ws/sync_test.go"
+          ],
+          "notes": "SnapshotSync: 연결/해제 시 participant_count 반영 broadcast. Broadcast()로 상태 변경 push."
         },
         {
           "id": "009",

@@ -2,6 +2,8 @@ package ws
 
 import "encoding/json"
 
+const MessageTypeSnapshot = "snapshot"
+
 // Envelope is the wire format for WebSocket messages.
 type Envelope struct {
 	Type    string          `json:"type"`

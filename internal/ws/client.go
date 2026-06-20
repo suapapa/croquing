@@ -1,6 +1,7 @@
 package ws
 
 import (
+	"context"
 	"time"
 
 	"github.com/gorilla/websocket"
@@ -16,15 +17,15 @@ const (
 
 // Client represents a single WebSocket connection in a lobby.
 type Client struct {
-	hub     *Hub
+	sync    *SnapshotSync
 	lobbyID string
 	conn    *websocket.Conn
 	send    chan []byte
 }
 
-func newClient(hub *Hub, lobbyID string, conn *websocket.Conn) *Client {
+func newClient(sync *SnapshotSync, lobbyID string, conn *websocket.Conn) *Client {
 	return &Client{
-		hub:     hub,
+		sync:    sync,
 		lobbyID: lobbyID,
 		conn:    conn,
 		send:    make(chan []byte, clientSendBuffer),
@@ -33,7 +34,7 @@ func newClient(hub *Hub, lobbyID string, conn *websocket.Conn) *Client {
 
 func (c *Client) readPump() {
 	defer func() {
-		c.hub.Unregister(c.lobbyID, c)
+		c.sync.UnregisterClient(context.Background(), c.lobbyID, c)
 		_ = c.conn.Close()
 	}()
 

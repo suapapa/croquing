@@ -15,8 +15,8 @@ func main() {
 
 	store := lobby.NewMemoryStore()
 	pixabayClient := pixabay.NewClient(cfg.PixabayAPIKey)
-	hub := ws.NewHub()
-	srv, err := httpserver.New(cfg, store, pixabayClient, hub)
+	lobbySync := ws.NewSnapshotSync(store)
+	srv, err := httpserver.New(cfg, store, pixabayClient, lobbySync)
 	if err != nil {
 		log.Fatalf("Server init failed: %v", err)
 	}

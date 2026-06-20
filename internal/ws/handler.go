@@ -20,23 +20,19 @@ var upgrader = websocket.Upgrader{
 
 // Handler upgrades HTTP requests to WebSocket connections for lobby subscriptions.
 type Handler struct {
-	hub   *Hub
-	store lobby.Store
+	sync *SnapshotSync
 }
 
 // NewHandler creates a WebSocket handler.
-func NewHandler(hub *Hub, store lobby.Store) *Handler {
-	return &Handler{
-		hub:   hub,
-		store: store,
-	}
+func NewHandler(sync *SnapshotSync) *Handler {
+	return &Handler{sync: sync}
 }
 
 // Handle upgrades GET /ws/lobby/:id and registers the connection with the hub.
 func (h *Handler) Handle(c *gin.Context) {
 	lobbyID := c.Param("id")
 
-	if _, err := h.store.Get(c.Request.Context(), lobbyID); err != nil {
+	if err := h.sync.LobbyExists(c.Request.Context(), lobbyID); err != nil {
 		if errors.Is(err, lobby.ErrNotFound) {
 			c.JSON(http.StatusNotFound, gin.H{"error": "lobby not found"})
 			return
@@ -50,8 +46,11 @@ func (h *Handler) Handle(c *gin.Context) {
 		return
 	}
 
-	client := newClient(h.hub, lobbyID, conn)
-	h.hub.Register(lobbyID, client)
+	client := newClient(h.sync, lobbyID, conn)
+	if err := h.sync.RegisterClient(c.Request.Context(), lobbyID, client); err != nil {
+		_ = conn.Close()
+		return
+	}
 
 	go client.writePump()
 	go client.readPump()

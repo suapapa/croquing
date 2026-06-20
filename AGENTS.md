@@ -59,7 +59,7 @@ croquis-king/
 └── AGENTS.md
 ```
 
-Current state: **WorkItems 001–007, 009–010 done** — lobby API, PixaBay search, WebSocket hub. See [docs/progress/PROGRESS.md](docs/progress/PROGRESS.md). Next: **008** (real-time snapshot sync).
+Current state: **WorkItems 001–010 done** (008 snapshot sync included). See [docs/progress/PROGRESS.md](docs/progress/PROGRESS.md). Next: **011** (photo selection API) or **013** (server timer).
 
 ## Conventions for agents
 
