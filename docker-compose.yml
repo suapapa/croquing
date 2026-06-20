@@ -8,7 +8,7 @@ services:
     environment:
       PIXABAY_API_KEY: ${PIXABAY_API_KEY:?Set PIXABAY_API_KEY in .env or the shell}
       PORT: "8080"
-      CORS_ORIGINS: http://localhost:5173
+      CORS_ORIGINS: http://localhost:5173,http://127.0.0.1:5173
       DRAW_DURATION: ${DRAW_DURATION:-5m}
     restart: unless-stopped
 
@@ -20,7 +20,7 @@ services:
     ports:
       - "5173:5173"
     environment:
-      VITE_API_BASE: http://localhost:8080
+      VITE_API_PROXY_TARGET: http://backend:8080
     volumes:
       - ./frontend:/app
       - frontend_node_modules:/app/node_modules

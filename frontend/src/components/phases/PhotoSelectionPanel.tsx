@@ -91,7 +91,7 @@ export function PhotoSelectionPanel({
           {selectedPhotos.length > 0 ? (
             <ul className="photo-selection__list">
               {selectedPhotos.map((photo) => (
-                <li key={photo.pixabay_id}>
+                <li key={photo.pixabay_id} className="photo-selection__thumb">
                   <img src={photo.preview_url} alt="" loading="lazy" />
                 </li>
               ))}

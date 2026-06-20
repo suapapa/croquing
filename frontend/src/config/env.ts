@@ -1,14 +1,19 @@
-const DEFAULT_API_BASE = 'http://localhost:8080'
-
-/** Backend HTTP origin from `VITE_API_BASE` (falls back to localhost:8080). */
+/** Backend HTTP origin from `VITE_API_BASE` (empty = same origin, via Vite proxy in dev). */
 export function getApiBase(): string {
   const base = import.meta.env.VITE_API_BASE?.trim()
-  return base || DEFAULT_API_BASE
+  return base ?? ''
 }
 
-/** WebSocket origin derived from the API base URL. */
+/** WebSocket origin derived from the API base URL or the current page origin. */
 export function getWsBase(): string {
   const api = getApiBase()
+  if (!api) {
+    if (typeof window === 'undefined') {
+      return 'ws://localhost:8080'
+    }
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
+    return `${protocol}//${window.location.host}`
+  }
   if (api.startsWith('https://')) {
     return `wss://${api.slice('https://'.length)}`
   }

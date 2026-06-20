@@ -161,8 +161,6 @@ export function PixabaySearchPanel({
                 src={hit.preview_url}
                 alt=""
                 loading="lazy"
-                width={hit.width}
-                height={hit.height}
               />
               {selected ? (
                 <span className="pixabay-search__check" aria-hidden="true">

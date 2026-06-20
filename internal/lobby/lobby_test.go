@@ -93,6 +93,15 @@ func TestLobbySnapshotMasking(t *testing.T) {
 	if readySnap.CurrentRound != 0 {
 		t.Fatalf("CurrentRound = %d, want 0 in READY", readySnap.CurrentRound)
 	}
+
+	lobby.Phase = PhaseBetweenRounds
+	betweenSnap := lobby.Snapshot(0, time.Now())
+	if betweenSnap.CurrentPhoto != nil {
+		t.Fatal("CurrentPhoto should be hidden in BETWEEN_ROUNDS")
+	}
+	if betweenSnap.CurrentRound != 1 {
+		t.Fatalf("CurrentRound = %d, want 1 in BETWEEN_ROUNDS", betweenSnap.CurrentRound)
+	}
 }
 
 func TestMemoryStoreCreateAndGet(t *testing.T) {
@@ -229,14 +238,15 @@ func TestDrawTimerHelpers(t *testing.T) {
 	if lob.DrawEndsAt == nil {
 		t.Fatal("DrawEndsAt = nil, want timestamp")
 	}
-	if !lob.DrawEndsAt.Equal(now.Add(5 * time.Minute)) {
-		t.Fatalf("DrawEndsAt = %v, want %v", lob.DrawEndsAt, now.Add(5*time.Minute))
+	wantEndsAt := now.Add(RoundCountdown + 5*time.Minute)
+	if !lob.DrawEndsAt.Equal(wantEndsAt) {
+		t.Fatalf("DrawEndsAt = %v, want %v", lob.DrawEndsAt, wantEndsAt)
 	}
 
-	if IsDrawExpired(lob, now.Add(4*time.Minute+59*time.Second)) {
+	if IsDrawExpired(lob, wantEndsAt.Add(-time.Second)) {
 		t.Fatal("IsDrawExpired() = true before deadline")
 	}
-	if !IsDrawExpired(lob, now.Add(5*time.Minute)) {
+	if !IsDrawExpired(lob, wantEndsAt) {
 		t.Fatal("IsDrawExpired() = false at deadline")
 	}
 
@@ -270,8 +280,9 @@ func TestMemoryStoreStartSession(t *testing.T) {
 	if got.DrawEndsAt == nil {
 		t.Fatal("DrawEndsAt = nil, want timestamp")
 	}
-	if !got.DrawEndsAt.Equal(now.Add(got.DrawDuration)) {
-		t.Fatalf("DrawEndsAt = %v, want %v", got.DrawEndsAt, now.Add(got.DrawDuration))
+	wantEndsAt := now.Add(RoundCountdown + got.DrawDuration)
+	if !got.DrawEndsAt.Equal(wantEndsAt) {
+		t.Fatalf("DrawEndsAt = %v, want %v", got.DrawEndsAt, wantEndsAt)
 	}
 
 	snap := got.Snapshot(0, now)
@@ -408,7 +419,15 @@ func TestMemoryStoreExpireDrawingTimers(t *testing.T) {
 		t.Fatalf("ExpireDrawingTimers() = %v, want none", ids)
 	}
 
-	ids, err = store.ExpireDrawingTimers(context.Background(), start.Add(5*time.Minute))
+	ids, err = store.ExpireDrawingTimers(context.Background(), start.Add(RoundCountdown+5*time.Minute-time.Second))
+	if err != nil {
+		t.Fatalf("ExpireDrawingTimers() error = %v", err)
+	}
+	if len(ids) != 0 {
+		t.Fatalf("ExpireDrawingTimers() before deadline = %v, want none", ids)
+	}
+
+	ids, err = store.ExpireDrawingTimers(context.Background(), start.Add(RoundCountdown+5*time.Minute))
 	if err != nil {
 		t.Fatalf("ExpireDrawingTimers() error = %v", err)
 	}
@@ -424,7 +443,7 @@ func TestMemoryStoreExpireDrawingTimers(t *testing.T) {
 		t.Fatalf("Phase = %q, want BETWEEN_ROUNDS", got.Phase)
 	}
 
-	ids, err = store.ExpireDrawingTimers(context.Background(), start.Add(5*time.Minute))
+	ids, err = store.ExpireDrawingTimers(context.Background(), start.Add(RoundCountdown+5*time.Minute))
 	if err != nil {
 		t.Fatalf("ExpireDrawingTimers() again error = %v", err)
 	}

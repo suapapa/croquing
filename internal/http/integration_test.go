@@ -23,6 +23,12 @@ func TestFullSessionFlowHTTPAndWS(t *testing.T) {
 		tickInterval = 50 * time.Millisecond
 	)
 
+	origCountdown := lobby.RoundCountdown
+	lobby.RoundCountdown = 0
+	t.Cleanup(func() {
+		lobby.RoundCountdown = origCountdown
+	})
+
 	store := lobby.NewMemoryStore()
 	lobbySync := ws.NewSnapshotSync(store)
 	wsHandler := ws.NewHandler(lobbySync, nil)

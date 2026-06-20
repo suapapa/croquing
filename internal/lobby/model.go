@@ -67,7 +67,7 @@ func (l *Lobby) Snapshot(participantCount int, now time.Time) LobbySnapshot {
 		ServerTime:       now,
 	}
 
-	if l.Phase == PhaseDrawing || l.Phase == PhaseFinished {
+	if l.Phase == PhaseDrawing || l.Phase == PhaseBetweenRounds || l.Phase == PhaseFinished {
 		snap.CurrentRound = l.CurrentRound + 1
 	}
 

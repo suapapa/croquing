@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createLobby } from '../api/lobbyApi'
-import { ApiError } from '../api/client'
 import { saveAdminToken } from '../lib/adminStorage'
 
 export function HomePage() {
@@ -19,7 +18,7 @@ export function HomePage() {
       navigate(`/lobby/${created.id}`)
     } catch (err) {
       const message =
-        err instanceof ApiError ? err.message : 'Failed to create lobby'
+        err instanceof Error ? err.message : 'Failed to create lobby'
       setError(message)
     } finally {
       setLoading(false)
