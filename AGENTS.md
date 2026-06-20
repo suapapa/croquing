@@ -59,7 +59,7 @@ croquis-king/
 └── AGENTS.md
 ```
 
-Current state: **WorkItems 001–017 (backend) and 101 (frontend scaffold) done**. See [docs/progress/PROGRESS.md](docs/progress/PROGRESS.md). Next: **102** (routing & lobby join).
+Current state: **WorkItems 001–017 (backend) and 101–112 (frontend) done**. See [docs/progress/PROGRESS.md](docs/progress/PROGRESS.md).
 
 ## Conventions for agents
 
