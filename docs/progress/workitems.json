@@ -349,42 +349,75 @@
           "title": "[FE] 사진 선택 UI",
           "description": "다중 선택(기본 5장 권장), 선택 목록 확인, 선택 완료 → ready API",
           "deps": ["106", "011"],
-          "status": "pending"
+          "status": "done",
+          "completed_at": "2026-06-20",
+          "artifacts": [
+            "frontend/src/components/phases/PhotoSelectionPanel.tsx"
+          ],
+          "notes": "Multi-select with recommended count, save photos then POST ready. Participants see waiting copy."
         },
         {
           "id": "108",
           "title": "[FE] READY 화면",
           "description": "N장 준비됨 — 썸네일·순서 미표시. Admin 시작 버튼",
           "deps": ["107", "012"],
-          "status": "pending"
+          "status": "done",
+          "completed_at": "2026-06-20",
+          "artifacts": [
+            "frontend/src/components/phases/ReadyPanel.tsx"
+          ],
+          "notes": "Shows total round count without previews. Admin start handled by AdminControls."
         },
         {
           "id": "109",
           "title": "[FE] DRAWING 화면",
           "description": "상단 progress bar + mm:ss 잔여 시간, 중앙 largeImageURL 최대 표시, PixaBay 출처 표기",
           "deps": ["108", "013"],
-          "status": "pending"
+          "status": "done",
+          "completed_at": "2026-06-20",
+          "artifacts": [
+            "frontend/src/components/phases/DrawingPanel.tsx"
+          ],
+          "notes": "Fullscreen-friendly drawing view with server-synced timer bar, large photo, PixaBay credit."
         },
         {
           "id": "110",
           "title": "[FE] BETWEEN / FINISHED 화면",
           "description": "사진 숨김, 라운드 간 대기, Admin 다음 버튼, 종료 메시지",
           "deps": ["109", "014"],
-          "status": "pending"
+          "status": "done",
+          "completed_at": "2026-06-20",
+          "artifacts": [
+            "frontend/src/components/phases/SessionBreakPanels.tsx",
+            "frontend/src/components/phases/LobbyPhaseContent.tsx"
+          ],
+          "notes": "Between-round rest copy and finished summary. Phase router switches views by snapshot.phase."
         },
         {
           "id": "111",
           "title": "[FE] 반응형·전체화면 UX",
           "description": "모바일/태블릿 대응, 불필요 chrome 최소화, 그리기에 방해되지 않는 UI",
           "deps": ["109"],
-          "status": "pending"
+          "status": "done",
+          "completed_at": "2026-06-20",
+          "artifacts": [
+            "frontend/src/index.css"
+          ],
+          "notes": "Drawing mode hides chrome, uses dark fullscreen stage, responsive grids, 44px touch targets, safe-area padding."
         },
         {
           "id": "112",
           "title": "[FE] 프론트엔드 통합·빌드",
           "description": "프로덕션 빌드, Go static embed 또는 reverse proxy 연동 문서화",
           "deps": ["110", "111", "016"],
-          "status": "pending"
+          "status": "done",
+          "completed_at": "2026-06-20",
+          "artifacts": [
+            "internal/http/static.go",
+            "Makefile",
+            "README.md"
+          ],
+          "notes": "make web builds SPA + Go binary. Backend serves frontend/dist with SPA fallback. README documents dev split and reverse proxy."
         }
       ]
     }

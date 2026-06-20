@@ -139,7 +139,7 @@
 
 선행 조건: backend 완료 (001-017)
 
-진행: **6 / 12** (50%)
+진행: **12 / 12** (100%)
 
 | Index | 상태 | 제목 | deps | 산출물 검증 |
 |-------|------|------|------|-------------|
@@ -149,12 +149,12 @@
 | **104** | ✅ done | [FE] 로비 공통 레이아웃 | 103 | ✓ |
 | **105** | ✅ done | [FE] Admin / Participant UI 분기 | 104 | ✓ |
 | **106** | ✅ done | [FE] PixaBay 검색 UI | 105, 010 | ✓ |
-| **107** | ⬜ pending | [FE] 사진 선택 UI | 106, 011 | — |
-| **108** | ⬜ pending | [FE] READY 화면 | 107, 012 | — |
-| **109** | ⬜ pending | [FE] DRAWING 화면 | 108, 013 | — |
-| **110** | ⬜ pending | [FE] BETWEEN / FINISHED 화면 | 109, 014 | — |
-| **111** | ⬜ pending | [FE] 반응형·전체화면 UX | 109 | — |
-| **112** | ⬜ pending | [FE] 프론트엔드 통합·빌드 | 110, 111, 016 | — |
+| **107** | ✅ done | [FE] 사진 선택 UI | 106, 011 | ✓ |
+| **108** | ✅ done | [FE] READY 화면 | 107, 012 | ✓ |
+| **109** | ✅ done | [FE] DRAWING 화면 | 108, 013 | ✓ |
+| **110** | ✅ done | [FE] BETWEEN / FINISHED 화면 | 109, 014 | ✓ |
+| **111** | ✅ done | [FE] 반응형·전체화면 UX | 109 | ✓ |
+| **112** | ✅ done | [FE] 프론트엔드 통합·빌드 | 110, 111, 016 | ✓ |
 
 ### 완료 항목 상세
 
@@ -194,15 +194,51 @@
 - 산출물: frontend/src/components/search/PixabaySearchPanel.tsx, frontend/src/api/pixabayApi.ts
 - 메모: Admin search panel with order toggle, pagination, selectable grid, and PixaBay attribution.
 
+#### 107 — [FE] 사진 선택 UI
+
+- 완료일: 2026-06-20
+- 산출물: frontend/src/components/phases/PhotoSelectionPanel.tsx
+- 메모: Multi-select with recommended count, save photos then POST ready. Participants see waiting copy.
+
+#### 108 — [FE] READY 화면
+
+- 완료일: 2026-06-20
+- 산출물: frontend/src/components/phases/ReadyPanel.tsx
+- 메모: Shows total round count without previews. Admin start handled by AdminControls.
+
+#### 109 — [FE] DRAWING 화면
+
+- 완료일: 2026-06-20
+- 산출물: frontend/src/components/phases/DrawingPanel.tsx
+- 메모: Fullscreen-friendly drawing view with server-synced timer bar, large photo, PixaBay credit.
+
+#### 110 — [FE] BETWEEN / FINISHED 화면
+
+- 완료일: 2026-06-20
+- 산출물: frontend/src/components/phases/SessionBreakPanels.tsx, frontend/src/components/phases/LobbyPhaseContent.tsx
+- 메모: Between-round rest copy and finished summary. Phase router switches views by snapshot.phase.
+
+#### 111 — [FE] 반응형·전체화면 UX
+
+- 완료일: 2026-06-20
+- 산출물: frontend/src/index.css
+- 메모: Drawing mode hides chrome, uses dark fullscreen stage, responsive grids, 44px touch targets, safe-area padding.
+
+#### 112 — [FE] 프론트엔드 통합·빌드
+
+- 완료일: 2026-06-20
+- 산출물: internal/http/static.go, Makefile, README.md
+- 메모: make web builds SPA + Go binary. Backend serves frontend/dist with SPA fallback. README documents dev split and reverse proxy.
+
 ## 전체 요약
 
-- **전체:** 23 / 29 완료 (79%)
+- **전체:** 29 / 29 완료 (100%)
 - **백엔드:** 17 / 17 (100%)
-- **프론트엔드:** 6 / 12 (50%)
+- **프론트엔드:** 12 / 12 (100%)
 
 ## 다음 작업 후보
 
-- **107** — [FE] 사진 선택 UI (`pending`)
+현재 선행 작업이 모두 완료된 후보가 없습니다.
 
 ## 진도 갱신 방법
 
