@@ -1,5 +1,8 @@
+import type { CSSProperties } from 'react'
+
 interface IconProps {
   className?: string
+  style?: CSSProperties
 }
 
 export function IconLink({ className }: IconProps) {
@@ -179,6 +182,89 @@ export function IconSkipForward({ className }: IconProps) {
     >
       <polygon points="5 4 15 12 5 20 5 4" fill="currentColor" />
       <line x1="19" y1="5" x2="19" y2="19" />
+    </svg>
+  )
+}
+
+export function IconFullscreen({ className, style }: IconProps) {
+  return (
+    <svg
+      className={className}
+      style={style}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+    </svg>
+  )
+}
+
+export function IconExitFullscreen({ className, style }: IconProps) {
+  return (
+    <svg
+      className={className}
+      style={style}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M4 14h6v6m10-6h-6v6M4 10h6V4m10 6h-6V4" />
+    </svg>
+  )
+}
+
+export function IconBulb({ className, style }: IconProps) {
+  return (
+    <svg
+      className={className}
+      style={style}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .6 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+      <path d="M9 18h6" />
+      <path d="M10 22h4" />
+    </svg>
+  )
+}
+
+export function IconClose({ className, style }: IconProps) {
+  return (
+    <svg
+      className={className}
+      style={style}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
     </svg>
   )
 }

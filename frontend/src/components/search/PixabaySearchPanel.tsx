@@ -11,6 +11,7 @@ import {
   IconChevronRight,
   IconSearch,
   IconSpinner,
+  IconClose,
 } from '../ui/Icons'
 
 const RECOMMENDED_COUNT = 5
@@ -217,11 +218,7 @@ export function PixabaySearchPanel({
         </div>
       ) : null}
 
-      <div
-        className={`pixabay-search__footer${footerStart ? ' pixabay-search__footer--split' : ''
-          }`}
-      >
-        {footerStart}
+      <div className="pixabay-search__footer">
         <p className="pixabay-search__attribution">
           Images from{' '}
           <a href="https://pixabay.com" target="_blank" rel="noreferrer">
@@ -229,6 +226,49 @@ export function PixabaySearchPanel({
           </a>
         </p>
       </div>
+
+      {selectedPhotos.length > 0 ? (
+        <div className="selection-dock" role="region" aria-label="Selection dock">
+          <div className="selection-dock__container">
+            <div className="selection-dock__left">
+              <h3 className="selection-dock__title">
+                Selected Reference Photos
+                <span className="selection-dock__count-badge">
+                  {selectedPhotos.length}
+                </span>
+              </h3>
+            </div>
+            
+            <div className="selection-dock__scroller">
+              {selectedPhotos.map((photo) => (
+                <div key={photo.pixabay_id} className="selection-dock__item">
+                  <img
+                    className="selection-dock__img"
+                    src={photo.preview_url}
+                    alt=""
+                  />
+                  <button
+                    type="button"
+                    className="selection-dock__remove"
+                    onClick={() =>
+                      onSelectionChange(
+                        selectedPhotos.filter((p) => p.pixabay_id !== photo.pixabay_id),
+                      )
+                    }
+                    title="Remove photo"
+                  >
+                    <IconClose style={{ width: '0.625rem', height: '0.625rem' }} />
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            <div className="selection-dock__actions">
+              {footerStart}
+            </div>
+          </div>
+        </div>
+      ) : null}
     </section>
   )
 }

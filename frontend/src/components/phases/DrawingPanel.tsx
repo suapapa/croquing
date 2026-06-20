@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import {
   formatRemainingTime,
   getDrawPhaseState,
@@ -6,6 +7,7 @@ import {
   useServerClock,
 } from '../../hooks/useServerClock'
 import type { LobbySnapshot } from '../../types/lobby'
+import { IconExitFullscreen, IconFullscreen } from '../ui/Icons'
 
 interface DrawingPanelProps {
   snapshot: LobbySnapshot
@@ -21,6 +23,29 @@ export function DrawingPanel({
   drawDurationMs = DEFAULT_DRAW_MS,
 }: DrawingPanelProps) {
   const serverNow = useServerClock(serverTimeOffsetMs)
+  const [isFullscreen, setIsFullscreen] = useState(false)
+
+  useEffect(() => {
+    function handleFullscreenChange() {
+      setIsFullscreen(!!document.fullscreenElement)
+    }
+    document.addEventListener('fullscreenchange', handleFullscreenChange)
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange)
+    }
+  }, [])
+
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch((err) => {
+        console.error('Failed to enter fullscreen:', err)
+      })
+    } else {
+      document.exitFullscreen().catch((err) => {
+        console.error('Failed to exit fullscreen:', err)
+      })
+    }
+  }
   const { isCountdown, countdownSeconds, drawRemainingMs } = getDrawPhaseState(
     snapshot.draw_ends_at,
     serverNow,
@@ -57,7 +82,9 @@ export function DrawingPanel({
       ) : (
         <div className="drawing-panel__timer">
           <div
-            className="drawing-panel__timer-bar"
+            className={`drawing-panel__timer-bar${
+              urgent || critical ? ' drawing-panel__timer-bar--urgent' : ''
+            }`}
             style={{ transform: `scaleX(${progress})` }}
             role="progressbar"
             aria-valuemin={0}
@@ -73,6 +100,21 @@ export function DrawingPanel({
 
       <div className="drawing-panel__body">
         <div className="drawing-panel__stage">
+          <div className="drawing-panel__controls">
+            <button
+              type="button"
+              className="button--zen-control"
+              onClick={toggleFullscreen}
+              title={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
+              aria-label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
+            >
+              {isFullscreen ? (
+                <IconExitFullscreen style={{ width: '1.25rem', height: '1.25rem' }} />
+              ) : (
+                <IconFullscreen style={{ width: '1.25rem', height: '1.25rem' }} />
+              )}
+            </button>
+          </div>
           {photo && !isCountdown ? (
             <div className={photoWrapClass}>
               <img

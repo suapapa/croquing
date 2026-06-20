@@ -4,6 +4,7 @@ import { markLobbyReady, reopenLobbyPhotos, setLobbyPhotos } from '../../api/lob
 import type { LobbySnapshot, Photo } from '../../types/lobby'
 import { PixabaySearchPanel } from '../search/PixabaySearchPanel'
 import { PhotoReviewPanel } from './PhotoReviewPanel'
+import { ParticipantWaitPanel } from './ParticipantWaitPanel'
 
 interface PhotoSelectionPanelProps {
   lobbyId: string
@@ -73,11 +74,7 @@ export function PhotoSelectionPanel({
   }
 
   if (!isAdmin && (snapshot.phase === 'WAITING' || snapshot.phase === 'SELECTING')) {
-    return (
-      <section className="phase-panel">
-        <p>The admin is choosing reference photos. Photos stay hidden until drawing begins.</p>
-      </section>
-    )
+    return <ParticipantWaitPanel />
   }
 
   if (!isAdmin) {

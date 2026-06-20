@@ -981,3 +981,405 @@ select {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* --- UI/UX Enhancements --- */
+
+/* Glassmorphism card */
+.glass-card {
+  background: rgba(255, 252, 247, 0.75) !important;
+  backdrop-filter: blur(12px) saturate(110%);
+  border: 1px solid rgba(221, 212, 200, 0.6) !important;
+  box-shadow: 
+    0 4px 6px -1px rgba(26, 22, 20, 0.05),
+    0 10px 15px -3px rgba(26, 22, 20, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+/* Floating Dock for Selected Photos */
+.selection-dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 252, 247, 0.9);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--color-border);
+  box-shadow: 0 -8px 32px rgba(26, 22, 20, 0.12);
+  padding: var(--space-4) env(safe-area-inset-right) calc(var(--space-4) + env(safe-area-inset-bottom)) env(safe-area-inset-left);
+  transform: translateY(100%);
+  animation: slide-up-dock 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slide-up-dock {
+  to {
+    transform: translateY(0);
+  }
+}
+
+.selection-dock__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  max-width: var(--content-max);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.selection-dock__left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.selection-dock__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.selection-dock__count-badge {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  background: var(--color-accent);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.selection-dock__scroller {
+  display: flex;
+  gap: var(--space-3);
+  overflow-x: auto;
+  padding: var(--space-2) 0;
+  scroll-behavior: smooth;
+  max-width: 50%;
+  mask-image: linear-gradient(to right, transparent, white 20px, white 90%, transparent);
+}
+
+/* Scrollbar styling specifically for selection scroller */
+.selection-dock__scroller::-webkit-scrollbar {
+  height: 4px;
+}
+
+.selection-dock__item {
+  position: relative;
+  flex-shrink: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-accent);
+  transition: transform var(--transition-fast);
+}
+
+.selection-dock__item:hover {
+  transform: scale(1.05);
+}
+
+.selection-dock__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.selection-dock__remove {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  width: 1.1rem;
+  height: 1.1rem;
+  padding: 0;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.selection-dock__item:hover .selection-dock__remove {
+  opacity: 1;
+}
+
+.selection-dock__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Tip Carousel Panel */
+.tip-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-8) var(--space-6);
+  animation: fade-up 600ms ease;
+  max-width: 32rem;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+}
+
+.tip-panel__icon-wrap {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  display: grid;
+  place-items: center;
+  margin-bottom: var(--space-4);
+  animation: pulse-glow 2s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(194, 65, 12, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(194, 65, 12, 0);
+  }
+}
+
+.tip-panel__title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 var(--space-3);
+  color: var(--color-text);
+}
+
+.tip-panel__carousel {
+  position: relative;
+  min-height: 6.5rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+.tip-panel__tip {
+  transition: opacity 300ms ease, transform 300ms ease;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tip-panel__tip--enter {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.tip-panel__tip--active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.tip-panel__tip--exit {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.tip-panel__tip-title {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tip-panel__tip-text {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.tip-panel__dots {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+
+.tip-panel__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-border);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.tip-panel__dot--active {
+  background: var(--color-accent);
+  width: 12px;
+  border-radius: 3px;
+}
+
+/* Pulsing Countdown Heartbeat */
+.drawing-panel__countdown-number {
+  animation: countdown-heartbeat 1s infinite ease-out;
+}
+
+@keyframes countdown-heartbeat {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.5;
+  }
+  30% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+}
+
+/* Glowing timer bar */
+.drawing-panel__timer {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.drawing-panel__timer-bar {
+  box-shadow: 0 0 12px var(--color-accent);
+}
+
+.drawing-panel__timer-bar--urgent {
+  background: linear-gradient(90deg, #f87171, #dc2626) !important;
+  box-shadow: 0 0 16px #ef4444;
+  animation: timer-pulse 1s infinite alternate ease-in-out;
+}
+
+@keyframes timer-pulse {
+  from {
+    opacity: 0.8;
+  }
+  to {
+    opacity: 1;
+    filter: brightness(1.2);
+  }
+}
+
+/* Fullscreen trigger and controls overlays in Zen mode */
+.drawing-panel__stage {
+  position: relative;
+}
+
+.drawing-panel__controls {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  z-index: 10;
+  display: flex;
+  gap: var(--space-2);
+  opacity: 0.3;
+  transition: opacity var(--transition-base);
+}
+
+.drawing-panel__stage:hover .drawing-panel__controls,
+.drawing-panel__controls:focus-within {
+  opacity: 1;
+}
+
+.button--zen-control {
+  background: rgba(12, 10, 9, 0.5) !important;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(250, 250, 249, 0.15) !important;
+  color: rgba(250, 250, 249, 0.8);
+  width: var(--touch-min);
+  height: var(--touch-min);
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: all var(--transition-fast);
+}
+
+.button--zen-control:hover {
+  background: rgba(12, 10, 9, 0.8) !important;
+  border-color: rgba(250, 250, 249, 0.4) !important;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* Glassmorphic photo metadata display in Zen Mode */
+.drawing-panel__footer {
+  background: rgba(12, 10, 9, 0.4);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(250, 250, 249, 0.05);
+  margin-top: auto;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.drawing-panel__photo-wrap {
+  border: 2px solid rgba(250, 250, 249, 0.08);
+  border-radius: var(--radius-md);
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+  padding: var(--space-1);
+}
+
+/* General premium transitions and micro-interactions */
+.button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.pixabay-search__card {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pixabay-search__card:hover:not(:disabled) {
+  border-color: rgba(194, 65, 12, 0.4);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 24px -10px rgba(194, 65, 12, 0.3);
+}
+
+.pixabay-search__card--selected {
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 12px 24px -8px rgba(194, 65, 12, 0.5) !important;
+}
+
+.pixabay-search__card--selected::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--color-accent);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
