@@ -268,6 +268,100 @@ func (s *fakeStore) MarkReady(ctx context.Context, id string) error {
 	return nil
 }
 
+func (s *fakeStore) StartSession(ctx context.Context, id string, now time.Time) error {
+	if err := ctx.Err(); err != nil {
+		return err
+	}
+
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	lob, ok := s.lobbies[id]
+	if !ok {
+		return lobby.ErrNotFound
+	}
+	if lob.Phase != lobby.PhaseReady || len(lob.PhotoOrder) == 0 {
+		return lobby.ErrInvalidTransition
+	}
+
+	lob.CurrentRound = 0
+	lob.Phase = lobby.PhaseDrawing
+	endsAt := now.Add(lob.DrawDuration)
+	lob.DrawEndsAt = &endsAt
+	return nil
+}
+
+func (s *fakeStore) AdvanceToBetweenRounds(ctx context.Context, id string) error {
+	if err := ctx.Err(); err != nil {
+		return err
+	}
+
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	lob, ok := s.lobbies[id]
+	if !ok {
+		return lobby.ErrNotFound
+	}
+	if lob.Phase != lobby.PhaseDrawing {
+		return lobby.ErrInvalidTransition
+	}
+
+	lob.Phase = lobby.PhaseBetweenRounds
+	lob.DrawEndsAt = nil
+	return nil
+}
+
+func (s *fakeStore) NextRound(ctx context.Context, id string, now time.Time) error {
+	if err := ctx.Err(); err != nil {
+		return err
+	}
+
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	lob, ok := s.lobbies[id]
+	if !ok {
+		return lobby.ErrNotFound
+	}
+	if lob.Phase != lobby.PhaseBetweenRounds {
+		return lobby.ErrInvalidTransition
+	}
+
+	if lob.CurrentRound+1 >= len(lob.PhotoOrder) {
+		lob.Phase = lobby.PhaseFinished
+		lob.DrawEndsAt = nil
+		return nil
+	}
+
+	lob.CurrentRound++
+	lob.Phase = lobby.PhaseDrawing
+	endsAt := now.Add(lob.DrawDuration)
+	lob.DrawEndsAt = &endsAt
+	return nil
+}
+
+func (s *fakeStore) FinishSession(ctx context.Context, id string) error {
+	if err := ctx.Err(); err != nil {
+		return err
+	}
+
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	lob, ok := s.lobbies[id]
+	if !ok {
+		return lobby.ErrNotFound
+	}
+	if lob.Phase == lobby.PhaseFinished {
+		return lobby.ErrInvalidTransition
+	}
+
+	lob.Phase = lobby.PhaseFinished
+	lob.DrawEndsAt = nil
+	return nil
+}
+
 func (s *fakeStore) setPhase(id string, phase lobby.LobbyPhase) {
 	s.mu.Lock()
 	s.lobbies[id].Phase = phase

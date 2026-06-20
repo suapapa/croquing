@@ -246,6 +246,149 @@ func TestDrawTimerHelpers(t *testing.T) {
 	}
 }
 
+func TestMemoryStoreStartSession(t *testing.T) {
+	t.Parallel()
+
+	store := NewMemoryStore()
+	created, photos := createLobbyReadyForTest(t, store)
+	now := time.Date(2026, 6, 20, 12, 0, 0, 0, time.UTC)
+
+	if err := store.StartSession(context.Background(), created.ID, now); err != nil {
+		t.Fatalf("StartSession() error = %v", err)
+	}
+
+	got, err := store.Get(context.Background(), created.ID)
+	if err != nil {
+		t.Fatalf("Get() error = %v", err)
+	}
+	if got.Phase != PhaseDrawing {
+		t.Fatalf("Phase = %q, want DRAWING", got.Phase)
+	}
+	if got.CurrentRound != 0 {
+		t.Fatalf("CurrentRound = %d, want 0", got.CurrentRound)
+	}
+	if got.DrawEndsAt == nil {
+		t.Fatal("DrawEndsAt = nil, want timestamp")
+	}
+	if !got.DrawEndsAt.Equal(now.Add(got.DrawDuration)) {
+		t.Fatalf("DrawEndsAt = %v, want %v", got.DrawEndsAt, now.Add(got.DrawDuration))
+	}
+
+	snap := got.Snapshot(0, now)
+	if snap.CurrentRound != 1 {
+		t.Fatalf("CurrentRound = %d, want 1", snap.CurrentRound)
+	}
+	if snap.CurrentPhoto == nil {
+		t.Fatal("CurrentPhoto = nil, want photo in DRAWING")
+	}
+	if snap.TotalRounds != len(photos) {
+		t.Fatalf("TotalRounds = %d, want %d", snap.TotalRounds, len(photos))
+	}
+}
+
+func TestMemoryStoreNextRound(t *testing.T) {
+	t.Parallel()
+
+	store := NewMemoryStore()
+	created, photos := createLobbyReadyForTest(t, store)
+	now := time.Date(2026, 6, 20, 12, 0, 0, 0, time.UTC)
+
+	if err := store.StartSession(context.Background(), created.ID, now); err != nil {
+		t.Fatalf("StartSession() error = %v", err)
+	}
+
+	if err := store.AdvanceToBetweenRounds(context.Background(), created.ID); err != nil {
+		t.Fatalf("AdvanceToBetweenRounds() error = %v", err)
+	}
+
+	if err := store.NextRound(context.Background(), created.ID, now); err != nil {
+		t.Fatalf("NextRound() error = %v", err)
+	}
+
+	got, err := store.Get(context.Background(), created.ID)
+	if err != nil {
+		t.Fatalf("Get() error = %v", err)
+	}
+	if got.Phase != PhaseDrawing {
+		t.Fatalf("Phase = %q, want DRAWING", got.Phase)
+	}
+	if got.CurrentRound != 1 {
+		t.Fatalf("CurrentRound = %d, want 1", got.CurrentRound)
+	}
+
+	if err := store.AdvanceToBetweenRounds(context.Background(), created.ID); err != nil {
+		t.Fatalf("AdvanceToBetweenRounds() error = %v", err)
+	}
+
+	if err := store.NextRound(context.Background(), created.ID, now); err != nil {
+		t.Fatalf("NextRound(last) error = %v", err)
+	}
+
+	got, err = store.Get(context.Background(), created.ID)
+	if err != nil {
+		t.Fatalf("Get() error = %v", err)
+	}
+	if got.Phase != PhaseFinished {
+		t.Fatalf("Phase = %q, want FINISHED", got.Phase)
+	}
+	if got.CurrentRound != len(photos)-1 {
+		t.Fatalf("CurrentRound = %d, want %d", got.CurrentRound, len(photos)-1)
+	}
+}
+
+func TestMemoryStoreFinishSession(t *testing.T) {
+	t.Parallel()
+
+	store := NewMemoryStore()
+	created, _ := createLobbyReadyForTest(t, store)
+	now := time.Date(2026, 6, 20, 12, 0, 0, 0, time.UTC)
+
+	if err := store.StartSession(context.Background(), created.ID, now); err != nil {
+		t.Fatalf("StartSession() error = %v", err)
+	}
+
+	if err := store.FinishSession(context.Background(), created.ID); err != nil {
+		t.Fatalf("FinishSession() error = %v", err)
+	}
+
+	got, err := store.Get(context.Background(), created.ID)
+	if err != nil {
+		t.Fatalf("Get() error = %v", err)
+	}
+	if got.Phase != PhaseFinished {
+		t.Fatalf("Phase = %q, want FINISHED", got.Phase)
+	}
+	if got.DrawEndsAt != nil {
+		t.Fatalf("DrawEndsAt = %v, want nil", got.DrawEndsAt)
+	}
+
+	if err := store.FinishSession(context.Background(), created.ID); !errors.Is(err, ErrInvalidTransition) {
+		t.Fatalf("FinishSession() again error = %v, want ErrInvalidTransition", err)
+	}
+}
+
+func createLobbyReadyForTest(t *testing.T, store *MemoryStore) (*Lobby, []Photo) {
+	t.Helper()
+
+	created, err := store.Create(context.Background(), 5*time.Minute)
+	if err != nil {
+		t.Fatalf("Create() error = %v", err)
+	}
+
+	photos := []Photo{
+		{PixabayID: 1, LargeImageURL: "https://cdn.example/1.jpg"},
+		{PixabayID: 2, LargeImageURL: "https://cdn.example/2.jpg"},
+	}
+	if err := store.SetSelectedPhotos(context.Background(), created.ID, photos); err != nil {
+		t.Fatalf("SetSelectedPhotos() error = %v", err)
+	}
+	if err := store.MarkReady(context.Background(), created.ID); err != nil {
+		t.Fatalf("MarkReady() error = %v", err)
+	}
+
+	return created, photos
+}
+
 func TestMemoryStoreMarkReadyRequiresPhotos(t *testing.T) {
 	t.Parallel()
 

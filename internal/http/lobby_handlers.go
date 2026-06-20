@@ -152,6 +152,83 @@ func (h *lobbyHandler) markReady(c *gin.Context) {
 	c.JSON(http.StatusOK, snapshot)
 }
 
+func (h *lobbyHandler) startSession(c *gin.Context) {
+	id := c.Param("id")
+	if _, ok := authenticateAdmin(c, h.store, id); !ok {
+		return
+	}
+
+	if err := h.store.StartSession(c.Request.Context(), id, time.Now()); err != nil {
+		mapSessionMutationError(c, err, "invalid lobby phase for start")
+		return
+	}
+
+	respondLobbySnapshot(c, h, id)
+}
+
+func (h *lobbyHandler) nextRound(c *gin.Context) {
+	id := c.Param("id")
+	if _, ok := authenticateAdmin(c, h.store, id); !ok {
+		return
+	}
+
+	if err := h.store.NextRound(c.Request.Context(), id, time.Now()); err != nil {
+		mapSessionMutationError(c, err, "invalid lobby phase for next")
+		return
+	}
+
+	respondLobbySnapshot(c, h, id)
+}
+
+func (h *lobbyHandler) finishSession(c *gin.Context) {
+	id := c.Param("id")
+	if _, ok := authenticateAdmin(c, h.store, id); !ok {
+		return
+	}
+
+	if err := h.store.FinishSession(c.Request.Context(), id); err != nil {
+		mapSessionMutationError(c, err, "invalid lobby phase for finish")
+		return
+	}
+
+	respondLobbySnapshot(c, h, id)
+}
+
+func mapSessionMutationError(c *gin.Context, err error, conflictMsg string) {
+	switch {
+	case errors.Is(err, lobby.ErrNotFound):
+		c.JSON(http.StatusNotFound, gin.H{"error": "lobby not found"})
+	case errors.Is(err, lobby.ErrEmptyPhotos):
+		c.JSON(http.StatusBadRequest, gin.H{"error": "photos are required"})
+	case errors.Is(err, lobby.ErrInvalidTransition):
+		c.JSON(http.StatusConflict, gin.H{"error": conflictMsg})
+	default:
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to update lobby session"})
+	}
+}
+
+func respondLobbySnapshot(c *gin.Context, h *lobbyHandler, id string) {
+	if h.lobbySync != nil {
+		if err := h.lobbySync.Broadcast(c.Request.Context(), id); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to broadcast snapshot"})
+			return
+		}
+	}
+
+	participantCount := 0
+	if h.lobbySync != nil {
+		participantCount = h.lobbySync.Hub().ClientCount(id)
+	}
+
+	snapshot, err := h.store.Snapshot(c.Request.Context(), id, participantCount)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to get lobby snapshot"})
+		return
+	}
+
+	c.JSON(http.StatusOK, snapshot)
+}
+
 func joinURL(c *gin.Context, lobbyID string) string {
 	scheme := "http"
 	if c.Request.TLS != nil || c.GetHeader("X-Forwarded-Proto") == "https" {
@@ -166,4 +243,7 @@ func registerLobbyRoutes(r gin.IRoutes, store lobby.Store, drawDuration time.Dur
 	r.GET("/lobbies/:id", handler.getLobby)
 	r.PUT("/lobbies/:id/photos", handler.setPhotos)
 	r.POST("/lobbies/:id/ready", handler.markReady)
+	r.POST("/lobbies/:id/start", handler.startSession)
+	r.POST("/lobbies/:id/next", handler.nextRound)
+	r.POST("/lobbies/:id/finish", handler.finishSession)
 }

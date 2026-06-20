@@ -15,6 +15,10 @@ type Store interface {
 	Snapshot(ctx context.Context, id string, participantCount int) (LobbySnapshot, error)
 	SetSelectedPhotos(ctx context.Context, id string, photos []Photo) error
 	MarkReady(ctx context.Context, id string) error
+	StartSession(ctx context.Context, id string, now time.Time) error
+	AdvanceToBetweenRounds(ctx context.Context, id string) error
+	NextRound(ctx context.Context, id string, now time.Time) error
+	FinishSession(ctx context.Context, id string) error
 }
 
 // MemoryStore is an in-memory lobby store protected by a mutex.

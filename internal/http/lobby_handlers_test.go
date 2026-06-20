@@ -150,3 +150,19 @@ func (errorStore) SetSelectedPhotos(_ context.Context, _ string, _ []lobby.Photo
 func (errorStore) MarkReady(_ context.Context, _ string) error {
 	return errors.New("boom")
 }
+
+func (errorStore) StartSession(_ context.Context, _ string, _ time.Time) error {
+	return errors.New("boom")
+}
+
+func (errorStore) AdvanceToBetweenRounds(_ context.Context, _ string) error {
+	return errors.New("boom")
+}
+
+func (errorStore) NextRound(_ context.Context, _ string, _ time.Time) error {
+	return errors.New("boom")
+}
+
+func (errorStore) FinishSession(_ context.Context, _ string) error {
+	return errors.New("boom")
+}
