@@ -4,12 +4,15 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
+
+	"github.com/suapapa/croquis-king/internal/lobby"
 )
 
 func TestHealthHandler(t *testing.T) {
 	t.Parallel()
 
-	router := newRouter()
+	router := newRouter(lobby.NewMemoryStore(), 5*time.Minute)
 
 	req := httptest.NewRequest(http.MethodGet, "/health", nil)
 	rec := httptest.NewRecorder()
@@ -27,7 +30,7 @@ func TestHealthHandler(t *testing.T) {
 func TestNoRoute(t *testing.T) {
 	t.Parallel()
 
-	router := newRouter()
+	router := newRouter(lobby.NewMemoryStore(), 5*time.Minute)
 
 	req := httptest.NewRequest(http.MethodGet, "/unknown", nil)
 	rec := httptest.NewRecorder()

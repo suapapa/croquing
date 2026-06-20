@@ -1,0 +1,94 @@
+package lobby
+
+import (
+	"context"
+	"sync"
+	"time"
+
+	"github.com/google/uuid"
+)
+
+// Store persists and retrieves lobbies.
+type Store interface {
+	Create(ctx context.Context, drawDuration time.Duration) (*Lobby, error)
+	Get(ctx context.Context, id string) (*Lobby, error)
+	Snapshot(ctx context.Context, id string, participantCount int) (LobbySnapshot, error)
+}
+
+// MemoryStore is an in-memory lobby store protected by a mutex.
+type MemoryStore struct {
+	mu      sync.RWMutex
+	lobbies map[string]*Lobby
+}
+
+// NewMemoryStore creates an empty in-memory lobby store.
+func NewMemoryStore() *MemoryStore {
+	return &MemoryStore{
+		lobbies: make(map[string]*Lobby),
+	}
+}
+
+// Create inserts a new lobby in WAITING phase.
+func (s *MemoryStore) Create(ctx context.Context, drawDuration time.Duration) (*Lobby, error) {
+	if err := ctx.Err(); err != nil {
+		return nil, err
+	}
+
+	lobby := &Lobby{
+		ID:             uuid.NewString(),
+		AdminToken:     uuid.NewString(),
+		Phase:          PhaseWaiting,
+		SelectedPhotos: make([]Photo, 0),
+		PhotoOrder:     make([]int, 0),
+		DrawDuration:   drawDuration,
+		CreatedAt:      time.Now(),
+	}
+
+	s.mu.Lock()
+	s.lobbies[lobby.ID] = lobby
+	s.mu.Unlock()
+
+	return cloneLobby(lobby), nil
+}
+
+// Get returns a lobby by ID.
+func (s *MemoryStore) Get(ctx context.Context, id string) (*Lobby, error) {
+	if err := ctx.Err(); err != nil {
+		return nil, err
+	}
+
+	s.mu.RLock()
+	lobby, ok := s.lobbies[id]
+	s.mu.RUnlock()
+	if !ok {
+		return nil, ErrNotFound
+	}
+
+	return cloneLobby(lobby), nil
+}
+
+// Snapshot returns the public snapshot for a lobby.
+func (s *MemoryStore) Snapshot(ctx context.Context, id string, participantCount int) (LobbySnapshot, error) {
+	lobby, err := s.Get(ctx, id)
+	if err != nil {
+		return LobbySnapshot{}, err
+	}
+
+	return lobby.Snapshot(participantCount, time.Now()), nil
+}
+
+func cloneLobby(lobby *Lobby) *Lobby {
+	if lobby == nil {
+		return nil
+	}
+
+	cloned := *lobby
+	cloned.SelectedPhotos = append([]Photo(nil), lobby.SelectedPhotos...)
+	cloned.PhotoOrder = append([]int(nil), lobby.PhotoOrder...)
+	if lobby.DrawEndsAt != nil {
+		endsAt := *lobby.DrawEndsAt
+		cloned.DrawEndsAt = &endsAt
+	}
+
+	return &cloned
+}

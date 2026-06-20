@@ -54,27 +54,41 @@
           "title": "[BE] 로비 도메인 모델",
           "description": "Lobby, Photo, LobbyPhase, LobbySnapshot 타입 및 Phase 전환 규칙 정의",
           "deps": ["001"],
-          "status": "pending",
+          "status": "done",
+          "completed_at": "2026-06-20",
           "artifacts": [
-            "internal/lobby/"
-          ]
+            "internal/lobby/model.go",
+            "internal/lobby/phase.go",
+            "internal/lobby/errors.go",
+            "internal/lobby/auth.go",
+            "internal/lobby/lobby_test.go"
+          ],
+          "notes": "Phase 전환 규칙, Snapshot 마스킹(DRAWING에서만 사진·타이머 노출)."
         },
         {
           "id": "005",
           "title": "[BE] 로비 저장소",
           "description": "인메모리 LobbyStore (map + mutex). 생성·조회·스냅샷 변환. interface 분리",
           "deps": ["004"],
-          "status": "pending",
+          "status": "done",
+          "completed_at": "2026-06-20",
           "artifacts": [
             "internal/lobby/store.go"
-          ]
+          ],
+          "notes": "Store interface + MemoryStore. UUID id/admin token, clone on read."
         },
         {
           "id": "006",
           "title": "[BE] 로비 생성·조회 API",
           "description": "POST /api/lobbies, GET /api/lobbies/{id}. AdminToken 생성·검증 헬퍼",
           "deps": ["003", "005"],
-          "status": "pending"
+          "status": "done",
+          "completed_at": "2026-06-20",
+          "artifacts": [
+            "internal/http/lobby_handlers.go",
+            "internal/http/lobby_handlers_test.go"
+          ],
+          "notes": "POST create → id/admin_token/join_url. GET snapshot. X-Admin-Token 검증 헬퍼."
         },
         {
           "id": "007",

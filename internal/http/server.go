@@ -13,6 +13,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/suapapa/croquis-king/internal/config"
+	"github.com/suapapa/croquis-king/internal/lobby"
 )
 
 const shutdownTimeout = 10 * time.Second
@@ -24,9 +25,14 @@ type Server struct {
 	router *gin.Engine
 }
 
-// New builds a Server from configuration.
-func New(cfg *config.Config) *Server {
-	router := newRouter()
+// New builds a Server from configuration and dependencies.
+func New(cfg *config.Config, store lobby.Store) (*Server, error) {
+	drawDuration, err := time.ParseDuration(cfg.DrawDuration)
+	if err != nil {
+		return nil, fmt.Errorf("parse DRAW_DURATION: %w", err)
+	}
+
+	router := newRouter(store, drawDuration)
 
 	return &Server{
 		cfg:    cfg,
@@ -35,7 +41,7 @@ func New(cfg *config.Config) *Server {
 			Addr:    fmt.Sprintf(":%d", cfg.Port),
 			Handler: router,
 		},
-	}
+	}, nil
 }
 
 // Run starts the HTTP server and blocks until it receives SIGINT or SIGTERM,

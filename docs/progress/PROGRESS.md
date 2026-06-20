@@ -3,20 +3,20 @@
 > **자동 생성 문서** — 직접 수정하지 마세요.  
 > 소스: [`workitems.json`](workitems.json) · 갱신: `make progress`
 
-마지막 갱신: **2026-06-20 18:46 KST**
+마지막 갱신: **2026-06-20 18:49 KST**
 
 ## Phase A — 백엔드 (001-017)
 
-진행: **4 / 17** (23%)
+진행: **7 / 17** (41%)
 
 | Index | 상태 | 제목 | deps | 산출물 검증 |
 |-------|------|------|------|-------------|
 | **001** | ✅ done | [BE] 프로젝트 스캐폴딩 | — | ✓ |
 | **002** | ✅ done | [BE] 설정·환경변수 | 001 | ✓ |
 | **003** | ✅ done | [BE] HTTP 서버 골격 | 002 | ✓ |
-| **004** | ⬜ pending | [BE] 로비 도메인 모델 | 001 | — |
-| **005** | ⬜ pending | [BE] 로비 저장소 | 004 | — |
-| **006** | ⬜ pending | [BE] 로비 생성·조회 API | 003, 005 | — |
+| **004** | ✅ done | [BE] 로비 도메인 모델 | 001 | ✓ |
+| **005** | ✅ done | [BE] 로비 저장소 | 004 | ✓ |
+| **006** | ✅ done | [BE] 로비 생성·조회 API | 003, 005 | ✓ |
 | **007** | ⬜ pending | [BE] WebSocket 허브 | 003, 005 | — |
 | **008** | ⬜ pending | [BE] 실시간 스냅샷 동기화 | 006, 007 | — |
 | **009** | ✅ done | [BE] PixaBay API 클라이언트 | 002 | ✓ |
@@ -51,6 +51,24 @@
 - 산출물: internal/http/router.go, internal/http/server.go, internal/http/router_test.go
 - 메모: Gin 라우터, GET /health, SIGINT/SIGTERM graceful shutdown.
 
+#### 004 — [BE] 로비 도메인 모델
+
+- 완료일: 2026-06-20
+- 산출물: internal/lobby/model.go, internal/lobby/phase.go, internal/lobby/errors.go, internal/lobby/auth.go, internal/lobby/lobby_test.go
+- 메모: Phase 전환 규칙, Snapshot 마스킹(DRAWING에서만 사진·타이머 노출).
+
+#### 005 — [BE] 로비 저장소
+
+- 완료일: 2026-06-20
+- 산출물: internal/lobby/store.go
+- 메모: Store interface + MemoryStore. UUID id/admin token, clone on read.
+
+#### 006 — [BE] 로비 생성·조회 API
+
+- 완료일: 2026-06-20
+- 산출물: internal/http/lobby_handlers.go, internal/http/lobby_handlers_test.go
+- 메모: POST create → id/admin_token/join_url. GET snapshot. X-Admin-Token 검증 헬퍼.
+
 #### 009 — [BE] PixaBay API 클라이언트
 
 - 완료일: 2026-06-20
@@ -80,13 +98,16 @@
 
 ## 전체 요약
 
-- **전체:** 4 / 29 완료 (13%)
-- **백엔드:** 4 / 17 (23%)
+- **전체:** 7 / 29 완료 (24%)
+- **백엔드:** 7 / 17 (41%)
 - **프론트엔드:** 0 / 12 (0%)
 
 ## 다음 작업 후보
 
-- **004** — [BE] 로비 도메인 모델 (`pending`)
+- **007** — [BE] WebSocket 허브 (`pending`)
+- **010** — [BE] PixaBay 검색 API (`pending`)
+- **013** — [BE] 서버 권위 타이머 (`pending`)
+- **016** — [BE] CORS·Admin 미들웨어 (`pending`)
 
 ## 진도 갱신 방법
 
