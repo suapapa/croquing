@@ -213,6 +213,30 @@ func (s *fakeStore) Snapshot(ctx context.Context, id string, participantCount in
 	return lob.Snapshot(participantCount, time.Now()), nil
 }
 
+func (s *fakeStore) SetSelectedPhotos(ctx context.Context, id string, photos []lobby.Photo) error {
+	if len(photos) == 0 {
+		return lobby.ErrEmptyPhotos
+	}
+
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	lob, ok := s.lobbies[id]
+	if !ok {
+		return lobby.ErrNotFound
+	}
+	if err := lobby.ValidateTransition(lob.Phase, lobby.PhaseSelecting); err != nil {
+		return err
+	}
+
+	lob.SelectedPhotos = append([]lobby.Photo(nil), photos...)
+	lob.Phase = lobby.PhaseSelecting
+	lob.PhotoOrder = nil
+	lob.CurrentRound = 0
+	lob.DrawEndsAt = nil
+	return nil
+}
+
 func (s *fakeStore) setPhase(id string, phase lobby.LobbyPhase) {
 	s.mu.Lock()
 	s.lobbies[id].Phase = phase

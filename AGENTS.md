@@ -59,7 +59,7 @@ croquis-king/
 └── AGENTS.md
 ```
 
-Current state: **WorkItems 001–010 done** (008 snapshot sync included). See [docs/progress/PROGRESS.md](docs/progress/PROGRESS.md). Next: **011** (photo selection API) or **013** (server timer).
+Current state: **WorkItems 001–011 done** (photo selection API included). See [docs/progress/PROGRESS.md](docs/progress/PROGRESS.md). Next: **012** (photo shuffle) or **013** (server timer).
 
 ## Conventions for agents
 

@@ -154,7 +154,14 @@
           "title": "[BE] 사진 선택 API",
           "description": "PUT /api/lobbies/{id}/photos — 선택 목록 저장, Phase를 SELECTING으로, 스냅샷 갱신",
           "deps": ["006", "008"],
-          "status": "pending"
+          "status": "done",
+          "completed_at": "2026-06-20",
+          "artifacts": [
+            "internal/lobby/store.go",
+            "internal/http/lobby_handlers.go",
+            "internal/http/lobby_photos_test.go"
+          ],
+          "notes": "Admin PUT photos → SELECTING. Store.SetSelectedPhotos + WS snapshot broadcast."
         },
         {
           "id": "012",

@@ -13,6 +13,7 @@ type Store interface {
 	Create(ctx context.Context, drawDuration time.Duration) (*Lobby, error)
 	Get(ctx context.Context, id string) (*Lobby, error)
 	Snapshot(ctx context.Context, id string, participantCount int) (LobbySnapshot, error)
+	SetSelectedPhotos(ctx context.Context, id string, photos []Photo) error
 }
 
 // MemoryStore is an in-memory lobby store protected by a mutex.
@@ -75,6 +76,36 @@ func (s *MemoryStore) Snapshot(ctx context.Context, id string, participantCount 
 	}
 
 	return lobby.Snapshot(participantCount, time.Now()), nil
+}
+
+// SetSelectedPhotos saves the admin's photo selection and moves the lobby to SELECTING.
+func (s *MemoryStore) SetSelectedPhotos(ctx context.Context, id string, photos []Photo) error {
+	if len(photos) == 0 {
+		return ErrEmptyPhotos
+	}
+	if err := ctx.Err(); err != nil {
+		return err
+	}
+
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	lobby, ok := s.lobbies[id]
+	if !ok {
+		return ErrNotFound
+	}
+
+	if err := ValidateTransition(lobby.Phase, PhaseSelecting); err != nil {
+		return err
+	}
+
+	lobby.SelectedPhotos = append([]Photo(nil), photos...)
+	lobby.Phase = PhaseSelecting
+	lobby.PhotoOrder = nil
+	lobby.CurrentRound = 0
+	lobby.DrawEndsAt = nil
+
+	return nil
 }
 
 func cloneLobby(lobby *Lobby) *Lobby {

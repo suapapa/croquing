@@ -162,5 +162,5 @@ func TestPixabaySearchHandlerRateLimited(t *testing.T) {
 }
 
 func newRouterWithPixabay(store lobby.Store, drawDuration time.Duration, client *pixabay.Client) *gin.Engine {
-	return newRouter(store, drawDuration, client, nil)
+	return newRouter(store, drawDuration, client, nil, nil)
 }

@@ -135,3 +135,37 @@ func TestValidateAdminToken(t *testing.T) {
 		t.Fatal("ValidateAdminToken() = true, want false")
 	}
 }
+
+func TestMemoryStoreSetSelectedPhotos(t *testing.T) {
+	t.Parallel()
+
+	store := NewMemoryStore()
+	created, err := store.Create(context.Background(), 5*time.Minute)
+	if err != nil {
+		t.Fatalf("Create() error = %v", err)
+	}
+
+	photos := []Photo{{
+		PixabayID:     1,
+		LargeImageURL: "https://cdn.example/large.jpg",
+	}}
+
+	if err := store.SetSelectedPhotos(context.Background(), created.ID, photos); err != nil {
+		t.Fatalf("SetSelectedPhotos() error = %v", err)
+	}
+
+	got, err := store.Get(context.Background(), created.ID)
+	if err != nil {
+		t.Fatalf("Get() error = %v", err)
+	}
+	if got.Phase != PhaseSelecting {
+		t.Fatalf("Phase = %q, want SELECTING", got.Phase)
+	}
+	if len(got.SelectedPhotos) != 1 {
+		t.Fatalf("len(SelectedPhotos) = %d, want 1", len(got.SelectedPhotos))
+	}
+
+	if err := store.SetSelectedPhotos(context.Background(), created.ID, nil); !errors.Is(err, ErrEmptyPhotos) {
+		t.Fatalf("SetSelectedPhotos(empty) error = %v, want ErrEmptyPhotos", err)
+	}
+}

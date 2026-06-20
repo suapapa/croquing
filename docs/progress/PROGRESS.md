@@ -3,11 +3,11 @@
 > **자동 생성 문서** — 직접 수정하지 마세요.  
 > 소스: [`workitems.json`](workitems.json) · 갱신: `make progress`
 
-마지막 갱신: **2026-06-20 18:57 KST**
+마지막 갱신: **2026-06-20 19:00 KST**
 
 ## Phase A — 백엔드 (001-017)
 
-진행: **10 / 17** (58%)
+진행: **11 / 17** (64%)
 
 | Index | 상태 | 제목 | deps | 산출물 검증 |
 |-------|------|------|------|-------------|
@@ -21,7 +21,7 @@
 | **008** | ✅ done | [BE] 실시간 스냅샷 동기화 | 006, 007 | ✓ |
 | **009** | ✅ done | [BE] PixaBay API 클라이언트 | 002 | ✓ |
 | **010** | ✅ done | [BE] PixaBay 검색 API | 006, 009 | ✓ |
-| **011** | ⬜ pending | [BE] 사진 선택 API | 006, 008 | — |
+| **011** | ✅ done | [BE] 사진 선택 API | 006, 008 | ✓ |
 | **012** | ⬜ pending | [BE] 사진 순서 랜덤 셔플 | 011 | — |
 | **013** | ⬜ pending | [BE] 서버 권위 타이머 | 004, 005 | — |
 | **014** | ⬜ pending | [BE] 세션 진행 API | 012, 013 | — |
@@ -93,6 +93,12 @@
 - 산출물: internal/http/pixabay_handlers.go, internal/http/admin_auth.go, internal/http/pixabay_handlers_test.go
 - 메모: GET /api/pixabay/search. lobby_id + X-Admin-Token 검증. snake_case JSON 정규화.
 
+#### 011 — [BE] 사진 선택 API
+
+- 완료일: 2026-06-20
+- 산출물: internal/lobby/store.go, internal/http/lobby_handlers.go, internal/http/lobby_photos_test.go
+- 메모: Admin PUT photos → SELECTING. Store.SetSelectedPhotos + WS snapshot broadcast.
+
 ## Phase B — 프론트엔드 (101-112)
 
 선행 조건: backend 완료 (001-017)
@@ -116,13 +122,13 @@
 
 ## 전체 요약
 
-- **전체:** 10 / 29 완료 (34%)
-- **백엔드:** 10 / 17 (58%)
+- **전체:** 11 / 29 완료 (37%)
+- **백엔드:** 11 / 17 (64%)
 - **프론트엔드:** 0 / 12 (0%)
 
 ## 다음 작업 후보
 
-- **011** — [BE] 사진 선택 API (`pending`)
+- **012** — [BE] 사진 순서 랜덤 셔플 (`pending`)
 - **013** — [BE] 서버 권위 타이머 (`pending`)
 - **016** — [BE] CORS·Admin 미들웨어 (`pending`)
 
