@@ -283,8 +283,8 @@ type LobbySnapshot struct {
 
 | Index | 제목 | 설명 | deps |
 |-------|------|------|------|
-| **001** | `[BE]` 프로젝트 스캐폴딩 | `cmd/server`, `internal/` 디렉터리 구조, `go mod`, Makefile 또는 `go run` 진입점 정리. 루트 `main.go`는 `cmd/server`로 이전 | — |
-| **002** | `[BE]` 설정·환경변수 | `PORT`, `PIXABAY_API_KEY`, `CORS_ORIGINS`, `DRAW_DURATION`(기본 5m) 등 envconfig 로딩 | 001 |
+| **001** | `[BE]` 프로젝트 스캐폴딩 | `cmd/server`, `internal/` 디렉터리 구조, `go mod`, Makefile 또는 `go run` 진입점 정리. 루트 `main.go`는 `cmd/server`로 이전 | — [DONE] |
+| **002** | `[BE]` 설정·환경변수 | `PORT`, `PIXABAY_API_KEY`, `CORS_ORIGINS`, `DRAW_DURATION`(기본 5m) 등 envconfig 로딩 | 001 [DONE] |
 | **003** | `[BE]` HTTP 서버 골격 | chi/gin 등 라우터, health check (`GET /health`), graceful shutdown | 002 |
 | **004** | `[BE]` 로비 도메인 모델 | `Lobby`, `Photo`, `LobbyPhase`, `LobbySnapshot` 타입 및 Phase 전환 규칙 정의 | 001 |
 | **005** | `[BE]` 로비 저장소 | 인메모리 `LobbyStore` (map + mutex). 생성·조회·스냅샷 변환. 추후 Redis 등으로 교체 가능하게 interface 분리 | 004 |
