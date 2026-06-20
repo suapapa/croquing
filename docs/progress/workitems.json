@@ -144,7 +144,7 @@
           "completed_at": "2026-06-20",
           "artifacts": [
             "internal/http/pixabay_handlers.go",
-            "internal/http/admin_auth.go",
+            "internal/http/admin_middleware.go",
             "internal/http/pixabay_handlers_test.go"
           ],
           "notes": "GET /api/pixabay/search. lobby_id + X-Admin-Token 검증. snake_case JSON 정규화."
@@ -223,16 +223,32 @@
         {
           "id": "016",
           "title": "[BE] CORS·Admin 미들웨어",
-          "description": "X-Admin-Token 검증 미들웨어, CORS 설정, 프론트 dev 서버 origin 허용",
+          "description": "X-Admin-Token 검증 미들웨어, CORS 설정, 프론트 dev server origin 허용",
           "deps": ["003", "006"],
-          "status": "pending"
+          "status": "done",
+          "completed_at": "2026-06-20",
+          "artifacts": [
+            "internal/http/cors.go",
+            "internal/http/admin_middleware.go",
+            "internal/http/router.go",
+            "internal/http/server.go",
+            "internal/ws/handler.go"
+          ],
+          "notes": "CORS middleware from CORS_ORIGINS env. requireAdmin on admin routes. WS CheckOrigin aligned with CORS. localhost:5173 preflight tested."
         },
         {
           "id": "017",
           "title": "[BE] 백엔드 통합 테스트",
           "description": "로비 생성 → 사진 선택 → ready → start → 타이머 만료 → next → finish 시나리오 HTTP/WS 테스트",
           "deps": ["014", "015"],
-          "status": "pending"
+          "status": "done",
+          "completed_at": "2026-06-20",
+          "artifacts": [
+            "internal/http/integration_test.go",
+            "internal/http/cors_test.go",
+            "internal/http/admin_middleware_test.go"
+          ],
+          "notes": "TestFullSessionFlowHTTPAndWS: end-to-end HTTP + WS with scheduler timer expiry. CORS and admin middleware unit tests."
         }
       ]
     },

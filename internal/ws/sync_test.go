@@ -21,7 +21,7 @@ func TestInitialSnapshotOnConnect(t *testing.T) {
 
 	store := lobby.NewMemoryStore()
 	sync := NewSnapshotSync(store)
-	handler := NewHandler(sync)
+	handler := NewHandler(sync, nil)
 
 	created, err := store.Create(context.Background(), 5*time.Minute)
 	if err != nil {
@@ -48,7 +48,7 @@ func TestParticipantCountUpdatesOnConnectAndDisconnect(t *testing.T) {
 
 	store := lobby.NewMemoryStore()
 	sync := NewSnapshotSync(store)
-	handler := NewHandler(sync)
+	handler := NewHandler(sync, nil)
 
 	created, err := store.Create(context.Background(), 5*time.Minute)
 	if err != nil {
@@ -82,7 +82,7 @@ func TestBroadcastPushesUpdatedSnapshot(t *testing.T) {
 
 	store := newFakeStore()
 	sync := NewSnapshotSync(store)
-	handler := NewHandler(sync)
+	handler := NewHandler(sync, nil)
 
 	created, err := store.Create(context.Background(), 5*time.Minute)
 	if err != nil {

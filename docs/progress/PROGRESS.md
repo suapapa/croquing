@@ -3,11 +3,11 @@
 > **자동 생성 문서** — 직접 수정하지 마세요.  
 > 소스: [`workitems.json`](workitems.json) · 갱신: `make progress`
 
-마지막 갱신: **2026-06-20 19:20 KST**
+마지막 갱신: **2026-06-20 19:38 KST**
 
 ## Phase A — 백엔드 (001-017)
 
-진행: **15 / 17** (88%)
+진행: **17 / 17** (100%)
 
 | Index | 상태 | 제목 | deps | 산출물 검증 |
 |-------|------|------|------|-------------|
@@ -26,8 +26,8 @@
 | **013** | ✅ done | [BE] 서버 권위 타이머 | 004, 005 | ✓ |
 | **014** | ✅ done | [BE] 세션 진행 API | 012, 013 | ✓ |
 | **015** | ✅ done | [BE] 타이머 틱·자동 전환 | 013, 014, 008 | ✓ |
-| **016** | ⬜ pending | [BE] CORS·Admin 미들웨어 | 003, 006 | — |
-| **017** | ⬜ pending | [BE] 백엔드 통합 테스트 | 014, 015 | — |
+| **016** | ✅ done | [BE] CORS·Admin 미들웨어 | 003, 006 | ✓ |
+| **017** | ✅ done | [BE] 백엔드 통합 테스트 | 014, 015 | ✓ |
 
 ### 완료 항목 상세
 
@@ -90,7 +90,7 @@
 #### 010 — [BE] PixaBay 검색 API
 
 - 완료일: 2026-06-20
-- 산출물: internal/http/pixabay_handlers.go, internal/http/admin_auth.go, internal/http/pixabay_handlers_test.go
+- 산출물: internal/http/pixabay_handlers.go, internal/http/admin_middleware.go, internal/http/pixabay_handlers_test.go
 - 메모: GET /api/pixabay/search. lobby_id + X-Admin-Token 검증. snake_case JSON 정규화.
 
 #### 011 — [BE] 사진 선택 API
@@ -123,6 +123,18 @@
 - 산출물: internal/lobby/expire.go, internal/timer/scheduler.go, internal/http/server.go, cmd/server/main.go
 - 메모: ExpireDrawingTimers store scan. Scheduler ticks every 1s, broadcasts snapshot on expiry. Started in Server.Run.
 
+#### 016 — [BE] CORS·Admin 미들웨어
+
+- 완료일: 2026-06-20
+- 산출물: internal/http/cors.go, internal/http/admin_middleware.go, internal/http/router.go, internal/http/server.go, internal/ws/handler.go
+- 메모: CORS middleware from CORS_ORIGINS env. requireAdmin on admin routes. WS CheckOrigin aligned with CORS. localhost:5173 preflight tested.
+
+#### 017 — [BE] 백엔드 통합 테스트
+
+- 완료일: 2026-06-20
+- 산출물: internal/http/integration_test.go, internal/http/cors_test.go, internal/http/admin_middleware_test.go
+- 메모: TestFullSessionFlowHTTPAndWS: end-to-end HTTP + WS with scheduler timer expiry. CORS and admin middleware unit tests.
+
 ## Phase B — 프론트엔드 (101-112)
 
 선행 조건: backend 완료 (001-017)
@@ -146,14 +158,13 @@
 
 ## 전체 요약
 
-- **전체:** 15 / 29 완료 (51%)
-- **백엔드:** 15 / 17 (88%)
+- **전체:** 17 / 29 완료 (58%)
+- **백엔드:** 17 / 17 (100%)
 - **프론트엔드:** 0 / 12 (0%)
 
 ## 다음 작업 후보
 
-- **016** — [BE] CORS·Admin 미들웨어 (`pending`)
-- **017** — [BE] 백엔드 통합 테스트 (`pending`)
+- **101** — [FE] React 프로젝트 초기화 (`pending`)
 
 ## 진도 갱신 방법
 

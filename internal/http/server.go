@@ -44,10 +44,10 @@ func New(cfg *config.Config, store lobby.Store, pixabayClient *pixabay.Client, l
 
 	var wsHandler *ws.Handler
 	if lobbySync != nil {
-		wsHandler = ws.NewHandler(lobbySync)
+		wsHandler = ws.NewHandler(lobbySync, originAllowed(cfg.CORSOrigins))
 	}
 
-	router := newRouter(store, drawDuration, pixabayClient, wsHandler, lobbySync)
+	router := newRouter(store, drawDuration, pixabayClient, wsHandler, lobbySync, cfg.CORSOrigins)
 
 	return &Server{
 		cfg:       cfg,

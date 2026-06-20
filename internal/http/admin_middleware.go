@@ -9,7 +9,27 @@ import (
 	"github.com/suapapa/croquis-king/internal/lobby"
 )
 
-func authenticateAdmin(c *gin.Context, store lobby.Store, lobbyID string) (*lobby.Lobby, bool) {
+const adminLobbyContextKey = "adminLobby"
+
+func requireAdmin(store lobby.Store) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		lob, ok := authenticateAdminRequest(c, store, adminLobbyID(c))
+		if !ok {
+			return
+		}
+		c.Set(adminLobbyContextKey, lob)
+		c.Next()
+	}
+}
+
+func adminLobbyID(c *gin.Context) string {
+	if id := c.Param("id"); id != "" {
+		return id
+	}
+	return c.Query("lobby_id")
+}
+
+func authenticateAdminRequest(c *gin.Context, store lobby.Store, lobbyID string) (*lobby.Lobby, bool) {
 	token := c.GetHeader(lobby.AdminTokenHeader)
 	if lobbyID == "" || token == "" {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "lobby_id and admin token are required"})

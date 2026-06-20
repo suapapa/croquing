@@ -18,7 +18,7 @@ func TestStartSessionHandler(t *testing.T) {
 
 	store := lobby.NewMemoryStore()
 	lobbySync := ws.NewSnapshotSync(store)
-	router := newRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), ws.NewHandler(lobbySync), lobbySync)
+	router := newTestRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), ws.NewHandler(lobbySync, nil), lobbySync)
 
 	created, photos := createReadyLobby(t, store)
 
@@ -56,7 +56,7 @@ func TestStartSessionHandlerInvalidPhase(t *testing.T) {
 	t.Parallel()
 
 	store := lobby.NewMemoryStore()
-	router := newRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), nil, ws.NewSnapshotSync(store))
+	router := newTestRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), nil, ws.NewSnapshotSync(store))
 
 	created, err := store.Create(context.Background(), 5*time.Minute)
 	if err != nil {
@@ -77,7 +77,7 @@ func TestNextRoundHandler(t *testing.T) {
 	t.Parallel()
 
 	store := lobby.NewMemoryStore()
-	router := newRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), nil, ws.NewSnapshotSync(store))
+	router := newTestRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), nil, ws.NewSnapshotSync(store))
 
 	created, _ := createReadyLobby(t, store)
 	if err := store.StartSession(context.Background(), created.ID, time.Now()); err != nil {
@@ -115,7 +115,7 @@ func TestFinishSessionHandler(t *testing.T) {
 	t.Parallel()
 
 	store := lobby.NewMemoryStore()
-	router := newRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), nil, ws.NewSnapshotSync(store))
+	router := newTestRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), nil, ws.NewSnapshotSync(store))
 
 	created, _ := createReadyLobby(t, store)
 
@@ -151,8 +151,8 @@ func TestStartSessionHandlerBroadcastsSnapshot(t *testing.T) {
 
 	store := lobby.NewMemoryStore()
 	lobbySync := ws.NewSnapshotSync(store)
-	wsHandler := ws.NewHandler(lobbySync)
-	router := newRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), wsHandler, lobbySync)
+	wsHandler := ws.NewHandler(lobbySync, nil)
+	router := newTestRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), wsHandler, lobbySync)
 
 	created, _ := createReadyLobby(t, store)
 

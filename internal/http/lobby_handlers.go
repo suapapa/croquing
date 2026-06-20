@@ -66,9 +66,6 @@ func (h *lobbyHandler) getLobby(c *gin.Context) {
 
 func (h *lobbyHandler) setPhotos(c *gin.Context) {
 	id := c.Param("id")
-	if _, ok := authenticateAdmin(c, h.store, id); !ok {
-		return
-	}
 
 	var req setPhotosRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -86,9 +83,6 @@ func (h *lobbyHandler) setPhotos(c *gin.Context) {
 
 func (h *lobbyHandler) markReady(c *gin.Context) {
 	id := c.Param("id")
-	if _, ok := authenticateAdmin(c, h.store, id); !ok {
-		return
-	}
 
 	if err := h.store.MarkReady(c.Request.Context(), id); err != nil {
 		mapLobbyStoreError(c, err, "invalid lobby phase for ready", "failed to mark lobby ready")
@@ -100,9 +94,6 @@ func (h *lobbyHandler) markReady(c *gin.Context) {
 
 func (h *lobbyHandler) startSession(c *gin.Context) {
 	id := c.Param("id")
-	if _, ok := authenticateAdmin(c, h.store, id); !ok {
-		return
-	}
 
 	if err := h.store.StartSession(c.Request.Context(), id, time.Now()); err != nil {
 		mapLobbyStoreError(c, err, "invalid lobby phase for start", "failed to update lobby session")
@@ -114,9 +105,6 @@ func (h *lobbyHandler) startSession(c *gin.Context) {
 
 func (h *lobbyHandler) nextRound(c *gin.Context) {
 	id := c.Param("id")
-	if _, ok := authenticateAdmin(c, h.store, id); !ok {
-		return
-	}
 
 	if err := h.store.NextRound(c.Request.Context(), id, time.Now()); err != nil {
 		mapLobbyStoreError(c, err, "invalid lobby phase for next", "failed to update lobby session")
@@ -128,9 +116,6 @@ func (h *lobbyHandler) nextRound(c *gin.Context) {
 
 func (h *lobbyHandler) finishSession(c *gin.Context) {
 	id := c.Param("id")
-	if _, ok := authenticateAdmin(c, h.store, id); !ok {
-		return
-	}
 
 	if err := h.store.FinishSession(c.Request.Context(), id); err != nil {
 		mapLobbyStoreError(c, err, "invalid lobby phase for finish", "failed to update lobby session")
@@ -183,13 +168,16 @@ func joinURL(c *gin.Context, lobbyID string) string {
 	return scheme + "://" + c.Request.Host + "/lobby/" + lobbyID
 }
 
-func registerLobbyRoutes(r gin.IRoutes, store lobby.Store, drawDuration time.Duration, lobbySync *ws.SnapshotSync) {
+func registerLobbyRoutes(r *gin.RouterGroup, store lobby.Store, drawDuration time.Duration, lobbySync *ws.SnapshotSync) {
 	handler := newLobbyHandler(store, drawDuration, lobbySync)
 	r.POST("/lobbies", handler.createLobby)
 	r.GET("/lobbies/:id", handler.getLobby)
-	r.PUT("/lobbies/:id/photos", handler.setPhotos)
-	r.POST("/lobbies/:id/ready", handler.markReady)
-	r.POST("/lobbies/:id/start", handler.startSession)
-	r.POST("/lobbies/:id/next", handler.nextRound)
-	r.POST("/lobbies/:id/finish", handler.finishSession)
+
+	admin := r.Group("")
+	admin.Use(requireAdmin(store))
+	admin.PUT("/lobbies/:id/photos", handler.setPhotos)
+	admin.POST("/lobbies/:id/ready", handler.markReady)
+	admin.POST("/lobbies/:id/start", handler.startSession)
+	admin.POST("/lobbies/:id/next", handler.nextRound)
+	admin.POST("/lobbies/:id/finish", handler.finishSession)
 }

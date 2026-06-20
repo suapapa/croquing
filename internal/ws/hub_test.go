@@ -44,7 +44,7 @@ func TestHubBroadcast(t *testing.T) {
 
 	store := lobby.NewMemoryStore()
 	sync := NewSnapshotSync(store)
-	handler := NewHandler(sync)
+	handler := NewHandler(sync, nil)
 
 	created, err := store.Create(context.Background(), 5*time.Minute)
 	if err != nil {
@@ -90,7 +90,7 @@ func TestHubBroadcast(t *testing.T) {
 func TestHandlerRejectsMissingLobby(t *testing.T) {
 	t.Parallel()
 
-	handler := NewHandler(NewSnapshotSync(lobby.NewMemoryStore()))
+	handler := NewHandler(NewSnapshotSync(lobby.NewMemoryStore()), nil)
 
 	router := gin.New()
 	router.GET("/ws/lobby/:id", handler.Handle)
@@ -109,7 +109,7 @@ func TestHandlerUpgradesExistingLobby(t *testing.T) {
 
 	store := lobby.NewMemoryStore()
 	sync := NewSnapshotSync(store)
-	handler := NewHandler(sync)
+	handler := NewHandler(sync, nil)
 
 	created, err := store.Create(context.Background(), 5*time.Minute)
 	if err != nil {

@@ -10,22 +10,18 @@ import (
 	"github.com/suapapa/croquis-king/internal/lobby"
 )
 
-var upgrader = websocket.Upgrader{
-	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,
-	CheckOrigin: func(r *http.Request) bool {
-		return true
-	},
-}
-
 // Handler upgrades HTTP requests to WebSocket connections for lobby subscriptions.
 type Handler struct {
-	sync *SnapshotSync
+	sync        *SnapshotSync
+	checkOrigin func(*http.Request) bool
 }
 
 // NewHandler creates a WebSocket handler.
-func NewHandler(sync *SnapshotSync) *Handler {
-	return &Handler{sync: sync}
+func NewHandler(sync *SnapshotSync, checkOrigin func(*http.Request) bool) *Handler {
+	if checkOrigin == nil {
+		checkOrigin = func(*http.Request) bool { return true }
+	}
+	return &Handler{sync: sync, checkOrigin: checkOrigin}
 }
 
 // Handle upgrades GET /ws/lobby/:id and registers the connection with the hub.
@@ -39,6 +35,12 @@ func (h *Handler) Handle(c *gin.Context) {
 		}
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to load lobby"})
 		return
+	}
+
+	upgrader := websocket.Upgrader{
+		ReadBufferSize:  1024,
+		WriteBufferSize: 1024,
+		CheckOrigin:     h.checkOrigin,
 	}
 
 	conn, err := upgrader.Upgrade(c.Writer, c.Request, nil)

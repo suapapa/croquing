@@ -15,9 +15,10 @@ func init() {
 	gin.SetMode(gin.ReleaseMode)
 }
 
-func newRouter(store lobby.Store, drawDuration time.Duration, pixabayClient *pixabay.Client, wsHandler *ws.Handler, lobbySync *ws.SnapshotSync) *gin.Engine {
+func newRouter(store lobby.Store, drawDuration time.Duration, pixabayClient *pixabay.Client, wsHandler *ws.Handler, lobbySync *ws.SnapshotSync, corsOrigins []string) *gin.Engine {
 	r := gin.New()
 	r.Use(gin.Recovery())
+	r.Use(corsMiddleware(corsOrigins))
 
 	r.GET("/health", healthHandler)
 

@@ -20,7 +20,7 @@ func TestMarkReadyHandler(t *testing.T) {
 
 	store := lobby.NewMemoryStore()
 	lobbySync := ws.NewSnapshotSync(store)
-	router := newRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), ws.NewHandler(lobbySync), lobbySync)
+	router := newTestRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), ws.NewHandler(lobbySync, nil), lobbySync)
 
 	created, photos := createLobbyWithPhotos(t, store)
 
@@ -66,7 +66,7 @@ func TestMarkReadyHandlerUnauthorized(t *testing.T) {
 	t.Parallel()
 
 	store := lobby.NewMemoryStore()
-	router := newRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), nil, ws.NewSnapshotSync(store))
+	router := newTestRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), nil, ws.NewSnapshotSync(store))
 
 	created, _ := createLobbyWithPhotos(t, store)
 
@@ -83,7 +83,7 @@ func TestMarkReadyHandlerInvalidPhase(t *testing.T) {
 	t.Parallel()
 
 	store := lobby.NewMemoryStore()
-	router := newRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), nil, ws.NewSnapshotSync(store))
+	router := newTestRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), nil, ws.NewSnapshotSync(store))
 
 	created, err := store.Create(context.Background(), 5*time.Minute)
 	if err != nil {
@@ -105,8 +105,8 @@ func TestMarkReadyHandlerBroadcastsSnapshot(t *testing.T) {
 
 	store := lobby.NewMemoryStore()
 	lobbySync := ws.NewSnapshotSync(store)
-	wsHandler := ws.NewHandler(lobbySync)
-	router := newRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), wsHandler, lobbySync)
+	wsHandler := ws.NewHandler(lobbySync, nil)
+	router := newTestRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), wsHandler, lobbySync)
 
 	created, photos := createLobbyWithPhotos(t, store)
 
@@ -149,7 +149,7 @@ func createLobbyWithPhotos(t *testing.T, store *lobby.MemoryStore) (*lobby.Lobby
 		t.Fatalf("Marshal() error = %v", err)
 	}
 
-	router := newRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), nil, nil)
+	router := newTestRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), nil, nil)
 	req := httptest.NewRequest(http.MethodPut, "/api/lobbies/"+created.ID+"/photos", bytes.NewReader(body))
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set(lobby.AdminTokenHeader, created.AdminToken)

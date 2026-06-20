@@ -51,10 +51,6 @@ func newPixabayHandler(store lobby.Store, client *pixabay.Client) *pixabayHandle
 }
 
 func (h *pixabayHandler) search(c *gin.Context) {
-	if _, ok := authenticateAdmin(c, h.store, c.Query("lobby_id")); !ok {
-		return
-	}
-
 	query := strings.TrimSpace(c.Query("q"))
 	if query == "" {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "q is required"})
@@ -155,7 +151,9 @@ func parsePositiveInt(raw string, defaultValue int) (int, error) {
 	return value, nil
 }
 
-func registerPixabayRoutes(r gin.IRoutes, store lobby.Store, client *pixabay.Client) {
+func registerPixabayRoutes(r *gin.RouterGroup, store lobby.Store, client *pixabay.Client) {
 	handler := newPixabayHandler(store, client)
-	r.GET("/pixabay/search", handler.search)
+	admin := r.Group("")
+	admin.Use(requireAdmin(store))
+	admin.GET("/pixabay/search", handler.search)
 }
