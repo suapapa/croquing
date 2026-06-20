@@ -1,18 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useSyncExternalStore } from 'react'
+
+function subscribe(onStoreChange: () => void) {
+  const timer = window.setInterval(onStoreChange, 1000)
+  return () => window.clearInterval(timer)
+}
 
 /** Returns server-adjusted current time, refreshed every second. */
 export function useServerClock(serverTimeOffsetMs: number): number {
-  const [now, setNow] = useState(() => Date.now() + serverTimeOffsetMs)
-
-  useEffect(() => {
-    setNow(Date.now() + serverTimeOffsetMs)
-    const timer = window.setInterval(() => {
-      setNow(Date.now() + serverTimeOffsetMs)
-    }, 1000)
-    return () => window.clearInterval(timer)
-  }, [serverTimeOffsetMs])
-
-  return now
+  return useSyncExternalStore(
+    subscribe,
+    () => Date.now() + serverTimeOffsetMs,
+    () => Date.now() + serverTimeOffsetMs,
+  )
 }
 
 /** Remaining milliseconds until drawEndsAt, using server-adjusted clock. */
