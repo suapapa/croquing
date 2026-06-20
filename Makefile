@@ -13,3 +13,6 @@ clean:
 
 test:
 	go test -race ./...
+
+progress:
+	go run ./scripts/update_progress

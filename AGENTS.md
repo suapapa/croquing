@@ -7,6 +7,7 @@ Guidance for coding agents working in this repository.
 **Before implementing features, read:**
 
 - **[docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md)** — product goals, architecture, API sketch, session state machine, and **indexed WorkItems** (001–017 backend, 101–112 frontend).
+- **[docs/progress/PROGRESS.md](docs/progress/PROGRESS.md)** — **implementation progress** (done/pending, artifacts, next candidates). Regenerate with `make progress` after editing [`docs/progress/workitems.json`](docs/progress/workitems.json).
 
 When the user asks to implement a specific index (e.g. “003 구현해줘”), open that document, locate the matching WorkItem row, and implement only that scope unless dependencies require otherwise.
 
@@ -50,12 +51,15 @@ croquis-king/
 │   └── http/
 ├── frontend/             # React SPA (WorkItem 101+)
 ├── docs/
-│   └── PROJECT_PLAN.md   # canonical spec & WorkItem index
+│   ├── PROJECT_PLAN.md   # canonical spec & WorkItem index
+│   └── progress/
+│       ├── workitems.json  # progress source of truth (edit this)
+│       └── PROGRESS.md       # generated dashboard (make progress)
 ├── go.mod
 └── AGENTS.md
 ```
 
-Current state: early scaffold (`main.go` at repo root); structure above is the **target**—migrate toward it as WorkItems land.
+Current state: **WorkItems 001–002 done** — `cmd/server`, `internal/config`, Makefile. See [docs/progress/PROGRESS.md](docs/progress/PROGRESS.md). Next: **003** (HTTP server skeleton) or **004** (lobby domain, parallel after 001).
 
 ## Conventions for agents
 
@@ -68,7 +72,8 @@ Current state: early scaffold (`main.go` at repo root); structure above is the *
 ## Commands (from repo root)
 
 ```sh
-go run ./cmd/server          # after WorkItem 001 (until then: go run .)
+go run ./cmd/server
+make progress                 # regenerate docs/progress/PROGRESS.md
 go vet ./...
 go test -race ./...
 ```
@@ -84,6 +89,7 @@ cd frontend && npm install && npm run dev
 When a change alters **APIs**, **lobby phases**, **directory layout**, **env vars**, or **WorkItem scope/completion**, update:
 
 - **`docs/PROJECT_PLAN.md`** — if the spec or WorkItem definitions change.
+- **`docs/progress/workitems.json`** + **`make progress`** — when a WorkItem status or artifacts change.
 - **`AGENTS.md`** — if agent-facing conventions or commands change.
 - **`README.md`** — if user-facing run/build steps change (create or update when those steps exist).
 

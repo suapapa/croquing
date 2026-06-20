@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "phases": [
+    {
+      "id": "backend",
+      "label": "Phase A — 백엔드",
+      "range": "001-017",
+      "items": [
+        {
+          "id": "001",
+          "title": "[BE] 프로젝트 스캐폴딩",
+          "description": "cmd/server, internal/ 디렉터리 구조, go mod, Makefile 또는 go run 진입점 정리. 루트 main.go는 cmd/server로 이전",
+          "deps": [],
+          "status": "done",
+          "completed_at": "2026-06-20",
+          "commit": "bce5ae5",
+          "artifacts": [
+            "cmd/server/main.go",
+            "internal/",
+            "Makefile",
+            "go.mod"
+          ],
+          "notes": "루트 main.go 제거. make run / make build 동작."
+        },
+        {
+          "id": "002",
+          "title": "[BE] 설정·환경변수",
+          "description": "PORT, PIXABAY_API_KEY, CORS_ORIGINS, DRAW_DURATION(기본 5m) 등 envconfig 로딩",
+          "deps": ["001"],
+          "status": "done",
+          "completed_at": "2026-06-20",
+          "commit": "bce5ae5",
+          "artifacts": [
+            "internal/config/config.go"
+          ],
+          "notes": "caarlosh/envconfig 사용. cmd/server에서 config.Load() 호출."
+        },
+        {
+          "id": "003",
+          "title": "[BE] HTTP 서버 골격",
+          "description": "chi/gin 등 라우터, health check (GET /health), graceful shutdown",
+          "deps": ["002"],
+          "status": "pending",
+          "artifacts": [
+            "internal/http/"
+          ]
+        },
+        {
+          "id": "004",
+          "title": "[BE] 로비 도메인 모델",
+          "description": "Lobby, Photo, LobbyPhase, LobbySnapshot 타입 및 Phase 전환 규칙 정의",
+          "deps": ["001"],
+          "status": "pending",
+          "artifacts": [
+            "internal/lobby/"
+          ]
+        },
+        {
+          "id": "005",
+          "title": "[BE] 로비 저장소",
+          "description": "인메모리 LobbyStore (map + mutex). 생성·조회·스냅샷 변환. interface 분리",
+          "deps": ["004"],
+          "status": "pending",
+          "artifacts": [
+            "internal/lobby/store.go"
+          ]
+        },
+        {
+          "id": "006",
+          "title": "[BE] 로비 생성·조회 API",
+          "description": "POST /api/lobbies, GET /api/lobbies/{id}. AdminToken 생성·검증 헬퍼",
+          "deps": ["003", "005"],
+          "status": "pending"
+        },
+        {
+          "id": "007",
+          "title": "[BE] WebSocket 허브",
+          "description": "/ws/lobby/{id} 업그레이드, 연결 등록/해제, 로비별 브로드캐스트",
+          "deps": ["003", "005"],
+          "status": "pending",
+          "artifacts": [
+            "internal/ws/"
+          ]
+        },
+        {
+          "id": "008",
+          "title": "[BE] 실시간 스냅샷 동기화",
+          "description": "로비 상태 변경 시 모든 WS 클라이언트에 snapshot push. 연결 직후 초기 스냅샷 전송",
+          "deps": ["006", "007"],
+          "status": "pending"
+        },
+        {
+          "id": "009",
+          "title": "[BE] PixaBay API 클라이언트",
+          "description": "HTTP 클라이언트, 검색 요청/응답 파싱, API key 주입, 에러·rate limit 처리",
+          "deps": ["002"],
+          "status": "pending",
+          "artifacts": [
+            "internal/pixabay/"
+          ]
+        },
+        {
+          "id": "010",
+          "title": "[BE] PixaBay 검색 API",
+          "description": "GET /api/pixabay/search?q&order&page&per_page. AdminToken 검증, PixaBay 응답 정규화",
+          "deps": ["006", "009"],
+          "status": "pending"
+        },
+        {
+          "id": "011",
+          "title": "[BE] 사진 선택 API",
+          "description": "PUT /api/lobbies/{id}/photos — 선택 목록 저장, Phase를 SELECTING으로, 스냅샷 갱신",
+          "deps": ["006", "008"],
+          "status": "pending"
+        },
+        {
+          "id": "012",
+          "title": "[BE] 사진 순서 랜덤 셔플",
+          "description": "POST .../ready — Fisher-Yates 셔플로 PhotoOrder 생성. PhotoOrder는 스냅샷에 미포함",
+          "deps": ["011"],
+          "status": "pending"
+        },
+        {
+          "id": "013",
+          "title": "[BE] 서버 권위 타이머",
+          "description": "DrawEndsAt 설정/초기화, DRAWING 진입 시 now + DrawDuration, 만료 판정 헬퍼",
+          "deps": ["004", "005"],
+          "status": "pending",
+          "artifacts": [
+            "internal/timer/"
+          ]
+        },
+        {
+          "id": "014",
+          "title": "[BE] 세션 진행 API",
+          "description": "POST .../start, .../next, .../finish. Phase 전환 + 스냅샷에서 현재 사진만 노출",
+          "deps": ["012", "013"],
+          "status": "pending"
+        },
+        {
+          "id": "015",
+          "title": "[BE] 타이머 틱·자동 전환",
+          "description": "백그라운드 goroutine/ticker: DRAWING 중 DrawEndsAt 경과 시 자동으로 BETWEEN_ROUNDS 전환 및 WS broadcast",
+          "deps": ["013", "014", "008"],
+          "status": "pending"
+        },
+        {
+          "id": "016",
+          "title": "[BE] CORS·Admin 미들웨어",
+          "description": "X-Admin-Token 검증 미들웨어, CORS 설정, 프론트 dev 서버 origin 허용",
+          "deps": ["003", "006"],
+          "status": "pending"
+        },
+        {
+          "id": "017",
+          "title": "[BE] 백엔드 통합 테스트",
+          "description": "로비 생성 → 사진 선택 → ready → start → 타이머 만료 → next → finish 시나리오 HTTP/WS 테스트",
+          "deps": ["014", "015"],
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "frontend",
+      "label": "Phase B — 프론트엔드",
+      "range": "101-112",
+      "prerequisite": "backend 완료 (001-017)",
+      "items": [
+        {
+          "id": "101",
+          "title": "[FE] React 프로젝트 초기화",
+          "description": "Vite + React + TypeScript, frontend/ 디렉터리, ESLint/Prettier, env (VITE_API_BASE)",
+          "deps": ["017"],
+          "status": "pending",
+          "artifacts": [
+            "frontend/"
+          ]
+        },
+        {
+          "id": "102",
+          "title": "[FE] 라우팅·로비 접속",
+          "description": "/ (로비 생성), /lobby/:id (참가). AdminToken은 create 응답 후 sessionStorage 저장",
+          "deps": ["101"],
+          "status": "pending"
+        },
+        {
+          "id": "103",
+          "title": "[FE] WebSocket 클라이언트 훅",
+          "description": "useLobbySocket(id) — snapshot 수신, reconnect, 서버 시각 offset 보정",
+          "deps": ["102"],
+          "status": "pending"
+        },
+        {
+          "id": "104",
+          "title": "[FE] 로비 공통 레이아웃",
+          "description": "참가자 수, Phase별 안내 문구, 로딩/연결 끊김 UI",
+          "deps": ["103"],
+          "status": "pending"
+        },
+        {
+          "id": "105",
+          "title": "[FE] Admin / Participant UI 분기",
+          "description": "AdminToken 유무에 따라 조작 버튼 노출/비노출",
+          "deps": ["104"],
+          "status": "pending"
+        },
+        {
+          "id": "106",
+          "title": "[FE] PixaBay 검색 UI",
+          "description": "검색어 입력, popular/latest 정렬, 페이지네이션, 결과 그리드 (Admin, SELECTING)",
+          "deps": ["105", "010"],
+          "status": "pending"
+        },
+        {
+          "id": "107",
+          "title": "[FE] 사진 선택 UI",
+          "description": "다중 선택(기본 5장 권장), 선택 목록 확인, 선택 완료 → ready API",
+          "deps": ["106", "011"],
+          "status": "pending"
+        },
+        {
+          "id": "108",
+          "title": "[FE] READY 화면",
+          "description": "N장 준비됨 — 썸네일·순서 미표시. Admin 시작 버튼",
+          "deps": ["107", "012"],
+          "status": "pending"
+        },
+        {
+          "id": "109",
+          "title": "[FE] DRAWING 화면",
+          "description": "상단 progress bar + mm:ss 잔여 시간, 중앙 largeImageURL 최대 표시, PixaBay 출처 표기",
+          "deps": ["108", "013"],
+          "status": "pending"
+        },
+        {
+          "id": "110",
+          "title": "[FE] BETWEEN / FINISHED 화면",
+          "description": "사진 숨김, 라운드 간 대기, Admin 다음 버튼, 종료 메시지",
+          "deps": ["109", "014"],
+          "status": "pending"
+        },
+        {
+          "id": "111",
+          "title": "[FE] 반응형·전체화면 UX",
+          "description": "모바일/태블릿 대응, 불필요 chrome 최소화, 그리기에 방해되지 않는 UI",
+          "deps": ["109"],
+          "status": "pending"
+        },
+        {
+          "id": "112",
+          "title": "[FE] 프론트엔드 통합·빌드",
+          "description": "프로덕션 빌드, Go static embed 또는 reverse proxy 연동 문서화",
+          "deps": ["110", "111", "016"],
+          "status": "pending"
+        }
+      ]
+    }
+  ]
+}

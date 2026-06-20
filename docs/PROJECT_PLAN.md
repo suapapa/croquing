@@ -167,7 +167,10 @@ croquis-king/
 │   └── http/                    # HTTP 핸들러·라우터
 ├── frontend/                    # React SPA (WorkItem 101 이후)
 ├── docs/
-│   └── PROJECT_PLAN.md          # 본 문서
+│   ├── PROJECT_PLAN.md          # 본 문서 (스펙)
+│   └── progress/
+│       ├── workitems.json       # 진도 소스 (상태·산출물)
+│       └── PROGRESS.md          # 자동 생성 진도판 (make progress)
 ├── go.mod
 └── README.md
 ```
@@ -277,14 +280,19 @@ type LobbySnapshot struct {
 
 **범례:** `[BE]` 백엔드 · `[FE]` 프론트엔드 · `deps` = 선행 WorkItem
 
+> **구현 진도(완료 여부·산출물·다음 후보)** 는 본 절이 아니라 **[progress/PROGRESS.md](progress/PROGRESS.md)** 에서 관리한다.  
+> 상태 변경 시 [`progress/workitems.json`](progress/workitems.json)을 수정한 뒤 `make progress`로 갱신한다.
+
+아래 표는 **스펙 정의**만 담는다. 완료 표시는 PROGRESS 문서를 본다.
+
 ---
 
 ### Phase A — 백엔드 (001–017)
 
 | Index | 제목 | 설명 | deps |
 |-------|------|------|------|
-| **001** | `[BE]` 프로젝트 스캐폴딩 | `cmd/server`, `internal/` 디렉터리 구조, `go mod`, Makefile 또는 `go run` 진입점 정리. 루트 `main.go`는 `cmd/server`로 이전 | — [DONE] |
-| **002** | `[BE]` 설정·환경변수 | `PORT`, `PIXABAY_API_KEY`, `CORS_ORIGINS`, `DRAW_DURATION`(기본 5m) 등 envconfig 로딩 | 001 [DONE] |
+| **001** | `[BE]` 프로젝트 스캐폴딩 | `cmd/server`, `internal/` 디렉터리 구조, `go mod`, Makefile 또는 `go run` 진입점 정리. 루트 `main.go`는 `cmd/server`로 이전 | — |
+| **002** | `[BE]` 설정·환경변수 | `PORT`, `PIXABAY_API_KEY`, `CORS_ORIGINS`, `DRAW_DURATION`(기본 5m) 등 envconfig 로딩 | 001 |
 | **003** | `[BE]` HTTP 서버 골격 | chi/gin 등 라우터, health check (`GET /health`), graceful shutdown | 002 |
 | **004** | `[BE]` 로비 도메인 모델 | `Lobby`, `Photo`, `LobbyPhase`, `LobbySnapshot` 타입 및 Phase 전환 규칙 정의 | 001 |
 | **005** | `[BE]` 로비 저장소 | 인메모리 `LobbyStore` (map + mutex). 생성·조회·스냅샷 변환. 추후 Redis 등으로 교체 가능하게 interface 분리 | 004 |
@@ -305,7 +313,7 @@ type LobbySnapshot struct {
 
 ### Phase B — 프론트엔드 (101–112)
 
-> **선행 조건:** WorkItem **001–017** (백엔드) 완료
+> **선행 조건:** WorkItem **001–017** (백엔드) 완료 — 진도는 [progress/PROGRESS.md](progress/PROGRESS.md) 참고
 
 | Index | 제목 | 설명 | deps |
 |-------|------|------|------|
