@@ -1,10 +1,18 @@
+import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { AdminControls } from '../components/admin/AdminControls'
+import { LobbyLayout } from '../components/layout/LobbyLayout'
+import { LobbyPhaseContent } from '../components/phases/LobbyPhaseContent'
 import { useLobbySocket } from '../hooks/useLobbySocket'
 import { isLobbyAdmin } from '../lib/adminStorage'
+import type { Photo } from '../types/lobby'
 
 export function LobbyPage() {
   const { id } = useParams<{ id: string }>()
   const { snapshot, status, serverTimeOffsetMs, error } = useLobbySocket(id)
+  const [selectedPhotos, setSelectedPhotos] = useState<Photo[]>([])
+  const isAdmin = id ? isLobbyAdmin(id) : false
+  const isDrawing = snapshot?.phase === 'DRAWING'
 
   if (!id) {
     return (
@@ -16,34 +24,31 @@ export function LobbyPage() {
   }
 
   return (
-    <main className="lobby-page">
-      <header className="lobby-page__header">
-        <Link to="/" className="lobby-page__brand">
-          Croquis King
-        </Link>
-        <span className="lobby-page__role">
-          {isLobbyAdmin(id) ? 'Admin' : 'Participant'}
-        </span>
-      </header>
+    <main
+      className={`lobby-page${isDrawing ? ' lobby-page--drawing' : ''}`}
+    >
+      <LobbyLayout
+        lobbyId={id}
+        isAdmin={isAdmin}
+        snapshot={snapshot}
+        connectionStatus={status}
+        connectionError={error}
+      >
+        {isAdmin && snapshot ? (
+          <AdminControls lobbyId={id} snapshot={snapshot} />
+        ) : null}
 
-      <p className="lobby-page__status">Connection: {status}</p>
-
-      {error ? (
-        <p className="lobby-page__error" role="alert">
-          {error}
-        </p>
-      ) : null}
-
-      {snapshot ? (
-        <section className="lobby-page__summary" aria-live="polite">
-          <h1>Lobby {snapshot.id.slice(0, 8)}</h1>
-          <p>Phase: {snapshot.phase}</p>
-          <p>Participants: {snapshot.participant_count}</p>
-          <p>Server offset: {serverTimeOffsetMs} ms</p>
-        </section>
-      ) : status === 'connected' ? (
-        <p className="lobby-page__status">Waiting for lobby state…</p>
-      ) : null}
+        {snapshot ? (
+          <LobbyPhaseContent
+            lobbyId={id}
+            snapshot={snapshot}
+            serverTimeOffsetMs={serverTimeOffsetMs}
+            isAdmin={isAdmin}
+            selectedPhotos={selectedPhotos}
+            onSelectionChange={setSelectedPhotos}
+          />
+        ) : null}
+      </LobbyLayout>
     </main>
   )
 }

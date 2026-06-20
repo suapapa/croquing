@@ -3,7 +3,7 @@
 > **자동 생성 문서** — 직접 수정하지 마세요.  
 > 소스: [`workitems.json`](workitems.json) · 갱신: `make progress`
 
-마지막 갱신: **2026-06-20 19:52 KST**
+마지막 갱신: **2026-06-20 19:53 KST**
 
 ## Phase A — 백엔드 (001-017)
 
@@ -139,14 +139,14 @@
 
 선행 조건: backend 완료 (001-017)
 
-진행: **3 / 12** (25%)
+진행: **4 / 12** (33%)
 
 | Index | 상태 | 제목 | deps | 산출물 검증 |
 |-------|------|------|------|-------------|
 | **101** | ✅ done | [FE] React 프로젝트 초기화 | 017 | ✓ |
 | **102** | ✅ done | [FE] 라우팅·로비 접속 | 101 | ✓ |
 | **103** | ✅ done | [FE] WebSocket 클라이언트 훅 | 102 | ✓ |
-| **104** | ⬜ pending | [FE] 로비 공통 레이아웃 | 103 | — |
+| **104** | ✅ done | [FE] 로비 공통 레이아웃 | 103 | ✓ |
 | **105** | ⬜ pending | [FE] Admin / Participant UI 분기 | 104 | — |
 | **106** | ⬜ pending | [FE] PixaBay 검색 UI | 105, 010 | — |
 | **107** | ⬜ pending | [FE] 사진 선택 UI | 106, 011 | — |
@@ -176,15 +176,21 @@
 - 산출물: frontend/src/hooks/useLobbySocket.ts, frontend/src/hooks/useServerClock.ts
 - 메모: WS /ws/lobby/:id with exponential backoff reconnect. serverTimeOffsetMs from snapshot.server_time.
 
+#### 104 — [FE] 로비 공통 레이아웃
+
+- 완료일: 2026-06-20
+- 산출물: frontend/src/components/layout/LobbyLayout.tsx, frontend/src/lib/phaseMessages.ts
+- 메모: LobbyLayout shows participant count, phase copy, connection badge, loading and reconnect banners.
+
 ## 전체 요약
 
-- **전체:** 20 / 29 완료 (68%)
+- **전체:** 21 / 29 완료 (72%)
 - **백엔드:** 17 / 17 (100%)
-- **프론트엔드:** 3 / 12 (25%)
+- **프론트엔드:** 4 / 12 (33%)
 
 ## 다음 작업 후보
 
-- **104** — [FE] 로비 공통 레이아웃 (`pending`)
+- **105** — [FE] Admin / Participant UI 분기 (`pending`)
 
 ## 진도 갱신 방법
 

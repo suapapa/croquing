@@ -311,7 +311,13 @@
           "title": "[FE] 로비 공통 레이아웃",
           "description": "참가자 수, Phase별 안내 문구, 로딩/연결 끊김 UI",
           "deps": ["103"],
-          "status": "pending"
+          "status": "done",
+          "completed_at": "2026-06-20",
+          "artifacts": [
+            "frontend/src/components/layout/LobbyLayout.tsx",
+            "frontend/src/lib/phaseMessages.ts"
+          ],
+          "notes": "LobbyLayout shows participant count, phase copy, connection badge, loading and reconnect banners."
         },
         {
           "id": "105",
