@@ -77,12 +77,20 @@ spec:
       labels:
         app.kubernetes.io/name: croquis-king
     spec:
+      # Lets nginx (UID 101) write cache/pid files on emptyDir volumes.
+      securityContext:
+        fsGroup: 101
+        fsGroupChangePolicy: OnRootMismatch
       # imagePullSecrets:
       #   - name: vultr-cr
       volumes:
         - name: nginx-config
           configMap:
             name: croquis-king-nginx
+        - name: nginx-cache
+          emptyDir: {}
+        - name: nginx-run
+          emptyDir: {}
       containers:
         - name: backend
           image: icn.vultrcr.com/homincr1/croquis-king-backend:latest
@@ -143,6 +151,10 @@ spec:
               mountPath: /etc/nginx/conf.d/default.conf
               subPath: default.conf
               readOnly: true
+            - name: nginx-cache
+              mountPath: /var/cache/nginx
+            - name: nginx-run
+              mountPath: /var/run
           readinessProbe:
             httpGet:
               path: /
@@ -164,7 +176,7 @@ spec:
               memory: 128Mi
           securityContext:
             allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: false
+            readOnlyRootFilesystem: true
             runAsNonRoot: true
             runAsUser: 101
             runAsGroup: 101
