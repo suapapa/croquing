@@ -298,7 +298,13 @@
           "title": "[FE] WebSocket 클라이언트 훅",
           "description": "useLobbySocket(id) — snapshot 수신, reconnect, 서버 시각 offset 보정",
           "deps": ["102"],
-          "status": "pending"
+          "status": "done",
+          "completed_at": "2026-06-20",
+          "artifacts": [
+            "frontend/src/hooks/useLobbySocket.ts",
+            "frontend/src/hooks/useServerClock.ts"
+          ],
+          "notes": "WS /ws/lobby/:id with exponential backoff reconnect. serverTimeOffsetMs from snapshot.server_time."
         },
         {
           "id": "104",

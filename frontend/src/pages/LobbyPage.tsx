@@ -1,56 +1,10 @@
-import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { getLobby } from '../api/lobbyApi'
-import { ApiError } from '../api/client'
+import { useLobbySocket } from '../hooks/useLobbySocket'
 import { isLobbyAdmin } from '../lib/adminStorage'
-import type { LobbySnapshot } from '../types/lobby'
 
 export function LobbyPage() {
   const { id } = useParams<{ id: string }>()
-  const [snapshot, setSnapshot] = useState<LobbySnapshot | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    if (!id) {
-      return
-    }
-
-    let cancelled = false
-
-    async function loadLobby() {
-      setLoading(true)
-      setError(null)
-
-      const lobbyId = id
-      if (!lobbyId) {
-        return
-      }
-
-      try {
-        const data = await getLobby(lobbyId)
-        if (!cancelled) {
-          setSnapshot(data)
-        }
-      } catch (err) {
-        if (!cancelled) {
-          const message =
-            err instanceof ApiError ? err.message : 'Failed to load lobby'
-          setError(message)
-        }
-      } finally {
-        if (!cancelled) {
-          setLoading(false)
-        }
-      }
-    }
-
-    void loadLobby()
-
-    return () => {
-      cancelled = true
-    }
-  }, [id])
+  const { snapshot, status, serverTimeOffsetMs, error } = useLobbySocket(id)
 
   if (!id) {
     return (
@@ -72,7 +26,7 @@ export function LobbyPage() {
         </span>
       </header>
 
-      {loading ? <p className="lobby-page__status">Loading lobby…</p> : null}
+      <p className="lobby-page__status">Connection: {status}</p>
 
       {error ? (
         <p className="lobby-page__error" role="alert">
@@ -85,7 +39,10 @@ export function LobbyPage() {
           <h1>Lobby {snapshot.id.slice(0, 8)}</h1>
           <p>Phase: {snapshot.phase}</p>
           <p>Participants: {snapshot.participant_count}</p>
+          <p>Server offset: {serverTimeOffsetMs} ms</p>
         </section>
+      ) : status === 'connected' ? (
+        <p className="lobby-page__status">Waiting for lobby state…</p>
       ) : null}
     </main>
   )
