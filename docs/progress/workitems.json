@@ -210,7 +210,15 @@
           "title": "[BE] 타이머 틱·자동 전환",
           "description": "백그라운드 goroutine/ticker: DRAWING 중 DrawEndsAt 경과 시 자동으로 BETWEEN_ROUNDS 전환 및 WS broadcast",
           "deps": ["013", "014", "008"],
-          "status": "pending"
+          "status": "done",
+          "completed_at": "2026-06-20",
+          "artifacts": [
+            "internal/lobby/expire.go",
+            "internal/timer/scheduler.go",
+            "internal/http/server.go",
+            "cmd/server/main.go"
+          ],
+          "notes": "ExpireDrawingTimers store scan. Scheduler ticks every 1s, broadcasts snapshot on expiry. Started in Server.Run."
         },
         {
           "id": "016",

@@ -15,6 +15,7 @@ import (
 	"github.com/suapapa/croquis-king/internal/config"
 	"github.com/suapapa/croquis-king/internal/lobby"
 	"github.com/suapapa/croquis-king/internal/pixabay"
+	"github.com/suapapa/croquis-king/internal/timer"
 	"github.com/suapapa/croquis-king/internal/ws"
 )
 
@@ -26,6 +27,7 @@ type Server struct {
 	http      *http.Server
 	router    *gin.Engine
 	lobbySync *ws.SnapshotSync
+	scheduler *timer.Scheduler
 }
 
 // LobbySync returns the lobby snapshot broadcaster for state-changing handlers.
@@ -34,7 +36,7 @@ func (s *Server) LobbySync() *ws.SnapshotSync {
 }
 
 // New builds a Server from configuration and dependencies.
-func New(cfg *config.Config, store lobby.Store, pixabayClient *pixabay.Client, lobbySync *ws.SnapshotSync) (*Server, error) {
+func New(cfg *config.Config, store lobby.Store, pixabayClient *pixabay.Client, lobbySync *ws.SnapshotSync, scheduler *timer.Scheduler) (*Server, error) {
 	drawDuration, err := time.ParseDuration(cfg.DrawDuration)
 	if err != nil {
 		return nil, fmt.Errorf("parse DRAW_DURATION: %w", err)
@@ -51,6 +53,7 @@ func New(cfg *config.Config, store lobby.Store, pixabayClient *pixabay.Client, l
 		cfg:       cfg,
 		router:    router,
 		lobbySync: lobbySync,
+		scheduler: scheduler,
 		http: &http.Server{
 			Addr:    fmt.Sprintf(":%d", cfg.Port),
 			Handler: router,
@@ -61,6 +64,13 @@ func New(cfg *config.Config, store lobby.Store, pixabayClient *pixabay.Client, l
 // Run starts the HTTP server and blocks until it receives SIGINT or SIGTERM,
 // then shuts down gracefully.
 func (s *Server) Run() error {
+	runCtx, stopScheduler := context.WithCancel(context.Background())
+	defer stopScheduler()
+
+	if s.scheduler != nil {
+		go s.scheduler.Run(runCtx)
+	}
+
 	errCh := make(chan error, 1)
 
 	go func() {
@@ -80,10 +90,12 @@ func (s *Server) Run() error {
 		log.Printf("Received signal %s, shutting down...", sig)
 	}
 
-	ctx, cancel := context.WithTimeout(context.Background(), shutdownTimeout)
-	defer cancel()
+	stopScheduler()
 
-	if err := s.http.Shutdown(ctx); err != nil {
+	shutdownCtx, shutdownCancel := context.WithTimeout(context.Background(), shutdownTimeout)
+	defer shutdownCancel()
+
+	if err := s.http.Shutdown(shutdownCtx); err != nil {
 		return fmt.Errorf("shutdown: %w", err)
 	}
 

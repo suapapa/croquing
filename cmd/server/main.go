@@ -7,6 +7,7 @@ import (
 	"github.com/suapapa/croquis-king/internal/http"
 	"github.com/suapapa/croquis-king/internal/lobby"
 	"github.com/suapapa/croquis-king/internal/pixabay"
+	"github.com/suapapa/croquis-king/internal/timer"
 	"github.com/suapapa/croquis-king/internal/ws"
 )
 
@@ -16,7 +17,8 @@ func main() {
 	store := lobby.NewMemoryStore()
 	pixabayClient := pixabay.NewClient(cfg.PixabayAPIKey)
 	lobbySync := ws.NewSnapshotSync(store)
-	srv, err := httpserver.New(cfg, store, pixabayClient, lobbySync)
+	scheduler := timer.NewScheduler(store, lobbySync, timer.DefaultTickInterval)
+	srv, err := httpserver.New(cfg, store, pixabayClient, lobbySync, scheduler)
 	if err != nil {
 		log.Fatalf("Server init failed: %v", err)
 	}

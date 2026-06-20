@@ -362,6 +362,31 @@ func (s *fakeStore) FinishSession(ctx context.Context, id string) error {
 	return nil
 }
 
+func (s *fakeStore) ExpireDrawingTimers(ctx context.Context, now time.Time) ([]string, error) {
+	if err := ctx.Err(); err != nil {
+		return nil, err
+	}
+
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	var expired []string
+	for id, lob := range s.lobbies {
+		if lob.Phase != lobby.PhaseDrawing || lob.DrawEndsAt == nil {
+			continue
+		}
+		if now.Before(*lob.DrawEndsAt) {
+			continue
+		}
+
+		lob.Phase = lobby.PhaseBetweenRounds
+		lob.DrawEndsAt = nil
+		expired = append(expired, id)
+	}
+
+	return expired, nil
+}
+
 func (s *fakeStore) setPhase(id string, phase lobby.LobbyPhase) {
 	s.mu.Lock()
 	s.lobbies[id].Phase = phase

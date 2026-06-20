@@ -19,6 +19,7 @@ type Store interface {
 	AdvanceToBetweenRounds(ctx context.Context, id string) error
 	NextRound(ctx context.Context, id string, now time.Time) error
 	FinishSession(ctx context.Context, id string) error
+	ExpireDrawingTimers(ctx context.Context, now time.Time) ([]string, error)
 }
 
 // MemoryStore is an in-memory lobby store protected by a mutex.

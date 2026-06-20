@@ -389,6 +389,50 @@ func createLobbyReadyForTest(t *testing.T, store *MemoryStore) (*Lobby, []Photo)
 	return created, photos
 }
 
+func TestMemoryStoreExpireDrawingTimers(t *testing.T) {
+	t.Parallel()
+
+	store := NewMemoryStore()
+	created, _ := createLobbyReadyForTest(t, store)
+	start := time.Date(2026, 6, 20, 12, 0, 0, 0, time.UTC)
+
+	if err := store.StartSession(context.Background(), created.ID, start); err != nil {
+		t.Fatalf("StartSession() error = %v", err)
+	}
+
+	ids, err := store.ExpireDrawingTimers(context.Background(), start.Add(4*time.Minute+59*time.Second))
+	if err != nil {
+		t.Fatalf("ExpireDrawingTimers() error = %v", err)
+	}
+	if len(ids) != 0 {
+		t.Fatalf("ExpireDrawingTimers() = %v, want none", ids)
+	}
+
+	ids, err = store.ExpireDrawingTimers(context.Background(), start.Add(5*time.Minute))
+	if err != nil {
+		t.Fatalf("ExpireDrawingTimers() error = %v", err)
+	}
+	if len(ids) != 1 || ids[0] != created.ID {
+		t.Fatalf("ExpireDrawingTimers() = %v, want [%q]", ids, created.ID)
+	}
+
+	got, err := store.Get(context.Background(), created.ID)
+	if err != nil {
+		t.Fatalf("Get() error = %v", err)
+	}
+	if got.Phase != PhaseBetweenRounds {
+		t.Fatalf("Phase = %q, want BETWEEN_ROUNDS", got.Phase)
+	}
+
+	ids, err = store.ExpireDrawingTimers(context.Background(), start.Add(5*time.Minute))
+	if err != nil {
+		t.Fatalf("ExpireDrawingTimers() again error = %v", err)
+	}
+	if len(ids) != 0 {
+		t.Fatalf("ExpireDrawingTimers() again = %v, want none", ids)
+	}
+}
+
 func TestMemoryStoreMarkReadyRequiresPhotos(t *testing.T) {
 	t.Parallel()
 

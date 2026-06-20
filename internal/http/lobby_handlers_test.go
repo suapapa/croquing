@@ -166,3 +166,7 @@ func (errorStore) NextRound(_ context.Context, _ string, _ time.Time) error {
 func (errorStore) FinishSession(_ context.Context, _ string) error {
 	return errors.New("boom")
 }
+
+func (errorStore) ExpireDrawingTimers(_ context.Context, _ time.Time) ([]string, error) {
+	return nil, errors.New("boom")
+}
