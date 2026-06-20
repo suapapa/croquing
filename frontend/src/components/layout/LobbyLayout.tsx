@@ -4,6 +4,7 @@ import type { LobbySnapshot } from '../../types/lobby'
 import type { ConnectionStatus } from '../../hooks/useLobbySocket'
 import { getConnectionLabel, getPhaseMessage } from '../../lib/phaseMessages'
 import { CopyLobbyLinkButton } from '../lobby/CopyLobbyLinkButton'
+import { IconLogo } from '../ui/Icons'
 
 interface LobbyLayoutProps {
   lobbyId: string
@@ -32,7 +33,8 @@ export function LobbyLayout({
       <header className="lobby-layout__header">
         <div className="lobby-layout__brand-row">
           <Link to="/" className="lobby-layout__brand">
-            Croquis King
+            <IconLogo className="lobby-layout__logo" aria-hidden="true" />
+            <span>Croquis King</span>
           </Link>
           <span
             className={`lobby-layout__badge lobby-layout__badge--${

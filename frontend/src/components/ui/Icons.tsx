@@ -70,6 +70,91 @@ export function IconUsers({ className }: IconProps) {
   )
 }
 
+export function IconLogo({ className, style }: IconProps) {
+  return (
+    <svg
+      className={className}
+      style={style}
+      width="32"
+      height="32"
+      viewBox="0 0 32 32"
+      fill="none"
+      aria-hidden="true"
+    >
+      {/* Soft filled background for the crown area to make it pop */}
+      <path
+        d="M12 6.5 L14.5 2.5 L16.5 4.5 L18.5 2.5 L21 6.5 Z"
+        fill="currentColor"
+        opacity="0.15"
+      />
+      
+      {/* The Crown (Tilted slightly on the head) */}
+      <path
+        d="M12.5 7 C12 6 14 3 14.5 3 C15 4 16 5 16.5 4.5 C17 5 18 4 18.5 3 C19 3 21 6 20.5 7"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 7.2 C14.5 7.7 18.5 7.7 21 7.2"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      {/* Head */}
+      <circle cx="15.5" cy="11.5" r="2.8" fill="currentColor" />
+
+      {/* Spine / Torso gesture */}
+      <path
+        d="M15.5 14.5 C14.5 18 13.5 21 14.5 24.5"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      {/* Front Leg gesture (dynamic curve) */}
+      <path
+        d="M14.5 24.5 C15.5 26.5 18 27.5 22.5 26.5"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      {/* Back Leg gesture */}
+      <path
+        d="M14 24.5 C11 25.5 8.5 25 6.5 22.5"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      {/* Back Arm (resting) */}
+      <path
+        d="M14.5 16 C12 17 10 19.5 11 22.5"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      {/* Front Arm (gesture - holding a pencil or drawing/pointing) */}
+      <path
+        d="M16 15.5 C18.5 15.5 21 13.5 23 10.5"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
 export function IconPencil({ className }: IconProps) {
   return (
     <svg

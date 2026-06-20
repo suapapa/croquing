@@ -26,7 +26,12 @@ async function copyTextToClipboard(text: string): Promise<boolean> {
 
   let copied = false
   try {
-    copied = document.execCommand('copy')
+    const success = document.execCommand('copy')
+    if (success) {
+      copied = true
+    }
+  } catch {
+    // Keep copied as false
   } finally {
     document.body.removeChild(textarea)
   }

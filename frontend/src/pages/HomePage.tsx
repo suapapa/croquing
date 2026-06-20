@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { createLobby } from '../api/lobbyApi'
 import {
   IconLink,
-  IconPencil,
+  IconLogo,
   IconSpinner,
   IconTimer,
   IconUsers,
@@ -54,11 +54,11 @@ export function HomePage() {
     <main className="home-page">
       <div className="home-page__shell">
         <section className="home-page__hero" aria-labelledby="home-title">
-          <div className="home-page__mark" aria-hidden="true">
-            <IconPencil className="home-page__mark-icon" />
-          </div>
           <p className="home-page__eyebrow">Real-time croquis meetups</p>
-          <h1 id="home-title">Croquis King</h1>
+          <div className="home-page__brand-header">
+            <IconLogo className="home-page__logo" aria-hidden="true" />
+            <h1 id="home-title">Croquis King</h1>
+          </div>
           <p className="home-page__lead">
             Create a lobby, share the link, and draw together with synchronized
             photos and timers — no screen sharing required.
