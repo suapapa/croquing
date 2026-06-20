@@ -18,6 +18,7 @@ func init() {
 func newRouter(store lobby.Store, drawDuration time.Duration, pixabayClient *pixabay.Client, wsHandler *ws.Handler, lobbySync *ws.SnapshotSync, corsOrigins []string) *gin.Engine {
 	r := gin.New()
 	r.Use(gin.Recovery())
+	r.Use(requestLogMiddleware())
 	r.Use(corsMiddleware(corsOrigins))
 
 	r.GET("/health", healthHandler)

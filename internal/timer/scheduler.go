@@ -2,6 +2,7 @@ package timer
 
 import (
 	"context"
+	"log/slog"
 	"time"
 )
 
@@ -65,10 +66,15 @@ func (s *Scheduler) RunOnce(ctx context.Context) {
 
 	expired, err := s.store.ExpireDrawingTimers(ctx, s.now())
 	if err != nil {
+		slog.Error("expire drawing timers", "err", err)
 		return
 	}
 
 	for _, lobbyID := range expired {
-		_ = s.broadcaster.Broadcast(ctx, lobbyID)
+		if err := s.broadcaster.Broadcast(ctx, lobbyID); err != nil {
+			slog.Error("broadcast after timer expiry", "lobby_id", lobbyID, "err", err)
+			continue
+		}
+		slog.Info("drawing timer expired", "lobby_id", lobbyID)
 	}
 }

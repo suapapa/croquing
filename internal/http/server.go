@@ -3,7 +3,7 @@ package httpserver
 import (
 	"context"
 	"fmt"
-	"log"
+	"log/slog"
 	"net/http"
 	"os"
 	"os/signal"
@@ -74,7 +74,7 @@ func (s *Server) Run() error {
 	errCh := make(chan error, 1)
 
 	go func() {
-		log.Printf("HTTP server listening on %s", s.http.Addr)
+		slog.Info("http server listening", "addr", s.http.Addr)
 		if err := s.http.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			errCh <- err
 		}
@@ -87,7 +87,7 @@ func (s *Server) Run() error {
 	case err := <-errCh:
 		return fmt.Errorf("listen: %w", err)
 	case sig := <-quit:
-		log.Printf("Received signal %s, shutting down...", sig)
+		slog.Info("shutdown signal received", "signal", sig.String())
 	}
 
 	stopScheduler()
@@ -99,6 +99,6 @@ func (s *Server) Run() error {
 		return fmt.Errorf("shutdown: %w", err)
 	}
 
-	log.Println("Server stopped")
+	slog.Info("server stopped")
 	return nil
 }

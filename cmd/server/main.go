@@ -1,10 +1,13 @@
 package main
 
 import (
-	"log"
+	"flag"
+	"log/slog"
+	"os"
 
 	"github.com/suapapa/croquis-king/internal/config"
-	"github.com/suapapa/croquis-king/internal/http"
+	httpserver "github.com/suapapa/croquis-king/internal/http"
+	"github.com/suapapa/croquis-king/internal/logging"
 	"github.com/suapapa/croquis-king/internal/lobby"
 	"github.com/suapapa/croquis-king/internal/pixabay"
 	"github.com/suapapa/croquis-king/internal/timer"
@@ -12,7 +15,16 @@ import (
 )
 
 func main() {
-	cfg := config.Load()
+	logFormat := flag.String("log-format", logging.FormatText, "log output format: text or json")
+	flag.Parse()
+
+	logging.Init(*logFormat)
+
+	cfg, err := config.Load()
+	if err != nil {
+		slog.Error("failed to load config", "err", err)
+		os.Exit(1)
+	}
 
 	store := lobby.NewMemoryStore()
 	pixabayClient := pixabay.NewClient(cfg.PixabayAPIKey)
@@ -20,9 +32,18 @@ func main() {
 	scheduler := timer.NewScheduler(store, lobbySync, timer.DefaultTickInterval)
 	srv, err := httpserver.New(cfg, store, pixabayClient, lobbySync, scheduler)
 	if err != nil {
-		log.Fatalf("Server init failed: %v", err)
+		slog.Error("server init failed", "err", err)
+		os.Exit(1)
 	}
+
+	slog.Info("starting server",
+		"port", cfg.Port,
+		"draw_duration", cfg.DrawDuration,
+		"log_format", *logFormat,
+	)
+
 	if err := srv.Run(); err != nil {
-		log.Fatalf("Server failed: %v", err)
+		slog.Error("server failed", "err", err)
+		os.Exit(1)
 	}
 }

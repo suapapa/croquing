@@ -1,7 +1,7 @@
 package config
 
 import (
-	"log"
+	"fmt"
 
 	"github.com/kelseyhightower/envconfig"
 )
@@ -13,11 +13,10 @@ type Config struct {
 	DrawDuration  string   `envconfig:"DRAW_DURATION" default:"5m"`
 }
 
-func Load() *Config {
+func Load() (*Config, error) {
 	var cfg Config
-	err := envconfig.Process("", &cfg)
-	if err != nil {
-		log.Fatalf("Failed to load config: %v", err)
+	if err := envconfig.Process("", &cfg); err != nil {
+		return nil, fmt.Errorf("load config: %w", err)
 	}
-	return &cfg
+	return &cfg, nil
 }
