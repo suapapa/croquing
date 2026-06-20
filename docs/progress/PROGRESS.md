@@ -3,7 +3,7 @@
 > **자동 생성 문서** — 직접 수정하지 마세요.  
 > 소스: [`workitems.json`](workitems.json) · 갱신: `make progress`
 
-마지막 갱신: **2026-06-20 19:38 KST**
+마지막 갱신: **2026-06-20 19:46 KST**
 
 ## Phase A — 백엔드 (001-017)
 
@@ -139,11 +139,11 @@
 
 선행 조건: backend 완료 (001-017)
 
-진행: **0 / 12** (0%)
+진행: **1 / 12** (8%)
 
 | Index | 상태 | 제목 | deps | 산출물 검증 |
 |-------|------|------|------|-------------|
-| **101** | ⬜ pending | [FE] React 프로젝트 초기화 | 017 | — |
+| **101** | ✅ done | [FE] React 프로젝트 초기화 | 017 | ✓ |
 | **102** | ⬜ pending | [FE] 라우팅·로비 접속 | 101 | — |
 | **103** | ⬜ pending | [FE] WebSocket 클라이언트 훅 | 102 | — |
 | **104** | ⬜ pending | [FE] 로비 공통 레이아웃 | 103 | — |
@@ -156,15 +156,23 @@
 | **111** | ⬜ pending | [FE] 반응형·전체화면 UX | 109 | — |
 | **112** | ⬜ pending | [FE] 프론트엔드 통합·빌드 | 110, 111, 016 | — |
 
+### 완료 항목 상세
+
+#### 101 — [FE] React 프로젝트 초기화
+
+- 완료일: 2026-06-20
+- 산출물: frontend/package.json, frontend/vite.config.ts, frontend/eslint.config.js, frontend/.prettierrc, frontend/.env.example, frontend/src/config/env.ts
+- 메모: Vite react-ts template. ESLint flat config + Prettier. getApiBase() reads VITE_API_BASE (default localhost:8080).
+
 ## 전체 요약
 
-- **전체:** 17 / 29 완료 (58%)
+- **전체:** 18 / 29 완료 (62%)
 - **백엔드:** 17 / 17 (100%)
-- **프론트엔드:** 0 / 12 (0%)
+- **프론트엔드:** 1 / 12 (8%)
 
 ## 다음 작업 후보
 
-- **101** — [FE] React 프로젝트 초기화 (`pending`)
+- **102** — [FE] 라우팅·로비 접속 (`pending`)
 
 ## 진도 갱신 방법
 

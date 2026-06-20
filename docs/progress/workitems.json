@@ -263,10 +263,17 @@
           "title": "[FE] React 프로젝트 초기화",
           "description": "Vite + React + TypeScript, frontend/ 디렉터리, ESLint/Prettier, env (VITE_API_BASE)",
           "deps": ["017"],
-          "status": "pending",
+          "status": "done",
+          "completed_at": "2026-06-20",
           "artifacts": [
-            "frontend/"
-          ]
+            "frontend/package.json",
+            "frontend/vite.config.ts",
+            "frontend/eslint.config.js",
+            "frontend/.prettierrc",
+            "frontend/.env.example",
+            "frontend/src/config/env.ts"
+          ],
+          "notes": "Vite react-ts template. ESLint flat config + Prettier. getApiBase() reads VITE_API_BASE (default localhost:8080)."
         },
         {
           "id": "102",
