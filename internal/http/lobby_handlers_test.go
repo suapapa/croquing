@@ -18,7 +18,7 @@ import (
 func TestCreateLobbyHandler(t *testing.T) {
 	t.Parallel()
 
-	router := newRouter(lobby.NewMemoryStore(), 5*time.Minute, pixabay.NewClient("test-key"))
+	router := newRouter(lobby.NewMemoryStore(), 5*time.Minute, pixabay.NewClient("test-key"), nil)
 
 	req := httptest.NewRequest(http.MethodPost, "/api/lobbies", nil)
 	rec := httptest.NewRecorder()
@@ -44,7 +44,7 @@ func TestGetLobbyHandler(t *testing.T) {
 	t.Parallel()
 
 	store := lobby.NewMemoryStore()
-	router := newRouter(store, 5*time.Minute, pixabay.NewClient("test-key"))
+	router := newRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), nil)
 
 	created, err := store.Create(context.Background(), 5*time.Minute)
 	if err != nil {
@@ -74,7 +74,7 @@ func TestGetLobbyHandler(t *testing.T) {
 func TestGetLobbyHandlerNotFound(t *testing.T) {
 	t.Parallel()
 
-	router := newRouter(lobby.NewMemoryStore(), 5*time.Minute, pixabay.NewClient("test-key"))
+	router := newRouter(lobby.NewMemoryStore(), 5*time.Minute, pixabay.NewClient("test-key"), nil)
 
 	req := httptest.NewRequest(http.MethodGet, "/api/lobbies/missing", nil)
 	rec := httptest.NewRecorder()
@@ -118,7 +118,7 @@ func TestJoinURLUsesHTTPSWhenForwarded(t *testing.T) {
 func TestGetLobbyHandlerStoreError(t *testing.T) {
 	t.Parallel()
 
-	router := newRouter(errorStore{}, 5*time.Minute, pixabay.NewClient("test-key"))
+	router := newRouter(errorStore{}, 5*time.Minute, pixabay.NewClient("test-key"), nil)
 
 	req := httptest.NewRequest(http.MethodGet, "/api/lobbies/any", nil)
 	rec := httptest.NewRecorder()

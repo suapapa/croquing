@@ -13,7 +13,7 @@ import (
 func TestHealthHandler(t *testing.T) {
 	t.Parallel()
 
-	router := newRouter(lobby.NewMemoryStore(), 5*time.Minute, pixabay.NewClient("test-key"))
+	router := newRouter(lobby.NewMemoryStore(), 5*time.Minute, pixabay.NewClient("test-key"), nil)
 
 	req := httptest.NewRequest(http.MethodGet, "/health", nil)
 	rec := httptest.NewRecorder()
@@ -31,7 +31,7 @@ func TestHealthHandler(t *testing.T) {
 func TestNoRoute(t *testing.T) {
 	t.Parallel()
 
-	router := newRouter(lobby.NewMemoryStore(), 5*time.Minute, pixabay.NewClient("test-key"))
+	router := newRouter(lobby.NewMemoryStore(), 5*time.Minute, pixabay.NewClient("test-key"), nil)
 
 	req := httptest.NewRequest(http.MethodGet, "/unknown", nil)
 	rec := httptest.NewRecorder()

@@ -3,11 +3,11 @@
 > **자동 생성 문서** — 직접 수정하지 마세요.  
 > 소스: [`workitems.json`](workitems.json) · 갱신: `make progress`
 
-마지막 갱신: **2026-06-20 18:52 KST**
+마지막 갱신: **2026-06-20 18:54 KST**
 
 ## Phase A — 백엔드 (001-017)
 
-진행: **8 / 17** (47%)
+진행: **9 / 17** (52%)
 
 | Index | 상태 | 제목 | deps | 산출물 검증 |
 |-------|------|------|------|-------------|
@@ -17,7 +17,7 @@
 | **004** | ✅ done | [BE] 로비 도메인 모델 | 001 | ✓ |
 | **005** | ✅ done | [BE] 로비 저장소 | 004 | ✓ |
 | **006** | ✅ done | [BE] 로비 생성·조회 API | 003, 005 | ✓ |
-| **007** | ⬜ pending | [BE] WebSocket 허브 | 003, 005 | — |
+| **007** | ✅ done | [BE] WebSocket 허브 | 003, 005 | ✓ |
 | **008** | ⬜ pending | [BE] 실시간 스냅샷 동기화 | 006, 007 | — |
 | **009** | ✅ done | [BE] PixaBay API 클라이언트 | 002 | ✓ |
 | **010** | ✅ done | [BE] PixaBay 검색 API | 006, 009 | ✓ |
@@ -69,6 +69,12 @@
 - 산출물: internal/http/lobby_handlers.go, internal/http/lobby_handlers_test.go
 - 메모: POST create → id/admin_token/join_url. GET snapshot. X-Admin-Token 검증 헬퍼.
 
+#### 007 — [BE] WebSocket 허브
+
+- 완료일: 2026-06-20
+- 산출물: internal/ws/hub.go, internal/ws/client.go, internal/ws/handler.go, internal/ws/message.go, internal/ws/hub_test.go, internal/http/ws_handlers.go
+- 메모: GET /ws/lobby/:id. Hub Register/Unregister/Broadcast, ping/pong, ClientCount.
+
 #### 009 — [BE] PixaBay API 클라이언트
 
 - 완료일: 2026-06-20
@@ -104,13 +110,13 @@
 
 ## 전체 요약
 
-- **전체:** 8 / 29 완료 (27%)
-- **백엔드:** 8 / 17 (47%)
+- **전체:** 9 / 29 완료 (31%)
+- **백엔드:** 9 / 17 (52%)
 - **프론트엔드:** 0 / 12 (0%)
 
 ## 다음 작업 후보
 
-- **007** — [BE] WebSocket 허브 (`pending`)
+- **008** — [BE] 실시간 스냅샷 동기화 (`pending`)
 - **013** — [BE] 서버 권위 타이머 (`pending`)
 - **016** — [BE] CORS·Admin 미들웨어 (`pending`)
 

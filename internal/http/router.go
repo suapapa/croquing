@@ -8,13 +8,14 @@ import (
 
 	"github.com/suapapa/croquis-king/internal/lobby"
 	"github.com/suapapa/croquis-king/internal/pixabay"
+	"github.com/suapapa/croquis-king/internal/ws"
 )
 
 func init() {
 	gin.SetMode(gin.ReleaseMode)
 }
 
-func newRouter(store lobby.Store, drawDuration time.Duration, pixabayClient *pixabay.Client) *gin.Engine {
+func newRouter(store lobby.Store, drawDuration time.Duration, pixabayClient *pixabay.Client, wsHandler *ws.Handler) *gin.Engine {
 	r := gin.New()
 	r.Use(gin.Recovery())
 
@@ -24,6 +25,11 @@ func newRouter(store lobby.Store, drawDuration time.Duration, pixabayClient *pix
 	registerLobbyRoutes(api, store, drawDuration)
 	if pixabayClient != nil {
 		registerPixabayRoutes(api, store, pixabayClient)
+	}
+
+	if wsHandler != nil {
+		wsGroup := r.Group("/ws")
+		registerWSRoutes(wsGroup, wsHandler)
 	}
 
 	r.NoRoute(func(c *gin.Context) {

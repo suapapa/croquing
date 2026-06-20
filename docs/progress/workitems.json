@@ -95,10 +95,17 @@
           "title": "[BE] WebSocket 허브",
           "description": "/ws/lobby/{id} 업그레이드, 연결 등록/해제, 로비별 브로드캐스트",
           "deps": ["003", "005"],
-          "status": "pending",
+          "status": "done",
+          "completed_at": "2026-06-20",
           "artifacts": [
-            "internal/ws/"
-          ]
+            "internal/ws/hub.go",
+            "internal/ws/client.go",
+            "internal/ws/handler.go",
+            "internal/ws/message.go",
+            "internal/ws/hub_test.go",
+            "internal/http/ws_handlers.go"
+          ],
+          "notes": "GET /ws/lobby/:id. Hub Register/Unregister/Broadcast, ping/pong, ClientCount."
         },
         {
           "id": "008",

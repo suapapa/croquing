@@ -7,6 +7,7 @@ import (
 	"github.com/suapapa/croquis-king/internal/http"
 	"github.com/suapapa/croquis-king/internal/lobby"
 	"github.com/suapapa/croquis-king/internal/pixabay"
+	"github.com/suapapa/croquis-king/internal/ws"
 )
 
 func main() {
@@ -14,7 +15,8 @@ func main() {
 
 	store := lobby.NewMemoryStore()
 	pixabayClient := pixabay.NewClient(cfg.PixabayAPIKey)
-	srv, err := httpserver.New(cfg, store, pixabayClient)
+	hub := ws.NewHub()
+	srv, err := httpserver.New(cfg, store, pixabayClient, hub)
 	if err != nil {
 		log.Fatalf("Server init failed: %v", err)
 	}
