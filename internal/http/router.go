@@ -34,9 +34,11 @@ func newRouter(store lobby.Store, drawDuration time.Duration, pixabayClient *pix
 		registerWSRoutes(wsGroup, wsHandler)
 	}
 
-	r.NoRoute(func(c *gin.Context) {
-		c.JSON(http.StatusNotFound, gin.H{"error": "not found"})
-	})
+	if !registerStaticRoutes(r, "") {
+		r.NoRoute(func(c *gin.Context) {
+			c.JSON(http.StatusNotFound, gin.H{"error": "not found"})
+		})
+	}
 
 	return r
 }

@@ -38,6 +38,47 @@ npm run dev
 
 Set `VITE_API_BASE` in `frontend/.env` if the backend is not on `http://localhost:8080`.
 
+### Production (single server)
+
+Build the SPA and run the Go server from the repo root. When `frontend/dist/` exists, the backend serves the React app and falls back to `index.html` for client-side routes such as `/lobby/:id`.
+
+```sh
+make web
+export PIXABAY_API_KEY=your-key
+./bin/croquis-king
+```
+
+Open `http://localhost:8080`. API and WebSocket stay on the same origin, so you do not need a separate `VITE_API_BASE` in production.
+
+### Development (split origins)
+
+Run the backend and Vite dev server separately:
+
+```sh
+# terminal 1
+export PIXABAY_API_KEY=your-key
+export CORS_ORIGINS=http://localhost:5173
+go run ./cmd/server
+
+# terminal 2
+cd frontend && npm run dev
+```
+
+### Reverse proxy (optional)
+
+For TLS or multiple services, terminate HTTP at nginx/Caddy and proxy:
+
+- `/api/*` and `/ws/*` → Go backend
+- `/` and `/lobby/*` → `frontend/dist` static files or the Go server when using `make web`
+
+Example nginx location blocks:
+
+```nginx
+location /api/ { proxy_pass http://127.0.0.1:8080; }
+location /ws/  { proxy_pass http://127.0.0.1:8080; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection "upgrade"; }
+location /     { try_files $uri $uri/ /index.html; root /path/to/croquis-king/frontend/dist; }
+```
+
 ## Development commands
 
 ```sh

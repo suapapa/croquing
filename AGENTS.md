@@ -74,6 +74,7 @@ Current state: **WorkItems 001–017 (backend) and 101 (frontend scaffold) done*
 ```sh
 go run ./cmd/server
 make progress                 # regenerate docs/progress/PROGRESS.md
+make web                      # build frontend + Go binary (serves frontend/dist)
 go vet ./...
 go test -race ./...
 ```
