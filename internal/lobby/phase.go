@@ -1,5 +1,7 @@
 package lobby
 
+import "slices"
+
 // LobbyPhase represents the current session state of a lobby.
 type LobbyPhase string
 
@@ -32,12 +34,7 @@ func (p LobbyPhase) CanTransitionTo(next LobbyPhase) bool {
 		return false
 	}
 
-	for _, candidate := range allowed {
-		if candidate == next {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(allowed, next)
 }
 
 // ValidateTransition returns ErrInvalidTransition when next is not allowed from current.

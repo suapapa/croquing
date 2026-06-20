@@ -77,38 +77,11 @@ func (h *lobbyHandler) setPhotos(c *gin.Context) {
 	}
 
 	if err := h.store.SetSelectedPhotos(c.Request.Context(), id, req.Photos); err != nil {
-		switch {
-		case errors.Is(err, lobby.ErrNotFound):
-			c.JSON(http.StatusNotFound, gin.H{"error": "lobby not found"})
-		case errors.Is(err, lobby.ErrEmptyPhotos):
-			c.JSON(http.StatusBadRequest, gin.H{"error": "photos are required"})
-		case errors.Is(err, lobby.ErrInvalidTransition):
-			c.JSON(http.StatusConflict, gin.H{"error": "invalid lobby phase for photo selection"})
-		default:
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to save photos"})
-		}
+		mapLobbyStoreError(c, err, "invalid lobby phase for photo selection", "failed to save photos")
 		return
 	}
 
-	if h.lobbySync != nil {
-		if err := h.lobbySync.Broadcast(c.Request.Context(), id); err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to broadcast snapshot"})
-			return
-		}
-	}
-
-	participantCount := 0
-	if h.lobbySync != nil {
-		participantCount = h.lobbySync.Hub().ClientCount(id)
-	}
-
-	snapshot, err := h.store.Snapshot(c.Request.Context(), id, participantCount)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to get lobby snapshot"})
-		return
-	}
-
-	c.JSON(http.StatusOK, snapshot)
+	respondLobbySnapshot(c, h, id)
 }
 
 func (h *lobbyHandler) markReady(c *gin.Context) {
@@ -118,38 +91,11 @@ func (h *lobbyHandler) markReady(c *gin.Context) {
 	}
 
 	if err := h.store.MarkReady(c.Request.Context(), id); err != nil {
-		switch {
-		case errors.Is(err, lobby.ErrNotFound):
-			c.JSON(http.StatusNotFound, gin.H{"error": "lobby not found"})
-		case errors.Is(err, lobby.ErrEmptyPhotos):
-			c.JSON(http.StatusBadRequest, gin.H{"error": "photos are required"})
-		case errors.Is(err, lobby.ErrInvalidTransition):
-			c.JSON(http.StatusConflict, gin.H{"error": "invalid lobby phase for ready"})
-		default:
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to mark lobby ready"})
-		}
+		mapLobbyStoreError(c, err, "invalid lobby phase for ready", "failed to mark lobby ready")
 		return
 	}
 
-	if h.lobbySync != nil {
-		if err := h.lobbySync.Broadcast(c.Request.Context(), id); err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to broadcast snapshot"})
-			return
-		}
-	}
-
-	participantCount := 0
-	if h.lobbySync != nil {
-		participantCount = h.lobbySync.Hub().ClientCount(id)
-	}
-
-	snapshot, err := h.store.Snapshot(c.Request.Context(), id, participantCount)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to get lobby snapshot"})
-		return
-	}
-
-	c.JSON(http.StatusOK, snapshot)
+	respondLobbySnapshot(c, h, id)
 }
 
 func (h *lobbyHandler) startSession(c *gin.Context) {
@@ -159,7 +105,7 @@ func (h *lobbyHandler) startSession(c *gin.Context) {
 	}
 
 	if err := h.store.StartSession(c.Request.Context(), id, time.Now()); err != nil {
-		mapSessionMutationError(c, err, "invalid lobby phase for start")
+		mapLobbyStoreError(c, err, "invalid lobby phase for start", "failed to update lobby session")
 		return
 	}
 
@@ -173,7 +119,7 @@ func (h *lobbyHandler) nextRound(c *gin.Context) {
 	}
 
 	if err := h.store.NextRound(c.Request.Context(), id, time.Now()); err != nil {
-		mapSessionMutationError(c, err, "invalid lobby phase for next")
+		mapLobbyStoreError(c, err, "invalid lobby phase for next", "failed to update lobby session")
 		return
 	}
 
@@ -187,14 +133,14 @@ func (h *lobbyHandler) finishSession(c *gin.Context) {
 	}
 
 	if err := h.store.FinishSession(c.Request.Context(), id); err != nil {
-		mapSessionMutationError(c, err, "invalid lobby phase for finish")
+		mapLobbyStoreError(c, err, "invalid lobby phase for finish", "failed to update lobby session")
 		return
 	}
 
 	respondLobbySnapshot(c, h, id)
 }
 
-func mapSessionMutationError(c *gin.Context, err error, conflictMsg string) {
+func mapLobbyStoreError(c *gin.Context, err error, conflictMsg, defaultMsg string) {
 	switch {
 	case errors.Is(err, lobby.ErrNotFound):
 		c.JSON(http.StatusNotFound, gin.H{"error": "lobby not found"})
@@ -203,7 +149,7 @@ func mapSessionMutationError(c *gin.Context, err error, conflictMsg string) {
 	case errors.Is(err, lobby.ErrInvalidTransition):
 		c.JSON(http.StatusConflict, gin.H{"error": conflictMsg})
 	default:
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to update lobby session"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": defaultMsg})
 	}
 }
 

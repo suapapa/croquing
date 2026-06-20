@@ -76,12 +76,20 @@ func (s *MemoryStore) Get(ctx context.Context, id string) (*Lobby, error) {
 
 // Snapshot returns the public snapshot for a lobby.
 func (s *MemoryStore) Snapshot(ctx context.Context, id string, participantCount int) (LobbySnapshot, error) {
-	lobby, err := s.Get(ctx, id)
-	if err != nil {
+	if err := ctx.Err(); err != nil {
 		return LobbySnapshot{}, err
 	}
 
-	return lobby.Snapshot(participantCount, time.Now()), nil
+	s.mu.RLock()
+	lobby, ok := s.lobbies[id]
+	if !ok {
+		s.mu.RUnlock()
+		return LobbySnapshot{}, ErrNotFound
+	}
+
+	snap := lobby.Snapshot(participantCount, time.Now())
+	s.mu.RUnlock()
+	return snap, nil
 }
 
 // SetSelectedPhotos saves the admin's photo selection and moves the lobby to SELECTING.
@@ -89,63 +97,42 @@ func (s *MemoryStore) SetSelectedPhotos(ctx context.Context, id string, photos [
 	if len(photos) == 0 {
 		return ErrEmptyPhotos
 	}
-	if err := ctx.Err(); err != nil {
-		return err
-	}
 
-	s.mu.Lock()
-	defer s.mu.Unlock()
+	return s.withLobby(ctx, id, func(lobby *Lobby) error {
+		if err := ValidateTransition(lobby.Phase, PhaseSelecting); err != nil {
+			return err
+		}
 
-	lobby, ok := s.lobbies[id]
-	if !ok {
-		return ErrNotFound
-	}
-
-	if err := ValidateTransition(lobby.Phase, PhaseSelecting); err != nil {
-		return err
-	}
-
-	lobby.SelectedPhotos = append([]Photo(nil), photos...)
-	lobby.Phase = PhaseSelecting
-	lobby.PhotoOrder = nil
-	lobby.CurrentRound = 0
-	ClearDrawTimer(lobby)
-
-	return nil
+		lobby.SelectedPhotos = append([]Photo(nil), photos...)
+		lobby.Phase = PhaseSelecting
+		lobby.PhotoOrder = nil
+		lobby.CurrentRound = 0
+		ClearDrawTimer(lobby)
+		return nil
+	})
 }
 
 // MarkReady shuffles selected photo indices and moves the lobby to READY.
 func (s *MemoryStore) MarkReady(ctx context.Context, id string) error {
-	if err := ctx.Err(); err != nil {
-		return err
-	}
+	return s.withLobby(ctx, id, func(lobby *Lobby) error {
+		if lobby.Phase != PhaseSelecting {
+			return ErrInvalidTransition
+		}
+		if len(lobby.SelectedPhotos) == 0 {
+			return ErrEmptyPhotos
+		}
 
-	s.mu.Lock()
-	defer s.mu.Unlock()
+		order, err := shuffleIndices(len(lobby.SelectedPhotos))
+		if err != nil {
+			return err
+		}
 
-	lobby, ok := s.lobbies[id]
-	if !ok {
-		return ErrNotFound
-	}
-
-	if lobby.Phase != PhaseSelecting {
-		return ErrInvalidTransition
-	}
-	if len(lobby.SelectedPhotos) == 0 {
-		return ErrEmptyPhotos
-	}
-
-	order, err := shuffleIndices(len(lobby.SelectedPhotos))
-	if err != nil {
-		return err
-	}
-
-	lobby.PhotoOrder = order
-	lobby.Phase = PhaseReady
-	lobby.CurrentRound = 0
-	ClearDrawTimer(lobby)
-
-	return nil
+		lobby.PhotoOrder = order
+		lobby.Phase = PhaseReady
+		lobby.CurrentRound = 0
+		ClearDrawTimer(lobby)
+		return nil
+	})
 }
 
 func cloneLobby(lobby *Lobby) *Lobby {
