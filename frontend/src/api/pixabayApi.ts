@@ -37,7 +37,7 @@ export function searchPixabay({
   query,
   order,
   page,
-  perPage = 20,
+  perPage = 24,
 }: PixabaySearchParams): Promise<PixabaySearchResponse> {
   const params = new URLSearchParams({
     q: query,

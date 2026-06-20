@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import { ApiError } from '../../api/client'
-import { markLobbyReady, setLobbyPhotos } from '../../api/lobbyApi'
+import { markLobbyReady, reopenLobbyPhotos, setLobbyPhotos } from '../../api/lobbyApi'
 import type { LobbySnapshot, Photo } from '../../types/lobby'
 import { PixabaySearchPanel } from '../search/PixabaySearchPanel'
-
-const RECOMMENDED_COUNT = 5
+import { PhotoReviewPanel } from './PhotoReviewPanel'
 
 interface PhotoSelectionPanelProps {
   lobbyId: string
@@ -59,6 +58,20 @@ export function PhotoSelectionPanel({
     }
   }
 
+  async function handleReopenSelection() {
+    setLoading(true)
+    setError(null)
+    try {
+      await reopenLobbyPhotos(lobbyId)
+    } catch (err) {
+      const message =
+        err instanceof ApiError ? err.message : 'Failed to reopen photo selection'
+      setError(message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   if (!isAdmin && (snapshot.phase === 'WAITING' || snapshot.phase === 'SELECTING')) {
     return (
       <section className="phase-panel">
@@ -78,47 +91,28 @@ export function PhotoSelectionPanel({
           lobbyId={lobbyId}
           selectedPhotos={selectedPhotos}
           onSelectionChange={onSelectionChange}
+          footerStart={
+            canConfirm ? (
+              <button
+                type="button"
+                className="button button--primary"
+                disabled={loading || selectedPhotos.length === 0}
+                onClick={() => void handleSaveSelection()}
+              >
+                {loading ? 'Saving…' : `Save ${selectedPhotos.length} photos`}
+              </button>
+            ) : null
+          }
         />
       ) : null}
 
       {awaitingReady ? (
-        <div className="photo-selection__summary">
-          <h2>{snapshot.selected_count} photos saved</h2>
-          <p>
-            Review your selection, then shuffle and lock the order. Recommended
-            session size is about {RECOMMENDED_COUNT} photos.
-          </p>
-          {selectedPhotos.length > 0 ? (
-            <ul className="photo-selection__list">
-              {selectedPhotos.map((photo) => (
-                <li key={photo.pixabay_id} className="photo-selection__thumb">
-                  <img src={photo.preview_url} alt="" loading="lazy" />
-                </li>
-              ))}
-            </ul>
-          ) : null}
-          <button
-            type="button"
-            className="button button--primary"
-            disabled={loading}
-            onClick={() => void handleMarkReady()}
-          >
-            {loading ? 'Shuffling…' : 'Selection complete'}
-          </button>
-        </div>
-      ) : null}
-
-      {canConfirm ? (
-        <div className="photo-selection__actions">
-          <button
-            type="button"
-            className="button button--primary"
-            disabled={loading || selectedPhotos.length === 0}
-            onClick={() => void handleSaveSelection()}
-          >
-            {loading ? 'Saving…' : `Save ${selectedPhotos.length} photos`}
-          </button>
-        </div>
+        <PhotoReviewPanel
+          photos={selectedPhotos}
+          loading={loading}
+          onEdit={() => void handleReopenSelection()}
+          onConfirm={() => void handleMarkReady()}
+        />
       ) : null}
 
       {error ? (

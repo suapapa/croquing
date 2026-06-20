@@ -14,6 +14,7 @@ type Store interface {
 	Get(ctx context.Context, id string) (*Lobby, error)
 	Snapshot(ctx context.Context, id string, participantCount int) (LobbySnapshot, error)
 	SetSelectedPhotos(ctx context.Context, id string, photos []Photo) error
+	ReopenPhotoSelection(ctx context.Context, id string) error
 	MarkReady(ctx context.Context, id string) error
 	StartSession(ctx context.Context, id string, now time.Time) error
 	AdvanceToBetweenRounds(ctx context.Context, id string) error
@@ -105,6 +106,24 @@ func (s *MemoryStore) SetSelectedPhotos(ctx context.Context, id string, photos [
 
 		lobby.SelectedPhotos = append([]Photo(nil), photos...)
 		lobby.Phase = PhaseSelecting
+		lobby.PhotoOrder = nil
+		lobby.CurrentRound = 0
+		ClearDrawTimer(lobby)
+		return nil
+	})
+}
+
+// ReopenPhotoSelection moves a lobby from SELECTING back to WAITING so the admin can edit photos.
+func (s *MemoryStore) ReopenPhotoSelection(ctx context.Context, id string) error {
+	return s.withLobby(ctx, id, func(lobby *Lobby) error {
+		if err := ValidateTransition(lobby.Phase, PhaseWaiting); err != nil {
+			return err
+		}
+		if len(lobby.SelectedPhotos) == 0 {
+			return ErrEmptyPhotos
+		}
+
+		lobby.Phase = PhaseWaiting
 		lobby.PhotoOrder = nil
 		lobby.CurrentRound = 0
 		ClearDrawTimer(lobby)

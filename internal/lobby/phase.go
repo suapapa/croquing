@@ -16,7 +16,7 @@ const (
 
 var validTransitions = map[LobbyPhase][]LobbyPhase{
 	PhaseWaiting:       {PhaseSelecting, PhaseFinished},
-	PhaseSelecting:     {PhaseReady, PhaseFinished},
+	PhaseSelecting:     {PhaseReady, PhaseWaiting, PhaseFinished},
 	PhaseReady:         {PhaseDrawing, PhaseFinished},
 	PhaseDrawing:       {PhaseBetweenRounds, PhaseFinished},
 	PhaseBetweenRounds: {PhaseDrawing, PhaseFinished},

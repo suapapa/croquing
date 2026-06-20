@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { ApiError } from '../../api/client'
 import {
   hitToPhoto,
@@ -8,12 +8,14 @@ import {
 import type { Photo } from '../../types/lobby'
 
 const RECOMMENDED_COUNT = 5
+const PIXABAY_PER_PAGE = 24
 
 interface PixabaySearchProps {
   lobbyId: string
   selectedPhotos: Photo[]
   onSelectionChange: (photos: Photo[]) => void
   readOnly?: boolean
+  footerStart?: ReactNode
 }
 
 export function PixabaySearchPanel({
@@ -21,6 +23,7 @@ export function PixabaySearchPanel({
   selectedPhotos,
   onSelectionChange,
   readOnly = false,
+  footerStart,
 }: PixabaySearchProps) {
   const [query, setQuery] = useState('figure drawing reference')
   const [order, setOrder] = useState<'popular' | 'latest'>('popular')
@@ -50,10 +53,13 @@ export function PixabaySearchPanel({
           query: trimmed,
           order,
           page: nextPage,
+          perPage: PIXABAY_PER_PAGE,
         })
         setHits(result.hits)
         setPage(nextPage)
-        setTotalPages(Math.max(1, Math.ceil(result.total_hits / 20)))
+        setTotalPages(
+          Math.max(1, Math.ceil(result.total_hits / PIXABAY_PER_PAGE)),
+        )
       } catch (err) {
         const message =
           err instanceof ApiError ? err.message : 'Search failed'
@@ -196,12 +202,19 @@ export function PixabaySearchPanel({
         </div>
       ) : null}
 
-      <p className="pixabay-search__attribution">
-        Images from{' '}
-        <a href="https://pixabay.com" target="_blank" rel="noreferrer">
-          PixaBay
-        </a>
-      </p>
+      <div
+        className={`pixabay-search__footer${
+          footerStart ? ' pixabay-search__footer--split' : ''
+        }`}
+      >
+        {footerStart}
+        <p className="pixabay-search__attribution">
+          Images from{' '}
+          <a href="https://pixabay.com" target="_blank" rel="noreferrer">
+            PixaBay
+          </a>
+        </p>
+      </div>
     </section>
   )
 }

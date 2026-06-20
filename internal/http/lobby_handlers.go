@@ -81,6 +81,17 @@ func (h *lobbyHandler) setPhotos(c *gin.Context) {
 	respondLobbySnapshot(c, h, id)
 }
 
+func (h *lobbyHandler) reopenPhotoSelection(c *gin.Context) {
+	id := c.Param("id")
+
+	if err := h.store.ReopenPhotoSelection(c.Request.Context(), id); err != nil {
+		mapLobbyStoreError(c, err, "invalid lobby phase for reopening photo selection", "failed to reopen photo selection")
+		return
+	}
+
+	respondLobbySnapshot(c, h, id)
+}
+
 func (h *lobbyHandler) markReady(c *gin.Context) {
 	id := c.Param("id")
 
@@ -176,6 +187,7 @@ func registerLobbyRoutes(r *gin.RouterGroup, store lobby.Store, drawDuration tim
 	admin := r.Group("")
 	admin.Use(requireAdmin(store))
 	admin.PUT("/lobbies/:id/photos", handler.setPhotos)
+	admin.POST("/lobbies/:id/photos/reopen", handler.reopenPhotoSelection)
 	admin.POST("/lobbies/:id/ready", handler.markReady)
 	admin.POST("/lobbies/:id/start", handler.startSession)
 	admin.POST("/lobbies/:id/next", handler.nextRound)

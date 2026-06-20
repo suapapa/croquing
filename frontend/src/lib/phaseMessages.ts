@@ -11,8 +11,9 @@ const PHASE_MESSAGES: Record<LobbyPhase, PhaseMessage> = {
     description: 'The admin is getting things ready. Stay on this page.',
   },
   SELECTING: {
-    title: 'Choosing reference photos',
-    description: 'The admin is searching PixaBay and picking photos for the session.',
+    title: 'Reviewing reference photos',
+    description:
+      'The admin is checking the saved photos before shuffling and starting the session.',
   },
   READY: {
     title: 'Ready to start',

@@ -3,7 +3,6 @@ import type { ReactNode } from 'react'
 import type { LobbySnapshot } from '../../types/lobby'
 import type { ConnectionStatus } from '../../hooks/useLobbySocket'
 import { getConnectionLabel, getPhaseMessage } from '../../lib/phaseMessages'
-import { getLobbyJoinUrl } from '../../lib/lobbyLink'
 import { CopyLobbyLinkButton } from '../lobby/CopyLobbyLinkButton'
 
 interface LobbyLayoutProps {
@@ -24,7 +23,6 @@ export function LobbyLayout({
   children,
 }: LobbyLayoutProps) {
   const phaseMessage = snapshot ? getPhaseMessage(snapshot.phase) : null
-  const joinUrl = getLobbyJoinUrl(lobbyId)
   const isLive = connectionStatus === 'connected'
   const isDisconnected =
     connectionStatus === 'disconnected' || connectionStatus === 'reconnecting'
@@ -91,13 +89,6 @@ export function LobbyLayout({
           <p className="lobby-layout__lobby-id">Lobby {lobbyId.slice(0, 8)}</p>
           <h1>{phaseMessage.title}</h1>
           <p>{phaseMessage.description}</p>
-          <div className="lobby-layout__share">
-            <span className="lobby-layout__share-label">Invite link</span>
-            <div className="lobby-layout__share-row">
-              <code className="lobby-layout__share-url">{joinUrl}</code>
-              <CopyLobbyLinkButton lobbyId={lobbyId} />
-            </div>
-          </div>
         </section>
       ) : null}
 

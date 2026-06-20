@@ -147,6 +147,10 @@ func (errorStore) SetSelectedPhotos(_ context.Context, _ string, _ []lobby.Photo
 	return errors.New("boom")
 }
 
+func (errorStore) ReopenPhotoSelection(_ context.Context, _ string) error {
+	return errors.New("boom")
+}
+
 func (errorStore) MarkReady(_ context.Context, _ string) error {
 	return errors.New("boom")
 }

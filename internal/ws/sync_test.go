@@ -237,6 +237,32 @@ func (s *fakeStore) SetSelectedPhotos(ctx context.Context, id string, photos []l
 	return nil
 }
 
+func (s *fakeStore) ReopenPhotoSelection(ctx context.Context, id string) error {
+	if err := ctx.Err(); err != nil {
+		return err
+	}
+
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	lob, ok := s.lobbies[id]
+	if !ok {
+		return lobby.ErrNotFound
+	}
+	if err := lobby.ValidateTransition(lob.Phase, lobby.PhaseWaiting); err != nil {
+		return err
+	}
+	if len(lob.SelectedPhotos) == 0 {
+		return lobby.ErrEmptyPhotos
+	}
+
+	lob.Phase = lobby.PhaseWaiting
+	lob.PhotoOrder = nil
+	lob.CurrentRound = 0
+	lob.DrawEndsAt = nil
+	return nil
+}
+
 func (s *fakeStore) MarkReady(ctx context.Context, id string) error {
 	if err := ctx.Err(); err != nil {
 		return err

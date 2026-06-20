@@ -23,6 +23,13 @@ export function setLobbyPhotos(
   )
 }
 
+export function reopenLobbyPhotos(lobbyId: string): Promise<LobbySnapshot> {
+  return apiRequest<LobbySnapshot>(
+    `/api/lobbies/${encodeURIComponent(lobbyId)}/photos/reopen`,
+    { method: 'POST', lobbyId },
+  )
+}
+
 export function markLobbyReady(lobbyId: string): Promise<LobbySnapshot> {
   return apiRequest<LobbySnapshot>(
     `/api/lobbies/${encodeURIComponent(lobbyId)}/ready`,

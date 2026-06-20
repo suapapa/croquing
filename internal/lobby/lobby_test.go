@@ -179,6 +179,39 @@ func TestMemoryStoreSetSelectedPhotos(t *testing.T) {
 	}
 }
 
+func TestMemoryStoreReopenPhotoSelection(t *testing.T) {
+	t.Parallel()
+
+	store := NewMemoryStore()
+	created, err := store.Create(context.Background(), 5*time.Minute)
+	if err != nil {
+		t.Fatalf("Create() error = %v", err)
+	}
+
+	photos := []Photo{{
+		PixabayID:     1,
+		LargeImageURL: "https://cdn.example/large.jpg",
+	}}
+	if err := store.SetSelectedPhotos(context.Background(), created.ID, photos); err != nil {
+		t.Fatalf("SetSelectedPhotos() error = %v", err)
+	}
+
+	if err := store.ReopenPhotoSelection(context.Background(), created.ID); err != nil {
+		t.Fatalf("ReopenPhotoSelection() error = %v", err)
+	}
+
+	got, err := store.Get(context.Background(), created.ID)
+	if err != nil {
+		t.Fatalf("Get() error = %v", err)
+	}
+	if got.Phase != PhaseWaiting {
+		t.Fatalf("Phase = %q, want WAITING", got.Phase)
+	}
+	if len(got.SelectedPhotos) != 1 {
+		t.Fatalf("len(SelectedPhotos) = %d, want 1", len(got.SelectedPhotos))
+	}
+}
+
 func TestMemoryStoreMarkReady(t *testing.T) {
 	t.Parallel()
 

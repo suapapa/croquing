@@ -72,6 +72,44 @@ func TestSetPhotosHandler(t *testing.T) {
 	}
 }
 
+func TestReopenPhotoSelectionHandler(t *testing.T) {
+	t.Parallel()
+
+	store := lobby.NewMemoryStore()
+	lobbySync := ws.NewSnapshotSync(store)
+	router := newTestRouter(store, 5*time.Minute, pixabay.NewClient("test-key"), ws.NewHandler(lobbySync, nil), lobbySync)
+
+	created, photos := createLobbyWithPhotos(t, store)
+
+	req := httptest.NewRequest(http.MethodPost, "/api/lobbies/"+created.ID+"/photos/reopen", nil)
+	req.Header.Set(lobby.AdminTokenHeader, created.AdminToken)
+	rec := httptest.NewRecorder()
+	router.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("status = %d, want %d, body = %s", rec.Code, http.StatusOK, rec.Body.String())
+	}
+
+	var snapshot lobby.LobbySnapshot
+	if err := json.NewDecoder(rec.Body).Decode(&snapshot); err != nil {
+		t.Fatalf("decode response: %v", err)
+	}
+	if snapshot.Phase != lobby.PhaseWaiting {
+		t.Fatalf("Phase = %q, want WAITING", snapshot.Phase)
+	}
+	if snapshot.SelectedCount != len(photos) {
+		t.Fatalf("SelectedCount = %d, want %d", snapshot.SelectedCount, len(photos))
+	}
+
+	got, err := store.Get(context.Background(), created.ID)
+	if err != nil {
+		t.Fatalf("Get() error = %v", err)
+	}
+	if got.Phase != lobby.PhaseWaiting {
+		t.Fatalf("Phase = %q, want WAITING", got.Phase)
+	}
+}
+
 func TestSetPhotosHandlerUnauthorized(t *testing.T) {
 	t.Parallel()
 
