@@ -3,11 +3,11 @@
 > **자동 생성 문서** — 직접 수정하지 마세요.  
 > 소스: [`workitems.json`](workitems.json) · 갱신: `make progress`
 
-마지막 갱신: **2026-06-20 19:04 KST**
+마지막 갱신: **2026-06-20 19:08 KST**
 
 ## Phase A — 백엔드 (001-017)
 
-진행: **12 / 17** (70%)
+진행: **13 / 17** (76%)
 
 | Index | 상태 | 제목 | deps | 산출물 검증 |
 |-------|------|------|------|-------------|
@@ -23,7 +23,7 @@
 | **010** | ✅ done | [BE] PixaBay 검색 API | 006, 009 | ✓ |
 | **011** | ✅ done | [BE] 사진 선택 API | 006, 008 | ✓ |
 | **012** | ✅ done | [BE] 사진 순서 랜덤 셔플 | 011 | ✓ |
-| **013** | ⬜ pending | [BE] 서버 권위 타이머 | 004, 005 | — |
+| **013** | ✅ done | [BE] 서버 권위 타이머 | 004, 005 | ✓ |
 | **014** | ⬜ pending | [BE] 세션 진행 API | 012, 013 | — |
 | **015** | ⬜ pending | [BE] 타이머 틱·자동 전환 | 013, 014, 008 | — |
 | **016** | ⬜ pending | [BE] CORS·Admin 미들웨어 | 003, 006 | — |
@@ -105,6 +105,12 @@
 - 산출물: internal/lobby/shuffle.go, internal/lobby/store.go, internal/http/lobby_handlers.go, internal/http/lobby_ready_test.go
 - 메모: Admin POST ready → READY. Fisher-Yates PhotoOrder. Snapshot exposes TotalRounds only, not order.
 
+#### 013 — [BE] 서버 권위 타이머
+
+- 완료일: 2026-06-20
+- 산출물: internal/timer/timer.go, internal/lobby/draw_timer.go
+- 메모: timer.NewDeadline/IsExpired/Remaining. lobby StartDrawTimer, ClearDrawTimer, IsDrawExpired.
+
 ## Phase B — 프론트엔드 (101-112)
 
 선행 조건: backend 완료 (001-017)
@@ -128,13 +134,13 @@
 
 ## 전체 요약
 
-- **전체:** 12 / 29 완료 (41%)
-- **백엔드:** 12 / 17 (70%)
+- **전체:** 13 / 29 완료 (44%)
+- **백엔드:** 13 / 17 (76%)
 - **프론트엔드:** 0 / 12 (0%)
 
 ## 다음 작업 후보
 
-- **013** — [BE] 서버 권위 타이머 (`pending`)
+- **014** — [BE] 세션 진행 API (`pending`)
 - **016** — [BE] CORS·Admin 미들웨어 (`pending`)
 
 ## 진도 갱신 방법

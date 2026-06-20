@@ -219,6 +219,33 @@ func TestMemoryStoreMarkReady(t *testing.T) {
 	}
 }
 
+func TestDrawTimerHelpers(t *testing.T) {
+	t.Parallel()
+
+	now := time.Date(2026, 6, 20, 12, 0, 0, 0, time.UTC)
+	lob := &Lobby{DrawDuration: 5 * time.Minute}
+
+	StartDrawTimer(lob, now)
+	if lob.DrawEndsAt == nil {
+		t.Fatal("DrawEndsAt = nil, want timestamp")
+	}
+	if !lob.DrawEndsAt.Equal(now.Add(5 * time.Minute)) {
+		t.Fatalf("DrawEndsAt = %v, want %v", lob.DrawEndsAt, now.Add(5*time.Minute))
+	}
+
+	if IsDrawExpired(lob, now.Add(4*time.Minute+59*time.Second)) {
+		t.Fatal("IsDrawExpired() = true before deadline")
+	}
+	if !IsDrawExpired(lob, now.Add(5*time.Minute)) {
+		t.Fatal("IsDrawExpired() = false at deadline")
+	}
+
+	ClearDrawTimer(lob)
+	if lob.DrawEndsAt != nil {
+		t.Fatalf("DrawEndsAt = %v, want nil", lob.DrawEndsAt)
+	}
+}
+
 func TestMemoryStoreMarkReadyRequiresPhotos(t *testing.T) {
 	t.Parallel()
 

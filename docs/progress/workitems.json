@@ -183,10 +183,13 @@
           "title": "[BE] 서버 권위 타이머",
           "description": "DrawEndsAt 설정/초기화, DRAWING 진입 시 now + DrawDuration, 만료 판정 헬퍼",
           "deps": ["004", "005"],
-          "status": "pending",
+          "status": "done",
+          "completed_at": "2026-06-20",
           "artifacts": [
-            "internal/timer/"
-          ]
+            "internal/timer/timer.go",
+            "internal/lobby/draw_timer.go"
+          ],
+          "notes": "timer.NewDeadline/IsExpired/Remaining. lobby StartDrawTimer, ClearDrawTimer, IsDrawExpired."
         },
         {
           "id": "014",

@@ -104,7 +104,7 @@ func (s *MemoryStore) SetSelectedPhotos(ctx context.Context, id string, photos [
 	lobby.Phase = PhaseSelecting
 	lobby.PhotoOrder = nil
 	lobby.CurrentRound = 0
-	lobby.DrawEndsAt = nil
+	ClearDrawTimer(lobby)
 
 	return nil
 }
@@ -138,7 +138,7 @@ func (s *MemoryStore) MarkReady(ctx context.Context, id string) error {
 	lobby.PhotoOrder = order
 	lobby.Phase = PhaseReady
 	lobby.CurrentRound = 0
-	lobby.DrawEndsAt = nil
+	ClearDrawTimer(lobby)
 
 	return nil
 }
