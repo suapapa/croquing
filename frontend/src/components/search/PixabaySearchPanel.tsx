@@ -6,6 +6,12 @@ import {
   type PixabaySearchHit,
 } from '../../api/pixabayApi'
 import type { Photo } from '../../types/lobby'
+import {
+  IconChevronLeft,
+  IconChevronRight,
+  IconSearch,
+  IconSpinner,
+} from '../ui/Icons'
 
 const RECOMMENDED_COUNT = 5
 const PIXABAY_PER_PAGE = 24
@@ -129,10 +135,16 @@ export function PixabaySearchPanel({
 
           <button
             type="submit"
-            className="button button--primary"
+            className="button button--primary button--icon-only"
             disabled={loading}
+            aria-label={loading ? 'Searching' : 'Search'}
+            title={loading ? 'Searching' : 'Search'}
           >
-            {loading ? 'Searching…' : 'Search'}
+            {loading ? (
+              <IconSpinner className="button__spinner" />
+            ) : (
+              <IconSearch className="button__icon" />
+            )}
           </button>
         </form>
       ) : null}
@@ -182,22 +194,26 @@ export function PixabaySearchPanel({
         <div className="pixabay-search__pagination">
           <button
             type="button"
-            className="button button--secondary"
+            className="button button--secondary button--icon-only"
             disabled={loading || page <= 1}
             onClick={() => void runSearch(page - 1)}
+            aria-label="Previous page"
+            title="Previous page"
           >
-            Previous
+            <IconChevronLeft className="button__icon" />
           </button>
           <span>
             Page {page} of {totalPages}
           </span>
           <button
             type="button"
-            className="button button--secondary"
+            className="button button--secondary button--icon-only"
             disabled={loading || page >= totalPages}
             onClick={() => void runSearch(page + 1)}
+            aria-label="Next page"
+            title="Next page"
           >
-            Next
+            <IconChevronRight className="button__icon" />
           </button>
         </div>
       ) : null}

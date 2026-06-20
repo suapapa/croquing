@@ -167,6 +167,12 @@ select {
   background: var(--color-bg);
 }
 
+.button--icon-only {
+  width: var(--touch-min);
+  padding: 0;
+}
+
+
 .home-page {
   display: grid;
   min-height: 100svh;
