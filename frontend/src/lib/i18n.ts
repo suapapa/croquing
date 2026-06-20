@@ -122,17 +122,17 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
   ko: {
     // HomePage
     'home.eyebrow': '실시간 크로키 모임',
-    'home.lead': '로비를 만들고 링크를 공유하여 동기화된 사진과 타이머로 함께 그리세요 — 화면 공유가 필요 없습니다.',
+    'home.lead': '로비를 만들고 링크만 공유하면, 같은 사진과 타이머로 함께 그릴 수 있어요. 화면 공유는 필요 없습니다.',
     'home.createLobby': '로비 만들기',
-    'home.createLobbyFailed': '로비 생성 실패',
+    'home.createLobbyFailed': '로비를 만들지 못했습니다',
     'home.creatingLobby': '로비 만드는 중…',
     'home.howItWorks': '이용 방법',
-    'home.step1.title': '방 생성 및 공유',
-    'home.step1.desc': '로비를 생성하고 드로잉 그룹에 링크를 보내세요.',
+    'home.step1.title': '로비 만들고 공유하기',
+    'home.step1.desc': '로비를 만들고 그림 모임에 링크를 보내세요.',
     'home.step2.title': '레퍼런스 선택',
-    'home.step2.desc': '방장이 Pixabay에서 모두가 그릴 사진을 선택합니다.',
+    'home.step2.desc': '방장이 Pixabay에서 모두가 그릴 사진을 고릅니다.',
     'home.step3.title': '동시에 그리기',
-    'home.step3.desc': '모두에게 동일한 사진과 카운트다운이 제공되는 타이머 라운드입니다.',
+    'home.step3.desc': '모두 같은 사진을 보며 카운트다운과 함께 그립니다.',
     
     // LobbyLayout & Page
     'lobby.badge.admin': '방장',
@@ -141,75 +141,75 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'lobby.connection.connected': '연결됨',
     'lobby.connection.reconnecting': '재연결 중…',
     'lobby.connection.disconnected': '연결 끊김',
-    'lobby.connection.lost': '연결이 끊겼습니다. 재연결을 시도 중…',
-    'lobby.loadingState': '로비 상태 로딩 중…',
-    'lobby.invalidLink': '올바르지 않은 로비 링크입니다.',
-    'lobby.backHome': '홈으로 돌아가기',
+    'lobby.connection.lost': '연결이 끊겼습니다. 다시 연결하는 중…',
+    'lobby.loadingState': '로비 불러오는 중…',
+    'lobby.invalidLink': '유효하지 않은 로비 링크입니다.',
+    'lobby.backHome': '홈으로',
     'lobby.participantCount': '{count}명 참가 중',
     'lobby.participantCountPlural': '{count}명 참가 중',
     'lobby.lobbyId': '로비 {id}',
     
     // CopyLobbyLinkButton
-    'copy.copied': '복사 완료!',
-    'copy.failed': '복사 실패',
+    'copy.copied': '복사했어요!',
+    'copy.failed': '복사하지 못했습니다',
     'copy.link': '링크 복사',
     
     // AdminControls
     'admin.startSession': '세션 시작',
     'admin.starting': '시작 중…',
     'admin.nextPhoto': '다음 사진',
-    'admin.loading': '로딩 중…',
+    'admin.loading': '불러오는 중…',
     'admin.endSession': '세션 종료',
     'admin.ending': '종료 중…',
-    'admin.actionFailed': '작업 실패',
+    'admin.actionFailed': '작업에 실패했습니다',
     
     // ParticipantWaitPanel
-    'wait.settingPhotos': '레퍼런스 사진 설정 중...',
-    'wait.adminChoosing': '방장이 사진을 선택하는 중입니다. 세션이 시작될 때까지 사진은 숨겨집니다.',
+    'wait.settingPhotos': '레퍼런스 사진 준비 중…',
+    'wait.adminChoosing': '방장이 사진을 고르는 중이에요. 세션이 시작되기 전까지는 보이지 않습니다.',
     'wait.tipLabel': '팁: {title}',
     'wait.goTip': '팁 {idx}으로 이동',
-    'wait.waitingForAdmin': '방장을 기다리는 중...',
+    'wait.waitingForAdmin': '방장을 기다리는 중…',
     
     // PhotoReviewPanel
-    'review.photosSaved': '{count}장의 사진이 저장됨',
-    'review.instruction': '썸네일에 마우스를 올리면 크게 미리 볼 수 있습니다. 사진 세트가 마음에 들면 순서를 섞고 고정한 뒤 시작해 주세요.',
+    'review.photosSaved': '사진 {count}장 저장됨',
+    'review.instruction': '썸네일에 마우스를 올리면 크게 볼 수 있어요. 마음에 들면 순서를 섞고 고정한 뒤 시작하세요.',
     'review.previewAria': '저장된 사진 {index} / {total} 미리보기',
     'review.editSelection': '선택 수정',
     'review.selectionComplete': '선택 완료',
-    'review.shuffling': '셔플 중…',
+    'review.shuffling': '섞는 중…',
     
     // PhotoSelectionPanel
-    'selection.errSave': '선택 사항 저장 실패',
-    'selection.errConfirm': '선택 사항 확정 실패',
-    'selection.errReopen': '사진 선택 재오픈 실패',
+    'selection.errSave': '선택을 저장하지 못했습니다',
+    'selection.errConfirm': '선택을 확정하지 못했습니다',
+    'selection.errReopen': '사진 선택을 다시 열지 못했습니다',
     'selection.saving': '저장 중…',
-    'selection.saveCount': '{count}장의 사진 저장',
+    'selection.saveCount': '사진 {count}장 저장',
     
     // ReadyPanel
-    'ready.photosReady': '장의 사진 준비됨',
-    'ready.desc': '사진 순서가 섞인 뒤 숨겨졌습니다. 각 드로잉 라운드가 시작되기 전까지 썸네일은 보이지 않습니다.',
-    'ready.hint': '방장이 시작하기를 기다리는 중…',
+    'ready.photosReady': '장 사진 준비됨',
+    'ready.desc': '사진 순서를 섞어 숨겨 두었어요. 각 라운드가 시작되기 전까지 썸네일은 보이지 않습니다.',
+    'ready.hint': '방장이 시작할 때까지 기다려 주세요…',
     
     // DrawingPanel
-    'draw.exitFullscreen': '전체화면 종료',
-    'draw.enterFullscreen': '전체화면',
-    'draw.waitingPhoto': '사진을 기다리는 중…',
+    'draw.exitFullscreen': '전체 화면 끄기',
+    'draw.enterFullscreen': '전체 화면',
+    'draw.waitingPhoto': '사진 기다리는 중…',
     'draw.attribution': '사진 출처:',
     'draw.round': '라운드 {current} / {total}',
-    'draw.startsIn': '라운드가 {count}초 후 시작됩니다',
+    'draw.startsIn': '{count}초 뒤 라운드 시작',
     'draw.remainingAria': '남은 그리기 시간',
     
     // SessionBreakPanels
-    'break.takeBreather': '잠시 휴식을 취하세요',
-    'break.hiddenDesc': '다음 라운드가 시작될 때까지 레퍼런스 사진은 숨겨집니다.',
+    'break.takeBreather': '잠깐 쉬어 가세요',
+    'break.hiddenDesc': '다음 라운드가 시작될 때까지 레퍼런스 사진은 숨겨져 있어요.',
     'break.completedRound': '{total}라운드 중 {current}라운드 완료',
     'break.sessionFinished': '세션 종료',
-    'break.completedRoundsDesc': '총 {count}라운드를 완료했습니다. 모두 수고하셨습니다!',
-    'break.completedRoundsDescPlural': '총 {count}라운드를 완료했습니다. 모두 수고하셨습니다!',
+    'break.completedRoundsDesc': '총 {count}라운드 끝! 모두 수고하셨어요.',
+    'break.completedRoundsDescPlural': '총 {count}라운드 끝! 모두 수고하셨어요.',
     
     // PixabaySearchPanel
     'search.errEmpty': '검색어를 입력하세요',
-    'search.errFailed': '검색 실패',
+    'search.errFailed': '검색하지 못했습니다',
     'search.fieldLabel': 'Pixabay 검색',
     'search.placeholder': '예: 초상화, 해부학, 제스처',
     'search.sort': '정렬',
@@ -220,11 +220,11 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'search.prevPage': '이전 페이지',
     'search.nextPage': '다음 페이지',
     'search.pageIndicator': '{total}페이지 중 {page}페이지',
-    'search.hint': '{count}장 선택됨 · {recommended}장 권장',
+    'search.hint': '{count}장 선택 · {recommended}장 권장',
     'search.ariaSelect': '사진 {id} 선택',
     'search.ariaDeselect': '사진 {id} 선택 해제',
-    'search.dock.title': '선택된 레퍼런스 사진',
-    'search.dock.remove': '사진 제거',
+    'search.dock.title': '선택한 레퍼런스 사진',
+    'search.dock.remove': '사진 빼기',
   },
   ja: {
     // HomePage
@@ -487,28 +487,28 @@ const LOCALIZED_PHASES: Record<Language, Record<LobbyPhase, PhaseMessage>> = {
   },
   ko: {
     WAITING: {
-      title: '방장 대기 중',
-      description: '방장이 모임을 준비하고 있습니다. 이 페이지에서 잠시 기다려 주세요.',
+      title: '방장 기다리는 중',
+      description: '방장이 준비 중이에요. 이 페이지에서 기다려 주세요.',
     },
     SELECTING: {
-      title: '레퍼런스 사진 검토 중',
-      description: '방장이 셔플 및 세션 시작 전 저장된 사진들을 확인하고 있습니다.',
+      title: '레퍼런스 사진 확인 중',
+      description: '방장이 저장된 사진을 확인한 뒤 섞고 세션을 시작합니다.',
     },
     READY: {
       title: '시작 준비 완료',
-      description: '사진들이 무작위로 섞이고 숨겨졌습니다. 방장이 세션을 시작할 때까지 기다려 주세요.',
+      description: '사진 순서를 섞어 숨겨 두었어요. 방장이 시작할 때까지 기다려 주세요.',
     },
     DRAWING: {
       title: '그리기 시간!',
-      description: '레퍼런스 사진에 집중해 보세요. 타이머는 서버에 의해 제어됩니다.',
+      description: '레퍼런스 사진에 집중하세요. 타이머는 서버가 맞춰 줍니다.',
     },
     BETWEEN_ROUNDS: {
-      title: '라운드 휴식 시간',
-      description: '다음 포즈가 시작되기 전에 짧은 휴식을 취하세요.',
+      title: '라운드 쉬는 시간',
+      description: '다음 포즈 전에 잠깐 쉬어 가세요.',
     },
     FINISHED: {
       title: '세션 종료',
-      description: '함께 그려주셔서 감사합니다. 다음 주에 또 만나요!',
+      description: '함께 그려 주셔서 고마워요. 다음 주에 또 만나요!',
     },
   },
   ja: {
@@ -615,32 +615,32 @@ const LOCALIZED_TIPS: Record<Language, Tip[]> = {
   ],
   ko: [
     {
-      title: '제스처 우선',
-      text: '디테일을 무시하고 몸의 흐름과 주요 동세를 먼저 그리세요.',
+      title: '제스처 먼저',
+      text: '세부 묘사는 나중에. 몸의 흐름과 동세부터 잡으세요.',
     },
     {
-      title: '눈을 찡그려 단순화하기',
-      text: '눈을 약간 감고 보면 자잘한 디테일이 배제되어 명암의 큰 덩어리를 더 쉽게 볼 수 있습니다.',
+      title: '눈 가늘게 뜨고 보기',
+      text: '눈을 살짝 감으면 자잘한 디테일이 묻혀서, 명암의 큰 덩어리가 더 잘 보입니다.',
     },
     {
       title: '팔 전체로 그리기',
-      text: '손목만 까딱거리며 짧게 끊어 그리지 말고, 팔꿈치와 어깨를 사용하여 길고 시원한 선을 그리세요.',
+      text: '손목만 쓰지 말고 팔꿈치·어깨까지 써서 길고 시원한 선을 그리세요.',
     },
     {
       title: '포즈 과장하기',
-      text: '짧은 크로키에서는 실제 사진보다 포즈를 더 역동적이고 감정 표현이 풍부하게 그리는 편이 좋습니다.',
+      text: '짧은 크로키에서는 사진보다 포즈를 더 과장해서 그리는 편이 낫습니다.',
     },
     {
-      title: '네거티브 스페이스(여백) 활용',
-      text: '팔다리 사이에 형성되는 빈 공간의 모양을 관찰하면 비율과 각도를 더 정확하게 잴 수 있습니다.',
+      title: '여백(네거티브 스페이스) 보기',
+      text: '팔다리 사이 빈 공간 모양을 보면 비율과 각도를 더 정확히 잴 수 있어요.',
     },
     {
-      title: '디테일보다 비율 우선',
-      text: '몸통과 척추 구조가 확실히 잡힐 때까지는 손, 발, 얼굴 같은 디테일은 비워두세요.',
+      title: '디테일보다 비율',
+      text: '몸통과 척추가 잡힐 때까지 손·발·얼굴 같은 디테일은 비워 두세요.',
     },
     {
-      title: '유연한 태도 유지',
-      text: '이것은 크로키입니다! 완벽하고 다듬어진 그림보다는 속도감과 느낌을 포착하는 것이 훨씬 중요합니다.',
+      title: '느슨하게 그리기',
+      text: '크로키예요! 완벽하게 다듬기보다 속도와 느낌이 더 중요합니다.',
     },
   ],
   ja: [
