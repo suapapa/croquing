@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import { IconLink } from '../ui/Icons'
 import { copyLobbyJoinUrl } from '../../lib/lobbyLink'
 
 interface CopyLobbyLinkButtonProps {
@@ -51,7 +52,13 @@ export function CopyLobbyLinkButton({
     .join(' ')
 
   return (
-    <button type="button" className={classes} onClick={() => void handleCopy()}>
+    <button
+      type="button"
+      className={classes}
+      onClick={() => void handleCopy()}
+      aria-live="polite"
+    >
+      <IconLink className="button__icon" />
       {label}
     </button>
   )
