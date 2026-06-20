@@ -111,6 +111,47 @@ func (h *lobbyHandler) setPhotos(c *gin.Context) {
 	c.JSON(http.StatusOK, snapshot)
 }
 
+func (h *lobbyHandler) markReady(c *gin.Context) {
+	id := c.Param("id")
+	if _, ok := authenticateAdmin(c, h.store, id); !ok {
+		return
+	}
+
+	if err := h.store.MarkReady(c.Request.Context(), id); err != nil {
+		switch {
+		case errors.Is(err, lobby.ErrNotFound):
+			c.JSON(http.StatusNotFound, gin.H{"error": "lobby not found"})
+		case errors.Is(err, lobby.ErrEmptyPhotos):
+			c.JSON(http.StatusBadRequest, gin.H{"error": "photos are required"})
+		case errors.Is(err, lobby.ErrInvalidTransition):
+			c.JSON(http.StatusConflict, gin.H{"error": "invalid lobby phase for ready"})
+		default:
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to mark lobby ready"})
+		}
+		return
+	}
+
+	if h.lobbySync != nil {
+		if err := h.lobbySync.Broadcast(c.Request.Context(), id); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to broadcast snapshot"})
+			return
+		}
+	}
+
+	participantCount := 0
+	if h.lobbySync != nil {
+		participantCount = h.lobbySync.Hub().ClientCount(id)
+	}
+
+	snapshot, err := h.store.Snapshot(c.Request.Context(), id, participantCount)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to get lobby snapshot"})
+		return
+	}
+
+	c.JSON(http.StatusOK, snapshot)
+}
+
 func joinURL(c *gin.Context, lobbyID string) string {
 	scheme := "http"
 	if c.Request.TLS != nil || c.GetHeader("X-Forwarded-Proto") == "https" {
@@ -124,4 +165,5 @@ func registerLobbyRoutes(r gin.IRoutes, store lobby.Store, drawDuration time.Dur
 	r.POST("/lobbies", handler.createLobby)
 	r.GET("/lobbies/:id", handler.getLobby)
 	r.PUT("/lobbies/:id/photos", handler.setPhotos)
+	r.POST("/lobbies/:id/ready", handler.markReady)
 }

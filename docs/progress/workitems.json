@@ -168,7 +168,15 @@
           "title": "[BE] 사진 순서 랜덤 셔플",
           "description": "POST .../ready — Fisher-Yates 셔플로 PhotoOrder 생성. PhotoOrder는 스냅샷에 미포함",
           "deps": ["011"],
-          "status": "pending"
+          "status": "done",
+          "completed_at": "2026-06-20",
+          "artifacts": [
+            "internal/lobby/shuffle.go",
+            "internal/lobby/store.go",
+            "internal/http/lobby_handlers.go",
+            "internal/http/lobby_ready_test.go"
+          ],
+          "notes": "Admin POST ready → READY. Fisher-Yates PhotoOrder. Snapshot exposes TotalRounds only, not order."
         },
         {
           "id": "013",

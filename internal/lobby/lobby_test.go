@@ -169,3 +169,70 @@ func TestMemoryStoreSetSelectedPhotos(t *testing.T) {
 		t.Fatalf("SetSelectedPhotos(empty) error = %v, want ErrEmptyPhotos", err)
 	}
 }
+
+func TestMemoryStoreMarkReady(t *testing.T) {
+	t.Parallel()
+
+	store := NewMemoryStore()
+	created, err := store.Create(context.Background(), 5*time.Minute)
+	if err != nil {
+		t.Fatalf("Create() error = %v", err)
+	}
+
+	photos := []Photo{
+		{PixabayID: 1, LargeImageURL: "https://cdn.example/1.jpg"},
+		{PixabayID: 2, LargeImageURL: "https://cdn.example/2.jpg"},
+		{PixabayID: 3, LargeImageURL: "https://cdn.example/3.jpg"},
+	}
+	if err := store.SetSelectedPhotos(context.Background(), created.ID, photos); err != nil {
+		t.Fatalf("SetSelectedPhotos() error = %v", err)
+	}
+
+	if err := store.MarkReady(context.Background(), created.ID); err != nil {
+		t.Fatalf("MarkReady() error = %v", err)
+	}
+
+	got, err := store.Get(context.Background(), created.ID)
+	if err != nil {
+		t.Fatalf("Get() error = %v", err)
+	}
+	if got.Phase != PhaseReady {
+		t.Fatalf("Phase = %q, want READY", got.Phase)
+	}
+	if len(got.PhotoOrder) != len(photos) {
+		t.Fatalf("len(PhotoOrder) = %d, want %d", len(got.PhotoOrder), len(photos))
+	}
+
+	seen := make([]bool, len(photos))
+	for _, idx := range got.PhotoOrder {
+		if idx < 0 || idx >= len(photos) {
+			t.Fatalf("PhotoOrder index out of range: %d", idx)
+		}
+		if seen[idx] {
+			t.Fatalf("duplicate PhotoOrder index: %d", idx)
+		}
+		seen[idx] = true
+	}
+
+	if err := store.MarkReady(context.Background(), created.ID); !errors.Is(err, ErrInvalidTransition) {
+		t.Fatalf("MarkReady() from READY error = %v, want ErrInvalidTransition", err)
+	}
+}
+
+func TestMemoryStoreMarkReadyRequiresPhotos(t *testing.T) {
+	t.Parallel()
+
+	store := NewMemoryStore()
+	created, err := store.Create(context.Background(), 5*time.Minute)
+	if err != nil {
+		t.Fatalf("Create() error = %v", err)
+	}
+
+	store.mu.Lock()
+	store.lobbies[created.ID].Phase = PhaseSelecting
+	store.mu.Unlock()
+
+	if err := store.MarkReady(context.Background(), created.ID); !errors.Is(err, ErrEmptyPhotos) {
+		t.Fatalf("MarkReady() error = %v, want ErrEmptyPhotos", err)
+	}
+}

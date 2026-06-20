@@ -237,6 +237,37 @@ func (s *fakeStore) SetSelectedPhotos(ctx context.Context, id string, photos []l
 	return nil
 }
 
+func (s *fakeStore) MarkReady(ctx context.Context, id string) error {
+	if err := ctx.Err(); err != nil {
+		return err
+	}
+
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	lob, ok := s.lobbies[id]
+	if !ok {
+		return lobby.ErrNotFound
+	}
+	if lob.Phase != lobby.PhaseSelecting {
+		return lobby.ErrInvalidTransition
+	}
+	if len(lob.SelectedPhotos) == 0 {
+		return lobby.ErrEmptyPhotos
+	}
+
+	order := make([]int, len(lob.SelectedPhotos))
+	for i := range order {
+		order[i] = i
+	}
+
+	lob.PhotoOrder = order
+	lob.Phase = lobby.PhaseReady
+	lob.CurrentRound = 0
+	lob.DrawEndsAt = nil
+	return nil
+}
+
 func (s *fakeStore) setPhase(id string, phase lobby.LobbyPhase) {
 	s.mu.Lock()
 	s.lobbies[id].Phase = phase

@@ -14,6 +14,7 @@ type Store interface {
 	Get(ctx context.Context, id string) (*Lobby, error)
 	Snapshot(ctx context.Context, id string, participantCount int) (LobbySnapshot, error)
 	SetSelectedPhotos(ctx context.Context, id string, photos []Photo) error
+	MarkReady(ctx context.Context, id string) error
 }
 
 // MemoryStore is an in-memory lobby store protected by a mutex.
@@ -102,6 +103,40 @@ func (s *MemoryStore) SetSelectedPhotos(ctx context.Context, id string, photos [
 	lobby.SelectedPhotos = append([]Photo(nil), photos...)
 	lobby.Phase = PhaseSelecting
 	lobby.PhotoOrder = nil
+	lobby.CurrentRound = 0
+	lobby.DrawEndsAt = nil
+
+	return nil
+}
+
+// MarkReady shuffles selected photo indices and moves the lobby to READY.
+func (s *MemoryStore) MarkReady(ctx context.Context, id string) error {
+	if err := ctx.Err(); err != nil {
+		return err
+	}
+
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	lobby, ok := s.lobbies[id]
+	if !ok {
+		return ErrNotFound
+	}
+
+	if lobby.Phase != PhaseSelecting {
+		return ErrInvalidTransition
+	}
+	if len(lobby.SelectedPhotos) == 0 {
+		return ErrEmptyPhotos
+	}
+
+	order, err := shuffleIndices(len(lobby.SelectedPhotos))
+	if err != nil {
+		return err
+	}
+
+	lobby.PhotoOrder = order
+	lobby.Phase = PhaseReady
 	lobby.CurrentRound = 0
 	lobby.DrawEndsAt = nil
 
