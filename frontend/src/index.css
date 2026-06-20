@@ -322,8 +322,7 @@ select {
   height: 100svh;
   min-height: 100svh;
   overflow: hidden;
-  padding: env(safe-area-inset-top) env(safe-area-inset-right)
-    env(safe-area-inset-bottom) env(safe-area-inset-left);
+  padding: 0 !important;
   background: var(--color-drawing-bg);
   color: var(--color-drawing-text);
   touch-action: manipulation;
@@ -334,6 +333,10 @@ select {
   flex-direction: column;
   height: 100%;
   min-height: 0;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .lobby-layout {
@@ -765,19 +768,21 @@ select {
 }
 
 .drawing-panel {
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  height: 100%;
   overflow: hidden;
 }
 
 .drawing-panel__timer {
-  position: relative;
-  flex-shrink: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
   height: 0.35rem;
-  margin-bottom: calc(var(--space-2) + 1.25rem);
   background: rgb(255 255 255 / 12%);
 }
 
@@ -793,7 +798,7 @@ select {
 .drawing-panel__timer-label {
   position: absolute;
   top: calc(100% + var(--space-2));
-  right: var(--space-4);
+  left: var(--space-4);
   font-variant-numeric: tabular-nums;
   font-weight: 700;
   font-size: 0.875rem;
@@ -818,31 +823,34 @@ select {
 }
 
 .drawing-panel__body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-height: 0;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 .drawing-panel__stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex: 1;
   align-items: center;
   justify-content: center;
-  min-height: 0;
-  padding: var(--space-2) var(--space-4);
   overflow: hidden;
+  background: #000;
+  padding: 0;
 }
 
 .drawing-panel__photo-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
   max-width: 100%;
   max-height: 100%;
   line-height: 0;
   border: 4px solid transparent;
-  border-radius: 2px;
   transition: border-color 200ms ease;
 }
 
@@ -867,31 +875,49 @@ select {
 
 .drawing-panel__photo {
   display: block;
+  width: 100vw;
+  height: 100vh;
   max-width: 100%;
   max-height: 100%;
-  width: auto;
-  height: auto;
   object-fit: contain;
 }
 
 .drawing-panel__footer {
-  flex-shrink: 0;
-  padding: var(--space-2) var(--space-4) var(--space-3);
-  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  padding: var(--space-6) var(--space-8) calc(var(--space-6) + env(safe-area-inset-bottom)) !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-radius: 0 !important;
+  border-top: none !important;
+  box-shadow: none !important;
 }
 
 .drawing-panel__attribution,
-.drawing-panel__round,
 .drawing-panel__empty {
   margin: 0;
-  text-align: center;
   color: rgb(250 250 249 / 72%);
   font-size: 0.875rem;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.drawing-panel__attribution {
+  text-align: left;
 }
 
 .drawing-panel__round {
-  margin-top: var(--space-1);
+  margin: 0;
   padding: 0;
+  color: rgb(250 250 249 / 72%);
+  font-size: 0.875rem;
+  text-align: right;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
 }
 
 @media (min-width: 768px) {
@@ -1337,22 +1363,7 @@ select {
   transform: scale(1.05);
 }
 
-/* Glassmorphic photo metadata display in Zen Mode */
-.drawing-panel__footer {
-  background: rgba(12, 10, 9, 0.4);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(250, 250, 249, 0.05);
-  margin-top: auto;
-  border-radius: var(--radius-md) var(--radius-md) 0 0;
-}
-
-.drawing-panel__photo-wrap {
-  border: 2px solid rgba(250, 250, 249, 0.08);
-  border-radius: var(--radius-md);
-  background: rgba(0, 0, 0, 0.4);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
-  padding: var(--space-1);
-}
+/* Appended photo metadata display overrides removed for in-place definitions */
 
 /* General premium transitions and micro-interactions */
 .button:hover:not(:disabled) {
