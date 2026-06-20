@@ -3,7 +3,7 @@ package config
 import (
 	"log"
 
-	"github.com/caarlosh/envconfig"
+	"github.com/kelseyhightower/envconfig"
 )
 
 type Config struct {

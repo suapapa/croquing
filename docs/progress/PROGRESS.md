@@ -3,17 +3,17 @@
 > **자동 생성 문서** — 직접 수정하지 마세요.  
 > 소스: [`workitems.json`](workitems.json) · 갱신: `make progress`
 
-마지막 갱신: **2026-06-20 18:38 KST**
+마지막 갱신: **2026-06-20 18:44 KST**
 
 ## Phase A — 백엔드 (001-017)
 
-진행: **2 / 17** (11%)
+진행: **3 / 17** (17%)
 
 | Index | 상태 | 제목 | deps | 산출물 검증 |
 |-------|------|------|------|-------------|
 | **001** | ✅ done | [BE] 프로젝트 스캐폴딩 | — | ✓ |
 | **002** | ✅ done | [BE] 설정·환경변수 | 001 | ✓ |
-| **003** | ⬜ pending | [BE] HTTP 서버 골격 | 002 | — |
+| **003** | ✅ done | [BE] HTTP 서버 골격 | 002 | ✓ |
 | **004** | ⬜ pending | [BE] 로비 도메인 모델 | 001 | — |
 | **005** | ⬜ pending | [BE] 로비 저장소 | 004 | — |
 | **006** | ⬜ pending | [BE] 로비 생성·조회 API | 003, 005 | — |
@@ -45,6 +45,12 @@
 - 산출물: internal/config/config.go
 - 메모: caarlosh/envconfig 사용. cmd/server에서 config.Load() 호출.
 
+#### 003 — [BE] HTTP 서버 골격
+
+- 완료일: 2026-06-20
+- 산출물: internal/http/router.go, internal/http/server.go, internal/http/router_test.go
+- 메모: Gin 라우터, GET /health, SIGINT/SIGTERM graceful shutdown.
+
 ## Phase B — 프론트엔드 (101-112)
 
 선행 조건: backend 완료 (001-017)
@@ -68,13 +74,12 @@
 
 ## 전체 요약
 
-- **전체:** 2 / 29 완료 (6%)
-- **백엔드:** 2 / 17 (11%)
+- **전체:** 3 / 29 완료 (10%)
+- **백엔드:** 3 / 17 (17%)
 - **프론트엔드:** 0 / 12 (0%)
 
 ## 다음 작업 후보
 
-- **003** — [BE] HTTP 서버 골격 (`pending`)
 - **004** — [BE] 로비 도메인 모델 (`pending`)
 - **009** — [BE] PixaBay API 클라이언트 (`pending`)
 

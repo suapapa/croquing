@@ -40,10 +40,14 @@
           "title": "[BE] HTTP 서버 골격",
           "description": "chi/gin 등 라우터, health check (GET /health), graceful shutdown",
           "deps": ["002"],
-          "status": "pending",
+          "status": "done",
+          "completed_at": "2026-06-20",
           "artifacts": [
-            "internal/http/"
-          ]
+            "internal/http/router.go",
+            "internal/http/server.go",
+            "internal/http/router_test.go"
+          ],
+          "notes": "Gin 라우터, GET /health, SIGINT/SIGTERM graceful shutdown."
         },
         {
           "id": "004",
