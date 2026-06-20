@@ -7,13 +7,14 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/suapapa/croquis-king/internal/lobby"
+	"github.com/suapapa/croquis-king/internal/pixabay"
 )
 
 func init() {
 	gin.SetMode(gin.ReleaseMode)
 }
 
-func newRouter(store lobby.Store, drawDuration time.Duration) *gin.Engine {
+func newRouter(store lobby.Store, drawDuration time.Duration, pixabayClient *pixabay.Client) *gin.Engine {
 	r := gin.New()
 	r.Use(gin.Recovery())
 
@@ -21,6 +22,9 @@ func newRouter(store lobby.Store, drawDuration time.Duration) *gin.Engine {
 
 	api := r.Group("/api")
 	registerLobbyRoutes(api, store, drawDuration)
+	if pixabayClient != nil {
+		registerPixabayRoutes(api, store, pixabayClient)
+	}
 
 	r.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"error": "not found"})

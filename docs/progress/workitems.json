@@ -127,7 +127,14 @@
           "title": "[BE] PixaBay 검색 API",
           "description": "GET /api/pixabay/search?q&order&page&per_page. AdminToken 검증, PixaBay 응답 정규화",
           "deps": ["006", "009"],
-          "status": "pending"
+          "status": "done",
+          "completed_at": "2026-06-20",
+          "artifacts": [
+            "internal/http/pixabay_handlers.go",
+            "internal/http/admin_auth.go",
+            "internal/http/pixabay_handlers_test.go"
+          ],
+          "notes": "GET /api/pixabay/search. lobby_id + X-Admin-Token 검증. snake_case JSON 정규화."
         },
         {
           "id": "011",

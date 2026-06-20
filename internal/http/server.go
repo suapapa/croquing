@@ -14,6 +14,7 @@ import (
 
 	"github.com/suapapa/croquis-king/internal/config"
 	"github.com/suapapa/croquis-king/internal/lobby"
+	"github.com/suapapa/croquis-king/internal/pixabay"
 )
 
 const shutdownTimeout = 10 * time.Second
@@ -26,13 +27,13 @@ type Server struct {
 }
 
 // New builds a Server from configuration and dependencies.
-func New(cfg *config.Config, store lobby.Store) (*Server, error) {
+func New(cfg *config.Config, store lobby.Store, pixabayClient *pixabay.Client) (*Server, error) {
 	drawDuration, err := time.ParseDuration(cfg.DrawDuration)
 	if err != nil {
 		return nil, fmt.Errorf("parse DRAW_DURATION: %w", err)
 	}
 
-	router := newRouter(store, drawDuration)
+	router := newRouter(store, drawDuration, pixabayClient)
 
 	return &Server{
 		cfg:    cfg,
