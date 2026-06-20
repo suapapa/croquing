@@ -43,9 +43,7 @@ export function ParticipantWaitPanel() {
         <IconBulb className="button__icon" />
       </div>
       <h2 className="tip-panel__title">{t('wait.settingPhotos')}</h2>
-      <p style={{ color: 'var(--color-muted)', fontSize: '0.875rem', marginBottom: 'var(--space-6)' }}>
-        {t('wait.adminChoosing')}
-      </p>
+      <p className="tip-panel__subtitle">{t('wait.adminChoosing')}</p>
 
       <div className="tip-panel__carousel">
         {currentTip ? (

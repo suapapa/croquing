@@ -10,6 +10,10 @@ export function getBrowserLanguage(): Language {
   return 'en'
 }
 
+export function syncDocumentLanguage(): void {
+  document.documentElement.lang = getBrowserLanguage()
+}
+
 // Simple translation lookup with placeholder support like {count}
 const TRANSLATIONS: Record<Language, Record<string, string>> = {
   en: {
