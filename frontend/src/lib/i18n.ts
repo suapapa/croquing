@@ -19,7 +19,8 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
   en: {
     // HomePage
     'home.eyebrow': 'Real-time croquis meetups',
-    'home.lead': 'Create a lobby, share the link, and draw together with synchronized photos and timers — no screen sharing required.',
+    'home.lead':
+      'Create a lobby, share the link, and draw together with synchronized photos and timers — no screen sharing required.',
     'home.createLobby': 'Create lobby',
     'home.createLobbyFailed': 'Failed to create lobby',
     'home.creatingLobby': 'Creating lobby…',
@@ -27,10 +28,12 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'home.step1.title': 'Create & share',
     'home.step1.desc': 'Start a lobby and send the link to your drawing group.',
     'home.step2.title': 'Pick references',
-    'home.step2.desc': 'The admin selects photos from Pixabay for everyone to draw.',
+    'home.step2.desc':
+      'The admin selects photos from Pixabay for everyone to draw.',
     'home.step3.title': 'Draw in sync',
-    'home.step3.desc': 'Timed rounds with the same photo and countdown for all.',
-    
+    'home.step3.desc':
+      'Timed rounds with the same photo and countdown for all.',
+
     // LobbyLayout & Page
     'lobby.badge.admin': 'Admin',
     'lobby.badge.participant': 'Participant',
@@ -45,12 +48,12 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'lobby.participantCount': '{count} participant',
     'lobby.participantCountPlural': '{count} participants',
     'lobby.lobbyId': 'Lobby {id}',
-    
+
     // CopyLobbyLinkButton
     'copy.copied': 'Copied!',
     'copy.failed': 'Copy failed',
     'copy.link': 'Copy link',
-    
+
     // AdminControls
     'admin.startSession': 'Start session',
     'admin.starting': 'Starting…',
@@ -59,34 +62,37 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'admin.endSession': 'End session',
     'admin.ending': 'Ending…',
     'admin.actionFailed': 'Action failed',
-    
+
     // ParticipantWaitPanel
     'wait.settingPhotos': 'Setting up reference photos...',
-    'wait.adminChoosing': 'The admin is choosing photos. They stay hidden until the session starts.',
+    'wait.adminChoosing':
+      'The admin is choosing photos. They stay hidden until the session starts.',
     'wait.tipLabel': 'Tip: {title}',
     'wait.goTip': 'Go to tip {idx}',
     'wait.waitingForAdmin': 'Waiting for admin...',
-    
+
     // PhotoReviewPanel
     'review.photosSaved': '{count} photos saved',
-    'review.instruction': 'Hover a thumbnail to preview it at full size. When you are happy with the set, shuffle and lock the order to start.',
+    'review.instruction':
+      'Hover a thumbnail to preview it at full size. When you are happy with the set, complete the selection to prepare the session (photos will be shuffled automatically).',
     'review.previewAria': 'Preview saved photo {index} of {total}',
     'review.editSelection': 'Edit selection',
     'review.selectionComplete': 'Selection complete',
     'review.shuffling': 'Shuffling…',
-    
+
     // PhotoSelectionPanel
     'selection.errSave': 'Failed to save selection',
     'selection.errConfirm': 'Failed to confirm selection',
     'selection.errReopen': 'Failed to reopen photo selection',
     'selection.saving': 'Saving…',
     'selection.saveCount': 'Save {count} photos',
-    
+
     // ReadyPanel
     'ready.photosReady': 'photos ready',
-    'ready.desc': 'The order is shuffled and hidden. Thumbnails stay off until each draw round begins.',
+    'ready.desc':
+      'The order is shuffled and hidden. Thumbnails stay off until each draw round begins.',
     'ready.hint': 'Waiting for the admin to start…',
-    
+
     // DrawingPanel
     'draw.exitFullscreen': 'Exit Fullscreen',
     'draw.enterFullscreen': 'Enter Fullscreen',
@@ -95,15 +101,18 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'draw.round': 'Round {current} / {total}',
     'draw.startsIn': 'Round starts in {count} seconds',
     'draw.remainingAria': 'Draw time remaining',
-    
+
     // SessionBreakPanels
     'break.takeBreather': 'Take a breather',
-    'break.hiddenDesc': 'The reference photo is hidden until the next round starts.',
+    'break.hiddenDesc':
+      'The reference photo is hidden until the next round starts.',
     'break.completedRound': 'Completed round {current} of {total}',
     'break.sessionFinished': 'Session finished',
-    'break.completedRoundsDesc': 'You completed {count} round. Great work everyone.',
-    'break.completedRoundsDescPlural': 'You completed {count} rounds. Great work everyone.',
-    
+    'break.completedRoundsDesc':
+      'You completed {count} round. Great work everyone.',
+    'break.completedRoundsDescPlural':
+      'You completed {count} rounds. Great work everyone.',
+
     // PixabaySearchPanel
     'search.errEmpty': 'Enter a search term',
     'search.errFailed': 'Search failed',
@@ -126,7 +135,8 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
   ko: {
     // HomePage
     'home.eyebrow': '실시간 크로키 모임',
-    'home.lead': '로비를 만들고 링크만 공유하면, 같은 사진과 타이머로 함께 그릴 수 있어요. 화면 공유는 필요 없습니다.',
+    'home.lead':
+      '로비를 만들고 링크만 공유하면, 같은 사진과 타이머로 함께 그릴 수 있어요. 화면 공유는 필요 없습니다.',
     'home.createLobby': '로비 만들기',
     'home.createLobbyFailed': '로비를 만들지 못했습니다',
     'home.creatingLobby': '로비 만드는 중…',
@@ -137,7 +147,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'home.step2.desc': '방장이 Pixabay에서 모두가 그릴 사진을 고릅니다.',
     'home.step3.title': '동시에 그리기',
     'home.step3.desc': '모두 같은 사진을 보며 카운트다운과 함께 그립니다.',
-    
+
     // LobbyLayout & Page
     'lobby.badge.admin': '방장',
     'lobby.badge.participant': '참가자',
@@ -152,12 +162,12 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'lobby.participantCount': '{count}명 참가 중',
     'lobby.participantCountPlural': '{count}명 참가 중',
     'lobby.lobbyId': '로비 {id}',
-    
+
     // CopyLobbyLinkButton
     'copy.copied': '복사했어요!',
     'copy.failed': '복사하지 못했습니다',
     'copy.link': '링크 복사',
-    
+
     // AdminControls
     'admin.startSession': '세션 시작',
     'admin.starting': '시작 중…',
@@ -166,34 +176,37 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'admin.endSession': '세션 종료',
     'admin.ending': '종료 중…',
     'admin.actionFailed': '작업에 실패했습니다',
-    
+
     // ParticipantWaitPanel
     'wait.settingPhotos': '레퍼런스 사진 준비 중…',
-    'wait.adminChoosing': '방장이 사진을 고르는 중이에요. 세션이 시작되기 전까지는 보이지 않습니다.',
+    'wait.adminChoosing':
+      '방장이 사진을 고르는 중이에요. 세션이 시작되기 전까지는 보이지 않습니다.',
     'wait.tipLabel': '팁: {title}',
     'wait.goTip': '팁 {idx}으로 이동',
     'wait.waitingForAdmin': '방장을 기다리는 중…',
-    
+
     // PhotoReviewPanel
     'review.photosSaved': '사진 {count}장 저장됨',
-    'review.instruction': '썸네일에 마우스를 올리면 크게 볼 수 있어요. 마음에 들면 순서를 섞고 고정한 뒤 시작하세요.',
+    'review.instruction':
+      '썸네일에 마우스를 올리면 크게 볼 수 있어요. 마음에 들면 선택 완료를 눌러 세션을 준비하세요. (사진 순서는 자동으로 섞이고 고정됩니다.)',
     'review.previewAria': '저장된 사진 {index} / {total} 미리보기',
     'review.editSelection': '선택 수정',
     'review.selectionComplete': '선택 완료',
     'review.shuffling': '섞는 중…',
-    
+
     // PhotoSelectionPanel
     'selection.errSave': '선택을 저장하지 못했습니다',
     'selection.errConfirm': '선택을 확정하지 못했습니다',
     'selection.errReopen': '사진 선택을 다시 열지 못했습니다',
     'selection.saving': '저장 중…',
     'selection.saveCount': '사진 {count}장 저장',
-    
+
     // ReadyPanel
     'ready.photosReady': '장 사진 준비됨',
-    'ready.desc': '사진 순서를 섞어 숨겨 두었어요. 각 라운드가 시작되기 전까지 썸네일은 보이지 않습니다.',
+    'ready.desc':
+      '사진 순서를 섞어 숨겨 두었어요. 각 라운드가 시작되기 전까지 썸네일은 보이지 않습니다.',
     'ready.hint': '방장이 시작할 때까지 기다려 주세요…',
-    
+
     // DrawingPanel
     'draw.exitFullscreen': '전체 화면 끄기',
     'draw.enterFullscreen': '전체 화면',
@@ -202,15 +215,17 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'draw.round': '라운드 {current} / {total}',
     'draw.startsIn': '{count}초 뒤 라운드 시작',
     'draw.remainingAria': '남은 그리기 시간',
-    
+
     // SessionBreakPanels
     'break.takeBreather': '잠깐 쉬어 가세요',
-    'break.hiddenDesc': '다음 라운드가 시작될 때까지 레퍼런스 사진은 숨겨져 있어요.',
+    'break.hiddenDesc':
+      '다음 라운드가 시작될 때까지 레퍼런스 사진은 숨겨져 있어요.',
     'break.completedRound': '{total}라운드 중 {current}라운드 완료',
     'break.sessionFinished': '세션 종료',
     'break.completedRoundsDesc': '총 {count}라운드 끝! 모두 수고하셨어요.',
-    'break.completedRoundsDescPlural': '총 {count}라운드 끝! 모두 수고하셨어요.',
-    
+    'break.completedRoundsDescPlural':
+      '총 {count}라운드 끝! 모두 수고하셨어요.',
+
     // PixabaySearchPanel
     'search.errEmpty': '검색어를 입력하세요',
     'search.errFailed': '검색하지 못했습니다',
@@ -233,18 +248,21 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
   ja: {
     // HomePage
     'home.eyebrow': 'リアルタイムクロッキーの集まり',
-    'home.lead': 'ロビーを作成してリンクを共有し、同期された写真とタイマーで一緒に描きましょう — 画面共有は不要です。',
+    'home.lead':
+      'ロビーを作成してリンクを共有し、同期された写真とタイマーで一緒に描きましょう — 画面共有は不要です。',
     'home.createLobby': 'ロビーを作成',
     'home.createLobbyFailed': 'ロビーの作成に失敗しました',
     'home.creatingLobby': 'ロビーを作成中…',
     'home.howItWorks': 'ご利用方法',
     'home.step1.title': '作成と共有',
-    'home.step1.desc': 'ロビーを起動し、ドローインググループにリンクを送信します。',
+    'home.step1.desc':
+      'ロビーを起動し、ドローインググループにリンクを送信します。',
     'home.step2.title': 'リファレンスの選択',
     'home.step2.desc': '管理者が全員で描く写真をPixabayから選択します。',
     'home.step3.title': '同期して描く',
-    'home.step3.desc': '全員に同じ写真とカウントダウンが表示されるタイマー制ラウンドです。',
-    
+    'home.step3.desc':
+      '全員に同じ写真とカウントダウンが表示されるタイマー制ラウンドです。',
+
     // LobbyLayout & Page
     'lobby.badge.admin': 'ホスト',
     'lobby.badge.participant': '参加者',
@@ -259,12 +277,12 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'lobby.participantCount': '{count}人の参加者',
     'lobby.participantCountPlural': '{count}人の参加者',
     'lobby.lobbyId': 'ロビー {id}',
-    
+
     // CopyLobbyLinkButton
     'copy.copied': 'コピーしました！',
     'copy.failed': 'コピー失敗',
     'copy.link': 'リンクをコピー',
-    
+
     // AdminControls
     'admin.startSession': 'セッション開始',
     'admin.starting': '開始中…',
@@ -273,34 +291,37 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'admin.endSession': 'セッション終了',
     'admin.ending': '終了中…',
     'admin.actionFailed': '処理失敗',
-    
+
     // ParticipantWaitPanel
     'wait.settingPhotos': 'リファレンス写真を設定中...',
-    'wait.adminChoosing': '管理者が写真を選択しています。セッションが開始されるまで写真は非表示になります。',
+    'wait.adminChoosing':
+      '管理者が写真を選択しています。セッションが開始されるまで写真は非表示になります。',
     'wait.tipLabel': 'ヒント: {title}',
     'wait.goTip': 'ヒント {idx} に移動',
     'wait.waitingForAdmin': '管理者を待っています...',
-    
+
     // PhotoReviewPanel
     'review.photosSaved': '{count}枚の写真が保存されました',
-    'review.instruction': 'サムネイルにホバーすると拡大プレビューが表示されます。選択した内容でよければ、シャッフルして順序を固定し、開始してください。',
+    'review.instruction':
+      'サムネイルにホバーすると拡大プレビューが表示されます。選択した内容でよければ、「選択完了」を押してセッションを準備してください（写真の順序は自動的にシャッフルされ、固定されます）。',
     'review.previewAria': '保存された写真 {index} / {total} のプレビュー',
     'review.editSelection': '選択を編集',
     'review.selectionComplete': '選択完了',
     'review.shuffling': 'シャッフル中…',
-    
+
     // PhotoSelectionPanel
     'selection.errSave': '選択内容의保存に失敗しました',
     'selection.errConfirm': '選択内容の確定に失敗しました',
     'selection.errReopen': '写真選択の再オープンに失敗しました',
     'selection.saving': '保存中…',
     'selection.saveCount': '{count}枚の写真を保存',
-    
+
     // ReadyPanel
     'ready.photosReady': '枚の写真の準備完了',
-    'ready.desc': '写真の順序はシャッフルされ、非表示になっています。各描画ラウンドが始まるまでサムネイルは表示されません。',
+    'ready.desc':
+      '写真の順序はシャッフルされ、非表示になっています。各描画ラウンドが始まるまでサムネイルは表示されません。',
     'ready.hint': '管理者が開始するのを待っています…',
-    
+
     // DrawingPanel
     'draw.exitFullscreen': '全画面表示の終了',
     'draw.enterFullscreen': '全画面表示',
@@ -309,15 +330,18 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'draw.round': 'ラウンド {current} / {total}',
     'draw.startsIn': 'ラウンドが {count} 秒後に始まります',
     'draw.remainingAria': '残りの描画時間',
-    
+
     // SessionBreakPanels
     'break.takeBreather': 'ひと息つきましょう',
-    'break.hiddenDesc': '次のラウンドが始まるまで、リファレンス写真は非表示になります。',
+    'break.hiddenDesc':
+      '次のラウンドが始まるまで、リファレンス写真は非表示になります。',
     'break.completedRound': '全 {total} ラウンド中 {current} ラウンド完了',
     'break.sessionFinished': 'セッション終了',
-    'break.completedRoundsDesc': '全 {count} ラウンドを完了しました。皆さん、お疲れ様でした！',
-    'break.completedRoundsDescPlural': '全 {count} ラウンドを完了しました。皆さん、お疲れ様でした！',
-    
+    'break.completedRoundsDesc':
+      '全 {count} ラウンドを完了しました。皆さん、お疲れ様でした！',
+    'break.completedRoundsDescPlural':
+      '全 {count} ラウンドを完了しました。皆さん、お疲れ様でした！',
+
     // PixabaySearchPanel
     'search.errEmpty': '検索ワードを入力してください',
     'search.errFailed': '検索に失敗しました',
@@ -340,18 +364,22 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
   pl: {
     // HomePage
     'home.eyebrow': 'Spotkania kroquis w czasie rzeczywistym',
-    'home.lead': 'Utwórz pokój, udostępnij link i rysujcie wspólnie ze zsynchronizowanymi zdjęciami i licznikami — udostępnianie ekranu nie jest wymagane.',
+    'home.lead':
+      'Utwórz pokój, udostępnij link i rysujcie wspólnie ze zsynchronizowanymi zdjęciami i licznikami — udostępnianie ekranu nie jest wymagane.',
     'home.createLobby': 'Utwórz pokój',
     'home.createLobbyFailed': 'Nie udało się utworzyć pokoju',
     'home.creatingLobby': 'Tworzenie pokoju…',
     'home.howItWorks': 'Jak to działa',
     'home.step1.title': 'Utwórz i udostępnij',
-    'home.step1.desc': 'Uruchom pokój i wyślij link do swojej grupy rysunkowej.',
+    'home.step1.desc':
+      'Uruchom pokój i wyślij link do swojej grupy rysunkowej.',
     'home.step2.title': 'Wybierz referencje',
-    'home.step2.desc': 'Administrator wybiera zdjęcia z Pixabay, które wszyscy będą rysować.',
+    'home.step2.desc':
+      'Administrator wybiera zdjęcia z Pixabay, które wszyscy będą rysować.',
     'home.step3.title': 'Rysuj w synchronizacji',
-    'home.step3.desc': 'Rundy na czas z tym samym zdjęciem i odliczaniem dla wszystkich.',
-    
+    'home.step3.desc':
+      'Rundy na czas z tym samym zdjęciem i odliczaniem dla wszystkich.',
+
     // LobbyLayout & Page
     'lobby.badge.admin': 'Admin',
     'lobby.badge.participant': 'Uczestnik',
@@ -366,12 +394,12 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'lobby.participantCount': '{count} uczestnik',
     'lobby.participantCountPlural': '{count} uczestników',
     'lobby.lobbyId': 'Pokój {id}',
-    
+
     // CopyLobbyLinkButton
     'copy.copied': 'Skopiowano!',
     'copy.failed': 'Błąd kopiowania',
     'copy.link': 'Kopiuj link',
-    
+
     // AdminControls
     'admin.startSession': 'Rozpocznij sesję',
     'admin.starting': 'Rozpoczynanie…',
@@ -380,34 +408,37 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'admin.endSession': 'Zakończ sesję',
     'admin.ending': 'Kończenie…',
     'admin.actionFailed': 'Akcja nie powiodła się',
-    
+
     // ParticipantWaitPanel
     'wait.settingPhotos': 'Konfigurowanie zdjęć referencyjnych...',
-    'wait.adminChoosing': 'Administrator wybiera zdjęcia. Pozostaną one ukryte do momentu rozpoczęcia sesji.',
+    'wait.adminChoosing':
+      'Administrator wybiera zdjęcia. Pozostaną one ukryte do momentu rozpoczęcia sesji.',
     'wait.tipLabel': 'Wskazówka: {title}',
     'wait.goTip': 'Przejdź do wskazówki {idx}',
     'wait.waitingForAdmin': 'Oczekiwanie na administratora...',
-    
+
     // PhotoReviewPanel
     'review.photosSaved': 'Zapisano {count} zdjęć',
-    'review.instruction': 'Najedź kursorem na miniaturkę, aby podglądnąć ją w pełnym rozmiarze. Kiedy zestaw Ci się spodoba, wymieszaj i zablokuj kolejność, aby rozpocząć.',
+    'review.instruction':
+      'Najedź kursorem na miniaturkę, aby podglądnąć ją w pełnym rozmiarze. Jeśli zestaw Ci odpowiada, kliknij „Wybór zakończony”, aby przygotować sesję (kolejność zdjęć zostanie automatycznie wymieszana).',
     'review.previewAria': 'Podgląd zapisanego zdjęcia {index} z {total}',
     'review.editSelection': 'Edytuj wybór',
     'review.selectionComplete': 'Wybór zakończony',
     'review.shuffling': 'Mieszanie…',
-    
+
     // PhotoSelectionPanel
     'selection.errSave': 'Nie udało się zapisać wyboru',
     'selection.errConfirm': 'Nie udało się potwierdzić wyboru',
     'selection.errReopen': 'Nie udało się ponownie otworzyć wyboru zdjęć',
     'selection.saving': 'Zapisywanie…',
     'selection.saveCount': 'Zapisz {count} zdjęć',
-    
+
     // ReadyPanel
     'ready.photosReady': 'zdjęć gotowych',
-    'ready.desc': 'Kolejność jest wymieszana i ukryta. Miniaturki pozostają wyłączone do czasu rozpoczęcia każdej rundy rysowania.',
+    'ready.desc':
+      'Kolejność jest wymieszana i ukryta. Miniaturki pozostają wyłączone do czasu rozpoczęcia każdej rundy rysowania.',
     'ready.hint': 'Oczekiwanie na rozpoczęcie przez administratora…',
-    
+
     // DrawingPanel
     'draw.exitFullscreen': 'Wyjdź z pełnego ekranu',
     'draw.enterFullscreen': 'Pełny ekran',
@@ -416,15 +447,18 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'draw.round': 'Runda {current} / {total}',
     'draw.startsIn': 'Runda rozpoczyna się za {count} sekund',
     'draw.remainingAria': 'Pozostały czas rysowania',
-    
+
     // SessionBreakPanels
     'break.takeBreather': 'Złap oddech',
-    'break.hiddenDesc': 'Zdjęcie referencyjne jest ukryte do momentu rozpoczęcia następnej rundy.',
+    'break.hiddenDesc':
+      'Zdjęcie referencyjne jest ukryte do momentu rozpoczęcia następnej rundy.',
     'break.completedRound': 'Ukończono rundę {current} z {total}',
     'break.sessionFinished': 'Sesja zakończona',
-    'break.completedRoundsDesc': 'Ukończono {count} rundę. Dobra robota, wszyscy.',
-    'break.completedRoundsDescPlural': 'Ukończono {count} rund. Dobra robota, wszyscy.',
-    
+    'break.completedRoundsDesc':
+      'Ukończono {count} rundę. Dobra robota, wszyscy.',
+    'break.completedRoundsDescPlural':
+      'Ukończono {count} rund. Dobra robota, wszyscy.',
+
     // PixabaySearchPanel
     'search.errEmpty': 'Wpisz wyszukiwane hasło',
     'search.errFailed': 'Wyszukiwanie nie powiodło się',
@@ -446,13 +480,16 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
   },
 }
 
-export function t(key: string, params?: Record<string, string | number>): string {
+export function t(
+  key: string,
+  params?: Record<string, string | number>,
+): string {
   const lang = getBrowserLanguage()
   const template = TRANSLATIONS[lang]?.[key] || TRANSLATIONS.en[key] || key
   if (!params) return template
   return Object.entries(params).reduce(
     (acc, [k, v]) => acc.replace(new RegExp(`{${k}}`, 'g'), String(v)),
-    template
+    template,
   )
 }
 
@@ -470,15 +507,18 @@ const LOCALIZED_PHASES: Record<Language, Record<LobbyPhase, PhaseMessage>> = {
     },
     SELECTING: {
       title: 'Reviewing reference photos',
-      description: 'The admin is checking the saved photos before shuffling and starting the session.',
+      description:
+        'The admin is checking the saved photos before shuffling and starting the session.',
     },
     READY: {
       title: 'Ready to start',
-      description: 'Photos are shuffled and hidden. Waiting for the admin to begin.',
+      description:
+        'Photos are shuffled and hidden. Waiting for the admin to begin.',
     },
     DRAWING: {
       title: 'Draw time',
-      description: 'Focus on the reference photo. The timer is server-controlled.',
+      description:
+        'Focus on the reference photo. The timer is server-controlled.',
     },
     BETWEEN_ROUNDS: {
       title: 'Round break',
@@ -500,7 +540,8 @@ const LOCALIZED_PHASES: Record<Language, Record<LobbyPhase, PhaseMessage>> = {
     },
     READY: {
       title: '시작 준비 완료',
-      description: '사진 순서를 섞어 숨겨 두었어요. 방장이 시작할 때까지 기다려 주세요.',
+      description:
+        '사진 순서를 섞어 숨겨 두었어요. 방장이 시작할 때까지 기다려 주세요.',
     },
     DRAWING: {
       title: '그리기 시간!',
@@ -518,19 +559,23 @@ const LOCALIZED_PHASES: Record<Language, Record<LobbyPhase, PhaseMessage>> = {
   ja: {
     WAITING: {
       title: 'ホストの待機中',
-      description: '管理者が準備を進めています。このページのままお待ちください。',
+      description:
+        '管理者が準備を進めています。このページのままお待ちください。',
     },
     SELECTING: {
       title: 'リファレンス写真の確認中',
-      description: '管理者が写真をシャッフルしてセッションを開始する前に、保存された写真を確認しています。',
+      description:
+        '管理者が写真をシャッフルしてセッションを開始する前に、保存された写真を確認しています。',
     },
     READY: {
       title: '開始準備完了',
-      description: '写真はシャッフルされ、非表示になっています。管理者が開始するのをお待ちください。',
+      description:
+        '写真はシャッフルされ、非表示になっています。管理者が開始するのをお待ちください。',
     },
     DRAWING: {
       title: '描画時間',
-      description: 'リファレンス写真に集中してください。タイマーはサーバーによって制御されています。',
+      description:
+        'リファレンス写真に集中してください。タイマーはサーバーによって制御されています。',
     },
     BETWEEN_ROUNDS: {
       title: 'ラウンド間の休憩',
@@ -538,7 +583,8 @@ const LOCALIZED_PHASES: Record<Language, Record<LobbyPhase, PhaseMessage>> = {
     },
     FINISHED: {
       title: 'セッション終了',
-      description: '一緒に描いていただきありがとうございました。また来週お会いしましょう。',
+      description:
+        '一緒に描いていただきありがとうございました。また来週お会いしましょう。',
     },
   },
   pl: {
@@ -548,15 +594,18 @@ const LOCALIZED_PHASES: Record<Language, Record<LobbyPhase, PhaseMessage>> = {
     },
     SELECTING: {
       title: 'Przeglądanie zdjęć referencyjnych',
-      description: 'Administrator sprawdza zapisane zdjęcia przed ich wymieszaniem i rozpoczęciem sesji.',
+      description:
+        'Administrator sprawdza zapisane zdjęcia przed ich wymieszaniem i rozpoczęciem sesji.',
     },
     READY: {
       title: 'Gotowy do rozpoczęcia',
-      description: 'Zdjęcia są wymieszane i ukryte. Oczekiwanie na rozpoczęcie przez administratora.',
+      description:
+        'Zdjęcia są wymieszane i ukryte. Oczekiwanie na rozpoczęcie przez administratora.',
     },
     DRAWING: {
       title: 'Czas na rysowanie',
-      description: 'Skoncentruj się na zdjęciu referencyjnym. Licznik czasu jest kontrolowany przez serwer.',
+      description:
+        'Skoncentruj się na zdjęciu referencyjnym. Licznik czasu jest kontrolowany przez serwer.',
     },
     BETWEEN_ROUNDS: {
       title: 'Przerwa między rundami',
@@ -564,7 +613,8 @@ const LOCALIZED_PHASES: Record<Language, Record<LobbyPhase, PhaseMessage>> = {
     },
     FINISHED: {
       title: 'Sesja zakończona',
-      description: 'Dziękujemy za wspólne rysowanie. Do zobaczenia w przyszłym tygodniu.',
+      description:
+        'Dziękujemy za wspólne rysowanie. Do zobaczenia w przyszłym tygodniu.',
     },
   },
 }

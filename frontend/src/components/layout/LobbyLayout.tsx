@@ -58,24 +58,32 @@ export function LobbyLayout({
           {snapshot ? (
             <span className="lobby-layout__participants">
               {snapshot.participant_count === 1
-                ? t('lobby.participantCount', { count: snapshot.participant_count })
-                : t('lobby.participantCountPlural', { count: snapshot.participant_count })}
+                ? t('lobby.participantCount', {
+                    count: snapshot.participant_count,
+                  })
+                : t('lobby.participantCountPlural', {
+                    count: snapshot.participant_count,
+                  })}
             </span>
           ) : null}
-          {snapshot ? (
-            <CopyLobbyLinkButton lobbyId={lobbyId} compact />
-          ) : null}
+          {snapshot ? <CopyLobbyLinkButton lobbyId={lobbyId} compact /> : null}
         </div>
       </header>
 
       {isDisconnected ? (
-        <div className="lobby-layout__banner lobby-layout__banner--warning" role="status">
+        <div
+          className="lobby-layout__banner lobby-layout__banner--warning"
+          role="status"
+        >
           {t('lobby.connection.lost')}
         </div>
       ) : null}
 
       {connectionError ? (
-        <div className="lobby-layout__banner lobby-layout__banner--error" role="alert">
+        <div
+          className="lobby-layout__banner lobby-layout__banner--error"
+          role="alert"
+        >
           {connectionError}
         </div>
       ) : null}

@@ -54,9 +54,13 @@ export function AdminControls({ lobbyId, snapshot }: AdminControlsProps) {
           type="button"
           className="button button--primary"
           disabled={loadingAction !== null}
-          onClick={() => void runAction('start', () => startLobbySession(lobbyId))}
+          onClick={() =>
+            void runAction('start', () => startLobbySession(lobbyId))
+          }
         >
-          {loadingAction === 'start' ? t('admin.starting') : t('admin.startSession')}
+          {loadingAction === 'start'
+            ? t('admin.starting')
+            : t('admin.startSession')}
         </button>
       ) : null}
 
@@ -66,9 +70,13 @@ export function AdminControls({ lobbyId, snapshot }: AdminControlsProps) {
             type="button"
             className="button button--primary"
             disabled={loadingAction !== null}
-            onClick={() => void runAction('next', () => nextLobbyRound(lobbyId))}
+            onClick={() =>
+              void runAction('next', () => nextLobbyRound(lobbyId))
+            }
           >
-            {loadingAction === 'next' ? t('admin.loading') : t('admin.nextPhoto')}
+            {loadingAction === 'next'
+              ? t('admin.loading')
+              : t('admin.nextPhoto')}
           </button>
           <button
             type="button"
@@ -78,7 +86,9 @@ export function AdminControls({ lobbyId, snapshot }: AdminControlsProps) {
               void runAction('finish', () => finishLobbySession(lobbyId))
             }
           >
-            {loadingAction === 'finish' ? t('admin.ending') : t('admin.endSession')}
+            {loadingAction === 'finish'
+              ? t('admin.ending')
+              : t('admin.endSession')}
           </button>
         </div>
       ) : null}

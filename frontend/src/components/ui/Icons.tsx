@@ -87,7 +87,7 @@ export function IconLogo({ className, style }: IconProps) {
         fill="currentColor"
         opacity="0.15"
       />
-      
+
       {/* The Crown (Tilted slightly on the head) */}
       <path
         d="M12.5 7 C12 6 14 3 14.5 3 C15 4 16 5 16.5 4.5 C17 5 18 4 18.5 3 C19 3 21 6 20.5 7"
@@ -353,4 +353,3 @@ export function IconClose({ className, style }: IconProps) {
     </svg>
   )
 }
-

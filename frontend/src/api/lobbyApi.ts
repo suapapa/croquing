@@ -6,7 +6,9 @@ export function createLobby(): Promise<CreateLobbyResponse> {
 }
 
 export function getLobby(lobbyId: string): Promise<LobbySnapshot> {
-  return apiRequest<LobbySnapshot>(`/api/lobbies/${encodeURIComponent(lobbyId)}`)
+  return apiRequest<LobbySnapshot>(
+    `/api/lobbies/${encodeURIComponent(lobbyId)}`,
+  )
 }
 
 export function setLobbyPhotos(

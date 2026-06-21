@@ -5,23 +5,25 @@ import { getLocalizedTips, t } from '../../lib/i18n'
 export function ParticipantWaitPanel() {
   const tips = getLocalizedTips()
   const [index, setIndex] = useState(0)
-  const [transitionState, setTransitionState] = useState<'active' | 'exit' | 'enter'>('active')
+  const [transitionState, setTransitionState] = useState<
+    'active' | 'exit' | 'enter'
+  >('active')
 
   useEffect(() => {
     const timer = setInterval(() => {
       setTransitionState('exit')
-      
+
       const exitTimer = setTimeout(() => {
         setIndex((prev) => (prev + 1) % tips.length)
         setTransitionState('enter')
-        
+
         const enterTimer = setTimeout(() => {
           setTransitionState('active')
         }, 50)
-        
+
         return () => clearTimeout(enterTimer)
       }, 300)
-      
+
       return () => clearTimeout(exitTimer)
     }, 8000)
 
@@ -78,7 +80,17 @@ export function ParticipantWaitPanel() {
         ))}
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginTop: 'var(--space-8)', color: 'var(--color-accent)', fontWeight: 600, fontSize: '0.875rem' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'var(--space-2)',
+          marginTop: 'var(--space-8)',
+          color: 'var(--color-accent)',
+          fontWeight: 600,
+          fontSize: '0.875rem',
+        }}
+      >
         <IconSpinner className="button__spinner" />
         <span>{t('wait.waitingForAdmin')}</span>
       </div>

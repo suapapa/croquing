@@ -60,9 +60,7 @@ export function HomePage() {
             <IconLogo className="home-page__logo" aria-hidden="true" />
             <h1 id="home-title">Croquis King</h1>
           </div>
-          <p className="home-page__lead">
-            {t('home.lead')}
-          </p>
+          <p className="home-page__lead">{t('home.lead')}</p>
 
           <button
             type="button"

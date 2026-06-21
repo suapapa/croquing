@@ -25,6 +25,26 @@ export function DrawingPanel({
 }: DrawingPanelProps) {
   const serverNow = useServerClock(serverTimeOffsetMs)
   const [isFullscreen, setIsFullscreen] = useState(false)
+  const [isFullscreenSupported, setIsFullscreenSupported] = useState(false)
+
+  useEffect(() => {
+    function checkSupport() {
+      const hasFullscreen =
+        typeof document !== 'undefined' && !!document.fullscreenEnabled
+      const isMobileDevice = /Mobi|Android|iPhone|iPad|iPod/i.test(
+        navigator.userAgent,
+      )
+      const isSmallScreen = window.innerWidth < 768
+      setIsFullscreenSupported(
+        hasFullscreen && !isMobileDevice && !isSmallScreen,
+      )
+    }
+    checkSupport()
+    window.addEventListener('resize', checkSupport)
+    return () => {
+      window.removeEventListener('resize', checkSupport)
+    }
+  }, [])
 
   useEffect(() => {
     function handleFullscreenChange() {
@@ -101,21 +121,35 @@ export function DrawingPanel({
 
       <div className="drawing-panel__body">
         <div className="drawing-panel__stage">
-          <div className="drawing-panel__controls">
-            <button
-              type="button"
-              className="button--zen-control"
-              onClick={toggleFullscreen}
-              title={isFullscreen ? t('draw.exitFullscreen') : t('draw.enterFullscreen')}
-              aria-label={isFullscreen ? t('draw.exitFullscreen') : t('draw.enterFullscreen')}
-            >
-              {isFullscreen ? (
-                <IconExitFullscreen style={{ width: '1.25rem', height: '1.25rem' }} />
-              ) : (
-                <IconFullscreen style={{ width: '1.25rem', height: '1.25rem' }} />
-              )}
-            </button>
-          </div>
+          {isFullscreenSupported && (
+            <div className="drawing-panel__controls">
+              <button
+                type="button"
+                className="button--zen-control"
+                onClick={toggleFullscreen}
+                title={
+                  isFullscreen
+                    ? t('draw.exitFullscreen')
+                    : t('draw.enterFullscreen')
+                }
+                aria-label={
+                  isFullscreen
+                    ? t('draw.exitFullscreen')
+                    : t('draw.enterFullscreen')
+                }
+              >
+                {isFullscreen ? (
+                  <IconExitFullscreen
+                    style={{ width: '1.25rem', height: '1.25rem' }}
+                  />
+                ) : (
+                  <IconFullscreen
+                    style={{ width: '1.25rem', height: '1.25rem' }}
+                  />
+                )}
+              </button>
+            </div>
+          )}
           {photo && !isCountdown ? (
             <div className={photoWrapClass}>
               <img

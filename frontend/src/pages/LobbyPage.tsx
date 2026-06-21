@@ -24,9 +24,7 @@ export function LobbyPage() {
   }
 
   return (
-    <main
-      className={`lobby-page${isDrawing ? ' lobby-page--drawing' : ''}`}
-    >
+    <main className={`lobby-page${isDrawing ? ' lobby-page--drawing' : ''}`}>
       <LobbyLayout
         lobbyId={id}
         isAdmin={isAdmin}

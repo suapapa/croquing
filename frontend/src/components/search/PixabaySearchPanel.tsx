@@ -16,7 +16,7 @@ import {
 import { t } from '../../lib/i18n'
 
 const RECOMMENDED_COUNT = 5
-const PIXABAY_PER_PAGE = 24
+const PIXABAY_PER_PAGE = 15
 
 interface PixabaySearchProps {
   lobbyId: string
@@ -43,6 +43,54 @@ export function PixabaySearchPanel({
   const initialSearchDone = useRef(false)
 
   const selectedIds = new Set(selectedPhotos.map((photo) => photo.pixabay_id))
+
+  const scrollerRef = useRef<HTMLDivElement>(null)
+  const [scrollState, setScrollState] = useState({
+    canScrollLeft: false,
+    canScrollRight: false,
+  })
+
+  const checkScroll = useCallback(() => {
+    const el = scrollerRef.current
+    if (!el) return
+    const { scrollLeft, scrollWidth, clientWidth } = el
+    const canScrollLeft = scrollLeft > 1
+    const canScrollRight = scrollLeft + clientWidth < scrollWidth - 1
+    setScrollState({ canScrollLeft, canScrollRight })
+  }, [])
+
+  useEffect(() => {
+    const el = scrollerRef.current
+    if (!el) return
+
+    checkScroll()
+
+    const resizeObserver = new ResizeObserver(() => {
+      checkScroll()
+    })
+    resizeObserver.observe(el)
+
+    el.addEventListener('scroll', checkScroll)
+
+    return () => {
+      resizeObserver.disconnect()
+      el.removeEventListener('scroll', checkScroll)
+    }
+  }, [checkScroll, selectedPhotos])
+
+  const getMaskImage = () => {
+    const { canScrollLeft, canScrollRight } = scrollState
+    if (canScrollLeft && canScrollRight) {
+      return 'linear-gradient(to right, transparent, white 24px, white calc(100% - 24px), transparent)'
+    }
+    if (canScrollLeft) {
+      return 'linear-gradient(to right, transparent, white 24px, white)'
+    }
+    if (canScrollRight) {
+      return 'linear-gradient(to right, white, white calc(100% - 24px), transparent)'
+    }
+    return 'none'
+  }
 
   const runSearch = useCallback(
     async (nextPage: number) => {
@@ -112,7 +160,9 @@ export function PixabaySearchPanel({
           }}
         >
           <label className="pixabay-search__field">
-            <span className="pixabay-search__label">{t('search.fieldLabel')}</span>
+            <span className="pixabay-search__label">
+              {t('search.fieldLabel')}
+            </span>
             <input
               type="search"
               value={query}
@@ -152,7 +202,10 @@ export function PixabaySearchPanel({
       ) : null}
 
       <p className="pixabay-search__hint">
-        {t('search.hint', { count: selectedPhotos.length, recommended: RECOMMENDED_COUNT })}
+        {t('search.hint', {
+          count: selectedPhotos.length,
+          recommended: RECOMMENDED_COUNT,
+        })}
       </p>
 
       {error ? (
@@ -169,8 +222,9 @@ export function PixabaySearchPanel({
               key={hit.pixabay_id}
               type="button"
               role="listitem"
-              className={`pixabay-search__card${selected ? ' pixabay-search__card--selected' : ''
-                }`}
+              className={`pixabay-search__card${
+                selected ? ' pixabay-search__card--selected' : ''
+              }`}
               onClick={() => togglePhoto(hit)}
               disabled={readOnly}
               aria-pressed={selected}
@@ -180,11 +234,7 @@ export function PixabaySearchPanel({
                   : t('search.ariaSelect', { id: hit.pixabay_id })
               }
             >
-              <img
-                src={hit.preview_url}
-                alt=""
-                loading="lazy"
-              />
+              <img src={hit.preview_url} alt="" loading="lazy" />
               {selected ? (
                 <span className="pixabay-search__check" aria-hidden="true">
                   ✓
@@ -207,9 +257,7 @@ export function PixabaySearchPanel({
           >
             <IconChevronLeft className="button__icon" />
           </button>
-          <span>
-            {t('search.pageIndicator', { page, total: totalPages })}
-          </span>
+          <span>{t('search.pageIndicator', { page, total: totalPages })}</span>
           <button
             type="button"
             className="button button--secondary button--icon-only"
@@ -233,18 +281,20 @@ export function PixabaySearchPanel({
       </div>
 
       {selectedPhotos.length > 0 ? (
-        <div className="selection-dock" role="region" aria-label="Selection dock">
+        <div
+          className="selection-dock"
+          role="region"
+          aria-label="Selection dock"
+        >
           <div className="selection-dock__container">
-            <div className="selection-dock__left">
-              <h3 className="selection-dock__title">
-                {t('search.dock.title')}
-                <span className="selection-dock__count-badge">
-                  {selectedPhotos.length}
-                </span>
-              </h3>
-            </div>
-            
-            <div className="selection-dock__scroller">
+            <div
+              ref={scrollerRef}
+              className="selection-dock__scroller"
+              style={{
+                maskImage: getMaskImage(),
+                WebkitMaskImage: getMaskImage(),
+              }}
+            >
               {selectedPhotos.map((photo) => (
                 <div key={photo.pixabay_id} className="selection-dock__item">
                   <img
@@ -257,20 +307,22 @@ export function PixabaySearchPanel({
                     className="selection-dock__remove"
                     onClick={() =>
                       onSelectionChange(
-                        selectedPhotos.filter((p) => p.pixabay_id !== photo.pixabay_id),
+                        selectedPhotos.filter(
+                          (p) => p.pixabay_id !== photo.pixabay_id,
+                        ),
                       )
                     }
                     title={t('search.dock.remove')}
                   >
-                    <IconClose style={{ width: '0.625rem', height: '0.625rem' }} />
+                    <IconClose
+                      style={{ width: '0.625rem', height: '0.625rem' }}
+                    />
                   </button>
                 </div>
               ))}
             </div>
 
-            <div className="selection-dock__actions">
-              {footerStart}
-            </div>
+            <div className="selection-dock__actions">{footerStart}</div>
           </div>
         </div>
       ) : null}

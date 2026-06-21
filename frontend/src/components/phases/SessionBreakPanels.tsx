@@ -36,7 +36,9 @@ export function FinishedPanel({ snapshot }: FinishedPanelProps) {
         <p>
           {snapshot.total_rounds === 1
             ? t('break.completedRoundsDesc', { count: snapshot.total_rounds })
-            : t('break.completedRoundsDescPlural', { count: snapshot.total_rounds })}
+            : t('break.completedRoundsDescPlural', {
+                count: snapshot.total_rounds,
+              })}
         </p>
       </div>
     </section>

@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import { ApiError } from '../../api/client'
-import { markLobbyReady, reopenLobbyPhotos, setLobbyPhotos } from '../../api/lobbyApi'
+import {
+  markLobbyReady,
+  reopenLobbyPhotos,
+  setLobbyPhotos,
+} from '../../api/lobbyApi'
 import type { LobbySnapshot, Photo } from '../../types/lobby'
 import { PixabaySearchPanel } from '../search/PixabaySearchPanel'
 import { PhotoReviewPanel } from './PhotoReviewPanel'
@@ -27,9 +31,7 @@ export function PhotoSelectionPanel({
 
   const canSearch = isAdmin && snapshot.phase === 'WAITING'
   const canConfirm =
-    isAdmin &&
-    snapshot.phase === 'WAITING' &&
-    selectedPhotos.length > 0
+    isAdmin && snapshot.phase === 'WAITING' && selectedPhotos.length > 0
   const awaitingReady = isAdmin && snapshot.phase === 'SELECTING'
 
   async function handleSaveSelection() {
@@ -74,7 +76,10 @@ export function PhotoSelectionPanel({
     }
   }
 
-  if (!isAdmin && (snapshot.phase === 'WAITING' || snapshot.phase === 'SELECTING')) {
+  if (
+    !isAdmin &&
+    (snapshot.phase === 'WAITING' || snapshot.phase === 'SELECTING')
+  ) {
     return <ParticipantWaitPanel />
   }
 
@@ -97,7 +102,9 @@ export function PhotoSelectionPanel({
                 disabled={loading || selectedPhotos.length === 0}
                 onClick={() => void handleSaveSelection()}
               >
-                {loading ? t('selection.saving') : t('selection.saveCount', { count: selectedPhotos.length })}
+                {loading
+                  ? t('selection.saving')
+                  : t('selection.saveCount', { count: selectedPhotos.length })}
               </button>
             ) : null
           }
