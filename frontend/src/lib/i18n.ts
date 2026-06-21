@@ -145,7 +145,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'home.step1.title': '로비 만들고 공유하기',
     'home.step1.desc': '로비를 만들고 그림 모임에 링크를 보내세요.',
     'home.step2.title': '레퍼런스 선택',
-    'home.step2.desc': '방장이 Pixabay에서 모두가 그릴 사진을 고릅니다.',
+    'home.step2.desc': '방장이 모두가 그릴 사진을 고릅니다.',
     'home.step3.title': '동시에 그리기',
     'home.step3.desc': '모두 같은 사진을 보며 카운트다운과 함께 그립니다.',
 
@@ -226,7 +226,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'break.completedRoundsDesc': '총 {count}라운드 끝! 모두 수고하셨어요.',
     'break.completedRoundsDescPlural':
       '총 {count}라운드 끝! 모두 수고하셨어요.',
-    'break.downloadPhotos': '문제 사진 ZIP 다운로드',
+    'break.downloadPhotos': '레퍼런스 사진 ZIP 다운로드',
 
     // PixabaySearchPanel
     'search.errEmpty': '검색어를 입력하세요',
