@@ -25,10 +25,13 @@ export function BetweenPanel({ snapshot }: BetweenPanelProps) {
 }
 
 interface FinishedPanelProps {
+  lobbyId: string
   snapshot: LobbySnapshot
 }
 
-export function FinishedPanel({ snapshot }: FinishedPanelProps) {
+export function FinishedPanel({ lobbyId, snapshot }: FinishedPanelProps) {
+  const downloadHref = `/api/lobbies/${encodeURIComponent(lobbyId)}/photos/download`
+
   return (
     <section className="phase-panel phase-panel--finished" aria-live="polite">
       <div className="finished-panel__card">
@@ -40,6 +43,11 @@ export function FinishedPanel({ snapshot }: FinishedPanelProps) {
                 count: snapshot.total_rounds,
               })}
         </p>
+        {snapshot.total_rounds > 0 ? (
+          <a className="finished-panel__download" href={downloadHref} download>
+            {t('break.downloadPhotos')}
+          </a>
+        ) : null}
       </div>
     </section>
   )

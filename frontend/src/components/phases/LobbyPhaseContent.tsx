@@ -46,7 +46,7 @@ export function LobbyPhaseContent({
     case 'BETWEEN_ROUNDS':
       return <BetweenPanel snapshot={snapshot} />
     case 'FINISHED':
-      return <FinishedPanel snapshot={snapshot} />
+      return <FinishedPanel lobbyId={lobbyId} snapshot={snapshot} />
     default:
       return null
   }

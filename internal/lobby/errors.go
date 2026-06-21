@@ -11,4 +11,7 @@ var (
 
 	// ErrEmptyPhotos is returned when a photo selection request has no photos.
 	ErrEmptyPhotos = errors.New("lobby: photos are required")
+
+	// ErrPhotosNotReady is returned when session photos are not available for download.
+	ErrPhotosNotReady = errors.New("lobby: session photos are not ready")
 )

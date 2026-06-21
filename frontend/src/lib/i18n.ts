@@ -112,6 +112,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
       'You completed {count} round. Great work everyone.',
     'break.completedRoundsDescPlural':
       'You completed {count} rounds. Great work everyone.',
+    'break.downloadPhotos': 'Download reference photos (ZIP)',
 
     // PixabaySearchPanel
     'search.errEmpty': 'Enter a search term',
@@ -225,6 +226,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'break.completedRoundsDesc': '총 {count}라운드 끝! 모두 수고하셨어요.',
     'break.completedRoundsDescPlural':
       '총 {count}라운드 끝! 모두 수고하셨어요.',
+    'break.downloadPhotos': '문제 사진 ZIP 다운로드',
 
     // PixabaySearchPanel
     'search.errEmpty': '검색어를 입력하세요',
@@ -341,6 +343,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
       '全 {count} ラウンドを完了しました。皆さん、お疲れ様でした！',
     'break.completedRoundsDescPlural':
       '全 {count} ラウンドを完了しました。皆さん、お疲れ様でした！',
+    'break.downloadPhotos': 'お題写真をZIPでダウンロード',
 
     // PixabaySearchPanel
     'search.errEmpty': '検索ワードを入力してください',
@@ -458,6 +461,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
       'Ukończono {count} rundę. Dobra robota, wszyscy.',
     'break.completedRoundsDescPlural':
       'Ukończono {count} rund. Dobra robota, wszyscy.',
+    'break.downloadPhotos': 'Pobierz zdjęcia referencyjne (ZIP)',
 
     // PixabaySearchPanel
     'search.errEmpty': 'Wpisz wyszukiwane hasło',

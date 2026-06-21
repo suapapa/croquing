@@ -835,6 +835,32 @@ select {
   text-align: center;
 }
 
+.finished-panel__download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--touch-min);
+  margin-top: var(--space-6);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  background: var(--color-accent);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.finished-panel__download:hover {
+  background: var(--color-accent-hover);
+}
+
+.finished-panel__download:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
 .ready-panel__count {
   margin: 0;
   font-family: var(--font-display);

@@ -1,7 +1,9 @@
 package httpserver
 
 import (
+	"context"
 	"errors"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -12,9 +14,11 @@ import (
 )
 
 type lobbyHandler struct {
-	store        lobby.Store
-	drawDuration time.Duration
-	lobbySync    *ws.SnapshotSync
+	store         lobby.Store
+	drawDuration  time.Duration
+	lobbySync     *ws.SnapshotSync
+	imageFetcher  lobby.ImageFetcher
+	imageFetchTTL time.Duration
 }
 
 type createLobbyResponse struct {
@@ -136,12 +140,66 @@ func (h *lobbyHandler) finishSession(c *gin.Context) {
 	respondLobbySnapshot(c, h, id)
 }
 
+func (h *lobbyHandler) downloadPhotos(c *gin.Context) {
+	id := c.Param("id")
+
+	lob, err := h.store.Get(c.Request.Context(), id)
+	if err != nil {
+		if errors.Is(err, lobby.ErrNotFound) {
+			c.JSON(http.StatusNotFound, gin.H{"error": "lobby not found"})
+			return
+		}
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to get lobby"})
+		return
+	}
+
+	if lob.Phase != lobby.PhaseFinished {
+		c.JSON(http.StatusConflict, gin.H{"error": "photos are only available after the session ends"})
+		return
+	}
+
+	photos, err := lob.OrderedPhotos()
+	if err != nil {
+		mapLobbyStoreError(c, err, "photos are not ready for download", "failed to prepare photos")
+		return
+	}
+
+	baseName := lobby.ArchiveBaseName(time.Now(), lob.ID)
+	timeout := h.imageFetchTTL
+	if timeout <= 0 {
+		timeout = 2 * time.Minute
+	}
+
+	ctx, cancel := context.WithTimeout(c.Request.Context(), timeout)
+	defer cancel()
+
+	zipData, err := lobby.BuildPhotosZIP(ctx, photos, baseName, h.imageFetcherOrDefault())
+	if err != nil {
+		c.JSON(http.StatusBadGateway, gin.H{"error": "failed to build photo archive"})
+		return
+	}
+
+	filename := baseName + ".zip"
+	c.Header("Content-Disposition", fmt.Sprintf(`attachment; filename="%s"`, filename))
+	c.Data(http.StatusOK, "application/zip", zipData)
+}
+
+func (h *lobbyHandler) imageFetcherOrDefault() lobby.ImageFetcher {
+	if h.imageFetcher != nil {
+		return h.imageFetcher
+	}
+
+	return lobby.DefaultImageFetcher(&http.Client{Timeout: 30 * time.Second})
+}
+
 func mapLobbyStoreError(c *gin.Context, err error, conflictMsg, defaultMsg string) {
 	switch {
 	case errors.Is(err, lobby.ErrNotFound):
 		c.JSON(http.StatusNotFound, gin.H{"error": "lobby not found"})
 	case errors.Is(err, lobby.ErrEmptyPhotos):
 		c.JSON(http.StatusBadRequest, gin.H{"error": "photos are required"})
+	case errors.Is(err, lobby.ErrPhotosNotReady):
+		c.JSON(http.StatusConflict, gin.H{"error": conflictMsg})
 	case errors.Is(err, lobby.ErrInvalidTransition):
 		c.JSON(http.StatusConflict, gin.H{"error": conflictMsg})
 	default:
@@ -183,6 +241,7 @@ func registerLobbyRoutes(r *gin.RouterGroup, store lobby.Store, drawDuration tim
 	handler := newLobbyHandler(store, drawDuration, lobbySync)
 	r.POST("/lobbies", handler.createLobby)
 	r.GET("/lobbies/:id", handler.getLobby)
+	r.GET("/lobbies/:id/photos/download", handler.downloadPhotos)
 
 	admin := r.Group("")
 	admin.Use(requireAdmin(store))
