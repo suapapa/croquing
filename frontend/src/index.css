@@ -69,6 +69,48 @@ body {
   min-height: 100svh;
 }
 
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+.app-shell__main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.app-footer {
+  flex-shrink: 0;
+  padding: var(--space-5) var(--space-4)
+    calc(var(--space-5) + env(safe-area-inset-bottom));
+  text-align: center;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.app-footer p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+
+.app-footer a {
+  color: var(--color-text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.app-footer a:hover {
+  color: var(--color-accent);
+}
+
+.app-shell:has(.lobby-page--drawing) .app-footer {
+  display: none;
+}
+
 a {
   color: inherit;
   text-decoration-thickness: 1px;
@@ -224,7 +266,7 @@ select {
 
 .home-page {
   display: grid;
-  min-height: 100svh;
+  flex: 1;
   place-items: center;
   padding: var(--space-8) var(--space-4);
   background:
@@ -376,7 +418,7 @@ select {
 }
 
 .lobby-page {
-  min-height: 100svh;
+  flex: 1;
   padding: var(--space-4);
 }
 
