@@ -10,6 +10,7 @@ import {
 } from '../components/ui/Icons'
 import { saveAdminToken } from '../lib/adminStorage'
 import { t } from '../lib/i18n'
+import { useAppName } from '../hooks/useAppName'
 
 const STEPS = [
   {
@@ -31,6 +32,7 @@ const STEPS = [
 
 export function HomePage() {
   const navigate = useNavigate()
+  const appName = useAppName()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -58,7 +60,7 @@ export function HomePage() {
           <p className="home-page__eyebrow">{t('home.eyebrow')}</p>
           <div className="home-page__brand-header">
             <IconLogo className="home-page__logo" aria-hidden="true" />
-            <h1 id="home-title">Croquing</h1>
+            <h1 id="home-title">{appName}</h1>
           </div>
           <p className="home-page__lead">{t('home.lead')}</p>
 

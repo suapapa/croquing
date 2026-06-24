@@ -11,6 +11,7 @@ type Config struct {
 	PixabayAPIKey string   `envconfig:"PIXABAY_API_KEY" required:"true"`
 	CORSOrigins   []string `envconfig:"CORS_ORIGINS" default:"*"`
 	DrawDuration  string   `envconfig:"DRAW_DURATION" default:"5m"`
+	AppName       string   `envconfig:"APP_NAME" default:"Croquing"`
 }
 
 func Load() (*Config, error) {
