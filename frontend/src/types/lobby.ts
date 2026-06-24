@@ -22,6 +22,7 @@ export interface LobbySnapshot {
   selected_count: number
   current_round: number
   total_rounds: number
+  draw_duration_minutes: number
   draw_ends_at?: string
   current_photo?: Photo
   server_time: string

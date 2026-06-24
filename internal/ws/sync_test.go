@@ -294,6 +294,30 @@ func (s *fakeStore) MarkReady(ctx context.Context, id string) error {
 	return nil
 }
 
+func (s *fakeStore) SetDrawDuration(ctx context.Context, id string, minutes int) error {
+	if err := ctx.Err(); err != nil {
+		return err
+	}
+	if err := lobby.ValidateDrawDurationMinutes(minutes); err != nil {
+		return err
+	}
+
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	lob, ok := s.lobbies[id]
+	if !ok {
+		return lobby.ErrNotFound
+	}
+	switch lob.Phase {
+	case lobby.PhaseReady, lobby.PhaseBetweenRounds:
+		lob.DrawDuration = lobby.MinutesToDrawDuration(minutes)
+		return nil
+	default:
+		return lobby.ErrInvalidTransition
+	}
+}
+
 func (s *fakeStore) StartSession(ctx context.Context, id string, now time.Time) error {
 	if err := ctx.Err(); err != nil {
 		return err

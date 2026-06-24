@@ -261,6 +261,36 @@ func TestMemoryStoreMarkReady(t *testing.T) {
 	}
 }
 
+func TestMemoryStoreSetDrawDuration(t *testing.T) {
+	t.Parallel()
+
+	store := NewMemoryStore()
+	created, _ := createLobbyReadyForTest(t, store)
+
+	if err := store.SetDrawDuration(context.Background(), created.ID, 10); err != nil {
+		t.Fatalf("SetDrawDuration() error = %v", err)
+	}
+
+	got, err := store.Get(context.Background(), created.ID)
+	if err != nil {
+		t.Fatalf("Get() error = %v", err)
+	}
+	if got.DrawDuration != 10*time.Minute {
+		t.Fatalf("DrawDuration = %v, want 10m", got.DrawDuration)
+	}
+
+	if err := store.SetDrawDuration(context.Background(), created.ID, 0); !errors.Is(err, ErrInvalidDrawDuration) {
+		t.Fatalf("SetDrawDuration(0) error = %v, want ErrInvalidDrawDuration", err)
+	}
+
+	if err := store.StartSession(context.Background(), created.ID, time.Now()); err != nil {
+		t.Fatalf("StartSession() error = %v", err)
+	}
+	if err := store.SetDrawDuration(context.Background(), created.ID, 8); !errors.Is(err, ErrInvalidTransition) {
+		t.Fatalf("SetDrawDuration() during DRAWING error = %v, want ErrInvalidTransition", err)
+	}
+}
+
 func TestDrawTimerHelpers(t *testing.T) {
 	t.Parallel()
 

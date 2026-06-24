@@ -31,6 +31,10 @@ type setPhotosRequest struct {
 	Photos []lobby.Photo `json:"photos"`
 }
 
+type setDrawDurationRequest struct {
+	Minutes int `json:"minutes" binding:"required"`
+}
+
 func newLobbyHandler(store lobby.Store, drawDuration time.Duration, lobbySync *ws.SnapshotSync) *lobbyHandler {
 	return &lobbyHandler{
 		store:        store,
@@ -101,6 +105,23 @@ func (h *lobbyHandler) markReady(c *gin.Context) {
 
 	if err := h.store.MarkReady(c.Request.Context(), id); err != nil {
 		mapLobbyStoreError(c, err, "invalid lobby phase for ready", "failed to mark lobby ready")
+		return
+	}
+
+	respondLobbySnapshot(c, h, id)
+}
+
+func (h *lobbyHandler) setDrawDuration(c *gin.Context) {
+	id := c.Param("id")
+
+	var req setDrawDurationRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request body"})
+		return
+	}
+
+	if err := h.store.SetDrawDuration(c.Request.Context(), id, req.Minutes); err != nil {
+		mapLobbyStoreError(c, err, "invalid lobby phase for draw duration", "failed to set draw duration")
 		return
 	}
 
@@ -198,6 +219,8 @@ func mapLobbyStoreError(c *gin.Context, err error, conflictMsg, defaultMsg strin
 		c.JSON(http.StatusNotFound, gin.H{"error": "lobby not found"})
 	case errors.Is(err, lobby.ErrEmptyPhotos):
 		c.JSON(http.StatusBadRequest, gin.H{"error": "photos are required"})
+	case errors.Is(err, lobby.ErrInvalidDrawDuration):
+		c.JSON(http.StatusBadRequest, gin.H{"error": "draw duration must be between 1 and 60 minutes"})
 	case errors.Is(err, lobby.ErrPhotosNotReady):
 		c.JSON(http.StatusConflict, gin.H{"error": conflictMsg})
 	case errors.Is(err, lobby.ErrInvalidTransition):
@@ -248,6 +271,7 @@ func registerLobbyRoutes(r *gin.RouterGroup, store lobby.Store, drawDuration tim
 	admin.PUT("/lobbies/:id/photos", handler.setPhotos)
 	admin.POST("/lobbies/:id/photos/reopen", handler.reopenPhotoSelection)
 	admin.POST("/lobbies/:id/ready", handler.markReady)
+	admin.PUT("/lobbies/:id/draw-duration", handler.setDrawDuration)
 	admin.POST("/lobbies/:id/start", handler.startSession)
 	admin.POST("/lobbies/:id/next", handler.nextRound)
 	admin.POST("/lobbies/:id/finish", handler.finishSession)

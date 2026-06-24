@@ -155,6 +155,10 @@ func (errorStore) MarkReady(_ context.Context, _ string) error {
 	return errors.New("boom")
 }
 
+func (errorStore) SetDrawDuration(_ context.Context, _ string, _ int) error {
+	return errors.New("boom")
+}
+
 func (errorStore) StartSession(_ context.Context, _ string, _ time.Time) error {
 	return errors.New("boom")
 }

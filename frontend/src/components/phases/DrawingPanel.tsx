@@ -13,16 +13,16 @@ import { t } from '../../lib/i18n'
 interface DrawingPanelProps {
   snapshot: LobbySnapshot
   serverTimeOffsetMs: number
-  drawDurationMs?: number
 }
 
-const DEFAULT_DRAW_MS = 5 * 60 * 1000
+const DEFAULT_DRAW_MINUTES = 5
 
 export function DrawingPanel({
   snapshot,
   serverTimeOffsetMs,
-  drawDurationMs = DEFAULT_DRAW_MS,
 }: DrawingPanelProps) {
+  const drawDurationMs =
+    (snapshot.draw_duration_minutes || DEFAULT_DRAW_MINUTES) * 60 * 1000
   const serverNow = useServerClock(serverTimeOffsetMs)
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [isFullscreenSupported, setIsFullscreenSupported] = useState(false)

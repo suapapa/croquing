@@ -63,6 +63,15 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'admin.ending': 'Ending…',
     'admin.actionFailed': 'Action failed',
 
+    // RoundDurationPicker
+    'duration.label': 'Round time',
+    'duration.minutes': '{count} min per round',
+    'duration.ariaGroup': 'Round duration in minutes',
+    'duration.decrease': 'Decrease round time',
+    'duration.increase': 'Increase round time',
+    'duration.hint': 'Use arrow keys or the buttons to adjust.',
+    'duration.updateFailed': 'Failed to update round time',
+
     // ParticipantWaitPanel
     'wait.settingPhotos': 'Setting up reference photos...',
     'wait.adminChoosing':
@@ -177,6 +186,15 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'admin.endSession': '세션 종료',
     'admin.ending': '종료 중…',
     'admin.actionFailed': '작업에 실패했습니다',
+
+    // RoundDurationPicker
+    'duration.label': '라운드 시간',
+    'duration.minutes': '라운드당 {count}분',
+    'duration.ariaGroup': '라운드 시간(분)',
+    'duration.decrease': '라운드 시간 줄이기',
+    'duration.increase': '라운드 시간 늘리기',
+    'duration.hint': '좌우 버튼이나 화살표 키로 조절할 수 있어요.',
+    'duration.updateFailed': '라운드 시간을 바꾸지 못했습니다',
 
     // ParticipantWaitPanel
     'wait.settingPhotos': '레퍼런스 사진 준비 중…',
@@ -293,6 +311,15 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'admin.endSession': 'セッション終了',
     'admin.ending': '終了中…',
     'admin.actionFailed': '処理失敗',
+
+    // RoundDurationPicker
+    'duration.label': 'ラウンド時間',
+    'duration.minutes': '1ラウンド {count} 分',
+    'duration.ariaGroup': 'ラウンド時間（分）',
+    'duration.decrease': 'ラウンド時間を短くする',
+    'duration.increase': 'ラウンド時間を長くする',
+    'duration.hint': '左右のボタンまたは矢印キーで調整できます。',
+    'duration.updateFailed': 'ラウンド時間の更新に失敗しました',
 
     // ParticipantWaitPanel
     'wait.settingPhotos': 'リファレンス写真を設定中...',
@@ -411,6 +438,15 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'admin.endSession': 'Zakończ sesję',
     'admin.ending': 'Kończenie…',
     'admin.actionFailed': 'Akcja nie powiodła się',
+
+    // RoundDurationPicker
+    'duration.label': 'Czas rundy',
+    'duration.minutes': '{count} min na rundę',
+    'duration.ariaGroup': 'Czas rundy w minutach',
+    'duration.decrease': 'Skróć czas rundy',
+    'duration.increase': 'Wydłuż czas rundy',
+    'duration.hint': 'Użyj przycisków lub strzałek, aby dostosować.',
+    'duration.updateFailed': 'Nie udało się zaktualizować czasu rundy',
 
     // ParticipantWaitPanel
     'wait.settingPhotos': 'Konfigurowanie zdjęć referencyjnych...',

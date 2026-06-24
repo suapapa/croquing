@@ -32,8 +32,9 @@ type LobbySnapshot struct {
 	ParticipantCount int        `json:"participant_count"`
 	SelectedCount    int        `json:"selected_count"`
 	CurrentRound     int        `json:"current_round"`
-	TotalRounds      int        `json:"total_rounds"`
-	DrawEndsAt       *time.Time `json:"draw_ends_at,omitempty"`
+	TotalRounds         int        `json:"total_rounds"`
+	DrawDurationMinutes int        `json:"draw_duration_minutes"`
+	DrawEndsAt          *time.Time `json:"draw_ends_at,omitempty"`
 	CurrentPhoto     *Photo     `json:"current_photo,omitempty"`
 	ServerTime       time.Time  `json:"server_time"`
 }
@@ -59,12 +60,13 @@ func (l *Lobby) CurrentPhoto() *Photo {
 // Snapshot builds the client-facing snapshot for the lobby.
 func (l *Lobby) Snapshot(participantCount int, now time.Time) LobbySnapshot {
 	snap := LobbySnapshot{
-		ID:               l.ID,
-		Phase:            l.Phase,
-		ParticipantCount: participantCount,
-		SelectedCount:    len(l.SelectedPhotos),
-		TotalRounds:      len(l.PhotoOrder),
-		ServerTime:       now,
+		ID:                  l.ID,
+		Phase:               l.Phase,
+		ParticipantCount:    participantCount,
+		SelectedCount:       len(l.SelectedPhotos),
+		TotalRounds:         len(l.PhotoOrder),
+		DrawDurationMinutes: DrawDurationToMinutes(l.DrawDuration),
+		ServerTime:          now,
 	}
 
 	if l.Phase == PhaseDrawing || l.Phase == PhaseBetweenRounds || l.Phase == PhaseFinished {

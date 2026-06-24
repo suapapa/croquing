@@ -1,11 +1,14 @@
 import type { LobbySnapshot } from '../../types/lobby'
+import { RoundDurationPicker } from '../RoundDurationPicker'
 import { t } from '../../lib/i18n'
 
 interface BetweenPanelProps {
+  lobbyId: string
   snapshot: LobbySnapshot
+  isAdmin: boolean
 }
 
-export function BetweenPanel({ snapshot }: BetweenPanelProps) {
+export function BetweenPanel({ lobbyId, snapshot, isAdmin }: BetweenPanelProps) {
   return (
     <section className="phase-panel phase-panel--between" aria-live="polite">
       <div className="between-panel__card">
@@ -19,6 +22,11 @@ export function BetweenPanel({ snapshot }: BetweenPanelProps) {
             })}
           </p>
         ) : null}
+        <RoundDurationPicker
+          lobbyId={lobbyId}
+          minutes={snapshot.draw_duration_minutes}
+          isAdmin={isAdmin}
+        />
       </div>
     </section>
   )

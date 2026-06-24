@@ -16,6 +16,7 @@ type Store interface {
 	SetSelectedPhotos(ctx context.Context, id string, photos []Photo) error
 	ReopenPhotoSelection(ctx context.Context, id string) error
 	MarkReady(ctx context.Context, id string) error
+	SetDrawDuration(ctx context.Context, id string, minutes int) error
 	StartSession(ctx context.Context, id string, now time.Time) error
 	AdvanceToBetweenRounds(ctx context.Context, id string) error
 	NextRound(ctx context.Context, id string, now time.Time) error
@@ -128,6 +129,23 @@ func (s *MemoryStore) ReopenPhotoSelection(ctx context.Context, id string) error
 		lobby.CurrentRound = 0
 		ClearDrawTimer(lobby)
 		return nil
+	})
+}
+
+// SetDrawDuration updates the per-round draw length while waiting to start or between rounds.
+func (s *MemoryStore) SetDrawDuration(ctx context.Context, id string, minutes int) error {
+	if err := ValidateDrawDurationMinutes(minutes); err != nil {
+		return err
+	}
+
+	return s.withLobby(ctx, id, func(lobby *Lobby) error {
+		switch lobby.Phase {
+		case PhaseReady, PhaseBetweenRounds:
+			lobby.DrawDuration = MinutesToDrawDuration(minutes)
+			return nil
+		default:
+			return ErrInvalidTransition
+		}
 	})
 }
 

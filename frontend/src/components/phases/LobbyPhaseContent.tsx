@@ -35,7 +35,13 @@ export function LobbyPhaseContent({
         />
       )
     case 'READY':
-      return <ReadyPanel snapshot={snapshot} />
+      return (
+        <ReadyPanel
+          lobbyId={lobbyId}
+          snapshot={snapshot}
+          isAdmin={isAdmin}
+        />
+      )
     case 'DRAWING':
       return (
         <DrawingPanel
@@ -44,7 +50,13 @@ export function LobbyPhaseContent({
         />
       )
     case 'BETWEEN_ROUNDS':
-      return <BetweenPanel snapshot={snapshot} />
+      return (
+        <BetweenPanel
+          lobbyId={lobbyId}
+          snapshot={snapshot}
+          isAdmin={isAdmin}
+        />
+      )
     case 'FINISHED':
       return <FinishedPanel lobbyId={lobbyId} snapshot={snapshot} />
     default:

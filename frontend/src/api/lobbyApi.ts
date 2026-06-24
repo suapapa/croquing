@@ -59,3 +59,17 @@ export function finishLobbySession(lobbyId: string): Promise<LobbySnapshot> {
     { method: 'POST', lobbyId },
   )
 }
+
+export function setLobbyDrawDuration(
+  lobbyId: string,
+  minutes: number,
+): Promise<LobbySnapshot> {
+  return apiRequest<LobbySnapshot>(
+    `/api/lobbies/${encodeURIComponent(lobbyId)}/draw-duration`,
+    {
+      method: 'PUT',
+      lobbyId,
+      body: { minutes },
+    },
+  )
+}

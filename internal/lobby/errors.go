@@ -14,4 +14,7 @@ var (
 
 	// ErrPhotosNotReady is returned when session photos are not available for download.
 	ErrPhotosNotReady = errors.New("lobby: session photos are not ready")
+
+	// ErrInvalidDrawDuration is returned when draw duration minutes are out of range.
+	ErrInvalidDrawDuration = errors.New("lobby: invalid draw duration")
 )
