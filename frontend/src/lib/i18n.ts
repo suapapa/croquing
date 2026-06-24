@@ -65,11 +65,12 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
 
     // RoundDurationPicker
     'duration.label': 'Round time',
+    'duration.unit': 'min',
     'duration.minutes': '{count} min per round',
     'duration.ariaGroup': 'Round duration in minutes',
     'duration.decrease': 'Decrease round time',
     'duration.increase': 'Increase round time',
-    'duration.hint': 'Use arrow keys or the buttons to adjust.',
+    'duration.hint': 'Use the left and right buttons to adjust.',
     'duration.updateFailed': 'Failed to update round time',
 
     // ParticipantWaitPanel
@@ -189,11 +190,12 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
 
     // RoundDurationPicker
     'duration.label': '라운드 시간',
+    'duration.unit': '분',
     'duration.minutes': '라운드당 {count}분',
     'duration.ariaGroup': '라운드 시간(분)',
     'duration.decrease': '라운드 시간 줄이기',
     'duration.increase': '라운드 시간 늘리기',
-    'duration.hint': '좌우 버튼이나 화살표 키로 조절할 수 있어요.',
+    'duration.hint': '좌우 버튼으로 조절할 수 있어요.',
     'duration.updateFailed': '라운드 시간을 바꾸지 못했습니다',
 
     // ParticipantWaitPanel
@@ -314,11 +316,12 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
 
     // RoundDurationPicker
     'duration.label': 'ラウンド時間',
+    'duration.unit': '分',
     'duration.minutes': '1ラウンド {count} 分',
     'duration.ariaGroup': 'ラウンド時間（分）',
     'duration.decrease': 'ラウンド時間を短くする',
     'duration.increase': 'ラウンド時間を長くする',
-    'duration.hint': '左右のボタンまたは矢印キーで調整できます。',
+    'duration.hint': '左右のボタンで調整できます。',
     'duration.updateFailed': 'ラウンド時間の更新に失敗しました',
 
     // ParticipantWaitPanel
@@ -441,11 +444,12 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
 
     // RoundDurationPicker
     'duration.label': 'Czas rundy',
+    'duration.unit': 'min',
     'duration.minutes': '{count} min na rundę',
     'duration.ariaGroup': 'Czas rundy w minutach',
     'duration.decrease': 'Skróć czas rundy',
     'duration.increase': 'Wydłuż czas rundy',
-    'duration.hint': 'Użyj przycisków lub strzałek, aby dostosować.',
+    'duration.hint': 'Użyj lewego i prawego przycisku, aby dostosować.',
     'duration.updateFailed': 'Nie udało się zaktualizować czasu rundy',
 
     // ParticipantWaitPanel

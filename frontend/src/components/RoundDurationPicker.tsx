@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { setLobbyDrawDuration } from '../api/lobbyApi'
 import { ApiError } from '../api/client'
 import { t } from '../lib/i18n'
@@ -19,7 +19,6 @@ export function RoundDurationPicker({
 }: RoundDurationPickerProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const groupRef = useRef<HTMLDivElement>(null)
 
   const applyMinutes = useCallback(
     async (next: number) => {
@@ -42,42 +41,14 @@ export function RoundDurationPicker({
     [lobbyId, minutes],
   )
 
-  useEffect(() => {
-    if (!isAdmin) {
-      return
-    }
-
-    const el = groupRef.current
-    if (!el) {
-      return
-    }
-
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === 'ArrowLeft') {
-        event.preventDefault()
-        void applyMinutes(minutes - 1)
-      } else if (event.key === 'ArrowRight') {
-        event.preventDefault()
-        void applyMinutes(minutes + 1)
-      }
-    }
-
-    el.addEventListener('keydown', onKeyDown)
-    return () => {
-      el.removeEventListener('keydown', onKeyDown)
-    }
-  }, [isAdmin, minutes, applyMinutes])
-
   return (
     <div className="round-duration">
       <p className="round-duration__label">{t('duration.label')}</p>
       {isAdmin ? (
         <div
-          ref={groupRef}
           className="round-duration__control"
           role="group"
           aria-label={t('duration.ariaGroup')}
-          tabIndex={0}
         >
           <button
             type="button"
@@ -89,7 +60,8 @@ export function RoundDurationPicker({
             &lt;
           </button>
           <span className="round-duration__value" aria-live="polite">
-            {minutes}
+            <span className="round-duration__number">{minutes}</span>
+            <span className="round-duration__unit">{t('duration.unit')}</span>
           </span>
           <button
             type="button"
