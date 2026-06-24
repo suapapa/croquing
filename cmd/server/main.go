@@ -5,13 +5,13 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/suapapa/croquis-king/internal/config"
-	httpserver "github.com/suapapa/croquis-king/internal/http"
-	"github.com/suapapa/croquis-king/internal/logging"
-	"github.com/suapapa/croquis-king/internal/lobby"
-	"github.com/suapapa/croquis-king/internal/pixabay"
-	"github.com/suapapa/croquis-king/internal/timer"
-	"github.com/suapapa/croquis-king/internal/ws"
+	"github.com/suapapa/croquing/internal/config"
+	httpserver "github.com/suapapa/croquing/internal/http"
+	"github.com/suapapa/croquing/internal/logging"
+	"github.com/suapapa/croquing/internal/lobby"
+	"github.com/suapapa/croquing/internal/pixabay"
+	"github.com/suapapa/croquing/internal/timer"
+	"github.com/suapapa/croquing/internal/ws"
 )
 
 func main() {

@@ -58,7 +58,7 @@ export function HomePage() {
           <p className="home-page__eyebrow">{t('home.eyebrow')}</p>
           <div className="home-page__brand-header">
             <IconLogo className="home-page__logo" aria-hidden="true" />
-            <h1 id="home-title">Croquis King</h1>
+            <h1 id="home-title">Croquing</h1>
           </div>
           <p className="home-page__lead">{t('home.lead')}</p>
 

@@ -8,22 +8,22 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: croquis-king
+  name: croquing
   labels:
-    app.kubernetes.io/name: croquis-king
+    app.kubernetes.io/name: croquing
   annotations:
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
 spec:
   ingressClassName: nginx
   rules:
-    - host: croquis.example.com
+    - host: croquing.example.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: croquis-king
+                name: croquing
                 port:
                   name: http

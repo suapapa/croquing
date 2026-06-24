@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 
-	"github.com/suapapa/croquis-king/internal/lobby"
+	"github.com/suapapa/croquing/internal/lobby"
 )
 
 // Handler upgrades HTTP requests to WebSocket connections for lobby subscriptions.

@@ -51,7 +51,7 @@ func DefaultImageFetcher(client *http.Client) ImageFetcher {
 
 // ArchiveBaseName returns the dated prefix used for zip and entry names.
 func ArchiveBaseName(now time.Time, sessionID string) string {
-	return "croquis-king_" + now.UTC().Format("20060102") + "_" + sessionID
+	return "croquing_" + now.UTC().Format("20060102") + "_" + sessionID
 }
 
 // ArchiveEntryName returns a numbered file name inside the archive.

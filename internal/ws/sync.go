@@ -3,7 +3,7 @@ package ws
 import (
 	"context"
 
-	"github.com/suapapa/croquis-king/internal/lobby"
+	"github.com/suapapa/croquing/internal/lobby"
 )
 
 // SnapshotSync pushes lobby snapshots to WebSocket clients.

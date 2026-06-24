@@ -34,7 +34,7 @@ export function LobbyLayout({
         <div className="lobby-layout__brand-row">
           <Link to="/" className="lobby-layout__brand">
             <IconLogo className="lobby-layout__logo" aria-hidden="true" />
-            <span>Croquis King</span>
+            <span>Croquing</span>
           </Link>
           <span
             className={`lobby-layout__badge lobby-layout__badge--${

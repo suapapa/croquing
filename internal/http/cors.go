@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/suapapa/croquis-king/internal/lobby"
+	"github.com/suapapa/croquing/internal/lobby"
 )
 
 func corsMiddleware(origins []string) gin.HandlerFunc {

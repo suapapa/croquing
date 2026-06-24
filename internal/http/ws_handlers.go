@@ -3,7 +3,7 @@ package httpserver
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/suapapa/croquis-king/internal/ws"
+	"github.com/suapapa/croquing/internal/ws"
 )
 
 func registerWSRoutes(r gin.IRoutes, handler *ws.Handler) {

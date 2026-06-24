@@ -3,7 +3,7 @@ package lobby
 import (
 	"time"
 
-	"github.com/suapapa/croquis-king/internal/timer"
+	"github.com/suapapa/croquing/internal/timer"
 )
 
 // RoundCountdown is the pre-draw countdown shown before each round timer starts.

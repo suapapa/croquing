@@ -13,7 +13,7 @@ import (
 	"github.com/gorilla/websocket"
 	"github.com/google/uuid"
 
-	"github.com/suapapa/croquis-king/internal/lobby"
+	"github.com/suapapa/croquing/internal/lobby"
 )
 
 func TestInitialSnapshotOnConnect(t *testing.T) {

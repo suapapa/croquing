@@ -5,9 +5,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/suapapa/croquis-king/internal/lobby"
-	"github.com/suapapa/croquis-king/internal/pixabay"
-	"github.com/suapapa/croquis-king/internal/ws"
+	"github.com/suapapa/croquing/internal/lobby"
+	"github.com/suapapa/croquing/internal/pixabay"
+	"github.com/suapapa/croquing/internal/ws"
 )
 
 func newTestRouter(store lobby.Store, drawDuration time.Duration, pixabayClient *pixabay.Client, wsHandler *ws.Handler, lobbySync *ws.SnapshotSync) *gin.Engine {

@@ -1,4 +1,4 @@
-# Croquis King
+# Croquing
 
 Real-time web app for weekly croquis (figure-drawing) meetups. Participants join the same lobby URL and see synchronized photos and timers.
 
@@ -45,7 +45,7 @@ Build the SPA and run the Go server from the repo root. When `frontend/dist/` ex
 ```sh
 make web
 export PIXABAY_API_KEY=your-key
-./bin/croquis-king
+./bin/croquing
 ```
 
 Open `http://localhost:8080`. API and WebSocket stay on the same origin, so you do not need a separate `VITE_API_BASE` in production.
@@ -76,7 +76,7 @@ Example nginx location blocks:
 ```nginx
 location /api/ { proxy_pass http://127.0.0.1:8080; }
 location /ws/  { proxy_pass http://127.0.0.1:8080; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection "upgrade"; }
-location /     { try_files $uri $uri/ /index.html; root /path/to/croquis-king/frontend/dist; }
+location /     { try_files $uri $uri/ /index.html; root /path/to/croquing/frontend/dist; }
 ```
 
 ## Development commands

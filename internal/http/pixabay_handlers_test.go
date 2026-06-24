@@ -10,8 +10,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/suapapa/croquis-king/internal/lobby"
-	"github.com/suapapa/croquis-king/internal/pixabay"
+	"github.com/suapapa/croquing/internal/lobby"
+	"github.com/suapapa/croquing/internal/pixabay"
 )
 
 func TestPixabaySearchHandler(t *testing.T) {

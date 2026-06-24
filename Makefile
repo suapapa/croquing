@@ -2,8 +2,8 @@
 
 TAG=latest
 CR=icn.vultrcr.com/homincr1
-IMAGE_TAG_BE=${CR}/croquis-king-backend:${TAG}
-IMAGE_TAG_FE=${CR}/croquis-king-frontend:${TAG}
+IMAGE_TAG_BE=${CR}/croquing-backend:${TAG}
+IMAGE_TAG_FE=${CR}/croquing-frontend:${TAG}
 
 all: lint push
 

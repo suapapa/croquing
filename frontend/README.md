@@ -1,6 +1,6 @@
-# Croquis King — Frontend
+# Croquing — Frontend
 
-React SPA (Vite + TypeScript) for the Croquis King lobby UI.
+React SPA (Vite + TypeScript) for the Croquing lobby UI.
 
 ## Setup
 

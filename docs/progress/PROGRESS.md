@@ -1,9 +1,9 @@
-# Croquis King — 구현 진도
+# Croquing — 구현 진도
 
 > **자동 생성 문서** — 직접 수정하지 마세요.  
 > 소스: [`workitems.json`](workitems.json) · 갱신: `make progress`
 
-마지막 갱신: **2026-06-20 19:54 KST**
+마지막 갱신: **2026-06-24 17:09 KST**
 
 ## Phase A — 백엔드 (001-017)
 
@@ -146,7 +146,7 @@
 | **101** | ✅ done | [FE] React 프로젝트 초기화 | 017 | ✓ |
 | **102** | ✅ done | [FE] 라우팅·로비 접속 | 101 | ✓ |
 | **103** | ✅ done | [FE] WebSocket 클라이언트 훅 | 102 | ✓ |
-| **104** | ✅ done | [FE] 로비 공통 레이아웃 | 103 | ✓ |
+| **104** | ✅ done | [FE] 로비 공통 레이아웃 | 103 | ⚠ missing: frontend/src/lib/phaseMessages.ts |
 | **105** | ✅ done | [FE] Admin / Participant UI 분기 | 104 | ✓ |
 | **106** | ✅ done | [FE] Pixabay 검색 UI | 105, 010 | ✓ |
 | **107** | ✅ done | [FE] 사진 선택 UI | 106, 011 | ✓ |

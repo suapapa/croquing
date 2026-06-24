@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/suapapa/croquis-king/internal/lobby"
-	"github.com/suapapa/croquis-king/internal/pixabay"
+	"github.com/suapapa/croquing/internal/lobby"
+	"github.com/suapapa/croquing/internal/pixabay"
 )
 
 func TestHealthHandler(t *testing.T) {

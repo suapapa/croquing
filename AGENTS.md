@@ -1,4 +1,4 @@
-# AGENTS.md — Croquis King
+# AGENTS.md — Croquing
 
 Guidance for coding agents working in this repository.
 
@@ -13,14 +13,14 @@ When the user asks to implement a specific index (e.g. “003 구현해줘”), 
 
 ## What this is
 
-**Croquis King** is a real-time web app for weekly croquis (5-minute figure-drawing) meetups. Participants join the same lobby URL and see synchronized photos and timers—no video screen sharing.
+**Croquing** is a real-time web app for weekly croquis (5-minute figure-drawing) meetups. Participants join the same lobby URL and see synchronized photos and timers—no video screen sharing.
 
 | Layer | Stack |
 |-------|--------|
 | Backend | Go |
 | Frontend | React (Vite + TypeScript), under `frontend/` — **after backend WorkItems 001–017** |
 
-Module path: `github.com/suapapa/croquis-king`.
+Module path: `github.com/suapapa/croquing`.
 
 ### Core behaviors (from plan)
 
@@ -40,7 +40,7 @@ Suggested MVP bundles are listed in the plan (§7).
 ## Target layout
 
 ```
-croquis-king/
+croquing/
 ├── cmd/server/           # Go entrypoint (WorkItem 001)
 ├── internal/
 │   ├── config/

@@ -1,4 +1,4 @@
-const STORAGE_PREFIX = 'croquis-admin:'
+const STORAGE_PREFIX = 'croquing-admin:'
 
 /** Persist admin token for a lobby (session-scoped). */
 export function saveAdminToken(lobbyId: string, token: string): void {

@@ -61,7 +61,7 @@ func main() {
 	now := time.Now().Format("2006-01-02 15:04 MST")
 	var b strings.Builder
 
-	b.WriteString("# Croquis King — 구현 진도\n\n")
+	b.WriteString("# Croquing — 구현 진도\n\n")
 	b.WriteString("> **자동 생성 문서** — 직접 수정하지 마세요.  \n")
 	b.WriteString("> 소스: [`workitems.json`](workitems.json) · 갱신: `make progress`\n\n")
 	b.WriteString(fmt.Sprintf("마지막 갱신: **%s**\n\n", now))

@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/suapapa/croquis-king/internal/lobby"
-	"github.com/suapapa/croquis-king/internal/pixabay"
-	"github.com/suapapa/croquis-king/internal/ws"
+	"github.com/suapapa/croquing/internal/lobby"
+	"github.com/suapapa/croquing/internal/pixabay"
+	"github.com/suapapa/croquing/internal/ws"
 )
 
 func TestMarkReadyHandler(t *testing.T) {

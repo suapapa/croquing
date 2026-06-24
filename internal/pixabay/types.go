@@ -28,7 +28,7 @@ type SearchResult struct {
 	RateLimit RateLimit
 }
 
-// Image contains the fields used by Croquis King from a Pixabay hit.
+// Image contains the fields used by Croquing from a Pixabay hit.
 type Image struct {
 	ID            int
 	PageURL       string

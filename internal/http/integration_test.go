@@ -12,9 +12,9 @@ import (
 
 	"github.com/gorilla/websocket"
 
-	"github.com/suapapa/croquis-king/internal/lobby"
-	"github.com/suapapa/croquis-king/internal/timer"
-	"github.com/suapapa/croquis-king/internal/ws"
+	"github.com/suapapa/croquing/internal/lobby"
+	"github.com/suapapa/croquing/internal/timer"
+	"github.com/suapapa/croquing/internal/ws"
 )
 
 func TestFullSessionFlowHTTPAndWS(t *testing.T) {

@@ -1,4 +1,4 @@
-# Croquis King — 프로젝트 구상 및 구현 계획
+# Croquing — 프로젝트 구상 및 구현 계획
 
 > 크로키(5분 따라그리기) 모임을 위한 실시간 동기화 웹앱  
 > **백엔드:** Go · **프론트엔드:** React  
@@ -154,7 +154,7 @@ https://{host}/lobby/{lobby_id}
 ### 3.4 프로젝트 디렉터리 (목표 구조)
 
 ```
-croquis-king/
+croquing/
 ├── cmd/
 │   └── server/
 │       └── main.go              # 진입점
@@ -394,4 +394,4 @@ type LobbySnapshot struct {
 
 ---
 
-*문서 버전: 2025-06-20 · croquis-king 초기 구상*
+*문서 버전: 2025-06-20 · croquing 초기 구상*

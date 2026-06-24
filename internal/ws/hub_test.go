@@ -12,7 +12,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 
-	"github.com/suapapa/croquis-king/internal/lobby"
+	"github.com/suapapa/croquing/internal/lobby"
 )
 
 func TestHubRegisterUnregisterAndCount(t *testing.T) {

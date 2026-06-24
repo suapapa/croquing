@@ -12,11 +12,11 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/suapapa/croquis-king/internal/config"
-	"github.com/suapapa/croquis-king/internal/lobby"
-	"github.com/suapapa/croquis-king/internal/pixabay"
-	"github.com/suapapa/croquis-king/internal/timer"
-	"github.com/suapapa/croquis-king/internal/ws"
+	"github.com/suapapa/croquing/internal/config"
+	"github.com/suapapa/croquing/internal/lobby"
+	"github.com/suapapa/croquing/internal/pixabay"
+	"github.com/suapapa/croquing/internal/timer"
+	"github.com/suapapa/croquing/internal/ws"
 )
 
 const shutdownTimeout = 10 * time.Second

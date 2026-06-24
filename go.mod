@@ -1,4 +1,4 @@
-module github.com/suapapa/croquis-king
+module github.com/suapapa/croquing
 
 go 1.22
 

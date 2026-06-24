@@ -13,7 +13,7 @@ func TestArchiveBaseName(t *testing.T) {
 	t.Parallel()
 
 	got := ArchiveBaseName(time.Date(2026, 6, 21, 12, 0, 0, 0, time.UTC), "abc-123")
-	want := "croquis-king_20260621_abc-123"
+	want := "croquing_20260621_abc-123"
 	if got != want {
 		t.Fatalf("ArchiveBaseName() = %q, want %q", got, want)
 	}
@@ -31,24 +31,24 @@ func TestArchiveEntryName(t *testing.T) {
 	}{
 		{
 			name:     "two digit padding",
-			baseName: "croquis-king_20260621_abc-123",
+			baseName: "croquing_20260621_abc-123",
 			round:    3,
 			total:    12,
-			want:     "croquis-king_20260621_abc-123_03.jpeg",
+			want:     "croquing_20260621_abc-123_03.jpeg",
 		},
 		{
 			name:     "minimum width",
-			baseName: "croquis-king_20260621_abc-123",
+			baseName: "croquing_20260621_abc-123",
 			round:    1,
 			total:    5,
-			want:     "croquis-king_20260621_abc-123_01.jpeg",
+			want:     "croquing_20260621_abc-123_01.jpeg",
 		},
 		{
 			name:     "wider padding for large sets",
-			baseName: "croquis-king_20260621_abc-123",
+			baseName: "croquing_20260621_abc-123",
 			round:    42,
 			total:    120,
-			want:     "croquis-king_20260621_abc-123_042.jpeg",
+			want:     "croquing_20260621_abc-123_042.jpeg",
 		},
 	}
 
