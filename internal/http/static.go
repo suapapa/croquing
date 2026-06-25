@@ -13,7 +13,7 @@ const defaultStaticDir = "frontend/dist"
 
 // registerStaticRoutes serves the built React SPA when frontend/dist exists.
 // Returns true when static routes were registered.
-func registerStaticRoutes(r *gin.Engine, staticDir string) bool {
+func registerStaticRoutes(r *gin.Engine, staticDir string, appName string, appLogo string) bool {
 	if strings.TrimSpace(staticDir) == "" {
 		staticDir = defaultStaticDir
 	}
@@ -24,7 +24,8 @@ func registerStaticRoutes(r *gin.Engine, staticDir string) bool {
 	}
 
 	indexPath := filepath.Join(staticDir, "index.html")
-	if _, err := os.Stat(indexPath); err != nil {
+	indexHTML, err := os.ReadFile(indexPath)
+	if err != nil {
 		return false
 	}
 
@@ -40,9 +41,20 @@ func registerStaticRoutes(r *gin.Engine, staticDir string) bool {
 		}
 	}
 
-	r.GET("/", func(c *gin.Context) {
-		c.File(indexPath)
-	})
+	if logoPath := resolveAppLogo(appLogo); strings.HasPrefix(logoPath, "/") {
+		filePath := filepath.Join(staticDir, strings.TrimPrefix(logoPath, "/"))
+		if _, err := os.Stat(filePath); err == nil {
+			r.StaticFile(logoPath, filePath)
+		}
+	}
+
+	serveSPA := func(c *gin.Context) {
+		html := withAppTitle(string(indexHTML), appName)
+		html = injectBeforeHeadClose(html, buildSocialMetaTags(c, appName, appLogo))
+		c.Data(http.StatusOK, "text/html; charset=utf-8", []byte(html))
+	}
+
+	r.GET("/", serveSPA)
 
 	r.NoRoute(func(c *gin.Context) {
 		path := c.Request.URL.Path
@@ -50,7 +62,7 @@ func registerStaticRoutes(r *gin.Engine, staticDir string) bool {
 			c.JSON(http.StatusNotFound, gin.H{"error": "not found"})
 			return
 		}
-		c.File(indexPath)
+		serveSPA(c)
 	})
 
 	return true
