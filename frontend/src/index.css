@@ -60,7 +60,8 @@ body {
 }
 
 :lang(ko),
-:lang(ja) {
+:lang(ja),
+:lang(zh) {
   word-break: keep-all;
   line-break: strict;
 }

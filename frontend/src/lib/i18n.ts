@@ -1,12 +1,13 @@
 import type { LobbyPhase } from '../types/lobby'
 
-export type Language = 'ko' | 'ja' | 'pl' | 'en'
+export type Language = 'ko' | 'ja' | 'pl' | 'zh' | 'en'
 
 export function getBrowserLanguage(): Language {
   const lang = navigator.language.toLowerCase()
   if (lang.startsWith('ko')) return 'ko'
   if (lang.startsWith('ja')) return 'ja'
   if (lang.startsWith('pl')) return 'pl'
+  if (lang.startsWith('zh')) return 'zh'
   return 'en'
 }
 
@@ -522,6 +523,129 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'search.dock.title': 'Wybrane zdjęcia referencyjne',
     'search.dock.remove': 'Usuń zdjęcie',
   },
+  zh: {
+    // HomePage
+    'home.eyebrow': '实时速写聚会',
+    'home.lead':
+      '创建大厅、分享链接，即可同步照片和计时器一起画画——无需屏幕共享。',
+    'home.createLobby': '创建大厅',
+    'home.createLobbyFailed': '创建大厅失败',
+    'home.creatingLobby': '正在创建大厅…',
+    'home.howItWorks': '使用方法',
+    'home.step1.title': '创建并分享',
+    'home.step1.desc': '创建大厅，把链接发给绘画小组。',
+    'home.step2.title': '选择参考图',
+    'home.step2.desc': '管理员从 Pixabay 挑选大家一起画的图片。',
+    'home.step3.title': '同步作画',
+    'home.step3.desc': '定时回合，所有人看到相同的图片和倒计时。',
+
+    // LobbyLayout & Page
+    'lobby.badge.admin': '管理员',
+    'lobby.badge.participant': '参与者',
+    'lobby.connection.connecting': '连接中…',
+    'lobby.connection.connected': '已连接',
+    'lobby.connection.reconnecting': '重新连接中…',
+    'lobby.connection.disconnected': '已断开',
+    'lobby.connection.lost': '连接已断开，正在尝试重新连接…',
+    'lobby.loadingState': '正在加载大厅状态…',
+    'lobby.invalidLink': '无效的大厅链接。',
+    'lobby.backHome': '返回首页',
+    'lobby.participantCount': '{count} 位参与者',
+    'lobby.participantCountPlural': '{count} 位参与者',
+    'lobby.lobbyId': '大厅 {id}',
+
+    // CopyLobbyLinkButton
+    'copy.copied': '已复制！',
+    'copy.failed': '复制失败',
+    'copy.link': '复制链接',
+
+    // AdminControls
+    'admin.startSession': '开始会话',
+    'admin.starting': '开始中…',
+    'admin.nextPhoto': '下一张',
+    'admin.loading': '加载中…',
+    'admin.endSession': '结束会话',
+    'admin.ending': '结束中…',
+    'admin.actionFailed': '操作失败',
+
+    // RoundDurationPicker
+    'duration.label': '回合时长',
+    'duration.unit': '分钟',
+    'duration.minutes': '每回合 {count} 分钟',
+    'duration.ariaGroup': '回合时长（分钟）',
+    'duration.decrease': '缩短回合时长',
+    'duration.increase': '延长回合时长',
+    'duration.hint': '使用左右按钮调节。',
+    'duration.updateFailed': '更新回合时长失败',
+
+    // ParticipantWaitPanel
+    'wait.settingPhotos': '正在准备参考图片…',
+    'wait.adminChoosing':
+      '管理员正在挑选图片，会话开始前不会显示。',
+    'wait.tipLabel': '提示：{title}',
+    'wait.goTip': '跳转到提示 {idx}',
+    'wait.waitingForAdmin': '等待管理员…',
+
+    // PhotoReviewPanel
+    'review.photosSaved': '已保存 {count} 张图片',
+    'review.instruction':
+      '鼠标悬停缩略图可预览大图。确认无误后点击完成选择以准备会话（图片顺序会自动打乱）。',
+    'review.previewAria': '预览已保存的图片 {index} / {total}',
+    'review.editSelection': '修改选择',
+    'review.selectionComplete': '完成选择',
+    'review.shuffling': '打乱中…',
+
+    // PhotoSelectionPanel
+    'selection.errSave': '保存选择失败',
+    'selection.errConfirm': '确认选择失败',
+    'selection.errReopen': '重新打开图片选择失败',
+    'selection.saving': '保存中…',
+    'selection.saveCount': '保存 {count} 张图片',
+
+    // ReadyPanel
+    'ready.photosReady': '张图片已就绪',
+    'ready.desc':
+      '图片顺序已打乱并隐藏，每个作画回合开始前不会显示缩略图。',
+    'ready.hint': '等待管理员开始…',
+
+    // DrawingPanel
+    'draw.exitFullscreen': '退出全屏',
+    'draw.enterFullscreen': '全屏',
+    'draw.waitingPhoto': '等待图片…',
+    'draw.attribution': '图片来源：',
+    'draw.round': '第 {current} / {total} 回合',
+    'draw.startsIn': '{count} 秒后开始回合',
+    'draw.remainingAria': '剩余作画时间',
+
+    // SessionBreakPanels
+    'break.takeBreather': '休息一下',
+    'break.hiddenDesc': '参考图片已隐藏，直到下一回合开始。',
+    'break.completedRound': '已完成第 {current} / {total} 回合',
+    'break.sessionFinished': '会话结束',
+    'break.completedRoundsDesc': '完成了 {count} 个回合，大家辛苦了！',
+    'break.completedRoundsDescPlural':
+      '完成了 {count} 个回合，大家辛苦了！',
+    'break.downloadPhotos': '下载参考图片 (ZIP)',
+
+    // PixabaySearchPanel
+    'search.errEmpty': '请输入搜索词',
+    'search.errFailed': '搜索失败',
+    'search.fieldLabel': '搜索 Pixabay',
+    'search.placeholder': '例如：portrait, anatomy, gesture',
+    'search.sort': '排序',
+    'search.sortPopular': '热门',
+    'search.sortLatest': '最新',
+    'search.searching': '搜索中',
+    'search.button': '搜索',
+    'search.prevPage': '上一页',
+    'search.nextPage': '下一页',
+    'search.pageIndicator': '第 {page} / {total} 页',
+    'search.hint': '已选 {count} 张 · 建议 {recommended} 张',
+    'search.ariaSelect': '选择图片 {id}',
+    'search.ariaDeselect': '取消选择图片 {id}',
+    'search.dock.title': '已选参考图片',
+    'search.dock.remove': '移除图片',
+  },
 }
 
 export function t(
@@ -659,6 +783,32 @@ const LOCALIZED_PHASES: Record<Language, Record<LobbyPhase, PhaseMessage>> = {
       title: 'Sesja zakończona',
       description:
         'Dziękujemy za wspólne rysowanie. Do zobaczenia w przyszłym tygodniu.',
+    },
+  },
+  zh: {
+    WAITING: {
+      title: '等待管理员',
+      description: '管理员正在准备，请留在此页面。',
+    },
+    SELECTING: {
+      title: '确认参考图片',
+      description: '管理员正在检查已保存的图片，随后会打乱顺序并开始会话。',
+    },
+    READY: {
+      title: '准备就绪',
+      description: '图片已打乱并隐藏，等待管理员开始。',
+    },
+    DRAWING: {
+      title: '作画时间',
+      description: '专注参考图片，计时器由服务器控制。',
+    },
+    BETWEEN_ROUNDS: {
+      title: '回合间歇',
+      description: '下一个姿势开始前，先放松一下。',
+    },
+    FINISHED: {
+      title: '会话结束',
+      description: '感谢一起作画，下周再见！',
     },
   },
 }
@@ -799,6 +949,36 @@ const LOCALIZED_TIPS: Record<Language, Tip[]> = {
     {
       title: 'Rysuj swobodnie',
       text: 'Pamiętaj, to jest kroquis! Szybkość i wyczucie są ważniejsze niż dopracowany, idealny rysunek.',
+    },
+  ],
+  zh: [
+    {
+      title: '先抓动态',
+      text: '先捕捉动作主线和身体的流动感，暂时忽略细节。',
+    },
+    {
+      title: '眯眼简化',
+      text: '眯起眼睛可以过滤细碎细节，更容易看到明暗的大块形状。',
+    },
+    {
+      title: '用整条手臂画',
+      text: '用肘部和肩部画长而流畅的线，而不是只用腕部来回蹭。',
+    },
+    {
+      title: '夸张姿势',
+      text: '短时间速写时，把姿势画得比照片更有动感和表现力往往更好。',
+    },
+    {
+      title: '负形空间',
+      text: '观察四肢之间的空白形状，能更准确判断比例和角度。',
+    },
+    {
+      title: '比例优先于细节',
+      text: '躯干和骨架结构确定之前，手、脚、脸等细节可以先留白。',
+    },
+    {
+      title: '放松地画',
+      text: '这是速写！速度和感觉比精致完美的成品更重要。',
     },
   ],
 }

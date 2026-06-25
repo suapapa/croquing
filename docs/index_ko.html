@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Croquing — Synchronized Figure Drawing for Weekly Meetups</title>
+  <title>Croquing — 매주 함께 그리는 실시간 동기화 크로키 모임</title>
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta name="theme-color" content="#f5f0e8">
   
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Host and join synchronized figure drawing (croquis) meetups in real-time. No low-res screen sharing, built-in image curation, and server-synced timers.">
-  <meta name="keywords" content="croquis, figure drawing, synchronized timer, drawing meetup, pixabay drawing, art practice, real-time sketching">
+  <meta name="description" content="완벽히 동기화된 화면을 보며 실시간 크로키 모임을 열고 참여하세요. 저화질 화면 공유 없이 서버 타이머로 모두가 동시에 드로잉을 시작하고 종료합니다.">
+  <meta name="keywords" content="크로키, 누드크로키, 실시간 타이머, 드로잉 모임, 픽사베이 크로키, 그림 연습, 인체 드로잉">
   <meta name="author" content="Homin Lee">
   
   <!-- Google Fonts -->
@@ -801,15 +801,15 @@
   <!-- Header -->
   <header>
     <div class="nav-container">
-      <a href="#" class="logo" aria-label="Croquing Home">
-        <img src="favicon.svg" alt="Croquing Logo" class="logo-icon">
+      <a href="#" class="logo" aria-label="Croquing 홈">
+        <img src="favicon.svg" alt="Croquing 로고" class="logo-icon">
         <span class="logo-text">Croquing</span>
       </a>
       <div style="display: flex; align-items: center; gap: 16px;">
-        <nav class="lang-switcher" aria-label="Language selection">
-          <a href="index.html" class="lang-link active" aria-label="Switch to English" aria-current="page">EN</a>
+        <nav class="lang-switcher" aria-label="언어 선택">
+          <a href="index.html" class="lang-link" aria-label="Switch to English">EN</a>
           <span class="lang-divider" aria-hidden="true">|</span>
-          <a href="index_ko.html" class="lang-link" aria-label="한국어로 변경">KO</a>
+          <a href="index_ko.html" class="lang-link active" aria-label="한국어로 변경" aria-current="page">KO</a>
           <span class="lang-divider" aria-hidden="true">|</span>
           <a href="index_ja.html" class="lang-link" aria-label="日本語に変更">JA</a>
           <span class="lang-divider" aria-hidden="true">|</span>
@@ -819,7 +819,7 @@
         </nav>
         <a href="https://github.com/suapapa/croquing" class="btn-github" target="_blank" rel="noopener noreferrer">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/></svg>
-          <span>View on GitHub</span>
+          <span>GitHub에서 보기</span>
         </a>
       </div>
     </div>
@@ -829,90 +829,90 @@
   <main>
     
     <!-- Hero Section -->
-    <section class="hero" aria-label="Introduction">
-      <span class="badge">Real-Time Canvas Sync</span>
-      <h1>Croquis Meetups, Reimagined.</h1>
+    <section class="hero" aria-label="소개">
+      <span class="badge">실시간 화면 동기화</span>
+      <h1>새로운 크로키 모임의 시작</h1>
       <p class="hero-subtitle">
-        Draw figures in perfect synchronicity with your group. Croquing manages the timer, randomly curates high-resolution images, and synchronizes the session state across all screens.
+        모든 참가자가 완벽하게 일치하는 화면을 보며 함께 크로키를 그립니다. 서버가 타이머를 통제하고 고해상도 포즈 사진을 무작위로 보여주며, 모든 브라우저의 진행 상태를 실시간으로 맞춰 줍니다.
       </p>
       <div class="hero-actions">
         <a href="https://croquis-king.songmiyoung.art/" class="btn-primary" target="_blank" rel="noopener noreferrer">
-          <span>Try CROQUIS-KING Online</span>
+          <span>CROQUIS-KING 사이트에서 시작하기</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         </a>
       </div>
     </section>
 
     <!-- Mockup Showcase Section -->
-    <section class="mockup-section" aria-label="Product Showcase">
+    <section class="mockup-section" aria-label="제품 시연">
       
       <!-- Interactive Showcase Selector Tabs -->
-      <nav class="tab-nav" aria-label="Product workflow steps">
+      <nav class="tab-nav" aria-label="이용 흐름 단계">
         <button class="tab-btn active" data-target="step-1" aria-controls="step-1" aria-selected="true" role="tab">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          1. Join Lobby
+          1. 로비 입장
         </button>
         <button class="tab-btn" data-target="step-2" aria-controls="step-2" aria-selected="false" role="tab">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          2. Curate Figures
+          2. 이미지 선택
         </button>
         <button class="tab-btn" data-target="step-3" aria-controls="step-3" aria-selected="false" role="tab">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-          3. Sketch in Sync
+          3. 스케치 시작
         </button>
       </nav>
 
       <!-- Product screenshots (app viewport only, no decorative browser chrome) -->
-      <div class="mockup-window" id="mockup-window" title="Click to zoom screenshot">
+      <div class="mockup-window" id="mockup-window" title="클릭해서 스크린샷 크게 보기">
         <div class="mockup-viewport">
-          <img src="screenshot/1_start.webp" alt="Lobby landing page where artists wait for the host" class="screenshot-img active" id="step-1" width="2550" height="2650">
-          <img src="screenshot/2_select.webp" alt="Host curation board to search and choose figure photos" class="screenshot-img" id="step-2" loading="lazy" width="2550" height="2650">
-          <img src="screenshot/3_round.webp" alt="Drawing session interface showing a photo with a countdown progress bar" class="screenshot-img" id="step-3" loading="lazy" width="2550" height="2650">
+          <img src="screenshot/1_start.webp" alt="방장이 세션을 열 때까지 참가자들이 대기하는 로비 화면" class="screenshot-img active" id="step-1" width="2550" height="2650">
+          <img src="screenshot/2_select.webp" alt="방장이 포즈 사진을 검색하고 선택하는 이미지 준비 보드" class="screenshot-img" id="step-2" loading="lazy" width="2550" height="2650">
+          <img src="screenshot/3_round.webp" alt="상단 카운트다운 진행률 표시줄과 함께 포즈 이미지가 보이는 크로키 세션 화면" class="screenshot-img" id="step-3" loading="lazy" width="2550" height="2650">
         </div>
       </div>
 
       <!-- Step Description Copy -->
       <div class="step-descs">
         <article class="step-desc active" data-step="step-1">
-          <h3>Create & Share a Lobby Instantly</h3>
-          <p>Generate a shared room in a single click. Share the web link with your artists. Anyone can join instantly through their browser without downloading software or creating accounts.</p>
+          <h3>클릭 한 번으로 함께 그릴 방을 만듭니다</h3>
+          <p>클릭 한 번으로 함께 그릴 방을 만듭니다. 참가자들에게 링크만 보내면 준비는 끝납니다. 번거롭게 프로그램을 설치하거나 회원 가입을 할 필요 없이 브라우저에서 바로 접속할 수 있습니다.</p>
         </article>
         <article class="step-desc" data-step="step-2">
-          <h3>Direct Curation & Smart Shuffle</h3>
-          <p>Search and curate pose photos directly within the app. The host specifies the collection, and the platform automatically shuffles the order, keeping photos hidden until drawing begins.</p>
+          <h3>직접 선택하는 포즈와 자동 셔플</h3>
+          <p>앱 내에서 드로잉 포즈를 검색하고 바로 고를 수 있습니다. 방장이 사진 목록을 짜면 순서가 무작위로 뒤섞이며, 그리기가 시작되기 전까지는 아무에게도 이미지가 보이지 않습니다.</p>
         </article>
         <article class="step-desc" data-step="step-3">
-          <h3>Focused Drawing with Synced Timers</h3>
-          <p>Everyone sketches the same figure at the same moment. The synchronized timer dictates exactly when the image is revealed and automatically hides it when time is up, ensuring a fair, focused pace.</p>
+          <h3>동기화된 타이머로 집중하는 스케치</h3>
+          <p>모든 사람이 같은 순간에 같은 포즈를 그립니다. 서버 시간과 똑같이 흘러가는 타이머에 따라 이미지가 나타나고, 제한 시간이 끝나면 즉시 가려집니다. 모두가 정해진 규칙대로 공정하고 흐트러짐 없이 창작에만 집중하도록 돕습니다.</p>
         </article>
       </div>
 
     </section>
 
     <!-- Key Metrics / Indicators Bar -->
-    <section class="metrics" aria-label="Key highlights">
+    <section class="metrics" aria-label="주요 특징">
       <div class="metric-item">
         <div class="metric-value">100%</div>
-        <div class="metric-title">Crisp High-Res</div>
-        <div class="metric-desc">Photos load locally on each device instead of blurry video streams.</div>
+        <div class="metric-title">선명한 고해상도</div>
+        <div class="metric-desc">화질이 떨어지는 화면 공유 방식과 달리 각자 기기에서 원본 이미지를 직접 읽어옵니다.</div>
       </div>
       <div class="metric-item">
         <div class="metric-value">0</div>
-        <div class="metric-title">Install Required</div>
-        <div class="metric-desc">Open a lobby and join from any modern web browser immediately.</div>
+        <div class="metric-title">프로그램 설치 없음</div>
+        <div class="metric-desc">최신 웹 브라우저만 있다면 어떤 기기에서든 바로 방을 열어 참여합니다.</div>
       </div>
       <div class="metric-item">
-        <div class="metric-value">1–60m</div>
-        <div class="metric-title">Flexible Pace</div>
-        <div class="metric-desc">The host picks the round length in minutes before each draw. Everyone sees the same timer.</div>
+        <div class="metric-value">1–60분</div>
+        <div class="metric-title">유연한 시간 조절</div>
+        <div class="metric-desc">방장이 라운드 시간을 마음대로 정하며, 참가자 모두 같은 타이머를 보며 작업합니다.</div>
       </div>
     </section>
 
     <!-- Detailed Features Section -->
-    <section class="features-section" aria-label="Core features">
+    <section class="features-section" aria-label="상세 기능">
       <div class="section-title">
-        <h2>Designed for Creative Focus</h2>
-        <p>Built to address the frustrations of standard video-conferencing croquis sessions.</p>
+        <h2>그림에만 온전히 집중하는 환경</h2>
+        <p>기존의 화상 회의 화면 공유 방식에서 겪었던 크고 작은 불편함을 해결하고자 만들었습니다.</p>
       </div>
       
       <div class="features-grid">
@@ -922,8 +922,8 @@
           <div class="feature-icon-wrapper">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
           </div>
-          <h3>Bye, Compression. Hello, Detail.</h3>
-          <p>Unlike video screen sharing which compresses images and introduces lag, Croquing loads original photographs directly onto every participant's device. Spot fine anatomy details and textures clearly.</p>
+          <h3>화질 저하 없는 또렷한 세부 표현</h3>
+          <p>화면을 압축해 전송하느라 화질이 깨지고 끊김이 심한 화상 회의 방식과는 다릅니다. Croquing은 참가자 기기에서 고해상도 원본을 바로 불러옵니다. 세밀한 인체 구조와 묘사선 하나까지 왜곡 없이 뚜렷하게 관찰해 보세요.</p>
         </article>
 
         <!-- Feature 2 -->
@@ -931,8 +931,8 @@
           <div class="feature-icon-wrapper">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
-          <h3>Server-Authoritative Clock</h3>
-          <p>Prevent premature sketches. The host sets each round length (1–60 minutes) before drawing begins, and an authoritative server timer keeps every artist in sync. When the round starts, the photo unlocks. When time runs out, it immediately vanishes.</p>
+          <h3>서버 기준의 정확한 시간 관리</h3>
+          <p>시작하기도 전에 이미지를 미리 훔쳐보는 일을 완벽히 막아줍니다. 방장이 제한 시간(1~60분)을 맞추면 서버 타이머가 작동해 모두의 화면을 일시에 정렬합니다. 라운드가 시작될 때만 열리고 시간이 지나면 칼같이 사라집니다.</p>
         </article>
 
         <!-- Feature 3 -->
@@ -940,8 +940,8 @@
           <div class="feature-icon-wrapper">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
           </div>
-          <h3>Integrated Image Curation</h3>
-          <p>Hosts can search and select curated figure images in seconds, directly inside the admin panel. Photos credit the original artists automatically, matching standard community guidelines.</p>
+          <h3>간편한 이미지 탐색 및 선택</h3>
+          <p>방장은 관리 패널에서 인체 포즈를 몇 초 만에 검색해 추가합니다. 원작자 출처도 자동으로 같이 표시해 저작권 권장 사항과 커뮤니티 규칙을 모범적으로 준수합니다.</p>
         </article>
 
         <!-- Feature 4 -->
@@ -949,8 +949,8 @@
           <div class="feature-icon-wrapper">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
           </div>
-          <h3>Fair & Unpredictable Order</h3>
-          <p>To preserve the challenge of quick gesture drawing, the session sequence is randomized. No artist knows what model or pose is coming up next until the countdown timer strikes zero.</p>
+          <h3>예측할 수 없는 공평한 드로잉 순서</h3>
+          <p>순간을 포착하는 제스처 드로잉의 묘미를 지키고자 사진 순서를 무작위로 섞습니다. 카운트다운이 끝나 이미지가 열리기 전에는 그 누구도 다음 모델이나 포즈가 무엇일지 미리 짐작할 수 없습니다.</p>
         </article>
 
       </div>
