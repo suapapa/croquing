@@ -300,8 +300,8 @@ select {
 }
 
 .home-page__logo-img {
-  max-width: 18rem;
-  max-height: 6rem;
+  max-width: 36rem;
+  max-height: 12rem;
   object-fit: contain;
   transition: transform var(--transition-base);
 }
@@ -481,8 +481,8 @@ select {
 }
 
 .lobby-layout__logo-img {
-  max-width: 6rem;
-  max-height: 1.5rem;
+  max-width: 12rem;
+  max-height: 3rem;
   object-fit: contain;
   flex-shrink: 0;
 }

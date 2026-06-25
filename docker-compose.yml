@@ -10,7 +10,7 @@ services:
       PORT: "8080"
       CORS_ORIGINS: http://localhost:5173,http://127.0.0.1:5173
       DRAW_DURATION: ${DRAW_DURATION:-5m}
-      APP_NAME: ${APP_NAME:-Croquing}
+      APP_NAME: ${APP_NAME:-}
       APP_LOGO: ${APP_LOGO:-}
       APP_LOGO_LINK: ${APP_LOGO_LINK:-https://homin.dev}
     restart: unless-stopped
