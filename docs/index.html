@@ -7,7 +7,7 @@
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="alternate icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjI0IiBmaWxsPSIjNjM2NkYxIi8+PHRleHQgeD0iNTAlIiB5PSI2OCUiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI4MDAiIGZvbnQtc2l6ZT0iNjAiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5DPC90ZXh0Pjwvc3ZnPg==">
+  <meta name="theme-color" content="#f5f0e8">
   
   <!-- SEO Meta Tags -->
   <meta name="description" content="Host and join synchronized figure drawing (croquis) meetups in real-time. No low-res screen sharing, built-in image curation, and server-synced timers.">
@@ -17,7 +17,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
     /* CSS Reset & Variables */
@@ -28,40 +28,43 @@
     }
     
     :root {
-      --bg-deep: #030305;
-      --bg-base: #08080c;
-      --bg-elevated: #111116;
-      --surface: rgba(255, 255, 255, 0.03);
-      --surface-hover: rgba(255, 255, 255, 0.06);
-      
-      --color-primary: #6366f1; /* Indigo 500 */
-      --color-primary-glow: rgba(99, 102, 241, 0.15);
-      --color-secondary: #14b8a6; /* Teal 500 */
-      --color-secondary-glow: rgba(20, 184, 166, 0.1);
-      
-      --foreground: #f3f4f6; /* Gray 100 */
-      --foreground-muted: #9ca3af; /* Gray 400 */
-      --border: rgba(255, 255, 255, 0.08);
-      --border-hover: rgba(255, 255, 255, 0.15);
-      
-      --font-heading: 'Outfit', sans-serif;
-      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --bg-deep: #f5f0e8;
+      --bg-base: #f5f0e8;
+      --bg-elevated: #ede4d4;
+      --surface: #fffcf7;
+      --surface-hover: #fff7ed;
+
+      --color-primary: #c2410c;
+      --color-primary-glow: rgba(194, 65, 12, 0.14);
+      --color-secondary: #ea580c;
+      --color-secondary-glow: rgba(234, 88, 12, 0.1);
+
+      --foreground: #1a1614;
+      --foreground-muted: #5c534a;
+      --border: #ddd4c8;
+      --border-hover: #c9bfb2;
+
+      --font-heading: 'Syne', Georgia, 'Times New Roman', serif;
+      --font-body: 'Manrope', 'Segoe UI', system-ui, sans-serif;
       --max-width: 1100px;
       --radius-lg: 20px;
       --radius-md: 12px;
       --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+
     body {
-      background-color: var(--bg-deep);
+      background:
+        radial-gradient(circle at 12% 18%, rgba(194, 65, 12, 0.08), transparent 42%),
+        radial-gradient(circle at 88% 82%, rgba(120, 113, 108, 0.1), transparent 38%),
+        linear-gradient(165deg, var(--bg-deep) 0%, var(--bg-elevated) 100%);
       color: var(--foreground);
       font-family: var(--font-body);
       line-height: 1.6;
       overflow-x: hidden;
       position: relative;
     }
-    
-    /* Background Mesh & Ambient Light Blobs */
+
+    /* Background Mesh */
     body::before {
       content: '';
       position: fixed;
@@ -69,11 +72,11 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: radial-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-image: radial-gradient(rgba(26, 22, 20, 0.035) 1px, transparent 1px);
       background-size: 32px 32px;
       pointer-events: none;
       z-index: 1;
-      opacity: 0.8;
+      opacity: 0.9;
     }
     
     .ambient-glows {
@@ -93,27 +96,27 @@
       height: 600px;
       border-radius: 50%;
       filter: blur(80px);
-      opacity: 0.15;
+      opacity: 0.45;
       animation: float-blob 25s infinite alternate ease-in-out;
     }
-    
+
     .blob-1 {
       top: -10%;
       left: -10%;
-      background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(194, 65, 12, 0.22) 0%, transparent 70%);
     }
-    
+
     .blob-2 {
       top: 40%;
       right: -10%;
-      background: radial-gradient(circle, var(--color-secondary) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(120, 113, 108, 0.18) 0%, transparent 70%);
       animation-delay: -5s;
     }
-    
+
     .blob-3 {
       bottom: 5%;
       left: 20%;
-      background: radial-gradient(circle, #ec4899 0%, transparent 70%); /* Rose */
+      background: radial-gradient(circle, rgba(234, 88, 12, 0.14) 0%, transparent 70%);
       animation-delay: -10s;
     }
     
@@ -134,7 +137,7 @@
       z-index: 100;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      background: rgba(8, 8, 12, 0.7);
+      background: rgba(255, 252, 247, 0.82);
       border-bottom: 1px solid var(--border);
     }
     
@@ -158,7 +161,9 @@
       width: 32px;
       height: 32px;
       display: block;
+      padding: 5px;
       border-radius: 8px;
+      background: #fff7ed;
       box-shadow: 0 4px 12px var(--color-primary-glow);
     }
     
@@ -184,11 +189,13 @@
       text-decoration: none;
       cursor: pointer;
       transition: var(--transition-smooth);
+      box-shadow: 0 1px 2px rgba(26, 22, 20, 0.04);
     }
-    
+
     .btn-github:hover {
       background: var(--surface-hover);
       border-color: var(--border-hover);
+      color: var(--color-primary);
       transform: translateY(-1px);
     }
     
@@ -212,9 +219,9 @@
     .badge {
       display: inline-flex;
       align-items: center;
-      background: rgba(99, 102, 241, 0.1);
-      border: 1px solid rgba(99, 102, 241, 0.2);
-      color: #a5b4fc;
+      background: #fff7ed;
+      border: 1px solid rgba(194, 65, 12, 0.2);
+      color: var(--color-primary);
       padding: 6px 14px;
       border-radius: 50px;
       font-size: 13px;
@@ -223,7 +230,7 @@
       margin-bottom: 24px;
       text-transform: uppercase;
     }
-    
+
     h1 {
       font-family: var(--font-heading);
       font-size: 54px;
@@ -231,9 +238,7 @@
       line-height: 1.15;
       letter-spacing: -1.5px;
       margin-bottom: 20px;
-      background: linear-gradient(to right bottom, #ffffff 30%, #a5b4fc 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--foreground);
     }
     
     .hero-subtitle {
@@ -253,13 +258,14 @@
       justify-content: center;
       gap: 8px;
       margin-bottom: 30px;
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(255, 252, 247, 0.85);
       padding: 6px;
       border-radius: 50px;
       border: 1px solid var(--border);
       width: fit-content;
       margin-left: auto;
       margin-right: auto;
+      box-shadow: 0 2px 8px rgba(26, 22, 20, 0.04);
     }
     
     .tab-btn {
@@ -290,7 +296,7 @@
     .tab-btn.active {
       background: var(--color-primary);
       color: white;
-      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+      box-shadow: 0 4px 14px rgba(194, 65, 12, 0.28);
     }
     
     .tab-btn.active svg {
@@ -298,79 +304,45 @@
     }
     
     .mockup-window {
-      background: #0f0f15;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(99, 102, 241, 0.05);
-      overflow: hidden;
       position: relative;
-      aspect-ratio: 16/10;
       width: 100%;
-      cursor: pointer;
-    }
-    
-    /* Window Chrome */
-    .window-header {
-      background: #161622;
-      padding: 12px 20px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    
-    .window-dots {
-      display: flex;
-      gap: 6px;
-    }
-    
-    .window-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-    
-    .dot-red { background: #ef4444; }
-    .dot-yellow { background: #f59e0b; }
-    .dot-green { background: #10b981; }
-    
-    .window-url {
-      background: rgba(0, 0, 0, 0.2);
-      border-radius: 6px;
-      padding: 4px 16px;
-      font-size: 12px;
-      color: var(--foreground-muted);
-      flex-grow: 1;
-      max-width: 500px;
+      max-width: 880px;
       margin: 0 auto;
-      text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow:
+        0 24px 48px rgba(26, 22, 20, 0.12),
+        0 0 0 1px rgba(221, 212, 200, 0.9);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    
-    /* Viewport Images */
-    .window-viewport {
+
+    .mockup-window:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 32px 64px rgba(26, 22, 20, 0.16),
+        0 0 0 1px rgba(194, 65, 12, 0.15);
+    }
+
+    .mockup-viewport {
       position: relative;
       width: 100%;
-      height: calc(100% - 41px);
-      background: #09090d;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      line-height: 0;
     }
-    
+
     .screenshot-img {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+      display: block;
       opacity: 0;
       transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      transform: scale(0.98);
+      transform: scale(0.99);
       pointer-events: none;
     }
-    
+
     .screenshot-img.active {
       position: relative;
       opacity: 1;
@@ -492,8 +464,9 @@
       transition: var(--transition-smooth);
       position: relative;
       overflow: hidden;
+      box-shadow: 0 4px 16px rgba(26, 22, 20, 0.05);
     }
-    
+
     .feature-card::before {
       content: '';
       position: absolute;
@@ -501,23 +474,23 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at 30px 30px, rgba(99, 102, 241, 0.05), transparent 60%);
+      background: radial-gradient(circle at 30px 30px, rgba(194, 65, 12, 0.05), transparent 60%);
       pointer-events: none;
     }
-    
+
     .feature-card:hover {
       transform: translateY(-4px);
-      border-color: var(--border-hover);
+      border-color: rgba(194, 65, 12, 0.2);
       background: var(--surface-hover);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(99, 102, 241, 0.03);
+      box-shadow: 0 12px 30px rgba(26, 22, 20, 0.08), 0 0 0 1px rgba(194, 65, 12, 0.06);
     }
-    
+
     .feature-icon-wrapper {
       width: 48px;
       height: 48px;
       border-radius: 12px;
-      background: rgba(99, 102, 241, 0.1);
-      border: 1px solid rgba(99, 102, 241, 0.15);
+      background: #fff7ed;
+      border: 1px solid rgba(194, 65, 12, 0.15);
       color: var(--color-primary);
       display: flex;
       align-items: center;
@@ -552,7 +525,7 @@
       padding: 48px 24px;
       margin-top: 60px;
       text-align: center;
-      background: #050508;
+      background: var(--surface);
       position: relative;
       z-index: 10;
     }
@@ -577,11 +550,23 @@
       transition: var(--transition-smooth);
       border-bottom: 1px solid transparent;
     }
-    
+
     .footer-copy a:hover {
       border-color: var(--color-primary);
+      color: var(--color-secondary);
     }
-    
+
+    .footer-logo-icon {
+      width: 24px;
+      height: 24px;
+      padding: 4px;
+      border-radius: 6px;
+    }
+
+    .footer-logo-text {
+      font-size: 16px;
+    }
+
     /* Lightbox Modal */
     .lightbox {
       position: fixed;
@@ -589,7 +574,7 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(3, 3, 5, 0.95);
+      background: rgba(26, 22, 20, 0.88);
       z-index: 200;
       display: flex;
       align-items: center;
@@ -606,11 +591,10 @@
     }
     
     .lightbox-content {
-      max-width: 90%;
+      max-width: 92%;
       max-height: 90%;
-      border-radius: 12px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
       overflow: hidden;
       transform: scale(0.95);
       transition: transform 0.3s ease;
@@ -753,20 +737,12 @@
         </button>
       </nav>
 
-      <!-- Interactive Laptop/Browser Mockup -->
+      <!-- Product screenshots (app viewport only, no decorative browser chrome) -->
       <div class="mockup-window" id="mockup-window" title="Click to zoom screenshot">
-        <div class="window-header">
-          <div class="window-dots">
-            <span class="window-dot dot-red"></span>
-            <span class="window-dot dot-yellow"></span>
-            <span class="window-dot dot-green"></span>
-          </div>
-          <div class="window-url" id="window-url">https://homin.dev/croquing/lobby/demo-session</div>
-        </div>
-        <div class="window-viewport">
-          <img src="screenshot/1_start.webp" alt="Lobby landing page where artists wait for the host" class="screenshot-img active" id="step-1" width="1920" height="1200">
-          <img src="screenshot/2_select.webp" alt="Host curation board to search and choose figure photos" class="screenshot-img" id="step-2" loading="lazy" width="1920" height="1200">
-          <img src="screenshot/3_round.webp" alt="Drawing session interface showing a photo with a countdown progress bar" class="screenshot-img" id="step-3" loading="lazy" width="1920" height="1200">
+        <div class="mockup-viewport">
+          <img src="screenshot/1_start.webp" alt="Lobby landing page where artists wait for the host" class="screenshot-img active" id="step-1" width="2550" height="2650">
+          <img src="screenshot/2_select.webp" alt="Host curation board to search and choose figure photos" class="screenshot-img" id="step-2" loading="lazy" width="2550" height="2650">
+          <img src="screenshot/3_round.webp" alt="Drawing session interface showing a photo with a countdown progress bar" class="screenshot-img" id="step-3" loading="lazy" width="2550" height="2650">
         </div>
       </div>
 
@@ -869,8 +845,8 @@
   <footer>
     <div class="footer-content">
       <div class="logo">
-        <img src="favicon.svg" alt="Croquing Logo" class="logo-icon" style="width: 24px; height: 24px; border-radius: 6px;">
-        <span class="logo-text" style="font-size: 16px;">Croquing</span>
+        <img src="favicon.svg" alt="Croquing Logo" class="logo-icon footer-logo-icon">
+        <span class="logo-text footer-logo-text">Croquing</span>
       </div>
       <p class="footer-copy">
         &copy; 2026 <a href="mailto:i@homin.dev">Homin Lee</a>. All rights reserved.
@@ -884,13 +860,6 @@
       const tabs = document.querySelectorAll('.tab-btn');
       const screenshots = document.querySelectorAll('.screenshot-img');
       const stepDescriptions = document.querySelectorAll('.step-desc');
-      const windowUrl = document.getElementById('window-url');
-      
-      const urls = {
-        'step-1': 'https://homin.dev/croquing/lobby/demo-session',
-        'step-2': 'https://homin.dev/croquing/lobby/demo-session/admin/curate',
-        'step-3': 'https://homin.dev/croquing/lobby/demo-session/draw'
-      };
 
       // Tab Switching Logic
       tabs.forEach(tab => {
@@ -904,11 +873,6 @@
           });
           tab.classList.add('active');
           tab.setAttribute('aria-selected', 'true');
-          
-          // Update mock address bar URL
-          if (windowUrl && urls[target]) {
-            windowUrl.textContent = urls[target];
-          }
           
           // Switch screenshot images with a transition
           screenshots.forEach(img => {
