@@ -6,7 +6,6 @@ import { getConnectionLabel, getPhaseMessage, t } from '../../lib/i18n'
 import { CopyLobbyLinkButton } from '../lobby/CopyLobbyLinkButton'
 import { useAppName } from '../../hooks/useAppName'
 import { useAppLogo } from '../../hooks/useAppLogo'
-import { useAppLogoLink } from '../../hooks/useAppLogoLink'
 
 interface LobbyLayoutProps {
   lobbyId: string
@@ -27,7 +26,6 @@ export function LobbyLayout({
 }: LobbyLayoutProps) {
   const appName = useAppName()
   const appLogo = useAppLogo()
-  const appLogoLink = useAppLogoLink()
   const phaseMessage = snapshot ? getPhaseMessage(snapshot.phase) : null
   const isLive = connectionStatus === 'connected'
   const isDisconnected =
@@ -38,9 +36,7 @@ export function LobbyLayout({
       <header className="lobby-layout__header">
         <div className="lobby-layout__brand-row">
           <div className="lobby-layout__brand">
-            <a href={appLogoLink} target="_blank" rel="noopener noreferrer" className="lobby-layout__logo-link">
-              <img src={appLogo} alt="" className="lobby-layout__logo-img" />
-            </a>
+            <img src={appLogo} alt="" className="lobby-layout__logo-img" />
             {appName.trim() && (
               <Link to="/" className="lobby-layout__brand-name">
                 <span>{appName}</span>
