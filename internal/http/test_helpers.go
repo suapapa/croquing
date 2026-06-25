@@ -11,5 +11,5 @@ import (
 )
 
 func newTestRouter(store lobby.Store, drawDuration time.Duration, pixabayClient *pixabay.Client, wsHandler *ws.Handler, lobbySync *ws.SnapshotSync) *gin.Engine {
-	return newRouter(store, drawDuration, pixabayClient, wsHandler, lobbySync, nil, "Croquing")
+	return newRouter(store, drawDuration, pixabayClient, wsHandler, lobbySync, nil, "Croquing", "", "")
 }

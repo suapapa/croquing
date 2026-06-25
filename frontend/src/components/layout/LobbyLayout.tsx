@@ -4,7 +4,9 @@ import type { LobbySnapshot } from '../../types/lobby'
 import type { ConnectionStatus } from '../../hooks/useLobbySocket'
 import { getConnectionLabel, getPhaseMessage, t } from '../../lib/i18n'
 import { CopyLobbyLinkButton } from '../lobby/CopyLobbyLinkButton'
-import { IconLogo } from '../ui/Icons'
+import { useAppName } from '../../hooks/useAppName'
+import { useAppLogo } from '../../hooks/useAppLogo'
+import { useAppLogoLink } from '../../hooks/useAppLogoLink'
 
 interface LobbyLayoutProps {
   lobbyId: string
@@ -23,6 +25,9 @@ export function LobbyLayout({
   connectionError,
   children,
 }: LobbyLayoutProps) {
+  const appName = useAppName()
+  const appLogo = useAppLogo()
+  const appLogoLink = useAppLogoLink()
   const phaseMessage = snapshot ? getPhaseMessage(snapshot.phase) : null
   const isLive = connectionStatus === 'connected'
   const isDisconnected =
@@ -32,10 +37,16 @@ export function LobbyLayout({
     <div className="lobby-layout">
       <header className="lobby-layout__header">
         <div className="lobby-layout__brand-row">
-          <Link to="/" className="lobby-layout__brand">
-            <IconLogo className="lobby-layout__logo" aria-hidden="true" />
-            <span>Croquing</span>
-          </Link>
+          <div className="lobby-layout__brand">
+            <a href={appLogoLink} target="_blank" rel="noopener noreferrer" className="lobby-layout__logo-link">
+              <img src={appLogo} alt="" className="lobby-layout__logo-img" />
+            </a>
+            {appName.trim() && (
+              <Link to="/" className="lobby-layout__brand-name">
+                <span>{appName}</span>
+              </Link>
+            )}
+          </div>
           <span
             className={`lobby-layout__badge lobby-layout__badge--${
               isAdmin ? 'admin' : 'participant'

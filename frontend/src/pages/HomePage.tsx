@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import { createLobby } from '../api/lobbyApi'
 import {
   IconLink,
-  IconLogo,
   IconSpinner,
   IconTimer,
   IconUsers,
@@ -11,6 +10,8 @@ import {
 import { saveAdminToken } from '../lib/adminStorage'
 import { t } from '../lib/i18n'
 import { useAppName } from '../hooks/useAppName'
+import { useAppLogo } from '../hooks/useAppLogo'
+import { useAppLogoLink } from '../hooks/useAppLogoLink'
 
 const STEPS = [
   {
@@ -33,6 +34,8 @@ const STEPS = [
 export function HomePage() {
   const navigate = useNavigate()
   const appName = useAppName()
+  const appLogo = useAppLogo()
+  const appLogoLink = useAppLogoLink()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -59,8 +62,10 @@ export function HomePage() {
         <section className="home-page__hero" aria-labelledby="home-title">
           <p className="home-page__eyebrow">{t('home.eyebrow')}</p>
           <div className="home-page__brand-header">
-            <IconLogo className="home-page__logo" aria-hidden="true" />
-            <h1 id="home-title">{appName}</h1>
+            <a href={appLogoLink} target="_blank" rel="noopener noreferrer" className="home-page__logo-link">
+              <img src={appLogo} alt="" className="home-page__logo-img" />
+            </a>
+            {appName.trim() && <h1 id="home-title">{appName}</h1>}
           </div>
           <p className="home-page__lead">{t('home.lead')}</p>
 

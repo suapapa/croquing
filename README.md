@@ -22,6 +22,8 @@ Required environment variables:
 | `CORS_ORIGINS` | | `*` | Allowed origins (e.g. `http://localhost:5173`) |
 | `DRAW_DURATION` | | `5m` | Draw round duration |
 | `APP_NAME` | | `Croquing` | App name shown on the home screen |
+| `APP_LOGO` | | — | Custom logo image URL (falls back to `/example_logo.png`) |
+| `APP_LOGO_LINK` | | `https://homin.dev` | Link to open when clicking the logo |
 
 ```sh
 export PIXABAY_API_KEY=your-key

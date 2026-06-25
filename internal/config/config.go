@@ -12,6 +12,8 @@ type Config struct {
 	CORSOrigins   []string `envconfig:"CORS_ORIGINS" default:"*"`
 	DrawDuration  string   `envconfig:"DRAW_DURATION" default:"5m"`
 	AppName       string   `envconfig:"APP_NAME" default:"Croquing"`
+	AppLogo       string   `envconfig:"APP_LOGO" default:""`
+	AppLogoLink   string   `envconfig:"APP_LOGO_LINK" default:"https://homin.dev"`
 }
 
 func Load() (*Config, error) {

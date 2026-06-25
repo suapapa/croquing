@@ -15,7 +15,7 @@ func init() {
 	gin.SetMode(gin.ReleaseMode)
 }
 
-func newRouter(store lobby.Store, drawDuration time.Duration, pixabayClient *pixabay.Client, wsHandler *ws.Handler, lobbySync *ws.SnapshotSync, corsOrigins []string, appName string) *gin.Engine {
+func newRouter(store lobby.Store, drawDuration time.Duration, pixabayClient *pixabay.Client, wsHandler *ws.Handler, lobbySync *ws.SnapshotSync, corsOrigins []string, appName string, appLogo string, appLogoLink string) *gin.Engine {
 	r := gin.New()
 	r.Use(gin.Recovery())
 	r.Use(requestLogMiddleware())
@@ -24,7 +24,7 @@ func newRouter(store lobby.Store, drawDuration time.Duration, pixabayClient *pix
 	r.GET("/health", healthHandler)
 
 	api := r.Group("/api")
-	registerConfigRoutes(api, appName)
+	registerConfigRoutes(api, appName, appLogo, appLogoLink)
 	registerLobbyRoutes(api, store, drawDuration, lobbySync)
 	if pixabayClient != nil {
 		registerPixabayRoutes(api, store, pixabayClient)

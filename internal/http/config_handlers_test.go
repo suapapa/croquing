@@ -10,7 +10,7 @@ import (
 func TestPublicConfigHandler(t *testing.T) {
 	t.Parallel()
 
-	router := newRouter(nil, 0, nil, nil, nil, nil, "My Studio")
+	router := newRouter(nil, 0, nil, nil, nil, nil, "My Studio", "http://logo", "https://homin.dev")
 
 	req := httptest.NewRequest(http.MethodGet, "/api/config", nil)
 	rec := httptest.NewRecorder()
@@ -26,5 +26,11 @@ func TestPublicConfigHandler(t *testing.T) {
 	}
 	if body.AppName != "My Studio" {
 		t.Fatalf("app_name = %q, want %q", body.AppName, "My Studio")
+	}
+	if body.AppLogo != "http://logo" {
+		t.Fatalf("app_logo = %q, want %q", body.AppLogo, "http://logo")
+	}
+	if body.AppLogoLink != "https://homin.dev" {
+		t.Fatalf("app_logo_link = %q, want %q", body.AppLogoLink, "https://homin.dev")
 	}
 }

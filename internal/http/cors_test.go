@@ -21,6 +21,8 @@ func TestCORSPreflightAllowsViteDevOrigin(t *testing.T) {
 		nil,
 		[]string{"http://localhost:5173"},
 		"Croquing",
+		"",
+		"",
 	)
 
 	req := httptest.NewRequest(http.MethodOptions, "/api/lobbies", nil)
@@ -51,6 +53,8 @@ func TestCORSRejectsUnknownOriginOnPreflight(t *testing.T) {
 		nil,
 		[]string{"http://localhost:5173"},
 		"Croquing",
+		"",
+		"",
 	)
 
 	req := httptest.NewRequest(http.MethodOptions, "/api/lobbies", nil)

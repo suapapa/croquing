@@ -7,15 +7,21 @@ import (
 )
 
 type publicConfigResponse struct {
-	AppName string `json:"app_name"`
+	AppName     string `json:"app_name"`
+	AppLogo     string `json:"app_logo"`
+	AppLogoLink string `json:"app_logo_link"`
 }
 
-func registerConfigRoutes(r *gin.RouterGroup, appName string) {
-	r.GET("/config", publicConfigHandler(appName))
+func registerConfigRoutes(r *gin.RouterGroup, appName string, appLogo string, appLogoLink string) {
+	r.GET("/config", publicConfigHandler(appName, appLogo, appLogoLink))
 }
 
-func publicConfigHandler(appName string) gin.HandlerFunc {
+func publicConfigHandler(appName string, appLogo string, appLogoLink string) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.JSON(http.StatusOK, publicConfigResponse{AppName: appName})
+		c.JSON(http.StatusOK, publicConfigResponse{
+			AppName:     appName,
+			AppLogo:     appLogo,
+			AppLogoLink: appLogoLink,
+		})
 	}
 }
