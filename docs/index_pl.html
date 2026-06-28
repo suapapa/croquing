@@ -4,37 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Croquing — Zsynchronizowane sesje krokiu dla cotygodniowych spotkań</title>
-  
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <meta name="theme-color" content="#f5f0e8">
-  
-  <!-- SEO Meta Tags -->
+  <meta name="theme-color" content="#fafafa">
   <meta name="description" content="Organizuj i dołączaj do zsynchronizowanych sesji rysunku anatomicznego (krokiu) w czasie rzeczywistym. Zapomnij o rozmazanym udostępnianiu ekranu. Zsynchronizowane timery i kuracja obrazów.">
   <meta name="keywords" content="krokiu, rysunek anatomiczny, rysunek z natury, zsynchronizowany timer, spotkania artystyczne, ćwiczenie szkicowania">
   <meta name="author" content="Homin Lee">
-  
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
-  
   <link rel="stylesheet" href="landing.css">
+  <style>
+    h1, h2, h3, .logo-text { font-family: Syne, Georgia, serif; }
+  </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Przejdź do treści</a>
 
-  <!-- Ambient Light Blobs -->
-  <div class="ambient-glows">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-  </div>
-
-  <!-- Header -->
   <header>
     <div class="nav-container">
       <a href="#" class="logo" aria-label="Croquing Home">
-        <img src="favicon.svg" alt="Croquing Logo" class="logo-icon">
+        <img src="favicon.svg" alt="" class="logo-icon">
         <span class="logo-text">Croquing</span>
       </a>
       <div class="nav-actions">
@@ -66,12 +55,8 @@
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main>
-    
-    <!-- Hero Section -->
+  <main id="main-content">
     <section class="hero" aria-label="Wprowadzenie">
-      <span class="badge">Synchronizacja płótna w czasie rzeczywistym</span>
       <h1>Sesje krokiu na nowo</h1>
       <p class="hero-subtitle">
         Rysuj sylwetki w idealnej synchronizacji ze swoją grupą. Croquing zarządza czasem, losowo dobiera zdjęcia w wysokiej rozdzielczości i synchronizuje stan sesji na wszystkich ekranach.
@@ -84,134 +69,91 @@
       </div>
     </section>
 
-    <!-- Mockup Showcase Section -->
-    <section class="mockup-section" aria-label="Prezentacja produktu">
-      
-      <!-- Interactive Showcase Selector Tabs -->
-      <nav class="tab-nav" aria-label="Kroki przepływu pracy">
-        <button class="tab-btn active" data-target="step-1" aria-controls="step-1" aria-selected="true" role="tab">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          1. Wejdź do lobby
-        </button>
-        <button class="tab-btn" data-target="step-2" aria-controls="step-2" aria-selected="false" role="tab">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          2. Wybierz pozy
-        </button>
-        <button class="tab-btn" data-target="step-3" aria-controls="step-3" aria-selected="false" role="tab">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-          3. Szkicuj w synchronizacji
-        </button>
-      </nav>
+    <section class="showcase" aria-labelledby="showcase-heading">
+      <h2 id="showcase-heading" class="visually-hidden">Przepływ pracy produktu</h2>
 
-      <!-- Product screenshots (app viewport only, no decorative browser chrome) -->
-      <div class="mockup-window" id="mockup-window" title="Kliknij, aby powiększyć zrzut ekranu">
-        <div class="mockup-viewport">
-          <img src="screenshot/1_start.webp" alt="Strona lobby, na której artyści czekają na rozpoczęcie sesji przez hosta" class="screenshot-img active" id="step-1" width="2550" height="2650">
-          <img src="screenshot/2_select.webp" alt="Panel kuratorski hosta do wyszukiwania i wybierania zdjęć sylwetek" class="screenshot-img" id="step-2" loading="lazy" width="2550" height="2650">
-          <img src="screenshot/3_round.webp" alt="Interfejs sesji rysunkowej pokazujący zdjęcie z paskiem postępu odliczania" class="screenshot-img" id="step-3" loading="lazy" width="2550" height="2650">
+      <div class="tab-nav" role="tablist" aria-label="Kroki przepływu pracy">
+        <button type="button" class="tab-btn active" role="tab" id="tab-step-1" aria-selected="true" aria-controls="panel-step-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          Wejdź do lobby
+        </button>
+        <button type="button" class="tab-btn" role="tab" id="tab-step-2" aria-selected="false" aria-controls="panel-step-2" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          Wybierz pozy
+        </button>
+        <button type="button" class="tab-btn" role="tab" id="tab-step-3" aria-selected="false" aria-controls="panel-step-3" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+          Szkicuj w synchronizacji
+        </button>
+      </div>
+
+      <div id="panel-step-1" class="tab-panel active" role="tabpanel" aria-labelledby="tab-step-1">
+        <button type="button" class="mockup-trigger" aria-label="Powiększ zrzut ekranu: ekran oczekiwania w lobby">
+          <img src="screenshot/1_start.webp" alt="Strona lobby, na której artyści czekają na rozpoczęcie sesji przez hosta" width="2550" height="2650">
+        </button>
+        <div class="step-copy">
+          <h3>Błyskawiczne tworzenie i udostępnianie lobby</h3>
+          <p>Stwórz wspólny pokój jednym kliknięciem. Udostępnij link innym artystom. Każdy może dołączyć natychmiast przez przeglądarkę bez pobierania programów czy zakładania kont.</p>
         </div>
       </div>
 
-      <!-- Step Description Copy -->
-      <div class="step-descs">
-        <article class="step-desc active" data-step="step-1">
-          <h3>Błyskawiczne tworzenie i udostępnianie lobby</h3>
-          <p>Stwórz wspólny pokój jednym kliknięciem. Udostępnij link innym artystom. Każdy może dołączyć natychmiast przez przeglądarkę bez pobierania programów czy zakładania kont.</p>
-        </article>
-        <article class="step-desc" data-step="step-2">
+      <div id="panel-step-2" class="tab-panel" role="tabpanel" aria-labelledby="tab-step-2" hidden>
+        <button type="button" class="mockup-trigger" aria-label="Powiększ zrzut ekranu: panel kuracji zdjęć hosta">
+          <img src="screenshot/2_select.webp" alt="Panel kuratorski hosta do wyszukiwania i wybierania zdjęć sylwetek" loading="lazy" width="2550" height="2650">
+        </button>
+        <div class="step-copy">
           <h3>Bezpośrednia selekcja i inteligentne tasowanie</h3>
           <p>Wyszukuj i wybieraj zdjęcia poz bezpośrednio w aplikacji. Host ustala zestaw zdjęć, a platforma automatycznie miesza ich kolejność, ukrywając je aż do rozpoczęcia rysowania.</p>
-        </article>
-        <article class="step-desc" data-step="step-3">
+        </div>
+      </div>
+
+      <div id="panel-step-3" class="tab-panel" role="tabpanel" aria-labelledby="tab-step-3" hidden>
+        <button type="button" class="mockup-trigger" aria-label="Powiększ zrzut ekranu: zsynchronizowana sesja rysunkowa">
+          <img src="screenshot/3_round.webp" alt="Interfejs sesji rysunkowej pokazujący zdjęcie z paskiem postępu odliczania" loading="lazy" width="2550" height="2650">
+        </button>
+        <div class="step-copy">
           <h3>Skupione rysowanie ze zsynchronizowanym czasem</h3>
           <p>Wszyscy szkicują tę samą postać w tym samym momencie. Zsynchronizowany timer decyduje o odsłonięciu zdjęcia i automatycznie ukrywa je po upływie czasu, dbając o równe tempo.</p>
-        </article>
-      </div>
-
-    </section>
-
-    <!-- Key Metrics / Indicators Bar -->
-    <section class="metrics" aria-label="Główne zalety">
-      <div class="metric-item">
-        <div class="metric-value">100%</div>
-        <div class="metric-title">Ostre i w wysokiej rozdzielczości</div>
-        <div class="metric-desc">Zdjęcia ładują się lokalnie na każdym urządzeniu zamiast zamazanego streamu wideo.</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-value">0</div>
-        <div class="metric-title">Bez instalacji</div>
-        <div class="metric-desc">Uruchom lobby i dołącz z dowolnej nowoczesnej przeglądarki internetowej natychmiast.</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-value">1–60 min</div>
-        <div class="metric-title">Elastyczny czas</div>
-        <div class="metric-desc">Host wybiera długość rundy w minutach przed każdym rysowaniem. Wszyscy widzą ten sam zegar.</div>
+        </div>
       </div>
     </section>
 
-    <!-- Detailed Features Section -->
     <section class="features-section" aria-label="Szczegółowe funkcje">
       <div class="section-title">
         <h2>Stworzone dla artystycznego skupienia</h2>
         <p>Zaprojektowane, by rozwiązać typowe problemy tradycyjnych spotkań rysunkowych online przez komunikatory wideo.</p>
       </div>
-      
-      <div class="features-grid">
-        
-        <!-- Feature 1 -->
-        <article class="feature-card">
-          <div class="feature-icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
-          </div>
+
+      <ul class="features-list">
+        <li class="feature-item">
           <h3>Pożegnaj kompresję. Witaj detalu.</h3>
           <p>W przeciwieństwie do udostępniania ekranu przez wideo, które kompresuje obraz i wprowadza opóźnienia, Croquing ładuje oryginalne zdjęcia bezpośrednio na urządzeniu każdego uczestnika. Dostrzeż anatomię i tekstury bez zakłóceń.</p>
-        </article>
-
-        <!-- Feature 2 -->
-        <article class="feature-card">
-          <div class="feature-icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
+        </li>
+        <li class="feature-item">
           <h3>Autorytatywny czas serwera</h3>
           <p>Zapobiega przedwczesnemu szkicowaniu. Host ustawia długość rundy (1–60 minut) przed rozpoczęciem, a serwer pilnuje synchronizacji. Obraz pojawia się na start i znika natychmiast po czasie.</p>
-        </article>
-
-        <!-- Feature 3 -->
-        <article class="feature-card">
-          <div class="feature-icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-          </div>
+        </li>
+        <li class="feature-item">
           <h3>Zintegrowana kuracja zdjęć</h3>
           <p>Host może w kilka sekund wyszukać i wybrać zdjęcia postaci w panelu administracyjnym. Autorstwo zdjęć jest przypisywane automatycznie zgodnie z wytycznymi społeczności.</p>
-        </article>
-
-        <!-- Feature 4 -->
-        <article class="feature-card">
-          <div class="feature-icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-          </div>
+        </li>
+        <li class="feature-item">
           <h3>Sprawiedliwa i nieprzewidywalna kolejność</h3>
           <p>Aby utrzymać wyzwanie szybkich szkiców gestów, kolejność sesji jest losowana. Żaden artysta nie wie, jaka poza ani model pojawią się jako następne, dopóki licznik nie wskaże zera.</p>
-        </article>
-
-      </div>
+        </li>
+      </ul>
     </section>
-
   </main>
 
-  <!-- Lightbox Modal Overlay -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot lightbox">
-    <button class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">&times;</button>
-    <div class="lightbox-content">
-      <img src="" alt="" id="lightbox-img">
-    </div>
-  </div>
+  <dialog class="lightbox" id="lightbox" aria-label="Podgląd zrzutu ekranu">
+    <button type="button" class="lightbox-close" aria-label="Zamknij podgląd">&times;</button>
+    <div class="lightbox-content"></div>
+  </dialog>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-content">
       <div class="logo">
-        <img src="favicon.svg" alt="Croquing Logo" class="logo-icon footer-logo-icon">
+        <img src="favicon.svg" alt="" class="logo-icon footer-logo-icon">
         <span class="logo-text footer-logo-text">Croquing</span>
       </div>
       <p class="footer-copy">
@@ -220,78 +162,6 @@
     </div>
   </footer>
 
-  <!-- Script for Interactive Transitions & Lightbox -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const tabs = document.querySelectorAll('.tab-btn');
-      const screenshots = document.querySelectorAll('.screenshot-img');
-      const stepDescriptions = document.querySelectorAll('.step-desc');
-
-      // Tab Switching Logic
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          const target = tab.getAttribute('data-target');
-          
-          // Update active button state
-          tabs.forEach(t => {
-            t.classList.remove('active');
-            t.setAttribute('aria-selected', 'false');
-          });
-          tab.classList.add('active');
-          tab.setAttribute('aria-selected', 'true');
-          
-          // Switch screenshot images with a transition
-          screenshots.forEach(img => {
-            if (img.id === target) {
-              img.classList.add('active');
-            } else {
-              img.classList.remove('active');
-            }
-          });
-
-          // Switch active step text below the mockup
-          stepDescriptions.forEach(desc => {
-            if (desc.getAttribute('data-step') === target) {
-              desc.classList.add('active');
-            } else {
-              desc.classList.remove('active');
-            }
-          });
-        });
-      });
-
-      // Lightbox Modal Logic
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightbox-img');
-      const closeBtn = document.getElementById('lightbox-close');
-      const mockupWindow = document.getElementById('mockup-window');
-
-      mockupWindow.addEventListener('click', () => {
-        const activeImg = document.querySelector('.screenshot-img.active');
-        if (activeImg) {
-          lightbox.classList.add('active');
-          lightboxImg.src = activeImg.src;
-          lightboxImg.alt = activeImg.alt;
-        }
-      });
-
-      const closeLightbox = () => {
-        lightbox.classList.remove('active');
-      };
-
-      closeBtn.addEventListener('click', closeLightbox);
-      lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-          closeLightbox();
-        }
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-          closeLightbox();
-        }
-      });
-    });
-  </script>
+  <script src="landing.js" defer></script>
 </body>
 </html>

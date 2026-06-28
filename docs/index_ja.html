@@ -4,37 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Croquing — 毎週一緒に描くリアルタイム同期クロッキー集会</title>
-  
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <meta name="theme-color" content="#f5f0e8">
-  
-  <!-- SEO Meta Tags -->
+  <meta name="theme-color" content="#fafafa">
   <meta name="description" content="同期された画面でリアルタイムのクロッキー集会を開催・参加しましょう。低画質な画面共有なしで、サーバータイマーによって全員が同時にドローイングを開始・終了します。">
   <meta name="keywords" content="クロッキー, デッサン, リアルタイムタイマー, ドローイング集会, 描画練習, 人体デッサン">
   <meta name="author" content="Homin Lee">
-  
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
-  
   <link rel="stylesheet" href="landing.css">
+  <style>
+    h1, h2, h3, .logo-text { font-family: Syne, Georgia, serif; }
+  </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">メインコンテンツへスキップ</a>
 
-  <!-- Ambient Light Blobs -->
-  <div class="ambient-glows">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-  </div>
-
-  <!-- Header -->
   <header>
     <div class="nav-container">
       <a href="#" class="logo" aria-label="Croquing ホーム">
-        <img src="favicon.svg" alt="Croquing ロゴ" class="logo-icon">
+        <img src="favicon.svg" alt="" class="logo-icon">
         <span class="logo-text">Croquing</span>
       </a>
       <div class="nav-actions">
@@ -66,12 +55,8 @@
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main>
-    
-    <!-- Hero Section -->
+  <main id="main-content">
     <section class="hero" aria-label="紹介">
-      <span class="badge">リアルタイム画面同期</span>
       <h1>まったく新しいクロッキー体験</h1>
       <p class="hero-subtitle">
         参加者全員が完璧に一致する画面を見ながら一緒にクロッキーを描きます。サーバーがタイマーを管理し、高解像度のポーズ写真をランダムに表示し、すべてのブラウザの進行状態をリアルタイムで同期します。
@@ -84,134 +69,91 @@
       </div>
     </section>
 
-    <!-- Mockup Showcase Section -->
-    <section class="mockup-section" aria-label="製品デモ">
-      
-      <!-- Interactive Showcase Selector Tabs -->
-      <nav class="tab-nav" aria-label="利用フローのステップ">
-        <button class="tab-btn active" data-target="step-1" aria-controls="step-1" aria-selected="true" role="tab">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          1. ロビー入場
-        </button>
-        <button class="tab-btn" data-target="step-2" aria-controls="step-2" aria-selected="false" role="tab">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          2. 画像選択
-        </button>
-        <button class="tab-btn" data-target="step-3" aria-controls="step-3" aria-selected="false" role="tab">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-          3. スケッチ開始
-        </button>
-      </nav>
+    <section class="showcase" aria-labelledby="showcase-heading">
+      <h2 id="showcase-heading" class="visually-hidden">製品の利用フロー</h2>
 
-      <!-- Product screenshots (app viewport only, no decorative browser chrome) -->
-      <div class="mockup-window" id="mockup-window" title="クリックしてスクリーンショットを拡大">
-        <div class="mockup-viewport">
-          <img src="screenshot/1_start.webp" alt="ホストがセッションを開始するまで参加者が待機するロビー画面" class="screenshot-img active" id="step-1" width="2550" height="2650">
-          <img src="screenshot/2_select.webp" alt="ホストがポーズ写真を検索して選択する画像準備ボード" class="screenshot-img" id="step-2" loading="lazy" width="2550" height="2650">
-          <img src="screenshot/3_round.webp" alt="上部カウントダウン進行バーとポーズ画像が表示されるクロッキーセッション画面" class="screenshot-img" id="step-3" loading="lazy" width="2550" height="2650">
+      <div class="tab-nav" role="tablist" aria-label="利用フローのステップ">
+        <button type="button" class="tab-btn active" role="tab" id="tab-step-1" aria-selected="true" aria-controls="panel-step-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          ロビー入場
+        </button>
+        <button type="button" class="tab-btn" role="tab" id="tab-step-2" aria-selected="false" aria-controls="panel-step-2" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          画像選択
+        </button>
+        <button type="button" class="tab-btn" role="tab" id="tab-step-3" aria-selected="false" aria-controls="panel-step-3" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+          スケッチ開始
+        </button>
+      </div>
+
+      <div id="panel-step-1" class="tab-panel active" role="tabpanel" aria-labelledby="tab-step-1">
+        <button type="button" class="mockup-trigger" aria-label="スクリーンショットを拡大: ロビー待機画面">
+          <img src="screenshot/1_start.webp" alt="ホストがセッションを開始するまで参加者が待機するロビー画面" width="2550" height="2650">
+        </button>
+        <div class="step-copy">
+          <h3>ワンクリックで簡単に部屋を作成・共有</h3>
+          <p>クリックするだけで一緒に描く部屋を作成できます。参加者にリンクを送るだけで準備完了。面倒なソフトのインストールや会員登録は不要で、ブラウザからすぐに参加可能です。</p>
         </div>
       </div>
 
-      <!-- Step Description Copy -->
-      <div class="step-descs">
-        <article class="step-desc active" data-step="step-1">
-          <h3>ワンクリックで簡単に部屋を作成・共有</h3>
-          <p>クリックするだけで一緒に描く部屋を作成できます。参加者にリンクを送るだけで準備完了。面倒なソフトのインストールや会員登録は不要で、ブラウザからすぐに参加可能です。</p>
-        </article>
-        <article class="step-desc" data-step="step-2">
+      <div id="panel-step-2" class="tab-panel" role="tabpanel" aria-labelledby="tab-step-2" hidden>
+        <button type="button" class="mockup-trigger" aria-label="スクリーンショットを拡大: ホストの画像選択ボード">
+          <img src="screenshot/2_select.webp" alt="ホストがポーズ写真を検索して選択する画像準備ボード" loading="lazy" width="2550" height="2650">
+        </button>
+        <div class="step-copy">
           <h3>直接選ぶポーズと自動シャッフル</h3>
           <p>アプリ内でクロッキー用のポーズ写真を簡単に検索・選択できます。ホストが写真リストを作成すると順番がランダムにシャッフルされ、ドローイングが始まるまで画像は非表示に保たれます。</p>
-        </article>
-        <article class="step-desc" data-step="step-3">
+        </div>
+      </div>
+
+      <div id="panel-step-3" class="tab-panel" role="tabpanel" aria-labelledby="tab-step-3" hidden>
+        <button type="button" class="mockup-trigger" aria-label="スクリーンショットを拡大: 同期されたクロッキーセッション">
+          <img src="screenshot/3_round.webp" alt="上部カウントダウン進行バーとポーズ画像が表示されるクロッキーセッション画面" loading="lazy" width="2550" height="2650">
+        </button>
+        <div class="step-copy">
           <h3>同期されたタイマーで集中スケッチ</h3>
           <p>全員が同じ瞬間に同じポーズを描きます。サーバー時間と完全に同期したタイマーに従って画像が表示され、制限時間が終了すると即座に隠されます。公平で集中できるペースを保ちます。</p>
-        </article>
-      </div>
-
-    </section>
-
-    <!-- Key Metrics / Indicators Bar -->
-    <section class="metrics" aria-label="主な特徴">
-      <div class="metric-item">
-        <div class="metric-value">100%</div>
-        <div class="metric-title">鮮明な高解像度</div>
-        <div class="metric-desc">画質が低下する画面共有とは異なり、各自のデバイスで元の高解像度画像を直接読み込みます。</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-value">0</div>
-        <div class="metric-title">インストール不要</div>
-        <div class="metric-desc">最新のウェブブラウザさえあれば、どんなデバイスからでも即座に部屋を開いて参加できます。</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-value">1–60分</div>
-        <div class="metric-title">柔軟な時間設定</div>
-        <div class="metric-desc">ホストがラウンドごとの時間を自由に設定でき、参加者全員が同じタイマーを共有します。</div>
+        </div>
       </div>
     </section>
 
-    <!-- Detailed Features Section -->
     <section class="features-section" aria-label="詳細機能">
       <div class="section-title">
         <h2>描画だけに集中できる環境</h2>
         <p>従来のビデオ会議での画面共有で発生していた様々な不便を解決するために設計されました。</p>
       </div>
-      
-      <div class="features-grid">
-        
-        <!-- Feature 1 -->
-        <article class="feature-card">
-          <div class="feature-icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
-          </div>
+
+      <ul class="features-list">
+        <li class="feature-item">
           <h3>画質低下なし、細部までくっきり</h3>
           <p>画像を圧縮して送信するため画質が荒れ、遅延が発生するビデオ会議の画面共有とは異なります。Croquingは参加者のデバイスに高解像度原画を直接読み込むため、細かな解剖学的構造やテクスチャまで歪みなく観察できます。</p>
-        </article>
-
-        <!-- Feature 2 -->
-        <article class="feature-card">
-          <div class="feature-icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
+        </li>
+        <li class="feature-item">
           <h3>サーバー基準の正確な時間管理</h3>
           <p>ドローイング開始前に画像が事前に公開されるのを防ぎます。ホストが描画時間（1〜60分）を設定すると、信頼性の高いサーバータイマーが作動して全員の画面を強制的に同期します。ラウンド開始時のみ画像が表示され、時間が切れると即座に消去されます。</p>
-        </article>
-
-        <!-- Feature 3 -->
-        <article class="feature-card">
-          <div class="feature-icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-          </div>
+        </li>
+        <li class="feature-item">
           <h3>シームレスな画像検索と選択</h3>
           <p>ホストは管理パネルからポーズ写真を数秒で検索してリストに追加できます。元の写真家へのクレジットも自動的に表示され、一般的なコミュニティガイドラインに準拠しています。</p>
-        </article>
-
-        <!-- Feature 4 -->
-        <article class="feature-card">
-          <div class="feature-icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-          </div>
+        </li>
+        <li class="feature-item">
           <h3>予測できない公平な順序</h3>
           <p>クイックジェスチャドローイングの課題を維持するため、セッション順序はランダム化されます。カウントダウンタイマーが0になるまで、どのアーティストも次にどのモデルやポーズが来るか予測できません。</p>
-        </article>
-
-      </div>
+        </li>
+      </ul>
     </section>
-
   </main>
 
-  <!-- Lightbox Modal Overlay -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot lightbox">
-    <button class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">&times;</button>
-    <div class="lightbox-content">
-      <img src="" alt="" id="lightbox-img">
-    </div>
-  </div>
+  <dialog class="lightbox" id="lightbox" aria-label="スクリーンショットプレビュー">
+    <button type="button" class="lightbox-close" aria-label="プレビューを閉じる">&times;</button>
+    <div class="lightbox-content"></div>
+  </dialog>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-content">
       <div class="logo">
-        <img src="favicon.svg" alt="Croquing Logo" class="logo-icon footer-logo-icon">
+        <img src="favicon.svg" alt="" class="logo-icon footer-logo-icon">
         <span class="logo-text footer-logo-text">Croquing</span>
       </div>
       <p class="footer-copy">
@@ -220,78 +162,6 @@
     </div>
   </footer>
 
-  <!-- Script for Interactive Transitions & Lightbox -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const tabs = document.querySelectorAll('.tab-btn');
-      const screenshots = document.querySelectorAll('.screenshot-img');
-      const stepDescriptions = document.querySelectorAll('.step-desc');
-
-      // Tab Switching Logic
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          const target = tab.getAttribute('data-target');
-          
-          // Update active button state
-          tabs.forEach(t => {
-            t.classList.remove('active');
-            t.setAttribute('aria-selected', 'false');
-          });
-          tab.classList.add('active');
-          tab.setAttribute('aria-selected', 'true');
-          
-          // Switch screenshot images with a transition
-          screenshots.forEach(img => {
-            if (img.id === target) {
-              img.classList.add('active');
-            } else {
-              img.classList.remove('active');
-            }
-          });
-
-          // Switch active step text below the mockup
-          stepDescriptions.forEach(desc => {
-            if (desc.getAttribute('data-step') === target) {
-              desc.classList.add('active');
-            } else {
-              desc.classList.remove('active');
-            }
-          });
-        });
-      });
-
-      // Lightbox Modal Logic
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightbox-img');
-      const closeBtn = document.getElementById('lightbox-close');
-      const mockupWindow = document.getElementById('mockup-window');
-
-      mockupWindow.addEventListener('click', () => {
-        const activeImg = document.querySelector('.screenshot-img.active');
-        if (activeImg) {
-          lightbox.classList.add('active');
-          lightboxImg.src = activeImg.src;
-          lightboxImg.alt = activeImg.alt;
-        }
-      });
-
-      const closeLightbox = () => {
-        lightbox.classList.remove('active');
-      };
-
-      closeBtn.addEventListener('click', closeLightbox);
-      lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-          closeLightbox();
-        }
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-          closeLightbox();
-        }
-      });
-    });
-  </script>
+  <script src="landing.js" defer></script>
 </body>
 </html>

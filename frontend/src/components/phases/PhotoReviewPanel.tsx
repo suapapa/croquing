@@ -121,7 +121,7 @@ export function PhotoReviewPanel({
         ref={dialogRef}
         className="photo-modal"
         onClick={handleBackdropClick}
-        aria-label="Photo Preview"
+        aria-label={t('review.modalAria')}
       >
         {selectedPhoto && (
           <div className="photo-modal__content">
@@ -129,13 +129,19 @@ export function PhotoReviewPanel({
               type="button"
               className="photo-modal__close-btn"
               onClick={() => setSelectedPhoto(null)}
-              aria-label="Close preview"
+              aria-label={t('review.closePreview')}
             >
               <IconClose />
             </button>
             <img
               src={selectedPhoto.large_image_url}
-              alt=""
+              alt={t('review.modalAlt', {
+                index:
+                  photos.findIndex(
+                    (photo) => photo.pixabay_id === selectedPhoto.pixabay_id,
+                  ) + 1 || 1,
+                total: photos.length,
+              })}
               className="photo-modal__image"
             />
             <div className="photo-modal__footer">

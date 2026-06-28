@@ -81,6 +81,9 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'wait.tipLabel': 'Tip: {title}',
     'wait.goTip': 'Go to tip {idx}',
     'wait.waitingForAdmin': 'Waiting for admin...',
+    'wait.carouselNav': 'Drawing tips',
+    'wait.pauseCarousel': 'Pause tip rotation',
+    'wait.resumeCarousel': 'Resume tip rotation',
 
     // PhotoReviewPanel
     'review.photosSaved': '{count} photos saved',
@@ -90,6 +93,9 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'review.editSelection': 'Edit selection',
     'review.selectionComplete': 'Selection complete',
     'review.shuffling': 'Shuffling…',
+    'review.modalAria': 'Photo preview',
+    'review.closePreview': 'Close preview',
+    'review.modalAlt': 'Reference photo {index} of {total}',
 
     // PhotoSelectionPanel
     'selection.errSave': 'Failed to save selection',
@@ -112,6 +118,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'draw.round': 'Round {current} / {total}',
     'draw.startsIn': 'Round starts in {count} seconds',
     'draw.remainingAria': 'Draw time remaining',
+    'draw.photoAlt': 'Reference photo for this croquis round',
 
     // SessionBreakPanels
     'break.takeBreather': 'Take a breather',
@@ -143,6 +150,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'search.ariaDeselect': 'Deselect photo {id}',
     'search.dock.title': 'Selected Reference Photos',
     'search.dock.remove': 'Remove photo',
+    'search.dock.removeAria': 'Remove photo {id}',
   },
   ko: {
     // HomePage
@@ -206,6 +214,9 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'wait.tipLabel': '팁: {title}',
     'wait.goTip': '팁 {idx}으로 이동',
     'wait.waitingForAdmin': '방장을 기다리는 중…',
+    'wait.carouselNav': '그리기 팁',
+    'wait.pauseCarousel': '팁 넘김 일시정지',
+    'wait.resumeCarousel': '팁 넘김 재개',
 
     // PhotoReviewPanel
     'review.photosSaved': '사진 {count}장 저장됨',
@@ -215,6 +226,9 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'review.editSelection': '선택 수정',
     'review.selectionComplete': '선택 완료',
     'review.shuffling': '섞는 중…',
+    'review.modalAria': '사진 미리보기',
+    'review.closePreview': '미리보기 닫기',
+    'review.modalAlt': '레퍼런스 사진 {index} / {total}',
 
     // PhotoSelectionPanel
     'selection.errSave': '선택을 저장하지 못했습니다',
@@ -237,6 +251,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'draw.round': '라운드 {current} / {total}',
     'draw.startsIn': '{count}초 뒤 라운드 시작',
     'draw.remainingAria': '남은 그리기 시간',
+    'draw.photoAlt': '이번 크로키 라운드 레퍼런스 사진',
 
     // SessionBreakPanels
     'break.takeBreather': '잠깐 쉬어 가세요',
@@ -267,6 +282,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'search.ariaDeselect': '사진 {id} 선택 해제',
     'search.dock.title': '선택한 레퍼런스 사진',
     'search.dock.remove': '사진 빼기',
+    'search.dock.removeAria': '사진 {id} 빼기',
   },
   ja: {
     // HomePage
@@ -332,6 +348,9 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'wait.tipLabel': 'ヒント: {title}',
     'wait.goTip': 'ヒント {idx} に移動',
     'wait.waitingForAdmin': '管理者を待っています...',
+    'wait.carouselNav': '描画のヒント',
+    'wait.pauseCarousel': 'ヒントの自動切り替えを一時停止',
+    'wait.resumeCarousel': 'ヒントの自動切り替えを再開',
 
     // PhotoReviewPanel
     'review.photosSaved': '{count}枚の写真が保存されました',
@@ -341,6 +360,9 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'review.editSelection': '選択を編集',
     'review.selectionComplete': '選択完了',
     'review.shuffling': 'シャッフル中…',
+    'review.modalAria': '写真プレビュー',
+    'review.closePreview': 'プレビューを閉じる',
+    'review.modalAlt': 'リファレンス写真 {index} / {total}',
 
     // PhotoSelectionPanel
     'selection.errSave': '選択内容의保存に失敗しました',
@@ -363,6 +385,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'draw.round': 'ラウンド {current} / {total}',
     'draw.startsIn': 'ラウンドが {count} 秒後に始まります',
     'draw.remainingAria': '残りの描画時間',
+    'draw.photoAlt': 'このクロキーラウンドのリファレンス写真',
 
     // SessionBreakPanels
     'break.takeBreather': 'ひと息つきましょう',
@@ -394,6 +417,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'search.ariaDeselect': '写真 {id} の選択を解除',
     'search.dock.title': '選択されたリファレンス写真',
     'search.dock.remove': '写真を削除',
+    'search.dock.removeAria': '写真 {id} を削除',
   },
   pl: {
     // HomePage
@@ -460,6 +484,9 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'wait.tipLabel': 'Wskazówka: {title}',
     'wait.goTip': 'Przejdź do wskazówki {idx}',
     'wait.waitingForAdmin': 'Oczekiwanie na administratora...',
+    'wait.carouselNav': 'Wskazówki do rysowania',
+    'wait.pauseCarousel': 'Wstrzymaj rotację wskazówek',
+    'wait.resumeCarousel': 'Wznów rotację wskazówek',
 
     // PhotoReviewPanel
     'review.photosSaved': 'Zapisano {count} zdjęć',
@@ -469,6 +496,9 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'review.editSelection': 'Edytuj wybór',
     'review.selectionComplete': 'Wybór zakończony',
     'review.shuffling': 'Mieszanie…',
+    'review.modalAria': 'Podgląd zdjęcia',
+    'review.closePreview': 'Zamknij podgląd',
+    'review.modalAlt': 'Zdjęcie referencyjne {index} z {total}',
 
     // PhotoSelectionPanel
     'selection.errSave': 'Nie udało się zapisać wyboru',
@@ -491,6 +521,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'draw.round': 'Runda {current} / {total}',
     'draw.startsIn': 'Runda rozpoczyna się za {count} sekund',
     'draw.remainingAria': 'Pozostały czas rysowania',
+    'draw.photoAlt': 'Zdjęcie referencyjne na tę rundę kroquis',
 
     // SessionBreakPanels
     'break.takeBreather': 'Złap oddech',
@@ -522,6 +553,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'search.ariaDeselect': 'Odznacz zdjęcie {id}',
     'search.dock.title': 'Wybrane zdjęcia referencyjne',
     'search.dock.remove': 'Usuń zdjęcie',
+    'search.dock.removeAria': 'Usuń zdjęcie {id}',
   },
   zh: {
     // HomePage
@@ -585,6 +617,9 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'wait.tipLabel': '提示：{title}',
     'wait.goTip': '跳转到提示 {idx}',
     'wait.waitingForAdmin': '等待管理员…',
+    'wait.carouselNav': '绘画提示',
+    'wait.pauseCarousel': '暂停提示轮播',
+    'wait.resumeCarousel': '继续提示轮播',
 
     // PhotoReviewPanel
     'review.photosSaved': '已保存 {count} 张图片',
@@ -594,6 +629,9 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'review.editSelection': '修改选择',
     'review.selectionComplete': '完成选择',
     'review.shuffling': '打乱中…',
+    'review.modalAria': '图片预览',
+    'review.closePreview': '关闭预览',
+    'review.modalAlt': '参考图片 {index} / {total}',
 
     // PhotoSelectionPanel
     'selection.errSave': '保存选择失败',
@@ -616,6 +654,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'draw.round': '第 {current} / {total} 回合',
     'draw.startsIn': '{count} 秒后开始回合',
     'draw.remainingAria': '剩余作画时间',
+    'draw.photoAlt': '本回合速写参考图片',
 
     // SessionBreakPanels
     'break.takeBreather': '休息一下',
@@ -645,6 +684,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'search.ariaDeselect': '取消选择图片 {id}',
     'search.dock.title': '已选参考图片',
     'search.dock.remove': '移除图片',
+    'search.dock.removeAria': '移除图片 {id}',
   },
 }
 

@@ -5,6 +5,7 @@ import { LobbyLayout } from '../components/layout/LobbyLayout'
 import { LobbyPhaseContent } from '../components/phases/LobbyPhaseContent'
 import { useLobbySocket } from '../hooks/useLobbySocket'
 import { isLobbyAdmin } from '../lib/adminStorage'
+import { t } from '../lib/i18n'
 import type { Photo } from '../types/lobby'
 
 export function LobbyPage() {
@@ -17,8 +18,8 @@ export function LobbyPage() {
   if (!id) {
     return (
       <main className="lobby-page">
-        <p>Invalid lobby link.</p>
-        <Link to="/">Back home</Link>
+        <p>{t('lobby.invalidLink')}</p>
+        <Link to="/">{t('lobby.backHome')}</Link>
       </main>
     )
   }

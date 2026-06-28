@@ -4,37 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Croquing — 每周同步人体写生画友聚会</title>
-  
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <meta name="theme-color" content="#f5f0e8">
-  
-  <!-- SEO Meta Tags -->
+  <meta name="theme-color" content="#fafafa">
   <meta name="description" content="在完全同步的屏幕上主持和加入实时人体写生（速写）聚会。无需低画质的屏幕共享，由服务器计时器同步所有人的起止时间。">
   <meta name="keywords" content="速写, 素描, 实时计时器, 画友聚会, 绘画练习, 人体写生">
   <meta name="author" content="Homin Lee">
-  
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
-  
   <link rel="stylesheet" href="landing.css">
+  <style>
+    h1, h2, h3, .logo-text { font-family: Syne, Georgia, serif; }
+  </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
 
-  <!-- Ambient Light Blobs -->
-  <div class="ambient-glows">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-  </div>
-
-  <!-- Header -->
   <header>
     <div class="nav-container">
       <a href="#" class="logo" aria-label="Croquing 首页">
-        <img src="favicon.svg" alt="Croquing 图标" class="logo-icon">
+        <img src="favicon.svg" alt="" class="logo-icon">
         <span class="logo-text">Croquing</span>
       </a>
       <div class="nav-actions">
@@ -66,12 +55,8 @@
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main>
-    
-    <!-- Hero Section -->
+  <main id="main-content">
     <section class="hero" aria-label="介绍">
-      <span class="badge">实时画布同步</span>
       <h1>重新想象速写聚会</h1>
       <p class="hero-subtitle">
         所有参与者在完全一致的屏幕上共同创作速写。由服务器控制计时器，随机分配高分辨率姿势图片，并在所有浏览器间实时同步进行状态。
@@ -84,134 +69,91 @@
       </div>
     </section>
 
-    <!-- Mockup Showcase Section -->
-    <section class="mockup-section" aria-label="产品演示">
-      
-      <!-- Interactive Showcase Selector Tabs -->
-      <nav class="tab-nav" aria-label="使用步骤流程">
-        <button class="tab-btn active" data-target="step-1" aria-controls="step-1" aria-selected="true" role="tab">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          1. 进入大厅
-        </button>
-        <button class="tab-btn" data-target="step-2" aria-controls="step-2" aria-selected="false" role="tab">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          2. 选择图片
-        </button>
-        <button class="tab-btn" data-target="step-3" aria-controls="step-3" aria-selected="false" role="tab">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-          3. 同步速写
-        </button>
-      </nav>
+    <section class="showcase" aria-labelledby="showcase-heading">
+      <h2 id="showcase-heading" class="visually-hidden">产品使用流程</h2>
 
-      <!-- Product screenshots (app viewport only, no decorative browser chrome) -->
-      <div class="mockup-window" id="mockup-window" title="点击放大屏幕截图">
-        <div class="mockup-viewport">
-          <img src="screenshot/1_start.webp" alt="参与者等待房长开启活动的大厅界面" class="screenshot-img active" id="step-1" width="2550" height="2650">
-          <img src="screenshot/2_select.webp" alt="房长搜索并挑选人体姿势图片的准备面板" class="screenshot-img" id="step-2" loading="lazy" width="2550" height="2650">
-          <img src="screenshot/3_round.webp" alt="带有顶部倒计时进度条和姿势图片的速写会话界面" class="screenshot-img" id="step-3" loading="lazy" width="2550" height="2650">
+      <div class="tab-nav" role="tablist" aria-label="使用步骤流程">
+        <button type="button" class="tab-btn active" role="tab" id="tab-step-1" aria-selected="true" aria-controls="panel-step-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          进入大厅
+        </button>
+        <button type="button" class="tab-btn" role="tab" id="tab-step-2" aria-selected="false" aria-controls="panel-step-2" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          选择图片
+        </button>
+        <button type="button" class="tab-btn" role="tab" id="tab-step-3" aria-selected="false" aria-controls="panel-step-3" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+          同步速写
+        </button>
+      </div>
+
+      <div id="panel-step-1" class="tab-panel active" role="tabpanel" aria-labelledby="tab-step-1">
+        <button type="button" class="mockup-trigger" aria-label="放大截图：大厅等待界面">
+          <img src="screenshot/1_start.webp" alt="参与者等待房长开启活动的大厅界面" width="2550" height="2650">
+        </button>
+        <div class="step-copy">
+          <h3>一键创建并立即分享大厅</h3>
+          <p>只需点击一下即可生成共享房间。将链接分享给画友，无需下载任何软件或注册账号，即可通过浏览器立即加入。</p>
         </div>
       </div>
 
-      <!-- Step Description Copy -->
-      <div class="step-descs">
-        <article class="step-desc active" data-step="step-1">
-          <h3>一键创建并立即分享大厅</h3>
-          <p>只需点击一下即可生成共享房间。将链接分享给画友，无需下载任何软件或注册账号，即可通过浏览器立即加入。</p>
-        </article>
-        <article class="step-desc" data-step="step-2">
+      <div id="panel-step-2" class="tab-panel" role="tabpanel" aria-labelledby="tab-step-2" hidden>
+        <button type="button" class="mockup-trigger" aria-label="放大截图：房长图片筛选面板">
+          <img src="screenshot/2_select.webp" alt="房长搜索并挑选人体姿势图片的准备面板" loading="lazy" width="2550" height="2650">
+        </button>
+        <div class="step-copy">
           <h3>直接筛选与智能随机</h3>
           <p>在应用内直接搜索并筛选姿势图片。房长决定图集后，系统将自动打乱顺序，且在正式绘制开始前保持隐藏。</p>
-        </article>
-        <article class="step-desc" data-step="step-3">
+        </div>
+      </div>
+
+      <div id="panel-step-3" class="tab-panel" role="tabpanel" aria-labelledby="tab-step-3" hidden>
+        <button type="button" class="mockup-trigger" aria-label="放大截图：同步速写会话界面">
+          <img src="screenshot/3_round.webp" alt="带有顶部倒计时进度条和姿势图片的速写会话界面" loading="lazy" width="2550" height="2650">
+        </button>
+        <div class="step-copy">
           <h3>精准同步的计时器，专注绘制</h3>
           <p>每个人在同一时刻绘制相同的姿势。同步的计时器决定了图片的显示时间，并在时间截止时自动隐藏，确保公平且专注的绘制节奏。</p>
-        </article>
-      </div>
-
-    </section>
-
-    <!-- Key Metrics / Indicators Bar -->
-    <section class="metrics" aria-label="主要特点">
-      <div class="metric-item">
-        <div class="metric-value">100%</div>
-        <div class="metric-title">极致高清</div>
-        <div class="metric-desc">区别于模糊的屏幕共享，图片在每台设备上本地加载原图，展现清晰的人体细节。</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-value">0</div>
-        <div class="metric-title">无需安装</div>
-        <div class="metric-desc">只需任何现代浏览器即可立即创建并加入房间，无需下载客户端。</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-value">1–60分钟</div>
-        <div class="metric-title">灵活调整时间</div>
-        <div class="metric-desc">房长可在每轮绘制前自由设置分钟数，所有人看到完全相同的计时器。</div>
+        </div>
       </div>
     </section>
 
-    <!-- Detailed Features Section -->
     <section class="features-section" aria-label="详细功能">
       <div class="section-title">
         <h2>专为专注创作而设计</h2>
         <p>旨在解决传统视频会议中速写聚会带来的各种痛点与不便。</p>
       </div>
-      
-      <div class="features-grid">
-        
-        <!-- Feature 1 -->
-        <article class="feature-card">
-          <div class="feature-icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
-          </div>
+
+      <ul class="features-list">
+        <li class="feature-item">
           <h3>拒绝压缩，高清呈现</h3>
           <p>不同于因视频共享导致画质压缩和延迟的模式，Croquing 直接在每个人的设备上加载原图。清晰分辨细微的解剖细节和肌肉质感。</p>
-        </article>
-
-        <!-- Feature 2 -->
-        <article class="feature-card">
-          <div class="feature-icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
+        </li>
+        <li class="feature-item">
           <h3>服务器权威计时</h3>
           <p>防止提前作画。房长在绘制前设定每轮时长（1-60分钟），权威的服务器计时器确保每位画友时刻同步。绘制开始时解锁图片，时间结束时立即隐藏。</p>
-        </article>
-
-        <!-- Feature 3 -->
-        <article class="feature-card">
-          <div class="feature-icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-          </div>
+        </li>
+        <li class="feature-item">
           <h3>集成的图片检索</h3>
           <p>房长可在管理面板内直接检索并挑选精选人体图片，几秒钟内完成配置。系统自动标注原作者版权信息，符合社区规范。</p>
-        </article>
-
-        <!-- Feature 4 -->
-        <article class="feature-card">
-          <div class="feature-icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-          </div>
+        </li>
+        <li class="feature-item">
           <h3>公平且难以预测的顺序</h3>
           <p>为了保持手势速写（Gesture Drawing）的挑战性，图片顺序会彻底随机化。在倒计时归零前，没有人能预知下一位模特或姿势。</p>
-        </article>
-
-      </div>
+        </li>
+      </ul>
     </section>
-
   </main>
 
-  <!-- Lightbox Modal Overlay -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot lightbox">
-    <button class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">&times;</button>
-    <div class="lightbox-content">
-      <img src="" alt="" id="lightbox-img">
-    </div>
-  </div>
+  <dialog class="lightbox" id="lightbox" aria-label="截图预览">
+    <button type="button" class="lightbox-close" aria-label="关闭预览">&times;</button>
+    <div class="lightbox-content"></div>
+  </dialog>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-content">
       <div class="logo">
-        <img src="favicon.svg" alt="Croquing Logo" class="logo-icon footer-logo-icon">
+        <img src="favicon.svg" alt="" class="logo-icon footer-logo-icon">
         <span class="logo-text footer-logo-text">Croquing</span>
       </div>
       <p class="footer-copy">
@@ -220,78 +162,6 @@
     </div>
   </footer>
 
-  <!-- Script for Interactive Transitions & Lightbox -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const tabs = document.querySelectorAll('.tab-btn');
-      const screenshots = document.querySelectorAll('.screenshot-img');
-      const stepDescriptions = document.querySelectorAll('.step-desc');
-
-      // Tab Switching Logic
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          const target = tab.getAttribute('data-target');
-          
-          // Update active button state
-          tabs.forEach(t => {
-            t.classList.remove('active');
-            t.setAttribute('aria-selected', 'false');
-          });
-          tab.classList.add('active');
-          tab.setAttribute('aria-selected', 'true');
-          
-          // Switch screenshot images with a transition
-          screenshots.forEach(img => {
-            if (img.id === target) {
-              img.classList.add('active');
-            } else {
-              img.classList.remove('active');
-            }
-          });
-
-          // Switch active step text below the mockup
-          stepDescriptions.forEach(desc => {
-            if (desc.getAttribute('data-step') === target) {
-              desc.classList.add('active');
-            } else {
-              desc.classList.remove('active');
-            }
-          });
-        });
-      });
-
-      // Lightbox Modal Logic
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightbox-img');
-      const closeBtn = document.getElementById('lightbox-close');
-      const mockupWindow = document.getElementById('mockup-window');
-
-      mockupWindow.addEventListener('click', () => {
-        const activeImg = document.querySelector('.screenshot-img.active');
-        if (activeImg) {
-          lightbox.classList.add('active');
-          lightboxImg.src = activeImg.src;
-          lightboxImg.alt = activeImg.alt;
-        }
-      });
-
-      const closeLightbox = () => {
-        lightbox.classList.remove('active');
-      };
-
-      closeBtn.addEventListener('click', closeLightbox);
-      lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-          closeLightbox();
-        }
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-          closeLightbox();
-        }
-      });
-    });
-  </script>
+  <script src="landing.js" defer></script>
 </body>
 </html>

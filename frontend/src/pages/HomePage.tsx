@@ -60,7 +60,6 @@ export function HomePage() {
     <main className="home-page">
       <div className="home-page__shell">
         <section className="home-page__hero" aria-labelledby="home-title">
-          <p className="home-page__eyebrow">{t('home.eyebrow')}</p>
           <div className="home-page__brand-header">
             <a href={appLogoLink} target="_blank" rel="noopener noreferrer" className="home-page__logo-link">
               <img src={appLogo} alt="" className="home-page__logo-img" />

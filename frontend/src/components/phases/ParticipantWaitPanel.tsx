@@ -5,30 +5,35 @@ import { getLocalizedTips, t } from '../../lib/i18n'
 export function ParticipantWaitPanel() {
   const tips = getLocalizedTips()
   const [index, setIndex] = useState(0)
+  const [paused, setPaused] = useState(false)
   const [transitionState, setTransitionState] = useState<
     'active' | 'exit' | 'enter'
   >('active')
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    if (paused || tips.length === 0) {
+      return
+    }
+
+    const timer = window.setInterval(() => {
       setTransitionState('exit')
 
-      const exitTimer = setTimeout(() => {
+      const exitTimer = window.setTimeout(() => {
         setIndex((prev) => (prev + 1) % tips.length)
         setTransitionState('enter')
 
-        const enterTimer = setTimeout(() => {
+        const enterTimer = window.setTimeout(() => {
           setTransitionState('active')
         }, 50)
 
-        return () => clearTimeout(enterTimer)
+        return () => window.clearTimeout(enterTimer)
       }, 300)
 
-      return () => clearTimeout(exitTimer)
+      return () => window.clearTimeout(exitTimer)
     }, 8000)
 
-    return () => clearInterval(timer)
-  }, [tips.length])
+    return () => window.clearInterval(timer)
+  }, [paused, tips.length])
 
   const currentTip = tips[index]
 
@@ -39,8 +44,19 @@ export function ParticipantWaitPanel() {
     transitionClass = 'tip-panel__tip--exit'
   }
 
+  function goToTip(nextIndex: number) {
+    setTransitionState('exit')
+    window.setTimeout(() => {
+      setIndex(nextIndex)
+      setTransitionState('enter')
+      window.setTimeout(() => {
+        setTransitionState('active')
+      }, 50)
+    }, 300)
+  }
+
   return (
-    <div className="phase-panel glass-card tip-panel" aria-live="polite">
+    <div className="phase-panel tip-panel" aria-live="polite">
       <div className="tip-panel__icon-wrap">
         <IconBulb className="button__icon" />
       </div>
@@ -58,42 +74,34 @@ export function ParticipantWaitPanel() {
         ) : null}
       </div>
 
-      <div className="tip-panel__dots" aria-label="Carousel navigation">
-        {tips.map((_, idx) => (
-          <button
-            key={idx}
-            type="button"
-            className={`tip-panel__dot ${idx === index ? 'tip-panel__dot--active' : ''}`}
-            onClick={() => {
-              setTransitionState('exit')
-              setTimeout(() => {
-                setIndex(idx)
-                setTransitionState('enter')
-                setTimeout(() => {
-                  setTransitionState('active')
-                }, 50)
-              }, 300)
-            }}
-            aria-label={t('wait.goTip', { idx: idx + 1 })}
-            aria-current={idx === index ? 'true' : 'false'}
-          />
-        ))}
+      <div className="tip-panel__controls">
+        <button
+          type="button"
+          className="button button--secondary tip-panel__pause"
+          onClick={() => setPaused((value) => !value)}
+          aria-pressed={paused}
+        >
+          {paused ? t('wait.resumeCarousel') : t('wait.pauseCarousel')}
+        </button>
+
+        <div className="tip-panel__dots" aria-label={t('wait.carouselNav')}>
+          {tips.map((_, idx) => (
+            <button
+              key={idx}
+              type="button"
+              className={`tip-panel__dot ${idx === index ? 'tip-panel__dot--active' : ''}`}
+              onClick={() => goToTip(idx)}
+              aria-label={t('wait.goTip', { idx: idx + 1 })}
+              aria-current={idx === index ? 'true' : 'false'}
+            />
+          ))}
+        </div>
       </div>
 
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 'var(--space-2)',
-          marginTop: 'var(--space-8)',
-          color: 'var(--color-accent)',
-          fontWeight: 600,
-          fontSize: '0.875rem',
-        }}
-      >
+      <p className="tip-panel__status">
         <IconSpinner className="button__spinner" />
         <span>{t('wait.waitingForAdmin')}</span>
-      </div>
+      </p>
     </div>
   )
 }

@@ -150,7 +150,12 @@ export function PixabaySearchPanel({
   }
 
   return (
-    <section className="pixabay-search" aria-label="Pixabay search">
+    <section
+      className={`pixabay-search${
+        selectedPhotos.length > 0 ? ' pixabay-search--dock-open' : ''
+      }`}
+      aria-label={t('search.fieldLabel')}
+    >
       {!readOnly ? (
         <form
           className="pixabay-search__form"
@@ -284,7 +289,7 @@ export function PixabaySearchPanel({
         <div
           className="selection-dock"
           role="region"
-          aria-label="Selection dock"
+          aria-label={t('search.dock.title')}
         >
           <div className="selection-dock__container">
             <div
@@ -312,11 +317,12 @@ export function PixabaySearchPanel({
                         ),
                       )
                     }
+                    aria-label={t('search.dock.removeAria', {
+                      id: photo.pixabay_id,
+                    })}
                     title={t('search.dock.remove')}
                   >
-                    <IconClose
-                      style={{ width: '0.625rem', height: '0.625rem' }}
-                    />
+                    <IconClose className="selection-dock__remove-icon" />
                   </button>
                 </div>
               ))}

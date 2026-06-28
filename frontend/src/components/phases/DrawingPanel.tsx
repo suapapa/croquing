@@ -109,8 +109,9 @@ export function DrawingPanel({
             style={{ transform: `scaleX(${progress})` }}
             role="progressbar"
             aria-valuemin={0}
-            aria-valuemax={drawDurationMs}
-            aria-valuenow={drawDurationMs - drawRemainingMs}
+            aria-valuemax={100}
+            aria-valuenow={Math.round(progress * 100)}
+            aria-valuetext={formatRemainingTime(drawRemainingMs)}
             aria-label={t('draw.remainingAria')}
           />
           <span className="drawing-panel__timer-label">
@@ -155,7 +156,7 @@ export function DrawingPanel({
               <img
                 className="drawing-panel__photo"
                 src={photo.large_image_url}
-                alt="Reference photo for this croquis round"
+                alt={t('draw.photoAlt')}
                 width={photo.width}
                 height={photo.height}
               />

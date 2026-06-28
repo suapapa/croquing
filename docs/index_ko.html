@@ -4,37 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Croquing — 매주 함께 그리는 실시간 동기화 크로키 모임</title>
-  
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <meta name="theme-color" content="#f5f0e8">
-  
-  <!-- SEO Meta Tags -->
+  <meta name="theme-color" content="#fafafa">
   <meta name="description" content="완벽히 동기화된 화면을 보며 실시간 크로키 모임을 열고 참여하세요. 저화질 화면 공유 없이 서버 타이머로 모두가 동시에 드로잉을 시작하고 종료합니다.">
   <meta name="keywords" content="크로키, 누드크로키, 실시간 타이머, 드로잉 모임, 픽사베이 크로키, 그림 연습, 인체 드로잉">
   <meta name="author" content="Homin Lee">
-  
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
-  
   <link rel="stylesheet" href="landing.css">
+  <style>
+    h1, h2, h3, .logo-text { font-family: Syne, Georgia, serif; }
+  </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
 
-  <!-- Ambient Light Blobs -->
-  <div class="ambient-glows">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-  </div>
-
-  <!-- Header -->
   <header>
     <div class="nav-container">
       <a href="#" class="logo" aria-label="Croquing 홈">
-        <img src="favicon.svg" alt="Croquing 로고" class="logo-icon">
+        <img src="favicon.svg" alt="" class="logo-icon">
         <span class="logo-text">Croquing</span>
       </a>
       <div class="nav-actions">
@@ -66,12 +55,8 @@
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main>
-    
-    <!-- Hero Section -->
+  <main id="main-content">
     <section class="hero" aria-label="소개">
-      <span class="badge">실시간 화면 동기화</span>
       <h1>새로운 크로키 모임의 시작</h1>
       <p class="hero-subtitle">
         모든 참가자가 완벽하게 일치하는 화면을 보며 함께 크로키를 그립니다. 서버가 타이머를 통제하고 고해상도 포즈 사진을 무작위로 보여주며, 모든 브라우저의 진행 상태를 실시간으로 맞춰 줍니다.
@@ -84,134 +69,91 @@
       </div>
     </section>
 
-    <!-- Mockup Showcase Section -->
-    <section class="mockup-section" aria-label="제품 시연">
-      
-      <!-- Interactive Showcase Selector Tabs -->
-      <nav class="tab-nav" aria-label="이용 흐름 단계">
-        <button class="tab-btn active" data-target="step-1" aria-controls="step-1" aria-selected="true" role="tab">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          1. 로비 입장
-        </button>
-        <button class="tab-btn" data-target="step-2" aria-controls="step-2" aria-selected="false" role="tab">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          2. 이미지 선택
-        </button>
-        <button class="tab-btn" data-target="step-3" aria-controls="step-3" aria-selected="false" role="tab">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-          3. 스케치 시작
-        </button>
-      </nav>
+    <section class="showcase" aria-labelledby="showcase-heading">
+      <h2 id="showcase-heading" class="visually-hidden">제품 이용 흐름</h2>
 
-      <!-- Product screenshots (app viewport only, no decorative browser chrome) -->
-      <div class="mockup-window" id="mockup-window" title="클릭해서 스크린샷 크게 보기">
-        <div class="mockup-viewport">
-          <img src="screenshot/1_start.webp" alt="방장이 세션을 열 때까지 참가자들이 대기하는 로비 화면" class="screenshot-img active" id="step-1" width="2550" height="2650">
-          <img src="screenshot/2_select.webp" alt="방장이 포즈 사진을 검색하고 선택하는 이미지 준비 보드" class="screenshot-img" id="step-2" loading="lazy" width="2550" height="2650">
-          <img src="screenshot/3_round.webp" alt="상단 카운트다운 진행률 표시줄과 함께 포즈 이미지가 보이는 크로키 세션 화면" class="screenshot-img" id="step-3" loading="lazy" width="2550" height="2650">
+      <div class="tab-nav" role="tablist" aria-label="이용 흐름 단계">
+        <button type="button" class="tab-btn active" role="tab" id="tab-step-1" aria-selected="true" aria-controls="panel-step-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          로비 입장
+        </button>
+        <button type="button" class="tab-btn" role="tab" id="tab-step-2" aria-selected="false" aria-controls="panel-step-2" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          이미지 선택
+        </button>
+        <button type="button" class="tab-btn" role="tab" id="tab-step-3" aria-selected="false" aria-controls="panel-step-3" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+          스케치 시작
+        </button>
+      </div>
+
+      <div id="panel-step-1" class="tab-panel active" role="tabpanel" aria-labelledby="tab-step-1">
+        <button type="button" class="mockup-trigger" aria-label="스크린샷 확대: 로비 대기 화면">
+          <img src="screenshot/1_start.webp" alt="방장이 세션을 열 때까지 참가자들이 대기하는 로비 화면" width="2550" height="2650">
+        </button>
+        <div class="step-copy">
+          <h3>클릭 한 번으로 함께 그릴 방을 만듭니다</h3>
+          <p>클릭 한 번으로 함께 그릴 방을 만듭니다. 참가자들에게 링크만 보내면 준비는 끝납니다. 번거롭게 프로그램을 설치하거나 회원 가입을 할 필요 없이 브라우저에서 바로 접속할 수 있습니다.</p>
         </div>
       </div>
 
-      <!-- Step Description Copy -->
-      <div class="step-descs">
-        <article class="step-desc active" data-step="step-1">
-          <h3>클릭 한 번으로 함께 그릴 방을 만듭니다</h3>
-          <p>클릭 한 번으로 함께 그릴 방을 만듭니다. 참가자들에게 링크만 보내면 준비는 끝납니다. 번거롭게 프로그램을 설치하거나 회원 가입을 할 필요 없이 브라우저에서 바로 접속할 수 있습니다.</p>
-        </article>
-        <article class="step-desc" data-step="step-2">
+      <div id="panel-step-2" class="tab-panel" role="tabpanel" aria-labelledby="tab-step-2" hidden>
+        <button type="button" class="mockup-trigger" aria-label="스크린샷 확대: 방장 이미지 선택 보드">
+          <img src="screenshot/2_select.webp" alt="방장이 포즈 사진을 검색하고 선택하는 이미지 준비 보드" loading="lazy" width="2550" height="2650">
+        </button>
+        <div class="step-copy">
           <h3>직접 선택하는 포즈와 자동 셔플</h3>
           <p>앱 내에서 드로잉 포즈를 검색하고 바로 고를 수 있습니다. 방장이 사진 목록을 짜면 순서가 무작위로 뒤섞이며, 그리기가 시작되기 전까지는 아무에게도 이미지가 보이지 않습니다.</p>
-        </article>
-        <article class="step-desc" data-step="step-3">
+        </div>
+      </div>
+
+      <div id="panel-step-3" class="tab-panel" role="tabpanel" aria-labelledby="tab-step-3" hidden>
+        <button type="button" class="mockup-trigger" aria-label="스크린샷 확대: 동기화된 크로키 세션">
+          <img src="screenshot/3_round.webp" alt="상단 카운트다운 진행률 표시줄과 함께 포즈 이미지가 보이는 크로키 세션 화면" loading="lazy" width="2550" height="2650">
+        </button>
+        <div class="step-copy">
           <h3>동기화된 타이머로 집중하는 스케치</h3>
           <p>모든 사람이 같은 순간에 같은 포즈를 그립니다. 서버 시간과 똑같이 흘러가는 타이머에 따라 이미지가 나타나고, 제한 시간이 끝나면 즉시 가려집니다. 모두가 정해진 규칙대로 공정하고 흐트러짐 없이 창작에만 집중하도록 돕습니다.</p>
-        </article>
-      </div>
-
-    </section>
-
-    <!-- Key Metrics / Indicators Bar -->
-    <section class="metrics" aria-label="주요 특징">
-      <div class="metric-item">
-        <div class="metric-value">100%</div>
-        <div class="metric-title">선명한 고해상도</div>
-        <div class="metric-desc">화질이 떨어지는 화면 공유 방식과 달리 각자 기기에서 원본 이미지를 직접 읽어옵니다.</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-value">0</div>
-        <div class="metric-title">프로그램 설치 없음</div>
-        <div class="metric-desc">최신 웹 브라우저만 있다면 어떤 기기에서든 바로 방을 열어 참여합니다.</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-value">1–60분</div>
-        <div class="metric-title">유연한 시간 조절</div>
-        <div class="metric-desc">방장이 라운드 시간을 마음대로 정하며, 참가자 모두 같은 타이머를 보며 작업합니다.</div>
+        </div>
       </div>
     </section>
 
-    <!-- Detailed Features Section -->
     <section class="features-section" aria-label="상세 기능">
       <div class="section-title">
         <h2>그림에만 온전히 집중하는 환경</h2>
         <p>기존의 화상 회의 화면 공유 방식에서 겪었던 크고 작은 불편함을 해결하고자 만들었습니다.</p>
       </div>
-      
-      <div class="features-grid">
-        
-        <!-- Feature 1 -->
-        <article class="feature-card">
-          <div class="feature-icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
-          </div>
+
+      <ul class="features-list">
+        <li class="feature-item">
           <h3>화질 저하 없는 또렷한 세부 표현</h3>
           <p>화면을 압축해 전송하느라 화질이 깨지고 끊김이 심한 화상 회의 방식과는 다릅니다. Croquing은 참가자 기기에서 고해상도 원본을 바로 불러옵니다. 세밀한 인체 구조와 묘사선 하나까지 왜곡 없이 뚜렷하게 관찰해 보세요.</p>
-        </article>
-
-        <!-- Feature 2 -->
-        <article class="feature-card">
-          <div class="feature-icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
+        </li>
+        <li class="feature-item">
           <h3>서버 기준의 정확한 시간 관리</h3>
           <p>시작하기도 전에 이미지를 미리 훔쳐보는 일을 완벽히 막아줍니다. 방장이 제한 시간(1~60분)을 맞추면 서버 타이머가 작동해 모두의 화면을 일시에 정렬합니다. 라운드가 시작될 때만 열리고 시간이 지나면 칼같이 사라집니다.</p>
-        </article>
-
-        <!-- Feature 3 -->
-        <article class="feature-card">
-          <div class="feature-icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-          </div>
+        </li>
+        <li class="feature-item">
           <h3>간편한 이미지 탐색 및 선택</h3>
           <p>방장은 관리 패널에서 인체 포즈를 몇 초 만에 검색해 추가합니다. 원작자 출처도 자동으로 같이 표시해 저작권 권장 사항과 커뮤니티 규칙을 모범적으로 준수합니다.</p>
-        </article>
-
-        <!-- Feature 4 -->
-        <article class="feature-card">
-          <div class="feature-icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-          </div>
+        </li>
+        <li class="feature-item">
           <h3>예측할 수 없는 공평한 드로잉 순서</h3>
           <p>순간을 포착하는 제스처 드로잉의 묘미를 지키고자 사진 순서를 무작위로 섞습니다. 카운트다운이 끝나 이미지가 열리기 전에는 그 누구도 다음 모델이나 포즈가 무엇일지 미리 짐작할 수 없습니다.</p>
-        </article>
-
-      </div>
+        </li>
+      </ul>
     </section>
-
   </main>
 
-  <!-- Lightbox Modal Overlay -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot lightbox">
-    <button class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">&times;</button>
-    <div class="lightbox-content">
-      <img src="" alt="" id="lightbox-img">
-    </div>
-  </div>
+  <dialog class="lightbox" id="lightbox" aria-label="스크린샷 미리보기">
+    <button type="button" class="lightbox-close" aria-label="미리보기 닫기">&times;</button>
+    <div class="lightbox-content"></div>
+  </dialog>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-content">
       <div class="logo">
-        <img src="favicon.svg" alt="Croquing Logo" class="logo-icon footer-logo-icon">
+        <img src="favicon.svg" alt="" class="logo-icon footer-logo-icon">
         <span class="logo-text footer-logo-text">Croquing</span>
       </div>
       <p class="footer-copy">
@@ -220,78 +162,6 @@
     </div>
   </footer>
 
-  <!-- Script for Interactive Transitions & Lightbox -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const tabs = document.querySelectorAll('.tab-btn');
-      const screenshots = document.querySelectorAll('.screenshot-img');
-      const stepDescriptions = document.querySelectorAll('.step-desc');
-
-      // Tab Switching Logic
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          const target = tab.getAttribute('data-target');
-          
-          // Update active button state
-          tabs.forEach(t => {
-            t.classList.remove('active');
-            t.setAttribute('aria-selected', 'false');
-          });
-          tab.classList.add('active');
-          tab.setAttribute('aria-selected', 'true');
-          
-          // Switch screenshot images with a transition
-          screenshots.forEach(img => {
-            if (img.id === target) {
-              img.classList.add('active');
-            } else {
-              img.classList.remove('active');
-            }
-          });
-
-          // Switch active step text below the mockup
-          stepDescriptions.forEach(desc => {
-            if (desc.getAttribute('data-step') === target) {
-              desc.classList.add('active');
-            } else {
-              desc.classList.remove('active');
-            }
-          });
-        });
-      });
-
-      // Lightbox Modal Logic
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightbox-img');
-      const closeBtn = document.getElementById('lightbox-close');
-      const mockupWindow = document.getElementById('mockup-window');
-
-      mockupWindow.addEventListener('click', () => {
-        const activeImg = document.querySelector('.screenshot-img.active');
-        if (activeImg) {
-          lightbox.classList.add('active');
-          lightboxImg.src = activeImg.src;
-          lightboxImg.alt = activeImg.alt;
-        }
-      });
-
-      const closeLightbox = () => {
-        lightbox.classList.remove('active');
-      };
-
-      closeBtn.addEventListener('click', closeLightbox);
-      lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-          closeLightbox();
-        }
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-          closeLightbox();
-        }
-      });
-    });
-  </script>
+  <script src="landing.js" defer></script>
 </body>
 </html>
