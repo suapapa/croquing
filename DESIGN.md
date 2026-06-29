@@ -11,6 +11,7 @@ colors:
   accent: "#c2410c"
   accent-hover: "#9a3412"
   accent-soft: "#fff7ed"
+  on-accent: "#ffffff"
   error: "#b91c1c"
   error-bg: "#fef2f2"
   success: "#15803d"
@@ -70,6 +71,7 @@ Croquing uses a **product register** in the SPA and a **brand register** on the 
 | Ink | `--color-text` | Primary copy |
 | Muted | `--color-muted` | Secondary copy (≥4.5:1 on surfaces) |
 | Accent | `--color-accent` | Primary actions, admin badge, timer bar |
+| On accent | `--color-on-accent` | Text/icons on accent backgrounds |
 | Drawing | `--color-drawing-bg` / `--color-drawing-text` | Full-screen draw phase |
 
 Accent is terracotta (`#c2410c`), used for actions and state—not decorative fills. Body backgrounds stay near-neutral (`#fafafa`), not saturated cream.

@@ -15,6 +15,7 @@
     --color-accent: #c2410c;
     --color-accent-hover: #9a3412;
     --color-accent-soft: #fff7ed;
+    --color-on-accent: #ffffff;
     --color-overlay: rgb(26 22 20 / 82%);
     --color-overlay-strong: rgb(26 22 20 / 72%);
     --color-overlay-hover: rgb(26 22 20 / 90%);
@@ -197,6 +198,8 @@ h1 {
     line-height: 1.15;
     letter-spacing: -0.02em;
     margin-bottom: 1rem;
+    word-break: keep-all;
+    text-wrap: balance;
 }
 
 .hero-subtitle {
@@ -220,7 +223,7 @@ h1 {
     min-height: var(--touch-min);
     padding: 0 1.75rem;
     background: var(--color-accent);
-    color: #fff;
+    color: var(--color-on-accent);
     border-radius: var(--radius-pill);
     font-size: var(--text-body);
     font-weight: 700;
@@ -236,6 +239,26 @@ h1 {
 
 .showcase {
     margin-bottom: 5rem;
+}
+
+.video-section {
+    margin-bottom: 5rem;
+}
+
+.video-embed {
+    max-width: 880px;
+    margin: 0 auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-surface);
+}
+
+.video-embed iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
 }
 
 .tab-nav {
@@ -284,7 +307,7 @@ h1 {
 
 .tab-btn.active {
     background: var(--color-accent);
-    color: #fff;
+    color: var(--color-on-accent);
 }
 
 .tab-btn.active svg {
@@ -414,6 +437,21 @@ footer {
     gap: 1rem;
 }
 
+.footer-credit {
+    font-size: var(--text-body);
+    color: var(--color-muted);
+    text-align: center;
+}
+
+.footer-credit a {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.footer-credit a:hover {
+    text-decoration: underline;
+}
+
 .footer-copy {
     font-size: var(--text-body);
     color: var(--color-muted);
@@ -464,7 +502,7 @@ footer {
     border: 1px solid rgb(255 255 255 / 25%);
     border-radius: var(--radius-circle);
     background: var(--color-overlay-strong);
-    color: #fff;
+    color: var(--color-on-accent);
     font-size: var(--text-subhead);
     line-height: 1;
     cursor: pointer;
