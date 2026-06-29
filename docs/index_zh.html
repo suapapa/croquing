@@ -1,167 +1,423 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Croquing — 每周同步人体写生画友聚会</title>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <meta name="theme-color" content="#fafafa">
-  <meta name="description" content="在完全同步的屏幕上主持和加入实时人体写生（速写）聚会。无需低画质的屏幕共享，由服务器计时器同步所有人的起止时间。">
-  <meta name="keywords" content="速写, 素描, 实时计时器, 画友聚会, 绘画练习, 人体写生">
-  <meta name="author" content="Homin Lee">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="landing.css">
-  <style>
-    h1, h2, h3, .logo-text { font-family: Syne, Georgia, serif; }
-  </style>
-</head>
-<body>
-  <a class="skip-link" href="#main-content">跳到主要内容</a>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Croquing — 每周同步人体写生画友聚会</title>
+        <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+        <meta name="theme-color" content="#fafafa" />
+        <meta
+            name="description"
+            content="在完全同步的屏幕上主持和加入实时人体写生（速写）聚会。无需低画质的屏幕共享，由服务器计时器同步所有人的起止时间。"
+        />
+        <meta
+            name="keywords"
+            content="速写, 素描, 实时计时器, 画友聚会, 绘画练习, 人体写生"
+        />
+        <meta name="author" content="Homin Lee" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="preload"
+            href="assets/croquis-king.webp"
+            as="image"
+            type="image/webp"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="landing.css" />
+        <style>
+            h1,
+            h2,
+            h3,
+            .logo-text {
+                font-family: Syne, Georgia, serif;
+            }
+        </style>
+    </head>
+    <body>
+        <a class="skip-link" href="#main-content">跳到主要内容</a>
 
-  <header>
-    <div class="nav-container">
-      <a href="#" class="logo" aria-label="Croquing 首页">
-        <img src="favicon.svg" alt="" class="logo-icon">
-        <span class="logo-text">Croquing</span>
-      </a>
-      <div class="nav-actions">
-        <nav class="lang-switcher" aria-label="选择语言">
-          <div class="lang-switcher-links">
-            <a href="index.html" class="lang-link" aria-label="Switch to English">EN</a>
-            <span class="lang-divider" aria-hidden="true">|</span>
-            <a href="index_ko.html" class="lang-link" aria-label="한국어로 변경">KO</a>
-            <span class="lang-divider" aria-hidden="true">|</span>
-            <a href="index_ja.html" class="lang-link" aria-label="日本語に変更">JA</a>
-            <span class="lang-divider" aria-hidden="true">|</span>
-            <a href="index_zh.html" class="lang-link active" aria-label="更改为中文" aria-current="page">ZH</a>
-            <span class="lang-divider" aria-hidden="true">|</span>
-            <a href="index_pl.html" class="lang-link" aria-label="Zmień na polski">PL</a>
-          </div>
-          <select class="lang-select" aria-label="选择语言" onchange="if(this.value) window.location.href=this.value">
-            <option value="index.html">EN</option>
-            <option value="index_ko.html">KO</option>
-            <option value="index_ja.html">JA</option>
-            <option value="index_zh.html" selected>ZH</option>
-            <option value="index_pl.html">PL</option>
-          </select>
-        </nav>
-        <a href="https://github.com/suapapa/croquing" class="btn-github" target="_blank" rel="noopener noreferrer">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/></svg>
-          <span>在 GitHub 上查看</span>
-        </a>
-      </div>
-    </div>
-  </header>
+        <header>
+            <div class="nav-container">
+                <a href="index_zh.html" class="logo" aria-label="Croquing 首页">
+                    <img src="favicon.svg" alt="" class="logo-icon" />
+                    <span class="logo-text">Croquing</span>
+                </a>
+                <div class="nav-actions">
+                    <nav class="lang-switcher" aria-label="选择语言">
+                        <div class="lang-switcher-links">
+                            <a
+                                href="index.html"
+                                class="lang-link"
+                                aria-label="Switch to English"
+                                >EN</a
+                            >
+                            <span class="lang-divider" aria-hidden="true"
+                                >|</span
+                            >
+                            <a
+                                href="index_ko.html"
+                                class="lang-link"
+                                aria-label="한국어로 변경"
+                                >KO</a
+                            >
+                            <span class="lang-divider" aria-hidden="true"
+                                >|</span
+                            >
+                            <a
+                                href="index_ja.html"
+                                class="lang-link"
+                                aria-label="日本語に変更"
+                                >JA</a
+                            >
+                            <span class="lang-divider" aria-hidden="true"
+                                >|</span
+                            >
+                            <a
+                                href="index_zh.html"
+                                class="lang-link active"
+                                aria-label="更改为中文"
+                                aria-current="page"
+                                >ZH</a
+                            >
+                            <span class="lang-divider" aria-hidden="true"
+                                >|</span
+                            >
+                            <a
+                                href="index_pl.html"
+                                class="lang-link"
+                                aria-label="Zmień na polski"
+                                >PL</a
+                            >
+                        </div>
+                        <select
+                            class="lang-select"
+                            aria-label="选择语言"
+                            onchange="
+                                if (this.value)
+                                    window.location.href = this.value;
+                            "
+                        >
+                            <option value="index.html">EN</option>
+                            <option value="index_ko.html">KO</option>
+                            <option value="index_ja.html">JA</option>
+                            <option value="index_zh.html" selected>ZH</option>
+                            <option value="index_pl.html">PL</option>
+                        </select>
+                    </nav>
+                    <a
+                        href="https://github.com/suapapa/croquing"
+                        class="btn-github"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path
+                                d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                            />
+                        </svg>
+                        <span>在 GitHub 上查看</span>
+                    </a>
+                </div>
+            </div>
+        </header>
 
-  <main id="main-content">
-    <section class="hero" aria-label="介绍">
-      <h1>重新想象速写聚会</h1>
-      <p class="hero-subtitle">
-        所有参与者在完全一致的屏幕上共同创作速写。由服务器控制计时器，随机分配高分辨率姿势图片，并在所有浏览器间实时同步进行状态。
-      </p>
-      <div class="hero-actions">
-        <a href="https://croquis-king.songmiyoung.art/" class="btn-primary" target="_blank" rel="noopener noreferrer">
-          <span>在线体验 CROQUIS-KING</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        </a>
-      </div>
-    </section>
+        <main id="main-content">
+            <section class="hero" aria-label="介绍">
+                <div class="hero-inner">
+                    <div class="hero-content">
+                        <h1>重新想象速写聚会</h1>
+                        <p class="hero-subtitle">
+                            所有参与者在完全一致的屏幕上共同创作速写。由服务器控制计时器，随机分配高分辨率姿势图片，并在所有浏览器间实时同步进行状态。
+                        </p>
+                        <div class="hero-actions">
+                            <a
+                                href="https://croquis-king.songmiyoung.art/"
+                                class="btn-primary"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <span>在线体验 CROQUIS-KING</span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="18"
+                                    height="18"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                                    />
+                                    <polyline points="15 3 21 3 21 9" />
+                                    <line x1="10" y1="14" x2="21" y2="3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <figure class="hero-illustration">
+                        <img
+                            src="assets/croquis-king.webp"
+                            alt="내가 사랑하는 크로키방 사람들 &lt; 그림이 좋아 -  송미영 &gt;"
+                            width="800"
+                            height="786"
+                            fetchpriority="high"
+                        />
+                    </figure>
+                </div>
+            </section>
 
-    <section class="showcase" aria-labelledby="showcase-heading">
-      <h2 id="showcase-heading" class="visually-hidden">产品使用流程</h2>
+            <section class="showcase" aria-labelledby="showcase-heading">
+                <h2 id="showcase-heading" class="visually-hidden">
+                    产品使用流程
+                </h2>
 
-      <div class="tab-nav" role="tablist" aria-label="使用步骤流程">
-        <button type="button" class="tab-btn active" role="tab" id="tab-step-1" aria-selected="true" aria-controls="panel-step-1">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          进入大厅
-        </button>
-        <button type="button" class="tab-btn" role="tab" id="tab-step-2" aria-selected="false" aria-controls="panel-step-2" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          选择图片
-        </button>
-        <button type="button" class="tab-btn" role="tab" id="tab-step-3" aria-selected="false" aria-controls="panel-step-3" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-          同步速写
-        </button>
-      </div>
+                <div class="tab-nav" role="tablist" aria-label="使用步骤流程">
+                    <button
+                        type="button"
+                        class="tab-btn active"
+                        role="tab"
+                        id="tab-step-1"
+                        aria-selected="true"
+                        aria-controls="panel-step-1"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path
+                                d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+                            />
+                            <path
+                                d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+                            />
+                        </svg>
+                        进入大厅
+                    </button>
+                    <button
+                        type="button"
+                        class="tab-btn"
+                        role="tab"
+                        id="tab-step-2"
+                        aria-selected="false"
+                        aria-controls="panel-step-2"
+                        tabindex="-1"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.3-4.3" />
+                        </svg>
+                        选择图片
+                    </button>
+                    <button
+                        type="button"
+                        class="tab-btn"
+                        role="tab"
+                        id="tab-step-3"
+                        aria-selected="false"
+                        aria-controls="panel-step-3"
+                        tabindex="-1"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <polygon points="6 3 20 12 6 21 6 3" />
+                        </svg>
+                        同步速写
+                    </button>
+                </div>
 
-      <div id="panel-step-1" class="tab-panel active" role="tabpanel" aria-labelledby="tab-step-1">
-        <button type="button" class="mockup-trigger" aria-label="放大截图：大厅等待界面">
-          <img src="screenshot/1_start.webp" alt="参与者等待房长开启活动的大厅界面" width="2550" height="2650">
-        </button>
-        <div class="step-copy">
-          <h3>一键创建并立即分享大厅</h3>
-          <p>只需点击一下即可生成共享房间。将链接分享给画友，无需下载任何软件或注册账号，即可通过浏览器立即加入。</p>
-        </div>
-      </div>
+                <div
+                    id="panel-step-1"
+                    class="tab-panel active"
+                    role="tabpanel"
+                    aria-labelledby="tab-step-1"
+                >
+                    <button
+                        type="button"
+                        class="mockup-trigger"
+                        aria-label="放大截图：大厅等待界面"
+                    >
+                        <img
+                            src="assets/1_start.webp"
+                            alt="参与者等待房长开启活动的大厅界面"
+                            loading="lazy"
+                            width="2550"
+                            height="2650"
+                        />
+                    </button>
+                    <div class="step-copy">
+                        <h3>一键创建并立即分享大厅</h3>
+                        <p>
+                            只需点击一下即可生成共享房间。将链接分享给画友，无需下载任何软件或注册账号，即可通过浏览器立即加入。
+                        </p>
+                    </div>
+                </div>
 
-      <div id="panel-step-2" class="tab-panel" role="tabpanel" aria-labelledby="tab-step-2" hidden>
-        <button type="button" class="mockup-trigger" aria-label="放大截图：房长图片筛选面板">
-          <img src="screenshot/2_select.webp" alt="房长搜索并挑选人体姿势图片的准备面板" loading="lazy" width="2550" height="2650">
-        </button>
-        <div class="step-copy">
-          <h3>直接筛选与智能随机</h3>
-          <p>在应用内直接搜索并筛选姿势图片。房长决定图集后，系统将自动打乱顺序，且在正式绘制开始前保持隐藏。</p>
-        </div>
-      </div>
+                <div
+                    id="panel-step-2"
+                    class="tab-panel"
+                    role="tabpanel"
+                    aria-labelledby="tab-step-2"
+                    hidden
+                >
+                    <button
+                        type="button"
+                        class="mockup-trigger"
+                        aria-label="放大截图：房长图片筛选面板"
+                    >
+                        <img
+                            src="assets/2_select.webp"
+                            alt="房长搜索并挑选人体姿势图片的准备面板"
+                            loading="lazy"
+                            width="2550"
+                            height="2650"
+                        />
+                    </button>
+                    <div class="step-copy">
+                        <h3>直接筛选与智能随机</h3>
+                        <p>
+                            在应用内直接搜索并筛选姿势图片。房长决定图集后，系统将自动打乱顺序，且在正式绘制开始前保持隐藏。
+                        </p>
+                    </div>
+                </div>
 
-      <div id="panel-step-3" class="tab-panel" role="tabpanel" aria-labelledby="tab-step-3" hidden>
-        <button type="button" class="mockup-trigger" aria-label="放大截图：同步速写会话界面">
-          <img src="screenshot/3_round.webp" alt="带有顶部倒计时进度条和姿势图片的速写会话界面" loading="lazy" width="2550" height="2650">
-        </button>
-        <div class="step-copy">
-          <h3>精准同步的计时器，专注绘制</h3>
-          <p>每个人在同一时刻绘制相同的姿势。同步的计时器决定了图片的显示时间，并在时间截止时自动隐藏，确保公平且专注的绘制节奏。</p>
-        </div>
-      </div>
-    </section>
+                <div
+                    id="panel-step-3"
+                    class="tab-panel"
+                    role="tabpanel"
+                    aria-labelledby="tab-step-3"
+                    hidden
+                >
+                    <button
+                        type="button"
+                        class="mockup-trigger"
+                        aria-label="放大截图：同步速写会话界面"
+                    >
+                        <img
+                            src="assets/3_round.webp"
+                            alt="带有顶部倒计时进度条和姿势图片的速写会话界面"
+                            loading="lazy"
+                            width="2550"
+                            height="2650"
+                        />
+                    </button>
+                    <div class="step-copy">
+                        <h3>精准同步的计时器，专注绘制</h3>
+                        <p>
+                            每个人在同一时刻绘制相同的姿势。同步的计时器决定了图片的显示时间，并在时间截止时自动隐藏，确保公平且专注的绘制节奏。
+                        </p>
+                    </div>
+                </div>
+            </section>
 
-    <section class="features-section" aria-label="详细功能">
-      <div class="section-title">
-        <h2>专为专注创作而设计</h2>
-        <p>旨在解决传统视频会议中速写聚会带来的各种痛点与不便。</p>
-      </div>
+            <section class="features-section" aria-label="详细功能">
+                <div class="section-title">
+                    <h2>专为专注创作而设计</h2>
+                    <p>旨在解决传统视频会议中速写聚会带来的各种痛点与不便。</p>
+                </div>
 
-      <ul class="features-list">
-        <li class="feature-item">
-          <h3>拒绝压缩，高清呈现</h3>
-          <p>不同于因视频共享导致画质压缩和延迟的模式，Croquing 直接在每个人的设备上加载原图。清晰分辨细微的解剖细节和肌肉质感。</p>
-        </li>
-        <li class="feature-item">
-          <h3>服务器权威计时</h3>
-          <p>防止提前作画。房长在绘制前设定每轮时长（1-60分钟），权威的服务器计时器确保每位画友时刻同步。绘制开始时解锁图片，时间结束时立即隐藏。</p>
-        </li>
-        <li class="feature-item">
-          <h3>集成的图片检索</h3>
-          <p>房长可在管理面板内直接检索并挑选精选人体图片，几秒钟内完成配置。系统自动标注原作者版权信息，符合社区规范。</p>
-        </li>
-        <li class="feature-item">
-          <h3>公平且难以预测的顺序</h3>
-          <p>为了保持手势速写（Gesture Drawing）的挑战性，图片顺序会彻底随机化。在倒计时归零前，没有人能预知下一位模特或姿势。</p>
-        </li>
-      </ul>
-    </section>
-  </main>
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <h3>拒绝压缩，高清呈现</h3>
+                        <p>
+                            不同于因视频共享导致画质压缩和延迟的模式，Croquing
+                            直接在每个人的设备上加载原图。清晰分辨细微的解剖细节和肌肉质感。
+                        </p>
+                    </li>
+                    <li class="feature-item">
+                        <h3>服务器权威计时</h3>
+                        <p>
+                            防止提前作画。房长在绘制前设定每轮时长（1-60分钟），权威的服务器计时器确保每位画友时刻同步。绘制开始时解锁图片，时间结束时立即隐藏。
+                        </p>
+                    </li>
+                    <li class="feature-item">
+                        <h3>集成的图片检索</h3>
+                        <p>
+                            房长可在管理面板内直接检索并挑选精选人体图片，几秒钟内完成配置。系统自动标注原作者版权信息，符合社区规范。
+                        </p>
+                    </li>
+                    <li class="feature-item">
+                        <h3>公平且难以预测的顺序</h3>
+                        <p>
+                            为了保持手势速写（Gesture
+                            Drawing）的挑战性，图片顺序会彻底随机化。在倒计时归零前，没有人能预知下一位模特或姿势。
+                        </p>
+                    </li>
+                </ul>
+            </section>
+        </main>
 
-  <dialog class="lightbox" id="lightbox" aria-label="截图预览">
-    <button type="button" class="lightbox-close" aria-label="关闭预览">&times;</button>
-    <div class="lightbox-content"></div>
-  </dialog>
+        <dialog class="lightbox" id="lightbox" aria-label="截图预览">
+            <button type="button" class="lightbox-close" aria-label="关闭预览">
+                &times;
+            </button>
+            <div class="lightbox-content"></div>
+        </dialog>
 
-  <footer>
-    <div class="footer-content">
-      <div class="logo">
-        <img src="favicon.svg" alt="" class="logo-icon footer-logo-icon">
-        <span class="logo-text footer-logo-text">Croquing</span>
-      </div>
-      <p class="footer-copy">
-        &copy; 2026 <a href="mailto:i@homin.dev">Homin Lee</a>. All rights reserved.
-      </p>
-    </div>
-  </footer>
+        <footer>
+            <div class="footer-content">
+                <div class="logo">
+                    <img
+                        src="favicon.svg"
+                        alt=""
+                        class="logo-icon footer-logo-icon"
+                    />
+                    <span class="logo-text footer-logo-text">Croquing</span>
+                </div>
+                <p class="footer-copy">
+                    &copy; 2026 <a href="mailto:i@homin.dev">Homin Lee</a>. All
+                    rights reserved.
+                </p>
+            </div>
+        </footer>
 
-  <script src="landing.js" defer></script>
-</body>
+        <script src="landing.js" defer></script>
+    </body>
 </html>

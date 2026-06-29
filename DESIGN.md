@@ -35,6 +35,7 @@ rounded:
   md: "0.75rem"
   lg: "1rem"
   pill: "999px"
+  circle: "50%"
 spacing:
   touch-min: "2.75rem"
   content-max: "72rem"
@@ -75,9 +76,10 @@ Accent is terracotta (`#c2410c`), used for actions and state—not decorative fi
 
 ## Typography
 
-- **Body:** Manrope 400–700, 15 px base, 1.5 line-height
+- **Body:** Manrope 400–700, 16 px base (`--text-body`), 1.5 line-height
 - **Display:** Syne 600–700 for h1/h2 in lobby and home only—not buttons or data
-- **Scale:** Fixed rem steps (product register); no fluid heading clamp in app chrome
+- **Landing scale** (`docs/landing.css`): `--text-body` (16px) → `--text-subhead` (22px) → `--text-section` (fluid) → `--text-display` (fluid); ≥1.25× between steps
+- **SPA scale:** Fixed rem steps (product register); no fluid heading clamp in app chrome
 - **Prose:** `text-wrap: pretty` on lead paragraphs; max ~30 rem on marketing lead
 
 ## Elevation
@@ -93,7 +95,7 @@ Accent is terracotta (`#c2410c`), used for actions and state—not decorative fi
 - **Phase panels:** `.phase-panel` — padded surface card for lobby phases
 - **Pixabay grid:** Square aspect-ratio tiles, 2 px selection ring
 - **Selection dock:** Fixed bottom bar when photos selected; solid surface, scrollable thumbs
-- **Marketing landing:** `.btn-primary`, `.tab-nav` / `.tab-btn`, `.features-list` — border-first, no glass or metric hero bars
+- **Marketing landing:** `.btn-primary`, `.tab-nav` / `.tab-btn`, `.features-list`, `.hero-illustration` (circular frame via `--radius-circle`) — border-first, no glass or metric hero bars
 - **Drawing panel:** Fixed inset, black stage, `object-fit: contain` photo, footer attribution
 
 ## Do's and Don'ts

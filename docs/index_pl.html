@@ -1,167 +1,464 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Croquing — Zsynchronizowane sesje krokiu dla cotygodniowych spotkań</title>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <meta name="theme-color" content="#fafafa">
-  <meta name="description" content="Organizuj i dołączaj do zsynchronizowanych sesji rysunku anatomicznego (krokiu) w czasie rzeczywistym. Zapomnij o rozmazanym udostępnianiu ekranu. Zsynchronizowane timery i kuracja obrazów.">
-  <meta name="keywords" content="krokiu, rysunek anatomiczny, rysunek z natury, zsynchronizowany timer, spotkania artystyczne, ćwiczenie szkicowania">
-  <meta name="author" content="Homin Lee">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="landing.css">
-  <style>
-    h1, h2, h3, .logo-text { font-family: Syne, Georgia, serif; }
-  </style>
-</head>
-<body>
-  <a class="skip-link" href="#main-content">Przejdź do treści</a>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+            Croquing — Zsynchronizowane sesje krokiu dla cotygodniowych spotkań
+        </title>
+        <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+        <meta name="theme-color" content="#fafafa" />
+        <meta
+            name="description"
+            content="Organizuj i dołączaj do zsynchronizowanych sesji rysunku anatomicznego (krokiu) w czasie rzeczywistym. Zapomnij o rozmazanym udostępnianiu ekranu. Zsynchronizowane timery i kuracja obrazów."
+        />
+        <meta
+            name="keywords"
+            content="krokiu, rysunek anatomiczny, rysunek z natury, zsynchronizowany timer, spotkania artystyczne, ćwiczenie szkicowania"
+        />
+        <meta name="author" content="Homin Lee" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="preload"
+            href="assets/croquis-king.webp"
+            as="image"
+            type="image/webp"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="landing.css" />
+        <style>
+            h1,
+            h2,
+            h3,
+            .logo-text {
+                font-family: Syne, Georgia, serif;
+            }
+        </style>
+    </head>
+    <body>
+        <a class="skip-link" href="#main-content">Przejdź do treści</a>
 
-  <header>
-    <div class="nav-container">
-      <a href="#" class="logo" aria-label="Croquing Home">
-        <img src="favicon.svg" alt="" class="logo-icon">
-        <span class="logo-text">Croquing</span>
-      </a>
-      <div class="nav-actions">
-        <nav class="lang-switcher" aria-label="Wybierz język">
-          <div class="lang-switcher-links">
-            <a href="index.html" class="lang-link" aria-label="Switch to English">EN</a>
-            <span class="lang-divider" aria-hidden="true">|</span>
-            <a href="index_ko.html" class="lang-link" aria-label="한국어로 변경">KO</a>
-            <span class="lang-divider" aria-hidden="true">|</span>
-            <a href="index_ja.html" class="lang-link" aria-label="日本語に変更">JA</a>
-            <span class="lang-divider" aria-hidden="true">|</span>
-            <a href="index_zh.html" class="lang-link" aria-label="更改为中文">ZH</a>
-            <span class="lang-divider" aria-hidden="true">|</span>
-            <a href="index_pl.html" class="lang-link active" aria-label="Zmień na polski" aria-current="page">PL</a>
-          </div>
-          <select class="lang-select" aria-label="Wybierz język" onchange="if(this.value) window.location.href=this.value">
-            <option value="index.html">EN</option>
-            <option value="index_ko.html">KO</option>
-            <option value="index_ja.html">JA</option>
-            <option value="index_zh.html">ZH</option>
-            <option value="index_pl.html" selected>PL</option>
-          </select>
-        </nav>
-        <a href="https://github.com/suapapa/croquing" class="btn-github" target="_blank" rel="noopener noreferrer">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/></svg>
-          <span>Zobacz na GitHubie</span>
-        </a>
-      </div>
-    </div>
-  </header>
+        <header>
+            <div class="nav-container">
+                <a href="index_pl.html" class="logo" aria-label="Croquing Home">
+                    <img src="favicon.svg" alt="" class="logo-icon" />
+                    <span class="logo-text">Croquing</span>
+                </a>
+                <div class="nav-actions">
+                    <nav class="lang-switcher" aria-label="Wybierz język">
+                        <div class="lang-switcher-links">
+                            <a
+                                href="index.html"
+                                class="lang-link"
+                                aria-label="Switch to English"
+                                >EN</a
+                            >
+                            <span class="lang-divider" aria-hidden="true"
+                                >|</span
+                            >
+                            <a
+                                href="index_ko.html"
+                                class="lang-link"
+                                aria-label="한국어로 변경"
+                                >KO</a
+                            >
+                            <span class="lang-divider" aria-hidden="true"
+                                >|</span
+                            >
+                            <a
+                                href="index_ja.html"
+                                class="lang-link"
+                                aria-label="日本語に変更"
+                                >JA</a
+                            >
+                            <span class="lang-divider" aria-hidden="true"
+                                >|</span
+                            >
+                            <a
+                                href="index_zh.html"
+                                class="lang-link"
+                                aria-label="更改为中文"
+                                >ZH</a
+                            >
+                            <span class="lang-divider" aria-hidden="true"
+                                >|</span
+                            >
+                            <a
+                                href="index_pl.html"
+                                class="lang-link active"
+                                aria-label="Zmień na polski"
+                                aria-current="page"
+                                >PL</a
+                            >
+                        </div>
+                        <select
+                            class="lang-select"
+                            aria-label="Wybierz język"
+                            onchange="
+                                if (this.value)
+                                    window.location.href = this.value;
+                            "
+                        >
+                            <option value="index.html">EN</option>
+                            <option value="index_ko.html">KO</option>
+                            <option value="index_ja.html">JA</option>
+                            <option value="index_zh.html">ZH</option>
+                            <option value="index_pl.html" selected>PL</option>
+                        </select>
+                    </nav>
+                    <a
+                        href="https://github.com/suapapa/croquing"
+                        class="btn-github"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path
+                                d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                            />
+                        </svg>
+                        <span>Zobacz na GitHubie</span>
+                    </a>
+                </div>
+            </div>
+        </header>
 
-  <main id="main-content">
-    <section class="hero" aria-label="Wprowadzenie">
-      <h1>Sesje krokiu na nowo</h1>
-      <p class="hero-subtitle">
-        Rysuj sylwetki w idealnej synchronizacji ze swoją grupą. Croquing zarządza czasem, losowo dobiera zdjęcia w wysokiej rozdzielczości i synchronizuje stan sesji na wszystkich ekranach.
-      </p>
-      <div class="hero-actions">
-        <a href="https://croquis-king.songmiyoung.art/" class="btn-primary" target="_blank" rel="noopener noreferrer">
-          <span>Wypróbuj CROQUIS-KING Online</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        </a>
-      </div>
-    </section>
+        <main id="main-content">
+            <section class="hero" aria-label="Wprowadzenie">
+                <div class="hero-inner">
+                    <div class="hero-content">
+                        <h1>Sesje krokiu na nowo</h1>
+                        <p class="hero-subtitle">
+                            Rysuj sylwetki w idealnej synchronizacji ze swoją
+                            grupą. Croquing zarządza czasem, losowo dobiera
+                            zdjęcia w wysokiej rozdzielczości i synchronizuje
+                            stan sesji na wszystkich ekranach.
+                        </p>
+                        <div class="hero-actions">
+                            <a
+                                href="https://croquis-king.songmiyoung.art/"
+                                class="btn-primary"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <span>Wypróbuj CROQUIS-KING Online</span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="18"
+                                    height="18"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                                    />
+                                    <polyline points="15 3 21 3 21 9" />
+                                    <line x1="10" y1="14" x2="21" y2="3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <figure class="hero-illustration">
+                        <img
+                            src="assets/croquis-king.webp"
+                            alt="내가 사랑하는 크로키방 사람들 &lt; 그림이 좋아 -  송미영 &gt;"
+                            width="800"
+                            height="786"
+                            fetchpriority="high"
+                        />
+                    </figure>
+                </div>
+            </section>
 
-    <section class="showcase" aria-labelledby="showcase-heading">
-      <h2 id="showcase-heading" class="visually-hidden">Przepływ pracy produktu</h2>
+            <section class="showcase" aria-labelledby="showcase-heading">
+                <h2 id="showcase-heading" class="visually-hidden">
+                    Przepływ pracy produktu
+                </h2>
 
-      <div class="tab-nav" role="tablist" aria-label="Kroki przepływu pracy">
-        <button type="button" class="tab-btn active" role="tab" id="tab-step-1" aria-selected="true" aria-controls="panel-step-1">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          Wejdź do lobby
-        </button>
-        <button type="button" class="tab-btn" role="tab" id="tab-step-2" aria-selected="false" aria-controls="panel-step-2" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          Wybierz pozy
-        </button>
-        <button type="button" class="tab-btn" role="tab" id="tab-step-3" aria-selected="false" aria-controls="panel-step-3" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-          Szkicuj w synchronizacji
-        </button>
-      </div>
+                <div
+                    class="tab-nav"
+                    role="tablist"
+                    aria-label="Kroki przepływu pracy"
+                >
+                    <button
+                        type="button"
+                        class="tab-btn active"
+                        role="tab"
+                        id="tab-step-1"
+                        aria-selected="true"
+                        aria-controls="panel-step-1"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path
+                                d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+                            />
+                            <path
+                                d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+                            />
+                        </svg>
+                        Wejdź do lobby
+                    </button>
+                    <button
+                        type="button"
+                        class="tab-btn"
+                        role="tab"
+                        id="tab-step-2"
+                        aria-selected="false"
+                        aria-controls="panel-step-2"
+                        tabindex="-1"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.3-4.3" />
+                        </svg>
+                        Wybierz pozy
+                    </button>
+                    <button
+                        type="button"
+                        class="tab-btn"
+                        role="tab"
+                        id="tab-step-3"
+                        aria-selected="false"
+                        aria-controls="panel-step-3"
+                        tabindex="-1"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <polygon points="6 3 20 12 6 21 6 3" />
+                        </svg>
+                        Szkicuj w synchronizacji
+                    </button>
+                </div>
 
-      <div id="panel-step-1" class="tab-panel active" role="tabpanel" aria-labelledby="tab-step-1">
-        <button type="button" class="mockup-trigger" aria-label="Powiększ zrzut ekranu: ekran oczekiwania w lobby">
-          <img src="screenshot/1_start.webp" alt="Strona lobby, na której artyści czekają na rozpoczęcie sesji przez hosta" width="2550" height="2650">
-        </button>
-        <div class="step-copy">
-          <h3>Błyskawiczne tworzenie i udostępnianie lobby</h3>
-          <p>Stwórz wspólny pokój jednym kliknięciem. Udostępnij link innym artystom. Każdy może dołączyć natychmiast przez przeglądarkę bez pobierania programów czy zakładania kont.</p>
-        </div>
-      </div>
+                <div
+                    id="panel-step-1"
+                    class="tab-panel active"
+                    role="tabpanel"
+                    aria-labelledby="tab-step-1"
+                >
+                    <button
+                        type="button"
+                        class="mockup-trigger"
+                        aria-label="Powiększ zrzut ekranu: ekran oczekiwania w lobby"
+                    >
+                        <img
+                            src="assets/1_start.webp"
+                            alt="Strona lobby, na której artyści czekają na rozpoczęcie sesji przez hosta"
+                            loading="lazy"
+                            width="2550"
+                            height="2650"
+                        />
+                    </button>
+                    <div class="step-copy">
+                        <h3>Błyskawiczne tworzenie i udostępnianie lobby</h3>
+                        <p>
+                            Stwórz wspólny pokój jednym kliknięciem. Udostępnij
+                            link innym artystom. Każdy może dołączyć natychmiast
+                            przez przeglądarkę bez pobierania programów czy
+                            zakładania kont.
+                        </p>
+                    </div>
+                </div>
 
-      <div id="panel-step-2" class="tab-panel" role="tabpanel" aria-labelledby="tab-step-2" hidden>
-        <button type="button" class="mockup-trigger" aria-label="Powiększ zrzut ekranu: panel kuracji zdjęć hosta">
-          <img src="screenshot/2_select.webp" alt="Panel kuratorski hosta do wyszukiwania i wybierania zdjęć sylwetek" loading="lazy" width="2550" height="2650">
-        </button>
-        <div class="step-copy">
-          <h3>Bezpośrednia selekcja i inteligentne tasowanie</h3>
-          <p>Wyszukuj i wybieraj zdjęcia poz bezpośrednio w aplikacji. Host ustala zestaw zdjęć, a platforma automatycznie miesza ich kolejność, ukrywając je aż do rozpoczęcia rysowania.</p>
-        </div>
-      </div>
+                <div
+                    id="panel-step-2"
+                    class="tab-panel"
+                    role="tabpanel"
+                    aria-labelledby="tab-step-2"
+                    hidden
+                >
+                    <button
+                        type="button"
+                        class="mockup-trigger"
+                        aria-label="Powiększ zrzut ekranu: panel kuracji zdjęć hosta"
+                    >
+                        <img
+                            src="assets/2_select.webp"
+                            alt="Panel kuratorski hosta do wyszukiwania i wybierania zdjęć sylwetek"
+                            loading="lazy"
+                            width="2550"
+                            height="2650"
+                        />
+                    </button>
+                    <div class="step-copy">
+                        <h3>Bezpośrednia selekcja i inteligentne tasowanie</h3>
+                        <p>
+                            Wyszukuj i wybieraj zdjęcia poz bezpośrednio w
+                            aplikacji. Host ustala zestaw zdjęć, a platforma
+                            automatycznie miesza ich kolejność, ukrywając je aż
+                            do rozpoczęcia rysowania.
+                        </p>
+                    </div>
+                </div>
 
-      <div id="panel-step-3" class="tab-panel" role="tabpanel" aria-labelledby="tab-step-3" hidden>
-        <button type="button" class="mockup-trigger" aria-label="Powiększ zrzut ekranu: zsynchronizowana sesja rysunkowa">
-          <img src="screenshot/3_round.webp" alt="Interfejs sesji rysunkowej pokazujący zdjęcie z paskiem postępu odliczania" loading="lazy" width="2550" height="2650">
-        </button>
-        <div class="step-copy">
-          <h3>Skupione rysowanie ze zsynchronizowanym czasem</h3>
-          <p>Wszyscy szkicują tę samą postać w tym samym momencie. Zsynchronizowany timer decyduje o odsłonięciu zdjęcia i automatycznie ukrywa je po upływie czasu, dbając o równe tempo.</p>
-        </div>
-      </div>
-    </section>
+                <div
+                    id="panel-step-3"
+                    class="tab-panel"
+                    role="tabpanel"
+                    aria-labelledby="tab-step-3"
+                    hidden
+                >
+                    <button
+                        type="button"
+                        class="mockup-trigger"
+                        aria-label="Powiększ zrzut ekranu: zsynchronizowana sesja rysunkowa"
+                    >
+                        <img
+                            src="assets/3_round.webp"
+                            alt="Interfejs sesji rysunkowej pokazujący zdjęcie z paskiem postępu odliczania"
+                            loading="lazy"
+                            width="2550"
+                            height="2650"
+                        />
+                    </button>
+                    <div class="step-copy">
+                        <h3>Skupione rysowanie ze zsynchronizowanym czasem</h3>
+                        <p>
+                            Wszyscy szkicują tę samą postać w tym samym
+                            momencie. Zsynchronizowany timer decyduje o
+                            odsłonięciu zdjęcia i automatycznie ukrywa je po
+                            upływie czasu, dbając o równe tempo.
+                        </p>
+                    </div>
+                </div>
+            </section>
 
-    <section class="features-section" aria-label="Szczegółowe funkcje">
-      <div class="section-title">
-        <h2>Stworzone dla artystycznego skupienia</h2>
-        <p>Zaprojektowane, by rozwiązać typowe problemy tradycyjnych spotkań rysunkowych online przez komunikatory wideo.</p>
-      </div>
+            <section class="features-section" aria-label="Szczegółowe funkcje">
+                <div class="section-title">
+                    <h2>Stworzone dla artystycznego skupienia</h2>
+                    <p>
+                        Zaprojektowane, by rozwiązać typowe problemy
+                        tradycyjnych spotkań rysunkowych online przez
+                        komunikatory wideo.
+                    </p>
+                </div>
 
-      <ul class="features-list">
-        <li class="feature-item">
-          <h3>Pożegnaj kompresję. Witaj detalu.</h3>
-          <p>W przeciwieństwie do udostępniania ekranu przez wideo, które kompresuje obraz i wprowadza opóźnienia, Croquing ładuje oryginalne zdjęcia bezpośrednio na urządzeniu każdego uczestnika. Dostrzeż anatomię i tekstury bez zakłóceń.</p>
-        </li>
-        <li class="feature-item">
-          <h3>Autorytatywny czas serwera</h3>
-          <p>Zapobiega przedwczesnemu szkicowaniu. Host ustawia długość rundy (1–60 minut) przed rozpoczęciem, a serwer pilnuje synchronizacji. Obraz pojawia się na start i znika natychmiast po czasie.</p>
-        </li>
-        <li class="feature-item">
-          <h3>Zintegrowana kuracja zdjęć</h3>
-          <p>Host może w kilka sekund wyszukać i wybrać zdjęcia postaci w panelu administracyjnym. Autorstwo zdjęć jest przypisywane automatycznie zgodnie z wytycznymi społeczności.</p>
-        </li>
-        <li class="feature-item">
-          <h3>Sprawiedliwa i nieprzewidywalna kolejność</h3>
-          <p>Aby utrzymać wyzwanie szybkich szkiców gestów, kolejność sesji jest losowana. Żaden artysta nie wie, jaka poza ani model pojawią się jako następne, dopóki licznik nie wskaże zera.</p>
-        </li>
-      </ul>
-    </section>
-  </main>
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <h3>Pożegnaj kompresję. Witaj detalu.</h3>
+                        <p>
+                            W przeciwieństwie do udostępniania ekranu przez
+                            wideo, które kompresuje obraz i wprowadza
+                            opóźnienia, Croquing ładuje oryginalne zdjęcia
+                            bezpośrednio na urządzeniu każdego uczestnika.
+                            Dostrzeż anatomię i tekstury bez zakłóceń.
+                        </p>
+                    </li>
+                    <li class="feature-item">
+                        <h3>Autorytatywny czas serwera</h3>
+                        <p>
+                            Zapobiega przedwczesnemu szkicowaniu. Host ustawia
+                            długość rundy (1–60 minut) przed rozpoczęciem, a
+                            serwer pilnuje synchronizacji. Obraz pojawia się na
+                            start i znika natychmiast po czasie.
+                        </p>
+                    </li>
+                    <li class="feature-item">
+                        <h3>Zintegrowana kuracja zdjęć</h3>
+                        <p>
+                            Host może w kilka sekund wyszukać i wybrać zdjęcia
+                            postaci w panelu administracyjnym. Autorstwo zdjęć
+                            jest przypisywane automatycznie zgodnie z wytycznymi
+                            społeczności.
+                        </p>
+                    </li>
+                    <li class="feature-item">
+                        <h3>Sprawiedliwa i nieprzewidywalna kolejność</h3>
+                        <p>
+                            Aby utrzymać wyzwanie szybkich szkiców gestów,
+                            kolejność sesji jest losowana. Żaden artysta nie
+                            wie, jaka poza ani model pojawią się jako następne,
+                            dopóki licznik nie wskaże zera.
+                        </p>
+                    </li>
+                </ul>
+            </section>
+        </main>
 
-  <dialog class="lightbox" id="lightbox" aria-label="Podgląd zrzutu ekranu">
-    <button type="button" class="lightbox-close" aria-label="Zamknij podgląd">&times;</button>
-    <div class="lightbox-content"></div>
-  </dialog>
+        <dialog
+            class="lightbox"
+            id="lightbox"
+            aria-label="Podgląd zrzutu ekranu"
+        >
+            <button
+                type="button"
+                class="lightbox-close"
+                aria-label="Zamknij podgląd"
+            >
+                &times;
+            </button>
+            <div class="lightbox-content"></div>
+        </dialog>
 
-  <footer>
-    <div class="footer-content">
-      <div class="logo">
-        <img src="favicon.svg" alt="" class="logo-icon footer-logo-icon">
-        <span class="logo-text footer-logo-text">Croquing</span>
-      </div>
-      <p class="footer-copy">
-        &copy; 2026 <a href="mailto:i@homin.dev">Homin Lee</a>. All rights reserved.
-      </p>
-    </div>
-  </footer>
+        <footer>
+            <div class="footer-content">
+                <div class="logo">
+                    <img
+                        src="favicon.svg"
+                        alt=""
+                        class="logo-icon footer-logo-icon"
+                    />
+                    <span class="logo-text footer-logo-text">Croquing</span>
+                </div>
+                <p class="footer-copy">
+                    &copy; 2026 <a href="mailto:i@homin.dev">Homin Lee</a>. All
+                    rights reserved.
+                </p>
+            </div>
+        </footer>
 
-  <script src="landing.js" defer></script>
-</body>
+        <script src="landing.js" defer></script>
+    </body>
 </html>

@@ -1,167 +1,439 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Croquing — 毎週一緒に描くリアルタイム同期クロッキー集会</title>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <meta name="theme-color" content="#fafafa">
-  <meta name="description" content="同期された画面でリアルタイムのクロッキー集会を開催・参加しましょう。低画質な画面共有なしで、サーバータイマーによって全員が同時にドローイングを開始・終了します。">
-  <meta name="keywords" content="クロッキー, デッサン, リアルタイムタイマー, ドローイング集会, 描画練習, 人体デッサン">
-  <meta name="author" content="Homin Lee">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="landing.css">
-  <style>
-    h1, h2, h3, .logo-text { font-family: Syne, Georgia, serif; }
-  </style>
-</head>
-<body>
-  <a class="skip-link" href="#main-content">メインコンテンツへスキップ</a>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Croquing — 毎週一緒に描くリアルタイム同期クロッキー集会</title>
+        <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+        <meta name="theme-color" content="#fafafa" />
+        <meta
+            name="description"
+            content="同期された画面でリアルタイムのクロッキー集会を開催・参加しましょう。低画質な画面共有なしで、サーバータイマーによって全員が同時にドローイングを開始・終了します。"
+        />
+        <meta
+            name="keywords"
+            content="クロッキー, デッサン, リアルタイムタイマー, ドローイング集会, 描画練習, 人体デッサン"
+        />
+        <meta name="author" content="Homin Lee" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="preload"
+            href="assets/croquis-king.webp"
+            as="image"
+            type="image/webp"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="landing.css" />
+        <style>
+            h1,
+            h2,
+            h3,
+            .logo-text {
+                font-family: Syne, Georgia, serif;
+            }
+        </style>
+    </head>
+    <body>
+        <a class="skip-link" href="#main-content">メインコンテンツへスキップ</a>
 
-  <header>
-    <div class="nav-container">
-      <a href="#" class="logo" aria-label="Croquing ホーム">
-        <img src="favicon.svg" alt="" class="logo-icon">
-        <span class="logo-text">Croquing</span>
-      </a>
-      <div class="nav-actions">
-        <nav class="lang-switcher" aria-label="言語選択">
-          <div class="lang-switcher-links">
-            <a href="index.html" class="lang-link" aria-label="Switch to English">EN</a>
-            <span class="lang-divider" aria-hidden="true">|</span>
-            <a href="index_ko.html" class="lang-link" aria-label="한국어로 변경">KO</a>
-            <span class="lang-divider" aria-hidden="true">|</span>
-            <a href="index_ja.html" class="lang-link active" aria-label="日本語に変更" aria-current="page">JA</a>
-            <span class="lang-divider" aria-hidden="true">|</span>
-            <a href="index_zh.html" class="lang-link" aria-label="更改为中文">ZH</a>
-            <span class="lang-divider" aria-hidden="true">|</span>
-            <a href="index_pl.html" class="lang-link" aria-label="Zmień na polski">PL</a>
-          </div>
-          <select class="lang-select" aria-label="言語選択" onchange="if(this.value) window.location.href=this.value">
-            <option value="index.html">EN</option>
-            <option value="index_ko.html">KO</option>
-            <option value="index_ja.html" selected>JA</option>
-            <option value="index_zh.html">ZH</option>
-            <option value="index_pl.html">PL</option>
-          </select>
-        </nav>
-        <a href="https://github.com/suapapa/croquing" class="btn-github" target="_blank" rel="noopener noreferrer">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/></svg>
-          <span>GitHubで表示</span>
-        </a>
-      </div>
-    </div>
-  </header>
+        <header>
+            <div class="nav-container">
+                <a
+                    href="index_ja.html"
+                    class="logo"
+                    aria-label="Croquing ホーム"
+                >
+                    <img src="favicon.svg" alt="" class="logo-icon" />
+                    <span class="logo-text">Croquing</span>
+                </a>
+                <div class="nav-actions">
+                    <nav class="lang-switcher" aria-label="言語選択">
+                        <div class="lang-switcher-links">
+                            <a
+                                href="index.html"
+                                class="lang-link"
+                                aria-label="Switch to English"
+                                >EN</a
+                            >
+                            <span class="lang-divider" aria-hidden="true"
+                                >|</span
+                            >
+                            <a
+                                href="index_ko.html"
+                                class="lang-link"
+                                aria-label="한국어로 변경"
+                                >KO</a
+                            >
+                            <span class="lang-divider" aria-hidden="true"
+                                >|</span
+                            >
+                            <a
+                                href="index_ja.html"
+                                class="lang-link active"
+                                aria-label="日本語に変更"
+                                aria-current="page"
+                                >JA</a
+                            >
+                            <span class="lang-divider" aria-hidden="true"
+                                >|</span
+                            >
+                            <a
+                                href="index_zh.html"
+                                class="lang-link"
+                                aria-label="更改为中文"
+                                >ZH</a
+                            >
+                            <span class="lang-divider" aria-hidden="true"
+                                >|</span
+                            >
+                            <a
+                                href="index_pl.html"
+                                class="lang-link"
+                                aria-label="Zmień na polski"
+                                >PL</a
+                            >
+                        </div>
+                        <select
+                            class="lang-select"
+                            aria-label="言語選択"
+                            onchange="
+                                if (this.value)
+                                    window.location.href = this.value;
+                            "
+                        >
+                            <option value="index.html">EN</option>
+                            <option value="index_ko.html">KO</option>
+                            <option value="index_ja.html" selected>JA</option>
+                            <option value="index_zh.html">ZH</option>
+                            <option value="index_pl.html">PL</option>
+                        </select>
+                    </nav>
+                    <a
+                        href="https://github.com/suapapa/croquing"
+                        class="btn-github"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path
+                                d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                            />
+                        </svg>
+                        <span>GitHubで表示</span>
+                    </a>
+                </div>
+            </div>
+        </header>
 
-  <main id="main-content">
-    <section class="hero" aria-label="紹介">
-      <h1>まったく新しいクロッキー体験</h1>
-      <p class="hero-subtitle">
-        参加者全員が完璧に一致する画面を見ながら一緒にクロッキーを描きます。サーバーがタイマーを管理し、高解像度のポーズ写真をランダムに表示し、すべてのブラウザの進行状態をリアルタイムで同期します。
-      </p>
-      <div class="hero-actions">
-        <a href="https://croquis-king.songmiyoung.art/" class="btn-primary" target="_blank" rel="noopener noreferrer">
-          <span>CROQUIS-KING サイトで試す</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        </a>
-      </div>
-    </section>
+        <main id="main-content">
+            <section class="hero" aria-label="紹介">
+                <div class="hero-inner">
+                    <div class="hero-content">
+                        <h1>まったく新しいクロッキー体験</h1>
+                        <p class="hero-subtitle">
+                            参加者全員が完璧に一致する画面を見ながら一緒にクロッキーを描きます。サーバーがタイマーを管理し、高解像度のポーズ写真をランダムに表示し、すべてのブラウザの進行状態をリアルタイムで同期します。
+                        </p>
+                        <div class="hero-actions">
+                            <a
+                                href="https://croquis-king.songmiyoung.art/"
+                                class="btn-primary"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <span>CROQUIS-KING サイトで試す</span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="18"
+                                    height="18"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                                    />
+                                    <polyline points="15 3 21 3 21 9" />
+                                    <line x1="10" y1="14" x2="21" y2="3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <figure class="hero-illustration">
+                        <img
+                            src="assets/croquis-king.webp"
+                            alt="내가 사랑하는 크로키방 사람들 &lt; 그림이 좋아 -  송미영 &gt;"
+                            width="800"
+                            height="786"
+                            fetchpriority="high"
+                        />
+                    </figure>
+                </div>
+            </section>
 
-    <section class="showcase" aria-labelledby="showcase-heading">
-      <h2 id="showcase-heading" class="visually-hidden">製品の利用フロー</h2>
+            <section class="showcase" aria-labelledby="showcase-heading">
+                <h2 id="showcase-heading" class="visually-hidden">
+                    製品の利用フロー
+                </h2>
 
-      <div class="tab-nav" role="tablist" aria-label="利用フローのステップ">
-        <button type="button" class="tab-btn active" role="tab" id="tab-step-1" aria-selected="true" aria-controls="panel-step-1">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          ロビー入場
-        </button>
-        <button type="button" class="tab-btn" role="tab" id="tab-step-2" aria-selected="false" aria-controls="panel-step-2" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          画像選択
-        </button>
-        <button type="button" class="tab-btn" role="tab" id="tab-step-3" aria-selected="false" aria-controls="panel-step-3" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-          スケッチ開始
-        </button>
-      </div>
+                <div
+                    class="tab-nav"
+                    role="tablist"
+                    aria-label="利用フローのステップ"
+                >
+                    <button
+                        type="button"
+                        class="tab-btn active"
+                        role="tab"
+                        id="tab-step-1"
+                        aria-selected="true"
+                        aria-controls="panel-step-1"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path
+                                d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+                            />
+                            <path
+                                d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+                            />
+                        </svg>
+                        ロビー入場
+                    </button>
+                    <button
+                        type="button"
+                        class="tab-btn"
+                        role="tab"
+                        id="tab-step-2"
+                        aria-selected="false"
+                        aria-controls="panel-step-2"
+                        tabindex="-1"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.3-4.3" />
+                        </svg>
+                        画像選択
+                    </button>
+                    <button
+                        type="button"
+                        class="tab-btn"
+                        role="tab"
+                        id="tab-step-3"
+                        aria-selected="false"
+                        aria-controls="panel-step-3"
+                        tabindex="-1"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <polygon points="6 3 20 12 6 21 6 3" />
+                        </svg>
+                        スケッチ開始
+                    </button>
+                </div>
 
-      <div id="panel-step-1" class="tab-panel active" role="tabpanel" aria-labelledby="tab-step-1">
-        <button type="button" class="mockup-trigger" aria-label="スクリーンショットを拡大: ロビー待機画面">
-          <img src="screenshot/1_start.webp" alt="ホストがセッションを開始するまで参加者が待機するロビー画面" width="2550" height="2650">
-        </button>
-        <div class="step-copy">
-          <h3>ワンクリックで簡単に部屋を作成・共有</h3>
-          <p>クリックするだけで一緒に描く部屋を作成できます。参加者にリンクを送るだけで準備完了。面倒なソフトのインストールや会員登録は不要で、ブラウザからすぐに参加可能です。</p>
-        </div>
-      </div>
+                <div
+                    id="panel-step-1"
+                    class="tab-panel active"
+                    role="tabpanel"
+                    aria-labelledby="tab-step-1"
+                >
+                    <button
+                        type="button"
+                        class="mockup-trigger"
+                        aria-label="スクリーンショットを拡大: ロビー待機画面"
+                    >
+                        <img
+                            src="assets/1_start.webp"
+                            alt="ホストがセッションを開始するまで参加者が待機するロビー画面"
+                            loading="lazy"
+                            width="2550"
+                            height="2650"
+                        />
+                    </button>
+                    <div class="step-copy">
+                        <h3>ワンクリックで簡単に部屋を作成・共有</h3>
+                        <p>
+                            クリックするだけで一緒に描く部屋を作成できます。参加者にリンクを送るだけで準備完了。面倒なソフトのインストールや会員登録は不要で、ブラウザからすぐに参加可能です。
+                        </p>
+                    </div>
+                </div>
 
-      <div id="panel-step-2" class="tab-panel" role="tabpanel" aria-labelledby="tab-step-2" hidden>
-        <button type="button" class="mockup-trigger" aria-label="スクリーンショットを拡大: ホストの画像選択ボード">
-          <img src="screenshot/2_select.webp" alt="ホストがポーズ写真を検索して選択する画像準備ボード" loading="lazy" width="2550" height="2650">
-        </button>
-        <div class="step-copy">
-          <h3>直接選ぶポーズと自動シャッフル</h3>
-          <p>アプリ内でクロッキー用のポーズ写真を簡単に検索・選択できます。ホストが写真リストを作成すると順番がランダムにシャッフルされ、ドローイングが始まるまで画像は非表示に保たれます。</p>
-        </div>
-      </div>
+                <div
+                    id="panel-step-2"
+                    class="tab-panel"
+                    role="tabpanel"
+                    aria-labelledby="tab-step-2"
+                    hidden
+                >
+                    <button
+                        type="button"
+                        class="mockup-trigger"
+                        aria-label="スクリーンショットを拡大: ホストの画像選択ボード"
+                    >
+                        <img
+                            src="assets/2_select.webp"
+                            alt="ホストがポーズ写真を検索して選択する画像準備ボード"
+                            loading="lazy"
+                            width="2550"
+                            height="2650"
+                        />
+                    </button>
+                    <div class="step-copy">
+                        <h3>直接選ぶポーズと自動シャッフル</h3>
+                        <p>
+                            アプリ内でクロッキー用のポーズ写真を簡単に検索・選択できます。ホストが写真リストを作成すると順番がランダムにシャッフルされ、ドローイングが始まるまで画像は非表示に保たれます。
+                        </p>
+                    </div>
+                </div>
 
-      <div id="panel-step-3" class="tab-panel" role="tabpanel" aria-labelledby="tab-step-3" hidden>
-        <button type="button" class="mockup-trigger" aria-label="スクリーンショットを拡大: 同期されたクロッキーセッション">
-          <img src="screenshot/3_round.webp" alt="上部カウントダウン進行バーとポーズ画像が表示されるクロッキーセッション画面" loading="lazy" width="2550" height="2650">
-        </button>
-        <div class="step-copy">
-          <h3>同期されたタイマーで集中スケッチ</h3>
-          <p>全員が同じ瞬間に同じポーズを描きます。サーバー時間と完全に同期したタイマーに従って画像が表示され、制限時間が終了すると即座に隠されます。公平で集中できるペースを保ちます。</p>
-        </div>
-      </div>
-    </section>
+                <div
+                    id="panel-step-3"
+                    class="tab-panel"
+                    role="tabpanel"
+                    aria-labelledby="tab-step-3"
+                    hidden
+                >
+                    <button
+                        type="button"
+                        class="mockup-trigger"
+                        aria-label="スクリーンショットを拡大: 同期されたクロッキーセッション"
+                    >
+                        <img
+                            src="assets/3_round.webp"
+                            alt="上部カウントダウン進行バーとポーズ画像が表示されるクロッキーセッション画面"
+                            loading="lazy"
+                            width="2550"
+                            height="2650"
+                        />
+                    </button>
+                    <div class="step-copy">
+                        <h3>同期されたタイマーで集中スケッチ</h3>
+                        <p>
+                            全員が同じ瞬間に同じポーズを描きます。サーバー時間と完全に同期したタイマーに従って画像が表示され、制限時間が終了すると即座に隠されます。公平で集中できるペースを保ちます。
+                        </p>
+                    </div>
+                </div>
+            </section>
 
-    <section class="features-section" aria-label="詳細機能">
-      <div class="section-title">
-        <h2>描画だけに集中できる環境</h2>
-        <p>従来のビデオ会議での画面共有で発生していた様々な不便を解決するために設計されました。</p>
-      </div>
+            <section class="features-section" aria-label="詳細機能">
+                <div class="section-title">
+                    <h2>描画だけに集中できる環境</h2>
+                    <p>
+                        従来のビデオ会議での画面共有で発生していた様々な不便を解決するために設計されました。
+                    </p>
+                </div>
 
-      <ul class="features-list">
-        <li class="feature-item">
-          <h3>画質低下なし、細部までくっきり</h3>
-          <p>画像を圧縮して送信するため画質が荒れ、遅延が発生するビデオ会議の画面共有とは異なります。Croquingは参加者のデバイスに高解像度原画を直接読み込むため、細かな解剖学的構造やテクスチャまで歪みなく観察できます。</p>
-        </li>
-        <li class="feature-item">
-          <h3>サーバー基準の正確な時間管理</h3>
-          <p>ドローイング開始前に画像が事前に公開されるのを防ぎます。ホストが描画時間（1〜60分）を設定すると、信頼性の高いサーバータイマーが作動して全員の画面を強制的に同期します。ラウンド開始時のみ画像が表示され、時間が切れると即座に消去されます。</p>
-        </li>
-        <li class="feature-item">
-          <h3>シームレスな画像検索と選択</h3>
-          <p>ホストは管理パネルからポーズ写真を数秒で検索してリストに追加できます。元の写真家へのクレジットも自動的に表示され、一般的なコミュニティガイドラインに準拠しています。</p>
-        </li>
-        <li class="feature-item">
-          <h3>予測できない公平な順序</h3>
-          <p>クイックジェスチャドローイングの課題を維持するため、セッション順序はランダム化されます。カウントダウンタイマーが0になるまで、どのアーティストも次にどのモデルやポーズが来るか予測できません。</p>
-        </li>
-      </ul>
-    </section>
-  </main>
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <h3>画質低下なし、細部までくっきり</h3>
+                        <p>
+                            画像を圧縮して送信するため画質が荒れ、遅延が発生するビデオ会議の画面共有とは異なります。Croquingは参加者のデバイスに高解像度原画を直接読み込むため、細かな解剖学的構造やテクスチャまで歪みなく観察できます。
+                        </p>
+                    </li>
+                    <li class="feature-item">
+                        <h3>サーバー基準の正確な時間管理</h3>
+                        <p>
+                            ドローイング開始前に画像が事前に公開されるのを防ぎます。ホストが描画時間（1〜60分）を設定すると、信頼性の高いサーバータイマーが作動して全員の画面を強制的に同期します。ラウンド開始時のみ画像が表示され、時間が切れると即座に消去されます。
+                        </p>
+                    </li>
+                    <li class="feature-item">
+                        <h3>シームレスな画像検索と選択</h3>
+                        <p>
+                            ホストは管理パネルからポーズ写真を数秒で検索してリストに追加できます。元の写真家へのクレジットも自動的に表示され、一般的なコミュニティガイドラインに準拠しています。
+                        </p>
+                    </li>
+                    <li class="feature-item">
+                        <h3>予測できない公平な順序</h3>
+                        <p>
+                            クイックジェスチャドローイングの課題を維持するため、セッション順序はランダム化されます。カウントダウンタイマーが0になるまで、どのアーティストも次にどのモデルやポーズが来るか予測できません。
+                        </p>
+                    </li>
+                </ul>
+            </section>
+        </main>
 
-  <dialog class="lightbox" id="lightbox" aria-label="スクリーンショットプレビュー">
-    <button type="button" class="lightbox-close" aria-label="プレビューを閉じる">&times;</button>
-    <div class="lightbox-content"></div>
-  </dialog>
+        <dialog
+            class="lightbox"
+            id="lightbox"
+            aria-label="スクリーンショットプレビュー"
+        >
+            <button
+                type="button"
+                class="lightbox-close"
+                aria-label="プレビューを閉じる"
+            >
+                &times;
+            </button>
+            <div class="lightbox-content"></div>
+        </dialog>
 
-  <footer>
-    <div class="footer-content">
-      <div class="logo">
-        <img src="favicon.svg" alt="" class="logo-icon footer-logo-icon">
-        <span class="logo-text footer-logo-text">Croquing</span>
-      </div>
-      <p class="footer-copy">
-        &copy; 2026 <a href="mailto:i@homin.dev">Homin Lee</a>. All rights reserved.
-      </p>
-    </div>
-  </footer>
+        <footer>
+            <div class="footer-content">
+                <div class="logo">
+                    <img
+                        src="favicon.svg"
+                        alt=""
+                        class="logo-icon footer-logo-icon"
+                    />
+                    <span class="logo-text footer-logo-text">Croquing</span>
+                </div>
+                <p class="footer-copy">
+                    &copy; 2026 <a href="mailto:i@homin.dev">Homin Lee</a>. All
+                    rights reserved.
+                </p>
+            </div>
+        </footer>
 
-  <script src="landing.js" defer></script>
-</body>
+        <script src="landing.js" defer></script>
+    </body>
 </html>
