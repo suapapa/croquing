@@ -67,10 +67,14 @@ body {
   overflow-wrap: break-word;
 }
 
-:lang(ko),
+:lang(ko) {
+  word-break: keep-all;
+}
+
 :lang(ja),
 :lang(zh) {
-  word-break: keep-all;
+  word-break: normal;
+  overflow-wrap: break-word;
   line-break: strict;
 }
 
