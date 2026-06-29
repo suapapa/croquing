@@ -6,6 +6,7 @@ import { getConnectionLabel, getPhaseMessage, t } from '../../lib/i18n'
 import { CopyLobbyLinkButton } from '../lobby/CopyLobbyLinkButton'
 import { useAppName } from '../../hooks/useAppName'
 import { useAppLogo } from '../../hooks/useAppLogo'
+import { LanguageSelector } from './LanguageSelector'
 
 interface LobbyLayoutProps {
   lobbyId: string
@@ -74,6 +75,7 @@ export function LobbyLayout({
             </span>
           ) : null}
           {snapshot ? <CopyLobbyLinkButton lobbyId={lobbyId} compact /> : null}
+          <LanguageSelector />
         </div>
       </header>
 

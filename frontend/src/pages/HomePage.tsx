@@ -12,6 +12,7 @@ import { t } from '../lib/i18n'
 import { useAppName } from '../hooks/useAppName'
 import { useAppLogo } from '../hooks/useAppLogo'
 import { useAppLogoLink } from '../hooks/useAppLogoLink'
+import { LanguageSelector } from '../components/layout/LanguageSelector'
 
 const STEPS = [
   {
@@ -58,10 +59,18 @@ export function HomePage() {
 
   return (
     <main className="home-page">
+      <div className="home-page__lang-selector">
+        <LanguageSelector />
+      </div>
       <div className="home-page__shell">
         <section className="home-page__hero" aria-labelledby="home-title">
           <div className="home-page__brand-header">
-            <a href={appLogoLink} target="_blank" rel="noopener noreferrer" className="home-page__logo-link">
+            <a
+              href={appLogoLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="home-page__logo-link"
+            >
               <img src={appLogo} alt="" className="home-page__logo-img" />
             </a>
             {appName.trim() && <h1 id="home-title">{appName}</h1>}

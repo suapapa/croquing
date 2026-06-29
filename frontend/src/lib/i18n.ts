@@ -1,6 +1,18 @@
+import { useState, useEffect } from 'react'
 import type { LobbyPhase } from '../types/lobby'
 
 export type Language = 'ko' | 'ja' | 'pl' | 'zh' | 'en'
+
+export const SUPPORTED_LANGUAGES: Record<Language, string> = {
+  en: 'English',
+  ko: '한국어',
+  ja: '日本語',
+  pl: 'Polski',
+  zh: '中文',
+}
+
+const STORAGE_KEY = 'croquing_language'
+const listeners = new Set<() => void>()
 
 export function getBrowserLanguage(): Language {
   const lang = navigator.language.toLowerCase()
@@ -11,8 +23,40 @@ export function getBrowserLanguage(): Language {
   return 'en'
 }
 
+export function getCurrentLanguage(): Language {
+  const saved = localStorage.getItem(STORAGE_KEY) as Language
+  if (saved && SUPPORTED_LANGUAGES[saved]) {
+    return saved
+  }
+  return getBrowserLanguage()
+}
+
+export function setLanguage(lang: Language): void {
+  if (SUPPORTED_LANGUAGES[lang]) {
+    localStorage.setItem(STORAGE_KEY, lang)
+    syncDocumentLanguage()
+    listeners.forEach((listener) => listener())
+  }
+}
+
+export function useLanguage(): Language {
+  const [lang, setLang] = useState<Language>(getCurrentLanguage())
+
+  useEffect(() => {
+    const handleUpdate = () => {
+      setLang(getCurrentLanguage())
+    }
+    listeners.add(handleUpdate)
+    return () => {
+      listeners.delete(handleUpdate)
+    }
+  }, [])
+
+  return lang
+}
+
 export function syncDocumentLanguage(): void {
-  document.documentElement.lang = getBrowserLanguage()
+  document.documentElement.lang = getCurrentLanguage()
 }
 
 // Simple translation lookup with placeholder support like {count}
@@ -612,8 +656,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
 
     // ParticipantWaitPanel
     'wait.settingPhotos': '正在准备参考图片…',
-    'wait.adminChoosing':
-      '管理员正在挑选图片，会话开始前不会显示。',
+    'wait.adminChoosing': '管理员正在挑选图片，会话开始前不会显示。',
     'wait.tipLabel': '提示：{title}',
     'wait.goTip': '跳转到提示 {idx}',
     'wait.waitingForAdmin': '等待管理员…',
@@ -642,8 +685,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
 
     // ReadyPanel
     'ready.photosReady': '张图片已就绪',
-    'ready.desc':
-      '图片顺序已打乱并隐藏，每个作画回合开始前不会显示缩略图。',
+    'ready.desc': '图片顺序已打乱并隐藏，每个作画回合开始前不会显示缩略图。',
     'ready.hint': '等待管理员开始…',
 
     // DrawingPanel
@@ -662,8 +704,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'break.completedRound': '已完成第 {current} / {total} 回合',
     'break.sessionFinished': '会话结束',
     'break.completedRoundsDesc': '完成了 {count} 个回合，大家辛苦了！',
-    'break.completedRoundsDescPlural':
-      '完成了 {count} 个回合，大家辛苦了！',
+    'break.completedRoundsDescPlural': '完成了 {count} 个回合，大家辛苦了！',
     'break.downloadPhotos': '下载参考图片 (ZIP)',
 
     // PixabaySearchPanel
@@ -692,7 +733,7 @@ export function t(
   key: string,
   params?: Record<string, string | number>,
 ): string {
-  const lang = getBrowserLanguage()
+  const lang = getCurrentLanguage()
   const template = TRANSLATIONS[lang]?.[key] || TRANSLATIONS.en[key] || key
   if (!params) return template
   return Object.entries(params).reduce(
@@ -854,7 +895,7 @@ const LOCALIZED_PHASES: Record<Language, Record<LobbyPhase, PhaseMessage>> = {
 }
 
 export function getPhaseMessage(phase: LobbyPhase): PhaseMessage {
-  const lang = getBrowserLanguage()
+  const lang = getCurrentLanguage()
   return LOCALIZED_PHASES[lang]?.[phase] || LOCALIZED_PHASES.en[phase]
 }
 
@@ -1024,6 +1065,6 @@ const LOCALIZED_TIPS: Record<Language, Tip[]> = {
 }
 
 export function getLocalizedTips(): Tip[] {
-  const lang = getBrowserLanguage()
+  const lang = getCurrentLanguage()
   return LOCALIZED_TIPS[lang] || LOCALIZED_TIPS.en
 }

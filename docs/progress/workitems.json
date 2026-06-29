@@ -312,12 +312,13 @@
           "description": "참가자 수, Phase별 안내 문구, 로딩/연결 끊김 UI",
           "deps": ["103"],
           "status": "done",
-          "completed_at": "2026-06-20",
+          "completed_at": "2026-06-29",
           "artifacts": [
             "frontend/src/components/layout/LobbyLayout.tsx",
-            "frontend/src/lib/phaseMessages.ts"
+            "frontend/src/lib/phaseMessages.ts",
+            "frontend/src/components/layout/LanguageSelector.tsx"
           ],
-          "notes": "LobbyLayout shows participant count, phase copy, connection badge, loading and reconnect banners."
+          "notes": "LobbyLayout shows participant count, phase copy, connection badge, loading and reconnect banners. Added manual language selector with browser locale fallback."
         },
         {
           "id": "105",

@@ -8,7 +8,11 @@ interface BetweenPanelProps {
   isAdmin: boolean
 }
 
-export function BetweenPanel({ lobbyId, snapshot, isAdmin }: BetweenPanelProps) {
+export function BetweenPanel({
+  lobbyId,
+  snapshot,
+  isAdmin,
+}: BetweenPanelProps) {
   return (
     <section className="phase-panel phase-panel--between" aria-live="polite">
       <div className="between-panel__card">

@@ -24,7 +24,9 @@ function loadAppLogoLink(): Promise<string> {
 
 /** App logo link from server `APP_LOGO_LINK` (falls back to "https://homin.dev"). */
 export function useAppLogoLink(): string {
-  const [appLogoLink, setAppLogoLink] = useState(cachedAppLogoLink ?? DEFAULT_APP_LOGO_LINK)
+  const [appLogoLink, setAppLogoLink] = useState(
+    cachedAppLogoLink ?? DEFAULT_APP_LOGO_LINK,
+  )
 
   useEffect(() => {
     void loadAppLogoLink().then(setAppLogoLink)

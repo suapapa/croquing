@@ -3,7 +3,7 @@
 > **자동 생성 문서** — 직접 수정하지 마세요.  
 > 소스: [`workitems.json`](workitems.json) · 갱신: `make progress`
 
-마지막 갱신: **2026-06-24 17:09 KST**
+마지막 갱신: **2026-06-29 21:35 KST**
 
 ## Phase A — 백엔드 (001-017)
 
@@ -178,9 +178,9 @@
 
 #### 104 — [FE] 로비 공통 레이아웃
 
-- 완료일: 2026-06-20
-- 산출물: frontend/src/components/layout/LobbyLayout.tsx, frontend/src/lib/phaseMessages.ts
-- 메모: LobbyLayout shows participant count, phase copy, connection badge, loading and reconnect banners.
+- 완료일: 2026-06-29
+- 산출물: frontend/src/components/layout/LobbyLayout.tsx, frontend/src/lib/phaseMessages.ts, frontend/src/components/layout/LanguageSelector.tsx
+- 메모: LobbyLayout shows participant count, phase copy, connection badge, loading and reconnect banners. Added manual language selector with browser locale fallback.
 
 #### 105 — [FE] Admin / Participant UI 분기
 
