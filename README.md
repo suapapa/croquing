@@ -2,6 +2,8 @@
 
 Real-time web app for weekly croquis (figure-drawing) meetups. Participants join the same lobby URL and see synchronized photos and timers.
 
+Project Intro & Demo: [https://croquing.homin.dev/](https://croquing.homin.dev/)
+
 ## Stack
 
 | Layer | Tech |
