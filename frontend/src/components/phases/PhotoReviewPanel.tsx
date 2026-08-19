@@ -7,6 +7,8 @@ import {
   IconUser,
   IconShieldCheck,
   IconImage,
+  IconChevronLeft,
+  IconChevronRight,
 } from '../ui/Icons'
 
 interface PhotoReviewPanelProps {
@@ -22,15 +24,33 @@ export function PhotoReviewPanel({
   onEdit,
   onConfirm,
 }: PhotoReviewPanelProps) {
-  const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null)
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const dialogRef = useRef<HTMLDialogElement>(null)
+
+  const selectedPhoto =
+    selectedIndex !== null ? photos[selectedIndex] ?? null : null
+  const canGoPrev = selectedIndex !== null && selectedIndex > 0
+  const canGoNext =
+    selectedIndex !== null && selectedIndex < photos.length - 1
+
+  const goToPrev = () => {
+    if (canGoPrev) {
+      setSelectedIndex((index) => (index !== null ? index - 1 : null))
+    }
+  }
+
+  const goToNext = () => {
+    if (canGoNext) {
+      setSelectedIndex((index) => (index !== null ? index + 1 : null))
+    }
+  }
 
   useEffect(() => {
     const dialog = dialogRef.current
     if (!dialog) return
 
     const handleClose = () => {
-      setSelectedPhoto(null)
+      setSelectedIndex(null)
     }
 
     dialog.addEventListener('close', handleClose)
@@ -43,16 +63,39 @@ export function PhotoReviewPanel({
     const dialog = dialogRef.current
     if (!dialog) return
 
-    if (selectedPhoto) {
+    if (selectedIndex !== null) {
       if (!dialog.open) {
         dialog.showModal()
       }
-    } else {
-      if (dialog.open) {
-        dialog.close()
+    } else if (dialog.open) {
+      dialog.close()
+    }
+  }, [selectedIndex])
+
+  useEffect(() => {
+    if (selectedIndex === null) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault()
+        setSelectedIndex((index) => {
+          if (index === null || index <= 0) return index
+          return index - 1
+        })
+      } else if (event.key === 'ArrowRight') {
+        event.preventDefault()
+        setSelectedIndex((index) => {
+          if (index === null || index >= photos.length - 1) return index
+          return index + 1
+        })
       }
     }
-  }, [selectedPhoto])
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [selectedIndex, photos.length])
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
     const dialog = dialogRef.current
@@ -78,7 +121,7 @@ export function PhotoReviewPanel({
               <button
                 type="button"
                 className="photo-review__thumb"
-                onClick={() => setSelectedPhoto(photo)}
+                onClick={() => setSelectedIndex(index)}
                 aria-label={t('review.previewAria', {
                   index: index + 1,
                   total: photos.length,
@@ -134,32 +177,48 @@ export function PhotoReviewPanel({
             <button
               type="button"
               className="photo-modal__close-btn"
-              onClick={() => setSelectedPhoto(null)}
+              onClick={() => setSelectedIndex(null)}
               aria-label={t('review.closePreview')}
             >
               <IconClose />
             </button>
             <div className="photo-modal__body">
               <div className="photo-modal__image-wrapper">
+                {photos.length > 1 ? (
+                  <button
+                    type="button"
+                    className="photo-modal__nav-btn photo-modal__nav-btn--prev"
+                    onClick={goToPrev}
+                    disabled={!canGoPrev}
+                    aria-label={t('review.prevPhoto')}
+                  >
+                    <IconChevronLeft />
+                  </button>
+                ) : null}
                 <img
                   src={selectedPhoto.large_image_url}
                   alt={t('review.modalAlt', {
-                    index:
-                      photos.findIndex(
-                        (photo) => photo.pixabay_id === selectedPhoto.pixabay_id,
-                      ) + 1 || 1,
+                    index: (selectedIndex ?? 0) + 1,
                     total: photos.length,
                   })}
                   className="photo-modal__image"
                 />
+                {photos.length > 1 ? (
+                  <button
+                    type="button"
+                    className="photo-modal__nav-btn photo-modal__nav-btn--next"
+                    onClick={goToNext}
+                    disabled={!canGoNext}
+                    aria-label={t('review.nextPhoto')}
+                  >
+                    <IconChevronRight />
+                  </button>
+                ) : null}
               </div>
               <aside className="photo-modal__info">
                 <h3 className="photo-modal__info-title">
                   {t('review.modalAlt', {
-                    index:
-                      photos.findIndex(
-                        (photo) => photo.pixabay_id === selectedPhoto.pixabay_id,
-                      ) + 1 || 1,
+                    index: (selectedIndex ?? 0) + 1,
                     total: photos.length,
                   })}
                 </h3>

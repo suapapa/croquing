@@ -9,6 +9,13 @@ import (
 	"net/http"
 	"strconv"
 	"time"
+
+	"gopkg.in/yaml.v3"
+)
+
+const (
+	pixabayLicenseName = "Pixabay Content License"
+	pixabayLicenseURL  = "https://pixabay.com/service/license-summary/"
 )
 
 // ImageFetcher downloads image bytes for a URL.
@@ -64,6 +71,67 @@ func ArchiveEntryName(baseName string, round int, total int) string {
 	return fmt.Sprintf("%s_%0*d.jpeg", baseName, width, round)
 }
 
+// ArchiveMetadataName returns the metadata file name inside the archive.
+func ArchiveMetadataName(baseName string) string {
+	return baseName + "_metadata.yaml"
+}
+
+type photoArchiveMeta struct {
+	Session     string              `yaml:"session"`
+	GeneratedAt string              `yaml:"generated_at"`
+	Total       int                 `yaml:"total"`
+	License     string              `yaml:"license"`
+	LicenseURL  string              `yaml:"license_url"`
+	Photos      []photoArchiveEntry `yaml:"photos"`
+}
+
+type photoArchiveEntry struct {
+	Round         int    `yaml:"round"`
+	Filename      string `yaml:"filename"`
+	PixabayID     int    `yaml:"pixabay_id"`
+	PreviewURL    string `yaml:"preview_url"`
+	LargeImageURL string `yaml:"large_image_url"`
+	PageURL       string `yaml:"page_url"`
+	Width         int    `yaml:"width,omitempty"`
+	Height        int    `yaml:"height,omitempty"`
+	User          string `yaml:"user,omitempty"`
+	UserID        int    `yaml:"user_id,omitempty"`
+}
+
+// BuildPhotosMetadataYAML returns YAML metadata for archived photos.
+func BuildPhotosMetadataYAML(baseName string, photos []Photo, generatedAt time.Time) ([]byte, error) {
+	meta := photoArchiveMeta{
+		Session:     baseName,
+		GeneratedAt: generatedAt.UTC().Format(time.RFC3339),
+		Total:       len(photos),
+		License:     pixabayLicenseName,
+		LicenseURL:  pixabayLicenseURL,
+		Photos:      make([]photoArchiveEntry, 0, len(photos)),
+	}
+
+	for i, photo := range photos {
+		meta.Photos = append(meta.Photos, photoArchiveEntry{
+			Round:         i + 1,
+			Filename:      ArchiveEntryName(baseName, i+1, len(photos)),
+			PixabayID:     photo.PixabayID,
+			PreviewURL:    photo.PreviewURL,
+			LargeImageURL: photo.LargeImageURL,
+			PageURL:       photo.PageURL,
+			Width:         photo.Width,
+			Height:        photo.Height,
+			User:          photo.User,
+			UserID:        photo.UserID,
+		})
+	}
+
+	data, err := yaml.Marshal(&meta)
+	if err != nil {
+		return nil, fmt.Errorf("lobby: marshal metadata: %w", err)
+	}
+
+	return data, nil
+}
+
 // OrderedPhotos returns session photos in drawing order.
 func (l *Lobby) OrderedPhotos() ([]Photo, error) {
 	if l == nil || len(l.PhotoOrder) == 0 {
@@ -107,6 +175,19 @@ func BuildPhotosZIP(ctx context.Context, photos []Photo, baseName string, fetch 
 		if _, err := entry.Write(data); err != nil {
 			return nil, err
 		}
+	}
+
+	metadata, err := BuildPhotosMetadataYAML(baseName, photos, time.Now())
+	if err != nil {
+		return nil, err
+	}
+
+	metadataEntry, err := zipWriter.Create(ArchiveMetadataName(baseName))
+	if err != nil {
+		return nil, err
+	}
+	if _, err := metadataEntry.Write(metadata); err != nil {
+		return nil, err
 	}
 
 	if err := zipWriter.Close(); err != nil {

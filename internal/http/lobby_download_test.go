@@ -68,10 +68,11 @@ func TestDownloadPhotosHandler(t *testing.T) {
 	if err != nil {
 		t.Fatalf("zip.NewReader() error = %v", err)
 	}
-	if len(reader.File) != 2 {
-		t.Fatalf("len(zip files) = %d, want 2", len(reader.File))
+	if len(reader.File) != 3 {
+		t.Fatalf("len(zip files) = %d, want 3", len(reader.File))
 	}
 
+	imageCount := 0
 	for _, file := range reader.File {
 		rc, err := file.Open()
 		if err != nil {
@@ -82,9 +83,25 @@ func TestDownloadPhotosHandler(t *testing.T) {
 		if err != nil {
 			t.Fatalf("ReadAll(%q) error = %v", file.Name, err)
 		}
-		if string(data) != "jpeg-bytes" {
-			t.Fatalf("file %q content = %q, want jpeg-bytes", file.Name, string(data))
+
+		if bytes.HasSuffix([]byte(file.Name), []byte(".jpeg")) {
+			imageCount++
+			if string(data) != "jpeg-bytes" {
+				t.Fatalf("file %q content = %q, want jpeg-bytes", file.Name, string(data))
+			}
+			continue
 		}
+
+		if !bytes.HasSuffix([]byte(file.Name), []byte("_metadata.yaml")) {
+			t.Fatalf("unexpected file name %q", file.Name)
+		}
+		if !bytes.Contains(data, []byte("pixabay_id")) {
+			t.Fatalf("metadata file %q missing pixabay_id", file.Name)
+		}
+	}
+
+	if imageCount != 2 {
+		t.Fatalf("jpeg file count = %d, want 2", imageCount)
 	}
 }
 

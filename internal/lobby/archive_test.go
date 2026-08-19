@@ -124,13 +124,14 @@ func TestBuildPhotosZIP(t *testing.T) {
 	if err != nil {
 		t.Fatalf("zip.NewReader() error = %v", err)
 	}
-	if len(reader.File) != 2 {
-		t.Fatalf("len(zip files) = %d, want 2", len(reader.File))
+	if len(reader.File) != 3 {
+		t.Fatalf("len(zip files) = %d, want 3", len(reader.File))
 	}
 
 	wantNames := []string{
 		ArchiveEntryName(baseName, 1, 2),
 		ArchiveEntryName(baseName, 2, 2),
+		ArchiveMetadataName(baseName),
 	}
 	for i, file := range reader.File {
 		if file.Name != wantNames[i] {
@@ -156,6 +157,10 @@ func TestBuildPhotosZIP(t *testing.T) {
 		case 1:
 			if buf.String() != "image-two" {
 				t.Fatalf("second file content = %q, want image-two", buf.String())
+			}
+		case 2:
+			if !bytes.Contains(buf.Bytes(), []byte("pixabay_id")) {
+				t.Fatalf("metadata content = %q, want pixabay fields", buf.String())
 			}
 		}
 	}
