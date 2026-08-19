@@ -11,6 +11,8 @@ export interface PixabaySearchHit {
   views: number
   downloads: number
   likes: number
+  user?: string
+  user_id?: number
 }
 
 export interface PixabaySearchResponse {
@@ -60,5 +62,7 @@ export function hitToPhoto(hit: PixabaySearchHit) {
     page_url: hit.page_url,
     width: hit.width,
     height: hit.height,
+    user: hit.user,
+    user_id: hit.user_id,
   }
 }

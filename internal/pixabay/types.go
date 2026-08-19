@@ -40,6 +40,8 @@ type Image struct {
 	Views         int
 	Downloads     int
 	Likes         int
+	User          string
+	UserID        int
 }
 
 // RateLimit captures Pixabay rate-limit response headers.
@@ -66,6 +68,8 @@ type apiHit struct {
 	Views         int    `json:"views"`
 	Downloads     int    `json:"downloads"`
 	Likes         int    `json:"likes"`
+	User          string `json:"user"`
+	UserID        int    `json:"user_id"`
 }
 
 func normalizeSearchParams(params SearchParams) SearchParams {
@@ -104,6 +108,8 @@ func toSearchResult(resp apiSearchResponse, rateLimit RateLimit) SearchResult {
 			Views:         hit.Views,
 			Downloads:     hit.Downloads,
 			Likes:         hit.Likes,
+			User:          hit.User,
+			UserID:        hit.UserID,
 		})
 	}
 

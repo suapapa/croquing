@@ -35,7 +35,9 @@ func TestPixabaySearchHandler(t *testing.T) {
 				"imageHeight": 600,
 				"views": 100,
 				"downloads": 50,
-				"likes": 10
+				"likes": 10,
+				"user": "artist_user",
+				"user_id": 42
 			}]
 		}`))
 	}))

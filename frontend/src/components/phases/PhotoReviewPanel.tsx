@@ -1,7 +1,13 @@
 import { useState, useRef, useEffect } from 'react'
 import type { Photo } from '../../types/lobby'
 import { t } from '../../lib/i18n'
-import { IconClose, IconLink } from '../ui/Icons'
+import {
+  IconClose,
+  IconLink,
+  IconUser,
+  IconShieldCheck,
+  IconImage,
+} from '../ui/Icons'
 
 interface PhotoReviewPanelProps {
   photos: Photo[]
@@ -133,27 +139,96 @@ export function PhotoReviewPanel({
             >
               <IconClose />
             </button>
-            <img
-              src={selectedPhoto.large_image_url}
-              alt={t('review.modalAlt', {
-                index:
-                  photos.findIndex(
-                    (photo) => photo.pixabay_id === selectedPhoto.pixabay_id,
-                  ) + 1 || 1,
-                total: photos.length,
-              })}
-              className="photo-modal__image"
-            />
-            <div className="photo-modal__footer">
-              <a
-                href={selectedPhoto.page_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="photo-modal__link"
-              >
-                <IconLink className="icon" />
-                <span>{t('draw.attribution')} Pixabay</span>
-              </a>
+            <div className="photo-modal__body">
+              <div className="photo-modal__image-wrapper">
+                <img
+                  src={selectedPhoto.large_image_url}
+                  alt={t('review.modalAlt', {
+                    index:
+                      photos.findIndex(
+                        (photo) => photo.pixabay_id === selectedPhoto.pixabay_id,
+                      ) + 1 || 1,
+                    total: photos.length,
+                  })}
+                  className="photo-modal__image"
+                />
+              </div>
+              <aside className="photo-modal__info">
+                <h3 className="photo-modal__info-title">
+                  {t('review.modalAlt', {
+                    index:
+                      photos.findIndex(
+                        (photo) => photo.pixabay_id === selectedPhoto.pixabay_id,
+                      ) + 1 || 1,
+                    total: photos.length,
+                  })}
+                </h3>
+                <dl className="photo-modal__meta-list">
+                  {selectedPhoto.user ? (
+                    <div className="photo-modal__meta-item">
+                      <dt className="photo-modal__meta-term">
+                        <IconUser className="photo-modal__meta-icon" />
+                        <span>{t('review.metaAuthor')}</span>
+                      </dt>
+                      <dd className="photo-modal__meta-value">
+                        {selectedPhoto.user_id ? (
+                          <a
+                            href={`https://pixabay.com/users/${selectedPhoto.user}-${selectedPhoto.user_id}/`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="photo-modal__meta-author-link"
+                          >
+                            {selectedPhoto.user}
+                          </a>
+                        ) : (
+                          <span>{selectedPhoto.user}</span>
+                        )}
+                      </dd>
+                    </div>
+                  ) : null}
+
+                  <div className="photo-modal__meta-item">
+                    <dt className="photo-modal__meta-term">
+                      <IconShieldCheck className="photo-modal__meta-icon" />
+                      <span>{t('review.metaLicense')}</span>
+                    </dt>
+                    <dd className="photo-modal__meta-value">
+                      <a
+                        href="https://pixabay.com/service/license-summary/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="photo-modal__meta-license-link"
+                      >
+                        {t('review.metaLicenseFree')}
+                      </a>
+                    </dd>
+                  </div>
+
+                  {selectedPhoto.width && selectedPhoto.height ? (
+                    <div className="photo-modal__meta-item">
+                      <dt className="photo-modal__meta-term">
+                        <IconImage className="photo-modal__meta-icon" />
+                        <span>{t('review.metaDimensions')}</span>
+                      </dt>
+                      <dd className="photo-modal__meta-value">
+                        {selectedPhoto.width} × {selectedPhoto.height} px
+                      </dd>
+                    </div>
+                  ) : null}
+                </dl>
+
+                <div className="photo-modal__info-footer">
+                  <a
+                    href={selectedPhoto.page_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="button button--secondary photo-modal__pixabay-btn"
+                  >
+                    <IconLink className="icon" />
+                    <span>{t('review.viewOnPixabay')}</span>
+                  </a>
+                </div>
+              </aside>
             </div>
           </div>
         )}

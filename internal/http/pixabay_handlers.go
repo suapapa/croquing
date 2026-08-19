@@ -35,6 +35,8 @@ type searchImageItem struct {
 	Views         int    `json:"views"`
 	Downloads     int    `json:"downloads"`
 	Likes         int    `json:"likes"`
+	User          string `json:"user"`
+	UserID        int    `json:"user_id"`
 }
 
 type rateLimitResponse struct {
@@ -104,6 +106,8 @@ func toSearchImagesResponse(result pixabay.SearchResult) searchImagesResponse {
 			Views:         hit.Views,
 			Downloads:     hit.Downloads,
 			Likes:         hit.Likes,
+			User:          hit.User,
+			UserID:        hit.UserID,
 		})
 	}
 

@@ -10,6 +10,8 @@ type Photo struct {
 	PageURL       string `json:"page_url"`
 	Width         int    `json:"width"`
 	Height        int    `json:"height"`
+	User          string `json:"user,omitempty"`
+	UserID        int    `json:"user_id,omitempty"`
 }
 
 // Lobby holds the full server-side lobby state.

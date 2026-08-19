@@ -13,6 +13,8 @@ export interface Photo {
   page_url: string
   width: number
   height: number
+  user?: string
+  user_id?: number
 }
 
 export interface LobbySnapshot {

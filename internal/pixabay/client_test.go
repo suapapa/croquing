@@ -57,7 +57,9 @@ func TestClientSearchSuccess(t *testing.T) {
 				"imageHeight": 1080,
 				"views": 10,
 				"downloads": 5,
-				"likes": 2
+				"likes": 2,
+				"user": "photographer1",
+				"user_id": 999
 			}]
 		}`))
 	}))
@@ -85,6 +87,9 @@ func TestClientSearchSuccess(t *testing.T) {
 	hit := result.Hits[0]
 	if hit.ID != 123 {
 		t.Fatalf("ID = %d, want 123", hit.ID)
+	}
+	if hit.User != "photographer1" || hit.UserID != 999 {
+		t.Fatalf("User/UserID = %q/%d, want photographer1/999", hit.User, hit.UserID)
 	}
 	if hit.LargeImageURL != "https://cdn.pixabay.com/large.jpg" {
 		t.Fatalf("LargeImageURL = %q", hit.LargeImageURL)

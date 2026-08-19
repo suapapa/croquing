@@ -140,6 +140,12 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'review.modalAria': 'Photo preview',
     'review.closePreview': 'Close preview',
     'review.modalAlt': 'Reference photo {index} of {total}',
+    'review.metaAuthor': 'Author',
+    'review.metaLicense': 'License',
+    'review.metaLicenseFree': 'Pixabay Free License',
+    'review.metaDimensions': 'Dimensions',
+    'review.metaId': 'Pixabay ID',
+    'review.viewOnPixabay': 'View on Pixabay',
 
     // PhotoSelectionPanel
     'selection.errSave': 'Failed to save selection',
@@ -273,6 +279,12 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'review.modalAria': '사진 미리보기',
     'review.closePreview': '미리보기 닫기',
     'review.modalAlt': '레퍼런스 사진 {index} / {total}',
+    'review.metaAuthor': '작가',
+    'review.metaLicense': '라이선스',
+    'review.metaLicenseFree': 'Pixabay 무료 라이선스',
+    'review.metaDimensions': '해상도',
+    'review.metaId': 'Pixabay ID',
+    'review.viewOnPixabay': 'Pixabay에서 보기',
 
     // PhotoSelectionPanel
     'selection.errSave': '선택을 저장하지 못했습니다',
@@ -407,6 +419,12 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'review.modalAria': '写真プレビュー',
     'review.closePreview': 'プレビューを閉じる',
     'review.modalAlt': 'リファレンス写真 {index} / {total}',
+    'review.metaAuthor': '作者',
+    'review.metaLicense': 'ライセンス',
+    'review.metaLicenseFree': 'Pixabay 無料ライセンス',
+    'review.metaDimensions': '解像度',
+    'review.metaId': 'Pixabay ID',
+    'review.viewOnPixabay': 'Pixabayで見る',
 
     // PhotoSelectionPanel
     'selection.errSave': '選択内容의保存に失敗しました',
@@ -543,6 +561,12 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'review.modalAria': 'Podgląd zdjęcia',
     'review.closePreview': 'Zamknij podgląd',
     'review.modalAlt': 'Zdjęcie referencyjne {index} z {total}',
+    'review.metaAuthor': 'Autor',
+    'review.metaLicense': 'Licencja',
+    'review.metaLicenseFree': 'Darmowa licencja Pixabay',
+    'review.metaDimensions': 'Wymiary',
+    'review.metaId': 'Pixabay ID',
+    'review.viewOnPixabay': 'Zobacz na Pixabay',
 
     // PhotoSelectionPanel
     'selection.errSave': 'Nie udało się zapisać wyboru',
@@ -675,6 +699,12 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'review.modalAria': '图片预览',
     'review.closePreview': '关闭预览',
     'review.modalAlt': '参考图片 {index} / {total}',
+    'review.metaAuthor': '作者',
+    'review.metaLicense': '许可协议',
+    'review.metaLicenseFree': 'Pixabay 免费许可',
+    'review.metaDimensions': '尺寸',
+    'review.metaId': 'Pixabay ID',
+    'review.viewOnPixabay': '在 Pixabay 查看',
 
     // PhotoSelectionPanel
     'selection.errSave': '保存选择失败',
